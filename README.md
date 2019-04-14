@@ -5,11 +5,11 @@
 
 ## What's this?
 
-This is a Science (Physics) education app for the newest Mixed Reality (MR) technology headset "HoloLens". 
-The purpose of this app is education. The target of this app is students in junior high school, high school, college and university.
-You can learn about magnetic field which can not be seen in real world.
-This is one of education app which is few in the world.
-You can get this app via Microsoft Store.
+- This is a Science (Physics) education app for the newest Mixed Reality (MR) technology headset "HoloLens". 
+- The purpose of this app is education. The target of this app is students in junior high school, high school, college and university.
+- You can learn about magnetic field which can not be seen in real world.
+- This is one of education app which is few in the world.
+- You can get this app via Microsoft Store.
 
 ## Concept
 
@@ -63,11 +63,11 @@ Facebook: https://www.facebook.com/feelphysicsjp
 
 ## これは何？
 
-最先端の複合現実ヘッドセット「HoloLens」用の理科（物理）学習アプリです。
-このアプリの目的は教育です。対象は中学生、高校生、専門学校生、大学生です。
-このアプリを使って、現実世界では目で見ることのできない磁界について学習することができます。
-数少ない教育用HoloLensアプリです。
-Microsoft Storeで入手可能です。
+- 最先端の複合現実ヘッドセット「HoloLens」用の理科（物理）学習アプリです。
+- このアプリの目的は教育です。対象は中学生、高校生、専門学校生、大学生です。
+- このアプリを使って、現実世界では目で見ることのできない磁界について学習することができます。
+- 数少ない教育用HoloLensアプリです。
+- Microsoft Storeで入手可能です。
 
 ## 特徴
 
