@@ -5,18 +5,18 @@
 
 ## What's this?
 
-- This is a Science (Physics) education app for the newest Mixed Reality (MR) technology headset "HoloLens". 
-- The purpose of this app is education. The target of this app is students in junior high school, high school, college and university.
-- You can learn about magnetic field which can not be seen in real world.
-- This is one of education app which is few in the world.
-- You can get this app via Microsoft Store.
+- This is a Science (Physics) education app for the newest Mixed Reality (MR) technology headset **"HoloLens"**. 
+- The purpose of this app is for **education**. The target of this app is students in junior high school, high school, college and university.
+- You can learn about magnetic field which can **not** be seen in real world.
+- This is one of education app which is **few** in the world.
+- Everyone can get this app via **Microsoft Store** and experience.
 
 ## Concept
 
-- Implementation example of proper size for a HoloLens Development newbie
-- Simple and easy UI for people who have never touch HoloLens
-- Example of MVP Design pattern as a HoloLens application
-- Example avoiding `GameObject.Find()` which slow down the process speed
+- Implementation example of proper size for understanding how to develop for HoloLens Development **newbies**
+- Simple and easy UI for a user who have never touch HoloLens and experience for the **first time**
+- Example of **MVP Design pattern** as a HoloLens application
+- Example **avoiding** `GameObject.Find()` which slow down the process speed
 
 ## Getting Started
 
@@ -63,18 +63,18 @@ Facebook: https://www.facebook.com/feelphysicsjp
 
 ## これは何？
 
-- 最先端の複合現実ヘッドセット「HoloLens」用の理科（物理）学習アプリです。
-- このアプリの目的は教育です。対象は中学生、高校生、専門学校生、大学生です。
-- このアプリを使って、現実世界では目で見ることのできない磁界について学習することができます。
-- 数少ない教育用HoloLensアプリです。
-- Microsoft Storeで入手可能です。
+- 最先端の複合現実ヘッドセット **「HoloLens」** 用の理科（物理）学習アプリです。
+- このアプリの目的は**教育**です。対象は中学生、高校生、専門学校生、大学生です。
+- このアプリを使って、現実世界では目で**見ることのできない**磁界について学習することができます。
+- **数少ない**教育用HoloLensアプリです。
+- **誰でも**Microsoft Storeで無料で入手して体験することが可能です。
 
 ## 特徴
 
-- 初心者HoloLens開発者にとって、手軽な規模の実装例
-- HoloLensが初めての人手も操作できるシンプルなUI
-- HoloLensアプリケーションのデザインパターンとしてMVPを採用した例
-- Unityの処理が落ちる`GameObject.Find()`を極力使用しない例
+- **初心者**HoloLens開発者にとって、開発方法を学びやすい手軽な規模の実装例
+- HoloLensを体験するのが**初めてのユーザ**でも簡単に操作できるシンプルなUI
+- HoloLensアプリケーションのデザインパターンとして**MVPパターン**を採用した例
+- Unityの処理が落ちる`GameObject.Find()`を極力**使用しない**例
 
 ## 始め方
 
