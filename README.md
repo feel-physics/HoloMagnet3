@@ -4,6 +4,8 @@
 
 ## Licence
 
+## Contact
+
 MIT
 
 ## 始め方
@@ -32,3 +34,5 @@ MIT
 
 ## ライセンス
 MIT
+
+## 連絡先
