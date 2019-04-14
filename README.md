@@ -25,7 +25,7 @@ MIT
 
 Email: tatsuro.ueda@feel-physics.jp
 Twitter: [\(@feelphysicsjp\)](https://twitter.com/feelphysicsjp)
-Homepage: https://www.youtube.com/channel/UC0LXSJkm5P2Y9503L-g29BQ
+Homepage: https://www.youtube.com/watch?v=1nC2X5o88xA&list=PLUUoZRXFtWCeUb-ZHFwxF1LjgrtBOYd3G
 Facebook: https://www.facebook.com/feelphysicsjp
 
 ## これは何？
@@ -69,5 +69,5 @@ MIT
 
 Email: tatsuro.ueda@feel-physics.jp
 Twitter: [\(@feelphysicsjp\)](https://twitter.com/feelphysicsjp)
-Homepage: https://www.youtube.com/channel/UC0LXSJkm5P2Y9503L-g29BQ
+Homepage: https://www.youtube.com/watch?v=1nC2X5o88xA&list=PLUUoZRXFtWCeUb-ZHFwxF1LjgrtBOYd3G
 Facebook: https://www.facebook.com/feelphysicsjp
