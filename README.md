@@ -12,13 +12,21 @@ This is one of education app which is few in the world.
 ## Getting Started
 
 1. **Clone** this repository
-2. 
+2. **Open** the project
+3. **Build**
+4. **Deploy** to HoloLens
+5. **Start** app named "HoloLens3"
 
 ## Licence
 
+MIT
+
 ## Contact
 
-MIT
+Email: tatsuro.ueda@feel-physics.jp
+Twitter: [\(@feelphysicsjp\)](https://twitter.com/feelphysicsjp)
+Homepage: https://www.youtube.com/channel/UC0LXSJkm5P2Y9503L-g29BQ
+Facebook: https://www.facebook.com/feelphysicsjp
 
 ## これは何？
 
@@ -28,10 +36,11 @@ HoloLens用の理科（物理）学習アプリです。
 
 ## 始め方
 
-1. このリポジトリをクローンします
-2. Unityで、プロジェクトのフォルダを開きます
-3. ビルドして、HoloLensにデプロイします
-4. 「HoloLene3」を起動します
+1. このリポジトリを**クローン**します
+2. Unityで、プロジェクトを**開きます**
+3. **ビルド**します
+4. HoloLensに**配置**します
+4. 「HoloLene3」を**起動**します
 
 ## 使い方
 
@@ -57,3 +66,8 @@ HoloLens用の理科（物理）学習アプリです。
 MIT
 
 ## 連絡先
+
+Email: tatsuro.ueda@feel-physics.jp
+Twitter: [\(@feelphysicsjp\)](https://twitter.com/feelphysicsjp)
+Homepage: https://www.youtube.com/channel/UC0LXSJkm5P2Y9503L-g29BQ
+Facebook: https://www.facebook.com/feelphysicsjp
