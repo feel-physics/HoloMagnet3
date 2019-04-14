@@ -565,11 +565,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: HoloMagnet3-190114
   metroPackageVersion: 
-  metroCertificatePath: 
+  metroCertificatePath: C:\Users\uedat\Desktop\GitHub\HoloMagnet3\Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 00501b859411d601
   metroApplicationDescription: HoloMagnet3-190114
   wsaImages: {}
   metroTileShortName: 
@@ -647,7 +647,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: 802e478d-dcfa-450c-9f3e-d894dbf64ab8
   projectName: HoloMagnet3-190114
   organizationId: feel-physics
