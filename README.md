@@ -5,7 +5,8 @@
 
 ## What's this?
 
-This is a Science (Physics) education app for HoloLens.
+This is a Science (Physics) education app for HoloLens. 
+The target is students in junior high school, high school, college and university.
 You can learn about magnetic field which can not be seen in real world.
 This is one of education app which is few in the world.
 
@@ -35,6 +36,15 @@ This is one of education app which is few in the world.
   - There are four scenes
   - You can return to the first scene by double tap in the last scene
 
+1. **Introduction** scene in which you can grow accustomed to movement of a bar magnet
+2. **One compass** scene which shows the magnetic field
+3. Arranged in **2-Dimension** compasses scene
+4. Arranged in **3-Dimension** compasses scene
+
+## Development Environment
+
+- Unity 2017.4.25f
+- Visual Studio 2017.15
 
 ## Licence
 
@@ -53,6 +63,7 @@ Facebook: https://www.facebook.com/feelphysicsjp
 ## これは何？
 
 HoloLens用の理科（物理）学習アプリです。
+対象は中学生、高校生、専門学校生、大学生です。
 このアプリを使って、現実世界では目で見ることのできない磁界について学習することができます。
 数少ない教育用HoloLensアプリです。
 
@@ -82,10 +93,10 @@ HoloLens用の理科（物理）学習アプリです。
   - シーンは4つあります
   - 最後のシーンでダブルタップすると最初のシーンに戻ります
 
-  1. 棒磁石の移動になれてもらうためのシーン（棒磁石しかない）
-  2. 1つの磁界を表すコンパスのあるシーン
-  3. 平面グリッド上にコンパスが並んでいるシーン
-  4. 立体グリッド上にコンパスが並んでいるシーン
+1. 棒磁石の移動に**慣れて**もらうためのシーン（棒磁石しかない）
+2. **1つ**の磁界を表すコンパスのあるシーン
+3. **平面グリッド**上にコンパスが並んでいるシーン
+4. **立体グリッド**上にコンパスが並んでいるシーン
 
 ## 開発環境
 
