@@ -9,6 +9,13 @@ This is a Science (Physics) education app for HoloLens.
 You can learn about magnetic field which can not be seen in real world.
 This is one of education app which is few in the world.
 
+## Concept
+
+- Implementation example of proper size for a HoloLens Development newbie
+- Simple and easy UI for people who have never touch HoloLens
+- Example of MVP Design pattern as a HoloLens application
+- Example avoiding `GameObject.Find()` which slow down the process speed
+
 ## Getting Started
 
 1. **Clone** this repository
@@ -16,6 +23,18 @@ This is one of education app which is few in the world.
 3. **Build**
 4. **Deploy** to HoloLens
 5. **Start** app named "HoloLens3"
+
+## Usage
+
+- **Move Bar Magnet**
+  Hold and move your arm, then the bar magnet moves
+- **Show Magnetic Force Lines**
+  Tap
+- **Proceed to Next Scene**
+  Double tap
+  - There are four scenes
+  - You can return to the first scene by double tap in the last scene
+
 
 ## Licence
 
@@ -41,8 +60,8 @@ HoloLens用の理科（物理）学習アプリです。
 
 - 初心者HoloLens開発者にとって、手軽な規模の実装例
 - HoloLensが初めての人手も操作できるシンプルなUI
-- HoloLensアプリケーションのデザインパターンとしてMVPを採用
-- Unityの処理が落ちるGameObject.Find()を極力使用しない
+- HoloLensアプリケーションのデザインパターンとしてMVPを採用した例
+- Unityの処理が落ちる`GameObject.Find()`を極力使用しない例
 
 ## 始め方
 
@@ -54,18 +73,19 @@ HoloLens用の理科（物理）学習アプリです。
 
 ## 使い方
 
-- **磁石を動かす**
+- **棒磁石を動かす**
   ホールドしながら腕を動かすことで棒磁石を動かすことができます
 - **磁力線を表示**
   タップします
 - **次のシーンに進む**
   ダブルタップする
   - シーンは4つあります
-  - 棒磁石の移動になれてもらうためのシーン（棒磁石しかない）
-  - 1つの磁界を表すコンパスのあるシーン
-  - 平面グリッド上にコンパスが並んでいるシーン
-  - 立体グリッド上にコンパスが並んでいるシーン
-  - なお、最後のシーンでダブルタップすると最初のシーンに戻ります
+  - 最後のシーンでダブルタップすると最初のシーンに戻ります
+
+  1. 棒磁石の移動になれてもらうためのシーン（棒磁石しかない）
+  2. 1つの磁界を表すコンパスのあるシーン
+  3. 平面グリッド上にコンパスが並んでいるシーン
+  4. 立体グリッド上にコンパスが並んでいるシーン
 
 ## 開発環境
 
