@@ -39,9 +39,10 @@ HoloLens用の理科（物理）学習アプリです。
 
 ## 特徴
 
-- HoloLensアプリケーションのデザインパターンとしてMVPを採用
+- 初心者HoloLens開発者にとって、手軽な規模の実装例
 - HoloLensが初めての人手も操作できるシンプルなUI
-- 
+- HoloLensアプリケーションのデザインパターンとしてMVPを採用
+- Unityの処理が落ちるGameObject.Find()を極力使用しない
 
 ## 始め方
 
