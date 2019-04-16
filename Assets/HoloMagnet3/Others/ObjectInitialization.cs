@@ -24,8 +24,6 @@ public class ObjectInitialization : MonoBehaviour {
         else if(gameObject.name == "BarMagnet01")
         {
             transform.localPosition = new Vector3(0, 0f, 2f);
-            //transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 90));
             Debug.Log(gameObject.name + logMessage);
         }
     }
