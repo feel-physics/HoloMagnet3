@@ -24,7 +24,7 @@
 2. **Open** the project
 3. **Build**
 4. **Deploy** to HoloLens
-5. **Start** app named "HoloLens3"
+5. **Start** app named "HoloMagnet3"
 
 ## Usage
 
@@ -44,7 +44,7 @@
 
 ## Development Environment
 
-- Unity 2017.4.25f
+- Unity 2017.4.26f1
 - Visual Studio 2017.15
 
 ## Licence
@@ -82,7 +82,7 @@ Facebook: https://www.facebook.com/feelphysicsjp
 2. Unityで、プロジェクトを**開きます**
 3. **ビルド**します
 4. HoloLensに**配置**します
-4. 「HoloLene3」を**起動**します
+4. 「HoloMagnet3」を**起動**します
 
 ## 使い方
 
@@ -102,7 +102,7 @@ Facebook: https://www.facebook.com/feelphysicsjp
 
 ## 開発環境
 
-- Unity 2017.4.25f
+- Unity 2017.4.26f1
 - Visual Studio 2017.15
 
 ## ライセンス
