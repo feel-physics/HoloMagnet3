@@ -16,7 +16,8 @@ public class CompassPlacer3D : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        GameObject sharingObject = SharingObjectReferenceEnabler.Instance.SharingObjectReference;
+        // 2019/04/26
+        // GameObject sharingObject = SharingObjectReferenceEnabler.Instance.SharingObjectReference;
 
         // TODO: 磁力線を描画してないことをチェックする
         Debug.Log("Instantiate compasses");
@@ -38,8 +39,10 @@ public class CompassPlacer3D : MonoBehaviour
 
                     var compassCloned = Instantiate(compass,
                         new Vector3(0, 0, 0), Quaternion.identity);
-                    compassCloned.transform.parent = sharingObject.transform;
-                    compassCloned.transform.localPosition = localPositionCompassCloned;
+                    // 2019/04/26
+                    //compassCloned.transform.parent = sharingObject.transform;
+                    //compassCloned.transform.localPosition = localPositionCompassCloned;
+                    compassCloned.transform.position = localPositionCompassCloned + new Vector3(0, 0, 2);  // 2019/04/26
                 }
             }
         }
