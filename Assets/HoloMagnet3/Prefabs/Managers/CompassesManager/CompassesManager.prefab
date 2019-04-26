@@ -90,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsShown: 0
   CompassesReference: []
+  CompassesReferenceForManagedlyUpdate: []
 --- !u!114 &114967303281598454
 MonoBehaviour:
   m_ObjectHideFlags: 1
