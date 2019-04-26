@@ -44,6 +44,9 @@ public class MySceneModelAndLoader : Singleton<MySceneModelAndLoader> {
     // enumのシーンで指定したシーンをロードする
     public void Load(MySceneEnum scene)
     {
+        // 方位磁針をすべて削除する
+        CompassesRemover.Instance.Remove();
+        // シーンをロードする
         SceneManager.LoadScene(MySceneDic.FirstOrDefault(x => x.Value == scene).Key);
     }
 }
