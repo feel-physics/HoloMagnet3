@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using HoloToolkit.Unity;
+using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MySceneModelAndLoader : MonoBehaviour {
+public class MySceneModelAndLoader : Singleton<MySceneModelAndLoader> {
 
     // シーンのリストをenumで作る
     public enum MySceneEnum { Introduction, Compass_One, Compasses_2D, Compasses_3D }
