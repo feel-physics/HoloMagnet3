@@ -606,7 +606,7 @@ PlayerSettings:
       Proximity: False
       RemovableStorage: False
       SharedUserCertificates: False
-      SpatialPerception: True
+      SpatialPerception: False
       UserAccountInformation: False
       VideosLibrary: False
       VoipCall: False
