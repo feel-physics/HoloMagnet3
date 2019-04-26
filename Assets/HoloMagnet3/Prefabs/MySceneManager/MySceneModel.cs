@@ -7,7 +7,7 @@ public class MySceneModel : MonoBehaviour {
 
     // シーンのリストをenumで作る
     public enum MyScene { Introduction, Compass_One, Compasses_2D, Compasses_3D }
-    public MyScene scene;
+    public MyScene Scene;
 
     // シーン名とenumのシーンとを対応させる
     Dictionary<string, MyScene> sceneDic = new Dictionary<string, MyScene>() {
@@ -19,11 +19,6 @@ public class MySceneModel : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        Scene = MyScene.Introduction;
 	}
 }
