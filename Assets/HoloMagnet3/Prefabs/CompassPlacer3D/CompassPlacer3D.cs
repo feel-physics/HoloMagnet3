@@ -42,7 +42,7 @@ public class CompassPlacer3D : MonoBehaviour
                     // 2019/04/26
                     //compassCloned.transform.parent = sharingObject.transform;
                     //compassCloned.transform.localPosition = localPositionCompassCloned;
-                    compassCloned.transform.position = localPositionCompassCloned + new Vector3(0, 0, 2);  // 2019/04/26
+                    compassCloned.transform.position = localPositionCompassCloned + new Vector3(0, -0.185f, 2);  // 2019/04/26
                 }
             }
         }
