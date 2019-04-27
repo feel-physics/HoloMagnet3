@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
+#define DISABLE_DDOL
 
 using UnityEngine;
 
@@ -33,7 +34,10 @@ namespace HoloToolkit.Unity
                     if (objects.Length == 1)
                     {
                         instance = objects[0];
+#if DISABLE_DDOL
+#else
                         instance.gameObject.GetParentRoot().DontDestroyOnLoad();
+#endif
                     }
                     else if (objects.Length > 1)
                     {
@@ -97,7 +101,10 @@ namespace HoloToolkit.Unity
             {
                 instance = (T)this;
                 searchForInstance = false;
+#if DISABLE_DDOL
+#else
                 gameObject.GetParentRoot().DontDestroyOnLoad();
+#endif
             }
         }
 
