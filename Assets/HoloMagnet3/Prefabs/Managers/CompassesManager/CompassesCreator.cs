@@ -35,6 +35,5 @@ public class CompassesCreator : MonoBehaviour
         }
 
         Debug.Log("CompassPlacer3D.Destroy()");
-        Destroy(gameObject);
     }
 }
