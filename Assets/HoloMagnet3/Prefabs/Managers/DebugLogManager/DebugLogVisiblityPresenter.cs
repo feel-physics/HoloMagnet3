@@ -22,11 +22,6 @@ public class DebugLogVisiblityPresenter : Singleton<DebugLogVisiblityPresenter> 
 
     private void Present()
     {
-        if (SpawnedApplicationManagerExists())
-        {
-            SpawnedDebugLogModelReceiver.Instance.Receive(isShownCurrent);
-        }
-
         switch (isShownCurrent)
         {
             case true:
