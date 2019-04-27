@@ -21,12 +21,11 @@ public class CompassesCreator : MonoBehaviour
 
     void Start()
     {
-        /*
         int sceneId = MySceneManager.Instance.sceneId;
         switch (sceneId)
         {
             case 0:
-                break;
+                return;
             case 1:
                 numCompassX = 1;
                 numCompassY = 1;
@@ -45,7 +44,7 @@ public class CompassesCreator : MonoBehaviour
             default:
                 throw new System.Exception("Invalid sceneId");
         }
-        */
+
         Debug.Log("Instantiate compasses");
         GameObject compass = (GameObject)Resources.Load("Compass180509/Compass3D180509");
         for (int d = 0; d < numCompassZ; d++)

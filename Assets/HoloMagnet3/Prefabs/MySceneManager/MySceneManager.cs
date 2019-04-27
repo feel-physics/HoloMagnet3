@@ -7,8 +7,10 @@ public class MySceneManager : Singleton<MySceneManager> {
 
     public int sceneId = 0;
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         // 初期化
         string sceneName = SceneManager.GetActiveScene().name;
         switch (sceneName)
