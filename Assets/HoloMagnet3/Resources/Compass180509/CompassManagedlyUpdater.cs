@@ -58,6 +58,7 @@ public class CompassManagedlyUpdater : MonoBehaviour
 
         // 合力の大きさ
         //float brightnessOfForce = forceResultant.magnitude * brightness;
+        // Todo:  2次元の色の減衰が強すぎて、磁石に隣接する方位磁針にしか色がつかない。仕上げの段階で調整する。
         float brightnessOfForce = forceResultant.sqrMagnitude * brightness;
         //MyHelper.DebugLog(brightnessOfForce.ToString());
 
