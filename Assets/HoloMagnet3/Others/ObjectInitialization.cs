@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Unityでビルドしなくても、実機で確かめながら位置などを微調整できる
+/// </summary>
 public class ObjectInitialization : MonoBehaviour {
 
     private void Awake()
@@ -8,7 +11,7 @@ public class ObjectInitialization : MonoBehaviour {
 
         if (gameObject.name == "PointMagnet01")
         {
-            /*  Todo: どのオブジェクトかを調べる 
+            /*
             // 磁石を横向きに生成する
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
 
