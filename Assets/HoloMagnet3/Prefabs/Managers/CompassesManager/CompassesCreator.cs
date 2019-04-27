@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CompassCreator : MonoBehaviour
+public class CompassesCreator : MonoBehaviour
 {
     Vector3 shiftVector =
     new Vector3(0, 0, 2);
