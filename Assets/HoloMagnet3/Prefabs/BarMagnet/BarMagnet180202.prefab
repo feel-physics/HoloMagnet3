@@ -786,6 +786,12 @@ MonoBehaviour:
   manipulationMode: 4
   rotationConstraint: 0
   enableOneHandMovement: 1
+  ACFinish: {fileID: 8300000, guid: a95d405907cd9b54c8fec1f61bf945b8, type: 3}
+  ACMoving: {fileID: 8300000, guid: f7ae472712ee84e4bbf01ec756fdf312, type: 3}
+  ACTap: {fileID: 8300000, guid: 8fca52959c4e1f14db0b01ccf25f1c59, type: 3}
+  ACDoubleTap: {fileID: 8300000, guid: d52d89240c7918e40941d33fcfe42971, type: 3}
+  ACDragging: {fileID: 8300000, guid: 484574b0326bb484da20126f573e829c, type: 3}
+  ACHold: {fileID: 8300000, guid: e51f1b04d73ef33448fb253f9bff0709, type: 3}
 --- !u!120 &120904044303792982
 LineRenderer:
   m_ObjectHideFlags: 1
