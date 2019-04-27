@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114942184202073350}
   - component: {fileID: 114845266300539728}
   - component: {fileID: 114122603326899368}
-  - component: {fileID: 114967303281598454}
+  - component: {fileID: 114528457740456236}
   m_Layer: 0
   m_Name: CompassesManager
   m_TagString: Untagged
@@ -54,6 +54,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e039d21bb37ad143bf3de1b1c0b3e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114528457740456236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1018650526414424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c500762fcfee82f4b83489327074dd05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114845266300539728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,14 +89,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CompassesReference: []
   CompassesReferenceForManagedlyUpdate: []
---- !u!114 &114967303281598454
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1018650526414424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aea6632c6f7fcda44b31149a3d112aac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -1,7 +1,7 @@
 ﻿using HoloToolkit.Unity;
 using UnityEngine;
 
-public class CompassesCreator : Singleton<CompassesCreator> {
+public class CompassesCreator_ : Singleton<CompassesCreator_> {
 
     /// <summary>
     /// CompassPlacer3Dは自身で自分を消去する
