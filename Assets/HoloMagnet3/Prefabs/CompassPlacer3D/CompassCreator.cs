@@ -4,9 +4,9 @@ public class CompassCreator : MonoBehaviour
 {
     Vector3 shiftVector =
 #if UNITY_EDITOR
-    new Vector3(0, 0.4f, -1);
+    new Vector3(0, 0, 2);
 #else
-    new Vector3(0, 0.3f, -1);
+    new Vector3(0, 0, 2);
 #endif
     float pitchCompass = 0.03f;
     int numCompassX = 8;
@@ -32,9 +32,9 @@ public class CompassCreator : MonoBehaviour
                 {
                     var localPositionCompassCloned =
                     new Vector3(
-                        pitchCompass * w - numCompassX / 2.0f * pitchCompass,  // x軸に対し対称に±方向に方位磁針を並べる
-                        pitchCompass * h - numCompassY / 2.0f * pitchCompass - 0.185f,  // y軸に対し対称に±方向に方位磁針を並べる
-                        pitchCompass * d - numCompassZ / 2.0f * pitchCompass + 1.02f) // z軸方向に方位磁針を並べる
+                        pitchCompass * w - (numCompassX - 1.0f) / 2.0f * pitchCompass,  // x軸に対し対称に±方向に方位磁針を並べる
+                        pitchCompass * h - (numCompassY - 1.0f) / 2.0f * pitchCompass,  // y軸に対し対称に±方向に方位磁針を並べる
+                        pitchCompass * d - numCompassZ / 2.0f * pitchCompass) // z軸方向に方位磁針を並べる
                         + shiftVector;
 
                     var compassCloned = Instantiate(compass,
@@ -42,7 +42,7 @@ public class CompassCreator : MonoBehaviour
                     // 2019/04/26
                     //compassCloned.transform.parent = sharingObject.transform;
                     //compassCloned.transform.localPosition = localPositionCompassCloned;
-                    compassCloned.transform.position = localPositionCompassCloned + new Vector3(0, -0.185f, 2);  // 2019/04/26
+                    compassCloned.transform.position = localPositionCompassCloned;  // 2019/04/26
                 }
             }
         }
