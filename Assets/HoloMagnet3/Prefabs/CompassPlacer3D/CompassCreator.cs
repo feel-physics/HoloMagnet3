@@ -24,7 +24,7 @@ public class CompassCreator : MonoBehaviour
                     new Vector3(
                         pitchCompass * w - (numCompassX - 1.0f) / 2.0f * pitchCompass,  // x軸に対し対称に±方向に方位磁針を並べる
                         pitchCompass * h - (numCompassY - 1.0f) / 2.0f * pitchCompass,  // y軸に対し対称に±方向に方位磁針を並べる
-                        pitchCompass * d - numCompassZ / 2.0f * pitchCompass) // z軸方向に方位磁針を並べる
+                        pitchCompass * d - (numCompassZ - 1.0f) / 2.0f * pitchCompass) // z軸方向に方位磁針を並べる
                         + shiftVector;
 
                     var compassCloned = Instantiate(compass,

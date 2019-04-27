@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4414987423847220}
   - component: {fileID: 114834970292062630}
   m_Layer: 0
-  m_Name: CompassPlacer3D
+  m_Name: CompassCreator
   m_TagString: CompassPlacer3D
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
