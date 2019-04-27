@@ -10,6 +10,8 @@ public class CompassesCreator : MonoBehaviour
     private int numCompassY = 1;
     private int numCompassZ = 1;
 
+    private int dimension = 2;
+
     void Start()
     {
         int sceneId = MySceneManager.Instance.sceneId;
@@ -26,18 +28,31 @@ public class CompassesCreator : MonoBehaviour
                 numCompassX = 8;
                 numCompassY = 8;
                 numCompassZ = 1;
+                pitchCompass = 0.07f;
                 break;
             case 3:
                 numCompassX = 8;
                 numCompassY = 8;
                 numCompassZ = 6;
+                dimension = 3;
                 break;
             default:
                 throw new System.Exception("Invalid sceneId");
         }
 
         Debug.Log("Instantiate compasses");
-        GameObject compass = (GameObject)Resources.Load("Compass180509/Compass3D180509");
+        GameObject compass;
+        switch (dimension)
+        {
+            case 2:
+                compass = (GameObject)Resources.Load("Compass180509/Compass2D180509");
+                break;
+            case 3:
+                compass = (GameObject)Resources.Load("Compass180509/Compass3D180509");
+                break;
+            default:
+                throw new System.Exception("Invalid dimension");
+        }
         for (int d = 0; d < numCompassZ; d++)
         {
             for (int h = 0; h < numCompassY; h++)
