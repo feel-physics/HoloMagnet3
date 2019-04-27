@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CompassPlacer3D : MonoBehaviour
+public class CompassCreator : MonoBehaviour
 {
     Vector3 shiftVector =
 #if UNITY_EDITOR
