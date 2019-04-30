@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4480576968231282}
-  - component: {fileID: 114393261920821222}
+  - component: {fileID: 114447364137496900}
   m_Layer: 0
-  m_Name: TmpTapHandler
+  m_Name: MultiTapHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114393261920821222
+--- !u!114 &114447364137496900
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,6 +48,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1110684928767128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd154a1394fd8c1439302e4f0d455c34, type: 3}
+  m_Script: {fileID: 11500000, guid: e31a69577f009e84fbecbbc13980c30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MultTapTime: 0.5
+  p_MultTapCount: 0
+  p_MultTapStart: 0
