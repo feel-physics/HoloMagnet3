@@ -18,6 +18,10 @@ public class CompassManagedlyUpdater : MonoBehaviour
 
     float brightness = 0.001f;  // 明るさの係数
 
+    // カラーオブジェクトをプリロード（あらかじめ作っておく）して入れ替える
+    static Color originalCompassNorthColor = new Color(1f, 0.384f, 0.196f);
+    static Color originalCompassSouthColor = new Color(0.341f, 0.525f, 1f);
+
     void Start()
     {
         meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
@@ -41,30 +45,17 @@ public class CompassManagedlyUpdater : MonoBehaviour
     
     void RotateCompass()
     {
-        Vector3 forceResultant = MagneticForceCaliculator.Instance.ForceResultant(northPoles, southPoles, transform.position);
+        // 合力ベクトル
+        Vector3 forceResultant = 
+            MagneticForceCaliculator.Instance.ForceResultant(northPoles, southPoles, transform.position);
 
         // コンパスの向きを設定する
         transform.LookAt(transform.position + forceResultant);
         transform.Rotate(-90f, 0f, 0f);
 
-        // 合力の差分
-        /*
-        Vector3 difForceResultant = forceResultant - forceResultantPrevious;
-        if (2.0 < difForceResultant.magnitude)
-        {
-            audioSource.Play();
-        }
-        */
-
         // 合力の大きさ
-        //float brightnessOfForce = forceResultant.magnitude * brightness;
         // Todo:  2次元の色の減衰が強すぎて、磁石に隣接する方位磁針にしか色がつかない。仕上げの段階で調整する。
         float brightnessOfForce = forceResultant.sqrMagnitude * brightness;
-        //MyHelper.DebugLog(brightnessOfForce.ToString());
-
-        // 色の強さを変える
-        //materialNorth.color = ColorWithBrightness(true, materialNorth.color, brightnessOfForce);
-        //materialSouth.color = ColorWithBrightness(false, materialSouth.color, brightnessOfForce);
 
         // Emissioonを変える
         // Unity5のStandardシェーダのパラメタをスクリプトからいじろうとして丸一日潰れた話 - D.N.A.のおぼえがき
@@ -75,15 +66,10 @@ public class CompassManagedlyUpdater : MonoBehaviour
         materialSouth.SetColor("_Emission", ColorWithBrightness(false, materialSouthEmission, brightnessOfForce));
     }
 
-    // カラーオブジェクトをプリロード（あらかじめ作っておく）して入れ替える
-    static Color originalCompassNorthColor = new Color(1f, 0.384f, 0.196f);
-    static Color originalCompassSouthColor = new Color(0.341f, 0.525f, 1f);
-
-#if true
     Color ColorWithBrightness(bool isNorth, Color color, float brightness)
     {
         Color originalColor;
-        if (isNorth)  // if文
+        if (isNorth)  // if文  Todo: if文を排除してパフォーマンスを上げたい
         {
             originalColor = originalCompassNorthColor;
         }
@@ -107,33 +93,4 @@ public class CompassManagedlyUpdater : MonoBehaviour
         float colorB = originalColor.b * brightness;
         return new Color(colorR, colorG, colorB);
     }
-#else
-    Color ColorWithBrightness(bool isNorth, Color color, float brightness)
-    {
-        Color originalColor;
-        if (isNorth)  // if文
-        {
-            originalColor = originalCompassNorthColor;
-        }
-        else
-        {
-            originalColor = originalCompassSouthColor;
-        }
-
-        brightness *= 0.01f;
-
-        if (1.0f < brightness)
-        {
-            brightness = 1.0f + (brightness - 1.0f) * 0.00050f;  // 最後の値のさじ加減が大切
-        }
-        else if (brightness <= 0.5f)
-        {
-            brightness = 0.0f + brightness; // 明るさの最低値を決める。プロジェクターに出すときは0.5くらいで。
-        }
-        float colorR = originalColor.r * brightness;
-        float colorG = originalColor.g * brightness;
-        float colorB = originalColor.b * brightness;
-        return new Color(colorR, colorG, colorB);
-    }
-#endif
 }
