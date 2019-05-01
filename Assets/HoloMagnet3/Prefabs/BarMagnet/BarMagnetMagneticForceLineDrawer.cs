@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BarMagnetMagneticForceLineDrawer : Singleton<BarMagnetMagneticForceLineDrawer> {
 
+    float scaleToFitLocalPosition = 0.15f;
+
+    // --- 線分の長さ ---
+    float baseLengthOfLine = 0.1f;
+
     // Todo: Listがわからない
     //private List<GameObject> northPolesList;
     //private List<GameObject> southPolesList;
@@ -41,6 +46,9 @@ public class BarMagnetMagneticForceLineDrawer : Singleton<BarMagnetMagneticForce
         // --- LineRendererの始点を初期位置にセットする ---
         line.SetPosition(0, startPosition);  // 引数の(x, y, z)を始点として磁力線を描く
 
+        // --- lineの長さ ---
+        float lengthOfLine = baseLengthOfLine * scaleToFitLocalPosition;
+
         // --- lineの太さ ---
         line.startWidth = width;
         line.endWidth = width;
@@ -49,17 +57,12 @@ public class BarMagnetMagneticForceLineDrawer : Singleton<BarMagnetMagneticForce
 
         Vector3 positionCurrentPoint = startPosition;
 
-        float scaleToFitLocalPosition = 0.15f;
-
         // 線分を描画し続ける
         for (int i = 1; i < line.positionCount; i++)
         {
             //Vector3 forceResultant = ForceResultant(northPoles, southPoles, positionCurrentPoint);
             Vector3 forceResultant = MagneticForceCaliculator.Instance.ForceResultant(
                 northPoles, southPoles, positionCurrentPoint);
-
-            // --- 線分の長さ ---
-            float lengthOfLine = 0.01f * scaleToFitLocalPosition;
 
             // --- 描画 ---
             if (lineIsFromNorthPole)
