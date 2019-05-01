@@ -40,10 +40,10 @@ public class CompassManagedlyUpdater : MonoBehaviour
         //southPolesList.Add(BarMagnetModel.Instance.SouthPoleReference);
 
         // コンパスを回転させる
-        RotateCompass();
+        CompassRotateAndChangeEmission();
     }
     
-    void RotateCompass()
+    void CompassRotateAndChangeEmission()
     {
         // 合力ベクトル
         Vector3 forceResultant = 
@@ -53,7 +53,7 @@ public class CompassManagedlyUpdater : MonoBehaviour
         transform.LookAt(transform.position + forceResultant);
         transform.Rotate(-90f, 0f, 0f);
 
-        // 合力の大きさ
+        // 合力の大きさでコンパスの明るさを決める
         // Todo:  2次元の色の減衰が強すぎて、磁石に隣接する方位磁針にしか色がつかない。仕上げの段階で調整する。
         float brightnessOfForce = forceResultant.sqrMagnitude * brightness;
 
@@ -61,7 +61,7 @@ public class CompassManagedlyUpdater : MonoBehaviour
         // Unity5のStandardシェーダのパラメタをスクリプトからいじろうとして丸一日潰れた話 - D.N.A.のおぼえがき
         // http://dnasoftwares.hatenablog.com/entry/2015/03/19/100108
         var materialNorthEmission = materialNorth.GetColor("_Emission");
-        var materialSouthEmission = materialSouth.GetColor("_Emission");
+        var materialSouthEmission = materialSouth.GetColor("_Emission");  //  Todo: northとsouthを分ける意味はあるのか？
         materialNorth.SetColor("_Emission", ColorWithBrightness(true, materialNorthEmission, brightnessOfForce));
         materialSouth.SetColor("_Emission", ColorWithBrightness(false, materialSouthEmission, brightnessOfForce));
     }
@@ -78,16 +78,17 @@ public class CompassManagedlyUpdater : MonoBehaviour
             originalColor = originalCompassSouthColor;
         }
 
-        brightness *= 0.01f;
+        //brightness *= 0.01f;
 
-        if (1.0f < brightness)
+        if (1.0f < brightness)  // 明るすぎるとき
         {
             brightness = 1.0f + (brightness - 1.0f) * 0.00050f;  // 最後の値のさじ加減が大切
         }
-        else if (brightness <= 0.5f)
+        else if (brightness <= 0.5f)  // 暗すぎるとき
         {
             brightness = 0.0f + brightness; // 明るさの最低値を決める。プロジェクターに出すときは0.5くらいで。
         }
+        // Todo: 1行で書けないか？
         float colorR = originalColor.r * brightness;
         float colorG = originalColor.g * brightness;
         float colorB = originalColor.b * brightness;
