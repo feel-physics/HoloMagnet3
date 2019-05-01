@@ -72,7 +72,7 @@ public class CompassManagedlyUpdater : MonoBehaviour
         var materialNorthEmission = materialNorth.GetColor("_Emission");
         var materialSouthEmission = materialSouth.GetColor("_Emission");
         materialNorth.SetColor("_Emission", ColorWithBrightness(true, materialNorthEmission, brightnessOfForce));
-        materialSouth.SetColor("_Emission", ColorWithBrightness(false, materialNorthEmission, brightnessOfForce));
+        materialSouth.SetColor("_Emission", ColorWithBrightness(false, materialSouthEmission, brightnessOfForce));
     }
 
     // カラーオブジェクトをプリロード（あらかじめ作っておく）して入れ替える
