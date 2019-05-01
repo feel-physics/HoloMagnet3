@@ -10,7 +10,7 @@ using UnityEngine;
 // IInputClickHandler を利用するため InputModule を追加
 using HoloToolkit.Unity.InputModule;
 
-public class MultiTapEventFallbackHandler : MonoBehaviour,
+public class MultiTapHandler : MonoBehaviour,
 IInputClickHandler // タップ操作検出
 {
     /// <summary>
@@ -58,6 +58,14 @@ IInputClickHandler // タップ操作検出
                 }
                 p_MultTapCount = 0;
             }
+        }
+        // タップカウントが1のとき
+        else if (p_MultTapCount == 1)
+        {
+            // 磁力線描画処理のオンオフを切り替える
+            BarMagnetModel.Instance.IsDrawing = !BarMagnetModel.Instance.IsDrawing;
+            // 終了処理
+            p_MultTapCount = 0;
         }
     }
 
