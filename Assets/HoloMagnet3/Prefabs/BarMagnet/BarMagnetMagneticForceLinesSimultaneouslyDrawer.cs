@@ -132,12 +132,37 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
         //for (int i = -1; i <= 1; i += 2)  // j=1のときN極側の磁力線を描く
         for (int i = -1; i <= 1; i += 2)  // j=1のときN極側の磁力線を描く
         {
-            int numStartZ = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
-            int numEndZ   = -numStartZ;
-            int numShiftZ = 2;   // 磁力線描画開始地点を 奥行き 方向にいくつとるか
-            int numStartY = -2;  // 磁力線描画開始地点を 垂直   方向にいくつとるか
-            int numEndY   = -numStartZ;
-            int numShiftY = 1;   // 磁力線描画開始地点を 垂直   方向にいくつとるか
+            int numStartZ;
+            int numEndZ;
+            int numShiftZ;
+            int numStartY;
+            int numEndY;
+            int numShiftY;
+
+            Mode = 1;  // 実験行（後で削除する）
+
+            if (Mode == 0)
+            {
+                numStartZ = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+                numEndZ = -numStartZ;
+                numShiftZ = 2;   // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+                numStartY = -2;  // 磁力線描画開始地点を 垂直   方向にいくつとるか
+                numEndY = -numStartZ;
+                numShiftY = 1;   // 磁力線描画開始地点を 垂直   方向にいくつとるか
+            }
+            else if (Mode == 1)
+            {
+                numStartZ = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+                numEndZ = -numStartZ;
+                numShiftZ = 2;   // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+                numStartY = 0;  // 磁力線描画開始地点を 垂直   方向にいくつとるか
+                numEndY = -numStartZ;
+                numShiftY = 2;   // 磁力線描画開始地点を 垂直   方向にいくつとるか
+            }
+            else
+            {
+                throw new System.Exception("Invalid Mode");
+            }
 
             for (int j = numStartZ; j <= numEndZ; j += numShiftZ) // z
             {
