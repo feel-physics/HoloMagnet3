@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
 
+    public int Mode = 0;  // 0: 2D, 1: 3D  Todo: Listを使う
     private GameObject magneticForceLine;
     private bool hasLogged;
 
@@ -131,9 +132,16 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
         //for (int i = -1; i <= 1; i += 2)  // j=1のときN極側の磁力線を描く
         for (int i = -1; i <= 1; i += 2)  // j=1のときN極側の磁力線を描く
         {
-            for (int j = -2; j <= 2; j += 2) // y: 垂直？
+            int numStartZ = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+            int numEndZ   = -numStartZ;
+            int numShiftZ = 2;   // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+            int numStartY = -2;  // 磁力線描画開始地点を 垂直   方向にいくつとるか
+            int numEndY   = -numStartZ;
+            int numShiftY = 1;   // 磁力線描画開始地点を 垂直   方向にいくつとるか
+
+            for (int j = numStartZ; j <= numEndZ; j += numShiftZ) // z
             {
-                for (int k = -2; k <= 2; k++) // z: 奥行き？
+                for (int k = numStartY; k <= numEndY; k += numShiftY) // y
                 {
                     GameObject magneticForceLine =
                         Instantiate(this.magneticForceLine, transform.position, Quaternion.identity);
