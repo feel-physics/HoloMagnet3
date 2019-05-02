@@ -7,6 +7,7 @@ public class BarMagnetMagneticForceLineDrawer : Singleton<BarMagnetMagneticForce
     float scaleToFitLocalPosition = 0.15f;
 
     // --- 線分の長さ ---
+    // Todo: この長さを調節してN極から出た磁力線とS極から出た磁力線が一致するようにする
     float baseLengthOfLine = 0.1f;
 
     // Todo: Listがわからない
