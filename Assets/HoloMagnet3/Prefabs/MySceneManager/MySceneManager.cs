@@ -7,10 +7,27 @@ public class MySceneManager : Singleton<MySceneManager> {
 
     public int SceneId = 0;
 
+    public enum MySceneEnum { Introduction, Compass_One, Compasses_2D, Compasses_3D };
+    public MySceneEnum MyScene;
+
+    // シーン名とenumのシーンとを対応させる
+    private Dictionary<string, MySceneEnum> sceneDic = new Dictionary<string, MySceneEnum>() {
+        {"Introduction",    MySceneEnum.Introduction },
+        {"Compass_One",     MySceneEnum.Compass_One },
+        {"Compasses_2D",    MySceneEnum.Compasses_2D },
+        {"Compasses_3D",    MySceneEnum.Compasses_3D }
+    };
+
     protected override void Awake()
     {
+        // Singletonのオーバーライド
         base.Awake();
 
+        // シーンAwake時に、MySceneに現在のシーンを代入する
+        string sceneName = SceneManager.GetActiveScene().name;
+        MyScene = sceneDic[sceneName];
+
+#if false
         // 初期化
         string sceneName = SceneManager.GetActiveScene().name;
         switch (sceneName)
@@ -30,10 +47,33 @@ public class MySceneManager : Singleton<MySceneManager> {
             default:
                 break;
         }
+#endif
     }
 
     public void LoadNextScene()
     {
+        MySceneEnum nextScene;
+
+        switch (MyScene)
+        {
+            case MySceneEnum.Introduction:
+                nextScene = MySceneEnum.Compass_One;
+                break;
+            case MySceneEnum.Compass_One:
+                nextScene = MySceneEnum.Compasses_2D;
+                break;
+            case MySceneEnum.Compasses_2D:
+                nextScene = MySceneEnum.Compasses_3D;
+                break;
+            case MySceneEnum.Compasses_3D:
+                nextScene = MySceneEnum.Introduction;
+                break;
+            default:
+                throw new System.Exception("Invarid MyScene");
+        }
+
+        MyLoadScene(nextScene);
+#if false
         string sceneName;
 
         if (SceneId == 3)
@@ -45,7 +85,7 @@ public class MySceneManager : Singleton<MySceneManager> {
             SceneId++;
         }
 
-        switch (SceneId)
+        switch (MyScene)
         {
             case 0:
                 sceneName = "Introduction";
@@ -63,5 +103,12 @@ public class MySceneManager : Singleton<MySceneManager> {
                 throw new System.Exception("sceneId is invalid");
         }
         SceneManager.LoadScene(sceneName);
+#endif
+    }
+
+    // enumのシーンで指定したシーンをロードする
+    public void MyLoadScene(MySceneEnum scene)
+    {
+        SceneManager.LoadScene(sceneDic.FirstOrDefault(x => x.Value == scene).Key);
     }
 }
