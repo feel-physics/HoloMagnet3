@@ -14,7 +14,7 @@ public class CompassesCreator : MonoBehaviour
 
     void Start()
     {
-        int sceneId = MySceneManager.Instance.sceneId;
+        int sceneId = MySceneManager.Instance.SceneId;
         switch (sceneId)
         {
             case 0:

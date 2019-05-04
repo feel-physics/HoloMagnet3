@@ -26,7 +26,15 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
 
         if (isDrawingCurrent)
         {
-            Draw();
+            int dimension = 2;
+
+            int sceneId = MySceneManager.Instance.SceneId;
+            if (sceneId == 3)
+            {
+                dimension = 3;
+            }
+
+            Draw(dimension);
         }
 
         if (isDrawingCurrent != isDrawingOld)
@@ -49,7 +57,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
         }
     }
 
-    public void Draw()
+    public void Draw(int dimension)
     {
         GameObject myMagnet = gameObject;
 
@@ -78,9 +86,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
             int numEndZ;
             int numShiftZ;
 
-            Mode = 1;  // 実験行（後で削除する）
-
-            if (Mode == 0)
+            if (dimension == 3)
             {
                 numStartY = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
                 numEndY = -numStartY;
@@ -89,7 +95,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
                 numEndZ = -numStartZ;
                 numShiftZ = 1;   // 磁力線描画開始地点を 垂直   方向にいくつとるか
             }
-            else if (Mode == 1)
+            else if (dimension == 2)
             {
                 numStartY = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
                 numEndY = -numStartY;
@@ -105,10 +111,8 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
 
             for (int indexY = numStartY; indexY <= numEndY; indexY += numShiftY) // z
             {
-                Debug.Log("j=" + indexY);  // Debug
                 for (int indexZ = numStartZ; indexZ <= numEndZ; indexZ += numShiftZ) // y
                 {
-                    Debug.Log("k=" + indexZ);  // Debug
                     GameObject magneticForceLine =
                         Instantiate(this.magneticForceLine, transform.position, Quaternion.identity);
 

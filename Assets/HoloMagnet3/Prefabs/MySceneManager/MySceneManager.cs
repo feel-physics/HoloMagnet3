@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MySceneManager : Singleton<MySceneManager> {
 
-    public int sceneId = 0;
+    public int SceneId = 0;
 
     protected override void Awake()
     {
@@ -16,16 +16,16 @@ public class MySceneManager : Singleton<MySceneManager> {
         switch (sceneName)
         {
             case "Introduction":
-                sceneId = 0;
+                SceneId = 0;
                 break;
             case "Compass_One":
-                sceneId = 1;
+                SceneId = 1;
                 break;
             case "Compasses_2D":
-                sceneId = 2;
+                SceneId = 2;
                 break;
             case "Compasses_3D":
-                sceneId = 3;
+                SceneId = 3;
                 break;
             default:
                 break;
@@ -36,16 +36,16 @@ public class MySceneManager : Singleton<MySceneManager> {
     {
         string sceneName;
 
-        if (sceneId == 3)
+        if (SceneId == 3)
         {
-            sceneId = 0;
+            SceneId = 0;
         }
         else
         {
-            sceneId++;
+            SceneId++;
         }
 
-        switch (sceneId)
+        switch (SceneId)
         {
             case 0:
                 sceneName = "Introduction";
