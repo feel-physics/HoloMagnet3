@@ -10,7 +10,8 @@ public class CompassesCreator : MonoBehaviour
     private int numCompassY = 1;
     private int numCompassZ = 1;
 
-    private int dimension = 2;
+    private enum Dimensiton { D2, D3 };
+    private Dimensiton dimensiton;
 
     void Start()
     {
@@ -28,13 +29,14 @@ public class CompassesCreator : MonoBehaviour
                 numCompassX = 8;
                 numCompassY = 8;
                 numCompassZ = 1;
+                dimensiton = Dimensiton.D2;
                 pitchCompass = 0.07f;
                 break;
             case MySceneManager.MySceneEnum.Compasses_3D:
                 numCompassX = 8;
                 numCompassY = 8;
                 numCompassZ = 6;
-                dimension = 3;
+                dimensiton = Dimensiton.D3;
                 pitchCompass = 0.07f;
                 break;
             default:
@@ -43,12 +45,12 @@ public class CompassesCreator : MonoBehaviour
 
         Debug.Log("Instantiate compasses");  // Todo: 10秒おきのログの文面を現在進行形にする
         GameObject compass;
-        switch (dimension)
+        switch (dimensiton)
         {
-            case 2:
+            case Dimensiton.D2:
                 compass = (GameObject)Resources.Load("Compass180509/Compass2D180509");
                 break;
-            case 3:
+            case Dimensiton.D3:
                 compass = (GameObject)Resources.Load("Compass180509/Compass3D180509");
                 break;
             default:
