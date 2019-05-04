@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 114905948474313042}
   - component: {fileID: 114099035210276768}
   - component: {fileID: 114944391148216512}
+  - component: {fileID: 114946775741763146}
   m_Layer: 0
   m_Name: BarMagnet180202
   m_TagString: BarMagnet01
@@ -770,6 +771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bc5026f761a24a458826eb7fd373986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mode: 0
 --- !u!114 &114944391148216512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -792,6 +794,18 @@ MonoBehaviour:
   ACDoubleTap: {fileID: 8300000, guid: d52d89240c7918e40941d33fcfe42971, type: 3}
   ACDragging: {fileID: 8300000, guid: 484574b0326bb484da20126f573e829c, type: 3}
   ACHold: {fileID: 8300000, guid: e51f1b04d73ef33448fb253f9bff0709, type: 3}
+--- !u!114 &114946775741763146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1132814198459000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b5e0716c4749fe4f86289cfab8f65da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ACMoving: {fileID: 8300000, guid: f7ae472712ee84e4bbf01ec756fdf312, type: 3}
 --- !u!120 &120904044303792982
 LineRenderer:
   m_ObjectHideFlags: 1
