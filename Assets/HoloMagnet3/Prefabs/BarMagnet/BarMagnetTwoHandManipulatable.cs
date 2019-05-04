@@ -436,6 +436,13 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
                 audioSource.loop = true;
                 audioSource.Play();
             });
+
+            // 3ŸŒ³‚ÌƒV[ƒ“‚Å‚ ‚ê‚Î©“®ˆÚ“®‚ğ~‚ß‚é
+            if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D &&
+                BarMagnetAutoMover.Instance.IsMoving)
+            {
+                BarMagnetAutoMover.Instance.IsMoving = false;
+            }
 #else
             InputManager.Instance.PushModalInputHandler(gameObject);
 #endif
