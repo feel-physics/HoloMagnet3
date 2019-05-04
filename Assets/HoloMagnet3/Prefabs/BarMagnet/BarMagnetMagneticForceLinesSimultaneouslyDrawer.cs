@@ -132,42 +132,44 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
         //for (int i = -1; i <= 1; i += 2)  // j=1のときN極側の磁力線を描く
         for (int i = -1; i <= 1; i += 2)  // j=1のときN極側の磁力線を描く
         {
-            int numStartZ;
-            int numEndZ;
-            int numShiftZ;
             int numStartY;
             int numEndY;
             int numShiftY;
+            int numStartZ;
+            int numEndZ;
+            int numShiftZ;
 
             Mode = 1;  // 実験行（後で削除する）
 
             if (Mode == 0)
             {
-                numStartZ = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+                numStartY = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+                numEndY = -numStartY;
+                numShiftY = 2;   // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+                numStartZ = -2;  // 磁力線描画開始地点を 垂直   方向にいくつとるか
                 numEndZ = -numStartZ;
-                numShiftZ = 2;   // 磁力線描画開始地点を 奥行き 方向にいくつとるか
-                numStartY = -2;  // 磁力線描画開始地点を 垂直   方向にいくつとるか
-                numEndY = -numStartZ;
-                numShiftY = 1;   // 磁力線描画開始地点を 垂直   方向にいくつとるか
+                numShiftZ = 1;   // 磁力線描画開始地点を 垂直   方向にいくつとるか
             }
             else if (Mode == 1)
             {
-                numStartZ = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+                numStartY = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+                numEndY = -numStartY;
+                numShiftY = 2;   // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+                numStartZ = 0;  // 磁力線描画開始地点を 垂直   方向にいくつとるか
                 numEndZ = -numStartZ;
-                numShiftZ = 2;   // 磁力線描画開始地点を 奥行き 方向にいくつとるか
-                numStartY = 0;  // 磁力線描画開始地点を 垂直   方向にいくつとるか
-                numEndY = -numStartZ;
-                numShiftY = 2;   // 磁力線描画開始地点を 垂直   方向にいくつとるか
+                numShiftZ = 1;   // 磁力線描画開始地点を 垂直   方向にいくつとるか
             }
             else
             {
                 throw new System.Exception("Invalid Mode");
             }
 
-            for (int j = numStartZ; j <= numEndZ; j += numShiftZ) // z
+            for (int indexY = numStartY; indexY <= numEndY; indexY += numShiftY) // z
             {
-                for (int k = numStartY; k <= numEndY; k += numShiftY) // y
+                Debug.Log("j=" + indexY);  // Debug
+                for (int indexZ = numStartZ; indexZ <= numEndZ; indexZ += numShiftZ) // y
                 {
+                    Debug.Log("k=" + indexZ);  // Debug
                     GameObject magneticForceLine =
                         Instantiate(this.magneticForceLine, transform.position, Quaternion.identity);
 
@@ -192,9 +194,9 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
                     }
 
                     Vector3 shiftPositionFromMyPole = new Vector3(
-                        0.001f * j,  // y
+                        0.001f * indexY,  // y
                         0.001f * i,  // x
-                        0.001f * k  // z
+                        0.001f * indexZ  // z
                         );
 
                     shiftPositionFromMyPole =
