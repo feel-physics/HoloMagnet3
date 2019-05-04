@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class CompassManagedlyUpdater : MonoBehaviour
 {
-    public enum State { Compass2D, Compass3D };
-    public State state = State.Compass3D;
-
     GameObject[] southPoles;
     GameObject[] northPoles;
     MeshRenderer meshRenderer;
@@ -35,11 +32,11 @@ public class CompassManagedlyUpdater : MonoBehaviour
         northPoles = GameObject.FindGameObjectsWithTag("North Pole");
         southPoles = GameObject.FindGameObjectsWithTag("South Pole");
 
-        // Todo: Listがわからない
+        // 動作しない
         //northPolesList.Add(BarMagnetModel.Instance.NorthPoleReference);
         //southPolesList.Add(BarMagnetModel.Instance.SouthPoleReference);
 
-        // コンパスを回転させる
+        // コンパスを回転させ、明るさを変える
         CompassRotateAndChangeEmission();
     }
     
@@ -58,8 +55,11 @@ public class CompassManagedlyUpdater : MonoBehaviour
         float brightnessOfForce = forceResultant.sqrMagnitude * brightness;
 
         // Emissioonを変える
-        // Unity5のStandardシェーダのパラメタをスクリプトからいじろうとして丸一日潰れた話 - D.N.A.のおぼえがき
-        // http://dnasoftwares.hatenablog.com/entry/2015/03/19/100108
+        /*
+         * 参考にさせて頂きました：
+         * Unity5のStandardシェーダのパラメタをスクリプトからいじろうとして丸一日潰れた話 - D.N.A.のおぼえがき
+         * http://dnasoftwares.hatenablog.com/entry/2015/03/19/100108
+         */
         var materialNorthEmission = materialNorth.GetColor("_Emission");
         var materialSouthEmission = materialSouth.GetColor("_Emission");  //  Todo: northとsouthを分ける意味はあるのか？
         materialNorth.SetColor("_Emission", ColorWithBrightness(true, materialNorthEmission, brightnessOfForce));
@@ -69,6 +69,8 @@ public class CompassManagedlyUpdater : MonoBehaviour
     Color ColorWithBrightness(bool isNorth, Color color, float brightness)
     {
         Color originalColor;
+
+        // 準備
         if (isNorth)  // if文  Todo: if文を排除してパフォーマンスを上げたい
         {
             originalColor = originalCompassNorthColor;
@@ -78,8 +80,7 @@ public class CompassManagedlyUpdater : MonoBehaviour
             originalColor = originalCompassSouthColor;
         }
 
-        //brightness *= 0.01f;
-
+        // 明るさの微調整
         if (1.0f < brightness)  // 明るすぎるとき
         {
             brightness = 1.0f + (brightness - 1.0f) * 0.00050f;  // 最後の値のさじ加減が大切
@@ -88,6 +89,8 @@ public class CompassManagedlyUpdater : MonoBehaviour
         {
             brightness = 0.0f + brightness; // 明るさの最低値を決める。プロジェクターに出すときは0.5くらいで。
         }
+
+        // 最終的に適用するColor
         // Todo: 1行で書けないか？
         float colorR = originalColor.r * brightness;
         float colorG = originalColor.g * brightness;
