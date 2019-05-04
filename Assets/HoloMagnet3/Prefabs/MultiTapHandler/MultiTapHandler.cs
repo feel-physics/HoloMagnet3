@@ -56,13 +56,6 @@ IInputClickHandler // タップ操作検出
                 // 磁力線描画処理のオンオフを切り替える
                 BarMagnetModel.Instance.IsDrawing = !BarMagnetModel.Instance.IsDrawing;
 
-                // 3次元のシーンであれば自動移動を止める
-                if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D &&
-                    BarMagnetAutoMover.Instance.IsMoving)
-                {
-                    BarMagnetAutoMover.Instance.IsMoving = false;
-                }
-
                 // --- シングルタップ終了処理 ---
                 p_MultTapCount = 0;
             }
