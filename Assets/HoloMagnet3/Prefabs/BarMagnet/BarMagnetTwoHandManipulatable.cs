@@ -84,7 +84,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         public AudioClip ACDoubleTap;
         public AudioClip ACDragging;
         public AudioClip ACHold;
-        AudioSource audioSource;
+        private AudioSource audioSource;
 #endif
 
         // Private fields that store transform information.
@@ -159,6 +159,11 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             {
                 hostTransform = transform;
             }
+
+#if feel_physics
+            audioSource = GetComponents<AudioSource>()[0];  // Todo: スクリプトで追加して独立性を上げたい
+#endif
+
         }
 
         private void Update()
@@ -421,10 +426,15 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         private void OnManipulationStarted()
         {
 #if feel_physics
-            PlayAudioClip(ACHold);
+            audioSource.clip = ACHold;
+            audioSource.loop = false;
+            audioSource.Play();
+
             MyHelper.MyDelayMethod(this, 1f, () =>
             {
-                PlayAudioClip(ACDragging);
+                audioSource.clip = ACDragging;
+                audioSource.loop = true;
+                audioSource.Play();
             });
 #else
             InputManager.Instance.PushModalInputHandler(gameObject);
@@ -439,39 +449,20 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             InputManager.Instance.PopModalInputHandler();
 
 #if feel_physics
-            StopAudioClip();
-            PlayAudioClip(ACFinish);
+            audioSource.Stop();
+
+            audioSource.clip = ACFinish;
+            audioSource.loop = false;
+            audioSource.Play();
+
             MyHelper.MyDelayMethod(this, 1f, () =>
             {
-                StopAudioClip();
+                audioSource.Stop();
             });
 #endif
 
             // Hide Bounding Box visual on release
             ShowBoundingBox = false;
         }
-
-#if feel_physics
-        private void PlayAudioClip(AudioClip ac)
-        {
-            audioSource = GetComponents<AudioSource>()[0];
-            audioSource.clip = ac;
-            if (ac == ACMoving || ac == ACDragging)
-            {
-                audioSource.loop = true;
-            }
-            else
-            {
-                audioSource.loop = false;
-            }
-            audioSource.Play();
-        }
-
-        private void StopAudioClip()
-        {
-            audioSource = GetComponent<AudioSource>();
-            audioSource.Stop();
-        }
-#endif
     }
 }
