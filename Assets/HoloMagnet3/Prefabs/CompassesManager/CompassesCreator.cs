@@ -4,7 +4,7 @@ public class CompassesCreator : MonoBehaviour
 {
     Vector3 shiftVector = new Vector3(0, 0, 2);
 
-    float pitchCompass = 0.03f;
+    float pitchCompass;
 
     private int numCompassX = 1;
     private int numCompassY = 1;
@@ -35,6 +35,7 @@ public class CompassesCreator : MonoBehaviour
                 numCompassY = 8;
                 numCompassZ = 6;
                 dimension = 3;
+                pitchCompass = 0.07f;
                 break;
             default:
                 throw new System.Exception("Invalid sceneId");
