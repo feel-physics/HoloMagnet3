@@ -1,4 +1,4 @@
-﻿#undef DEBUG_LOG  // 磁力線を引く処理時間を計測するため
+﻿#undef elapsed_time  // 磁力線を引く処理時間を計測するため
 using UnityEngine;
 
 /// <summary>
@@ -15,19 +15,6 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
     private bool isDrawingCurrent = false;
     private bool isDrawingOld = false;
 
-    /*
-    private void Start()
-    {
-        CreateLineMaterial();
-        // Apply the line material
-        lineMaterial.SetPass(0);
-
-        GL.PushMatrix();
-        // Set transformation matrix for drawing to
-        // match our transform
-        GL.MultMatrix(transform.localToWorldMatrix);
-    }
-    */
     private void Start()
     {
         magneticForceLine = BarMagnetModel.Instance.MagneticForceLineReference;
@@ -61,54 +48,6 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
             Destroy(line);
         }
     }
-
-    //static Material lineMaterial;
-    static void CreateLineMaterial()
-    {
-        if (!lineMaterial)
-        {
-            // Unity has a built-in shader that is useful for drawing
-            // simple colored things.
-            Shader shader = Shader.Find("Hidden/Internal-Colored");
-            lineMaterial = new Material(shader);
-            lineMaterial.hideFlags = HideFlags.HideAndDontSave;
-            // Turn on alpha blending
-            lineMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-            lineMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-            // Turn backface culling off
-            lineMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
-            // Turn off depth writes
-            lineMaterial.SetInt("_ZWrite", 0);
-        }
-    }
-
-    /*
-    // Will be called after all regular rendering is done
-    public void OnRenderObject()
-    {
-        CreateLineMaterial();
-        // Apply the line material
-        lineMaterial.SetPass(0);
-
-        GL.PushMatrix();
-        // Set transformation matrix for drawing to
-        // match our transform
-        GL.MultMatrix(transform.localToWorldMatrix);
-
-        // Draw lines
-        GL.Begin(GL.LINES);
-
-        GL.Color(new Color(1, 0, 0, 1));
-        GL.Vertex3(0, 0, 0);
-        GL.Vertex3(0.1F, 0, 0);
-
-        GL.Color(new Color(0, 1, 0, 1));
-        GL.Vertex3(0.1F, 0.1F, 0);
-        GL.Vertex3(0, 0.1F, 0);
-
-        GL.End();
-    }
-    */
 
     public void Draw()
     {
@@ -203,22 +142,19 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
                         myMagnet.transform.rotation * shiftPositionFromMyPole;
                     Vector3 startPosition = myBarMagnetPoleWorldPosition + shiftPositionFromMyPole;
 
-                    /*
+#if elapsed_time
                     // 処理時間の計測
                     System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
                     sw.Start();
-                    */
-
+#endif
                     BarMagnetMagneticForceLineDrawer.Instance.Draw(
                         magneticForceLine, lineIsFromNorthPole, startPosition, 0.003f);
-
-                    /*
-                                        // 処理時間の計測
+#if elapsed_time
+                    // 処理時間の計測
                     sw.Stop();
-            #if DEBUG_LOG
+
                     Debug.Log("DrawMagnetForceLines3D takes " + sw.ElapsedMilliseconds + "ms");
-            #endif
-                    */
+#endif
                 }
             }
         }
