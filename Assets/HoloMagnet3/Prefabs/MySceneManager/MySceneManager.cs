@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MySceneManager : Singleton<MySceneManager> {
 
-    public int SceneId = 0;
-
     public enum MySceneEnum { Introduction, Compass_One, Compasses_2D, Compasses_3D };
     public MySceneEnum MyScene;
 

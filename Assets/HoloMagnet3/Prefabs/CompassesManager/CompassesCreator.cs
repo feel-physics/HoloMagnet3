@@ -14,23 +14,23 @@ public class CompassesCreator : MonoBehaviour
 
     void Start()
     {
-        int sceneId = MySceneManager.Instance.SceneId;
-        switch (sceneId)
+        MySceneManager.MySceneEnum scene = MySceneManager.Instance.MyScene;
+        switch (scene)
         {
-            case 0:
+            case MySceneManager.MySceneEnum.Introduction:
                 return;
-            case 1:
+            case MySceneManager.MySceneEnum.Compass_One:
                 numCompassX = 1;
                 numCompassY = 1;
                 numCompassZ = 1;
                 break;
-            case 2:
+            case MySceneManager.MySceneEnum.Compasses_2D:
                 numCompassX = 8;
                 numCompassY = 8;
                 numCompassZ = 1;
                 pitchCompass = 0.07f;
                 break;
-            case 3:
+            case MySceneManager.MySceneEnum.Compasses_3D:
                 numCompassX = 8;
                 numCompassY = 8;
                 numCompassZ = 6;
@@ -41,7 +41,7 @@ public class CompassesCreator : MonoBehaviour
                 throw new System.Exception("Invalid sceneId");
         }
 
-        Debug.Log("Instantiate compasses");
+        Debug.Log("Instantiate compasses");  // Todo: 10秒おきのログの文面を現在進行形にする
         GameObject compass;
         switch (dimension)
         {

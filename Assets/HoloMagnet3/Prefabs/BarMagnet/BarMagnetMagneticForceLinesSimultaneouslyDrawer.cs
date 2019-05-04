@@ -28,8 +28,15 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
         {
             int dimension = 2;
 
+            MySceneManager.MySceneEnum scene = MySceneManager.Instance.MyScene;
+#if false
             int sceneId = MySceneManager.Instance.SceneId;
             if (sceneId == 3)
+            {
+                dimension = 3;
+            }
+#endif
+            if (scene == MySceneManager.MySceneEnum.Compasses_3D)
             {
                 dimension = 3;
             }
