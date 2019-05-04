@@ -28,6 +28,7 @@ IInputClickHandler // タップ操作検出
     /// 連続タップ計測開始時刻
     /// </summary>
     private float p_MultTapStart;
+    private float tapTime;
 
     /// <summary>
     /// 起動時処理
@@ -43,8 +44,27 @@ IInputClickHandler // タップ操作検出
     /// </summary>
     void Update()
     {
-        // 連続タップ判定
-        if (p_MultTapCount > 1)
+        // 初回タップ
+        if (p_MultTapCount == 1)
+        {
+            // 経過時間確認
+            float elapsedTime = Time.time - p_MultTapStart;
+            // 初回タップから規定時間経過しても次のタップが来ない場合、シングルタップと判定
+            if (p_MultTapCount == 1 && MultTapTime < elapsedTime)
+            {
+                // --- シングルタップ処理 ---
+                // 磁力線描画処理のオンオフを切り替える
+                BarMagnetModel.Instance.IsDrawing = !BarMagnetModel.Instance.IsDrawing;
+                // --- シングルタップ終了処理 ---
+                p_MultTapCount = 0;
+            }
+            else
+            {
+                // 初回タップから次のタップを待機中
+            }
+        }
+        // 連続タップ
+        else if(p_MultTapCount > 1)
         {
             // タップカウントが 2 以上の時、連続タップの発生チェック
             if ((Time.time - p_MultTapStart) > MultTapTime)
@@ -56,16 +76,9 @@ IInputClickHandler // タップ操作検出
                     Debug.Log("DoubleTap");
                     MySceneManager.Instance.LoadNextScene();
                 }
+                // 終了処理
                 p_MultTapCount = 0;
             }
-        }
-        // タップカウントが1のとき
-        else if (p_MultTapCount == 1)
-        {
-            // 磁力線描画処理のオンオフを切り替える
-            BarMagnetModel.Instance.IsDrawing = !BarMagnetModel.Instance.IsDrawing;
-            // 終了処理
-            p_MultTapCount = 0;
         }
     }
 
@@ -81,7 +94,7 @@ IInputClickHandler // タップ操作検出
         float nowTime = Time.time;
 
         // 連続タップ確認
-        float tapTime = nowTime - p_MultTapStart;
+        tapTime = nowTime - p_MultTapStart;
         if (tapTime > MultTapTime)
         {
             // 前回タップから連続タップ許容時間を超えていれば初回タップと再判定
