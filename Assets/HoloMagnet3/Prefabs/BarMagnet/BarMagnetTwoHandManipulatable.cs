@@ -85,7 +85,6 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         public AudioClip ACDragging;
         public AudioClip ACHold;
         AudioSource audioSource;
-#else
 #endif
 
         // Private fields that store transform information.
@@ -446,7 +445,6 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             {
                 StopAudioClip();
             });
-#else
 #endif
 
             // Hide Bounding Box visual on release
@@ -474,7 +472,6 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             audioSource = GetComponent<AudioSource>();
             audioSource.Stop();
         }
-#else
 #endif
     }
 }
