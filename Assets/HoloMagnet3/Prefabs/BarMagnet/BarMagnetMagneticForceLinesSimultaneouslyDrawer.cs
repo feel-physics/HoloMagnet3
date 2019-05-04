@@ -154,7 +154,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
             {
                 numStartY = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
                 numEndY = -numStartY;
-                numShiftY = 2;   // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+                numShiftY = 1;   // 磁力線描画開始地点を 奥行き 方向にいくつとるか
                 numStartZ = 0;  // 磁力線描画開始地点を 垂直   方向にいくつとるか
                 numEndZ = -numStartZ;
                 numShiftZ = 1;   // 磁力線描画開始地点を 垂直   方向にいくつとるか
