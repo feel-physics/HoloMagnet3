@@ -76,8 +76,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
 
         Vector3 barMagnetDirection = transform.rotation.eulerAngles;
 
-        //for (int i = -1; i <= 1; i += 2)  // j=1のときN極側の磁力線を描く
-        for (int i = -1; i <= 1; i += 2)  // j=1のときN極側の磁力線を描く
+        for (int i = -1; i <= 1; i += 2)  // j=1のときN極側、j=-1のときS極側の磁力線を描く
         {
             int numStartY;
             int numEndY;
@@ -88,21 +87,23 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
 
             if (dimension == 3)
             {
-                numStartY = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
-                numEndY = -numStartY;
-                numShiftY = 2;   // 磁力線描画開始地点を 奥行き 方向にいくつとるか
-                numStartZ = -2;  // 磁力線描画開始地点を 垂直   方向にいくつとるか
+                numStartY = -2;  // 磁力線描画開始地点、y方向
+                numEndY = -numStartY;  // 磁石の中心に対して対称に描画開始地点を配置する
+                numShiftY = 2;   // 磁力線描画開始地点間の長さ、y方向
+
+                numStartZ = -2;  // 磁力線描画開始地点、z方向
                 numEndZ = -numStartZ;
-                numShiftZ = 1;   // 磁力線描画開始地点を 垂直   方向にいくつとるか
+                numShiftZ = 1;   // 磁力線描画開始地点間の長さ、z方向
             }
             else if (dimension == 2)
             {
-                numStartY = -2;  // 磁力線描画開始地点を 奥行き 方向にいくつとるか
+                numStartY = -2;
                 numEndY = -numStartY;
-                numShiftY = 1;   // 磁力線描画開始地点を 奥行き 方向にいくつとるか
-                numStartZ = 0;  // 磁力線描画開始地点を 垂直   方向にいくつとるか
+                numShiftY = 1;
+
+                numStartZ = 0;
                 numEndZ = -numStartZ;
-                numShiftZ = 1;   // 磁力線描画開始地点を 垂直   方向にいくつとるか
+                numShiftZ = 1;
             }
             else
             {
