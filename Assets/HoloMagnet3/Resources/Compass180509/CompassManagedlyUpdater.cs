@@ -9,10 +9,6 @@ public class CompassManagedlyUpdater : MonoBehaviour
     Material materialNorth;
     Material materialSouth;
 
-    // Todo: Listがわからない
-    //List<GameObject> northPolesList;
-    //List<GameObject> southPolesList;
-
     float brightness = 0.001f;  // 明るさの係数
 
     // カラーオブジェクトをプリロード（あらかじめ作っておく）して入れ替える
@@ -28,13 +24,8 @@ public class CompassManagedlyUpdater : MonoBehaviour
 
     public void ManagedlyUpdate()
     {
-        // Todo: Listがわからない
         northPoles = GameObject.FindGameObjectsWithTag("North Pole");
         southPoles = GameObject.FindGameObjectsWithTag("South Pole");
-
-        // 動作しない
-        //northPolesList.Add(BarMagnetModel.Instance.NorthPoleReference);
-        //southPolesList.Add(BarMagnetModel.Instance.SouthPoleReference);
 
         // コンパスを回転させ、明るさを変える
         CompassRotateAndChangeEmission();
