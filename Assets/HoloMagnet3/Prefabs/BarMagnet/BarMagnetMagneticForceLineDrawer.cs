@@ -1,48 +1,37 @@
 ﻿using HoloToolkit.Unity;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BarMagnetMagneticForceLineDrawer : Singleton<BarMagnetMagneticForceLineDrawer> {
 
+    // Todo: これは何だ？Sharing用のようだが…
     float scaleToFitLocalPosition = 0.15f;
 
     // --- 線分の長さ ---
-    // Todo: この長さを調節してN極から出た磁力線とS極から出た磁力線が一致するようにする
+    // Todo: この長さと数を調節してN極から出た磁力線とS極から出た磁力線が一致するようにする
     float baseLengthOfLine = 0.1f;
-
-    // Todo: Listがわからない
-    //private List<GameObject> northPolesList;
-    //private List<GameObject> southPolesList;
+    int numLines = 100;
 
     /// <summary>
     /// 引数の(x, y, z)を始点として磁力線を描く
     /// </summary>
     public void Draw(GameObject magnetForceLine, bool lineIsFromNorthPole, Vector3 startPosition, float width)
     {
-        // すべてのN極、S極を取得する
+        /*
+         * その時点のすべてのN極、S極をタグを使って取得する
+         * HoloMagnet3では棒磁石は1つしかないが、HoloMagnet5では最低でも2つになる
+         * HoloMagnet5では、アプリケーションの途中から磁石の数が変わる可能性があるため、毎フレーム取得する
+         * Todo: 本当はMagnetsManagerクラスを作り、MagnetManagerModelが変わったらeventで反映させるようにしたい
+         */
         GameObject[] northPoles = GameObject.FindGameObjectsWithTag("North Pole");
         GameObject[] southPoles = GameObject.FindGameObjectsWithTag("South Pole");
-
-        // すべてのN極、S極を取得する
-        // アプリケーションの途中から磁石の数が変わる可能性があるため、毎フレーム取得する
-        // 本当はMagnetsManagerクラスを作り、MagnetManagerModelが変わったらeventで反映させるようにしたい
-        // Todo: Listがわからない
-        // northPolesList が null のため
-        // "Object reference not set to an instance of an object" エラーが出て動かない
-        /*
-        northPolesList.Clear();
-        northPolesList.Add(BarMagnetModel.Instance.NorthPoleReference);
-        southPolesList.Clear();
-        southPolesList.Add(BarMagnetModel.Instance.SouthPoleReference);
-        */
 
         // LineRendererを準備する
         LineRenderer line = magnetForceLine.GetComponent<LineRenderer>();
 
         // === LineRendererを設定する ===
         // --- LineRendererを初期化する ---
-        line.useWorldSpace = true;
-        line.positionCount = 100;  // 描く線分の数
+        line.useWorldSpace = true;　　// Sharingのときのため。HoloMagnet5で使用。
+        line.positionCount = numLines;  // 描く線分の数
 
         // --- LineRendererの始点を初期位置にセットする ---
         line.SetPosition(0, startPosition);  // 引数の(x, y, z)を始点として磁力線を描く
