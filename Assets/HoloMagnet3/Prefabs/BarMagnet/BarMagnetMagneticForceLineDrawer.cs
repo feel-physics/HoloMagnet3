@@ -50,7 +50,6 @@ public class BarMagnetMagneticForceLineDrawer : Singleton<BarMagnetMagneticForce
         // 線分を描画し続ける
         for (int i = 1; i < line.positionCount; i++)
         {
-            //Vector3 forceResultant = ForceResultant(northPoles, southPoles, positionCurrentPoint);
             Vector3 forceResultant = MagneticForceCaliculator.Instance.ForceResultant(
                 northPoles, southPoles, positionCurrentPoint);
 
@@ -65,23 +64,6 @@ public class BarMagnetMagneticForceLineDrawer : Singleton<BarMagnetMagneticForce
             }
 
             line.SetPosition(i, positionCurrentPoint);
-
-            /*
-            // --- OpenGL ---
-            // Draw lines
-            GL.Begin(GL.LINES);
-
-            GL.Color(new Color(1, 0, 0, 1));
-            GL.Vertex3(0, 0, 0.7f);
-            GL.Vertex3(positionCurrentPoint.x, positionCurrentPoint.y, positionCurrentPoint.z);
-
-            GL.Color(new Color(0, 1, 0, 1));
-            GL.Vertex3(0.1F, 0.1F, 0);
-            GL.Vertex3(0, 0.1F, 0);
-
-            GL.End();
-            // --- end of OpenGL ---
-            */
         }
     }
 }
