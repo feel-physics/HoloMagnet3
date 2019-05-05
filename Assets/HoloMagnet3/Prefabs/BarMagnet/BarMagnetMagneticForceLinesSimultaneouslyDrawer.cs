@@ -76,7 +76,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
 
         // デバッグ用ログ出力
         MyHelper.DebugLogEvery10Seconds(
-            "DrawMagnetForceLines3D.Update() is fired.\n" +
+            "DrawMagnetForceLines3D.Update() is firing.\n" +
             "BarMagnet: " + gameObject.transform.position.ToString() + "\n" +
             "NorthPole: " + myBarMagnetNorthPoleWorldPosition.ToString() + "\n" +
             "SouthPole: " + myBarMagnetSouthPoleWorldPosition.ToString(), ref hasLogged);
