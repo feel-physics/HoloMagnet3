@@ -161,7 +161,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             }
 
 #if feel_physics
-            audioSource = GetComponents<AudioSource>()[0];  // Todo: スクリプトで追加して独立性を上げたい
+            audioSource = GetComponents<AudioSource>()[0];  // Todo: 繧ｹ繧ｯ繝ｪ繝励ヨ縺ｧ霑ｽ蜉縺励※迢ｬ遶区ｧ繧剃ｸ翫￡縺溘＞
 #endif
 
         }
@@ -437,7 +437,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
                 audioSource.Play();
             });
 
-            // 3次元のシーンであれば自動移動を止める
+            // 3谺｡蜈�縺ｮ繧ｷ繝ｼ繝ｳ縺ｧ縺ゅｌ縺ｰ閾ｪ蜍慕ｧｻ蜍輔ｒ豁｢繧√ｋ
             if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D &&
                 BarMagnetAutoMover.Instance.IsMoving)
             {
