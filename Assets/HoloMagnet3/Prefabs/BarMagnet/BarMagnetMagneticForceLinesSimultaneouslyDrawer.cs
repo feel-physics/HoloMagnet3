@@ -7,13 +7,8 @@ using UnityEngine;
 public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
 
     public int Mode = 0;  // 0: 2D, 1: 3D  Todo: Listを使う
-    private GameObject magneticForceLine
-    {
-        get
-        {
-            return BarMagnetModel.Instance.MagneticForceLineReference; 
-        }
-    }
+    private GameObject magneticForceLinePrefab;
+
     private bool hasLogged;
 
     static Material lineMaterial;
@@ -23,7 +18,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
 
     private void Start()
     {
-        //magneticForceLine = BarMagnetModel.Instance.MagneticForceLineReference;
+        magneticForceLinePrefab = BarMagnetModel.Instance.MagneticForceLinePrefab;
     }
 
     public void Update()
@@ -74,7 +69,6 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
     {
         GameObject myMagnet = gameObject;
 
-        magneticForceLine.SetActive(true);
         this.DeleteLines();
 
         Vector3 myBarMagnetNorthPoleWorldPosition = BarMagnetModel.Instance.NorthPoleReference.transform.position;
@@ -128,7 +122,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
                 for (int indexZ = numStartZ; indexZ <= numEndZ; indexZ += numShiftZ) // y
                 {
                     GameObject magneticForceLine =
-                        Instantiate(this.magneticForceLine, transform.position, Quaternion.identity);
+                        Instantiate(magneticForceLinePrefab, transform.position, Quaternion.identity);
 
                     // 作成したオブジェクトを子として登録
                     magneticForceLine.tag = "CloneLine";
@@ -176,6 +170,6 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
                 }
             }
         }
-        magneticForceLine.SetActive(false);
+
     }
 }
