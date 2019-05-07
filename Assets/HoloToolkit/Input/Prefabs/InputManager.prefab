@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03fe91f227bf8af44afc939d2303cbb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsGlobalListener: 1
+  IsGlobalListener: 0
   HoldStartedInterval: 2
   HoldCompletedInterval: 3
   SelectButton: 10
