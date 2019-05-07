@@ -46,7 +46,7 @@
 
 - Unity 2017.4.26f1
 - Visual Studio 2017.15
-- NET Framework 4.6
+- .NET Framework 3.5
 
 ## Licence
 
