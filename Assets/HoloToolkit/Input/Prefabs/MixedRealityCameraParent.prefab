@@ -751,7 +751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NearClipPlane_OpaqueDisplay: 0.01
-  CameraClearFlags_OpaqueDisplay: 1
+  CameraClearFlags_OpaqueDisplay: 2
   BackgroundColor_OpaqueDisplay: {r: 0, g: 0, b: 0, a: 1}
   OpaqueQualityLevel: 5
   NearClipPlane_TransparentDisplay: 0.01

@@ -7,7 +7,13 @@ using UnityEngine;
 public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
 
     public int Mode = 0;  // 0: 2D, 1: 3D  Todo: Listを使う
-    private GameObject magneticForceLine;
+    private GameObject magneticForceLine
+    {
+        get
+        {
+            return BarMagnetModel.Instance.MagneticForceLineReference; 
+        }
+    }
     private bool hasLogged;
 
     static Material lineMaterial;
@@ -17,7 +23,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : MonoBehaviour {
 
     private void Start()
     {
-        magneticForceLine = BarMagnetModel.Instance.MagneticForceLineReference;
+        //magneticForceLine = BarMagnetModel.Instance.MagneticForceLineReference;
     }
 
     public void Update()
