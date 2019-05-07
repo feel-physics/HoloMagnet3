@@ -1,4 +1,4 @@
-﻿#define elapsed_time  // 磁力線を引く処理時間を計測するため
+﻿#undef elapsed_time  // 磁力線を引く処理時間を計測するため
 using HoloToolkit.Unity;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,12 +54,11 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
     private DimensionScale scaleY;
     private DimensionScale scaleZ;
 
-
-
     /// <summary>
     /// 磁力線を描画中か管理するフラグの実態(private)
     /// </summary>
-    private bool _IsDrawing = false;
+    [SerializeField] private bool _IsDrawing = false;
+
     /// <summary>
     /// 磁力線を描画中か管理するフラグ(public)
     /// </summary>
@@ -67,11 +66,14 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
     {
         set
         {
+            Debug.Log(value);
             _IsDrawing = value;
 
             //描画中止への変更を検知して、DeleteLines()を呼び出す
             if (!value)
+            {
                 DeleteLines();
+            }
         }
         get
         {
@@ -117,6 +119,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
 
             //N極磁力線の描画
             DrawLoop(dimension, true, BarMagnetModel.Instance.NorthPoleReference.transform.position);
+           
             //S極磁力線の描画
             DrawLoop(dimension, false, BarMagnetModel.Instance.SouthPoleReference.transform.position);
 
@@ -212,7 +215,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
 
     // --- 線分の長さ ---
     // Todo: この長さを調節してN極から出た磁力線とS極から出た磁力線が一致するようにする
-    [SerializeField] float baseLengthOfLine = 0.16f;
+    [SerializeField] float baseLengthOfLine = 0.1f;
 
     // Todo: Listがわからない
     //private List<GameObject> northPolesList;
