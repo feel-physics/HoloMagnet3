@@ -7,7 +7,7 @@ public class SetCameraTransformOnUnityPlay : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        gameObject.transform.position += new Vector3(0, 1, -1);
+        gameObject.transform.position += new Vector3(0, 0, 0);
     }
 #endif
 }

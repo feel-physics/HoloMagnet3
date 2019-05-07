@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 4541142303025740}
   - component: {fileID: 114059824862712730}
   - component: {fileID: 114812681035175298}
+  - component: {fileID: 114792790499410082}
   m_Layer: 0
   m_Name: MixedRealityCameraParent
   m_TagString: Untagged
@@ -817,6 +818,17 @@ MonoBehaviour:
   Axis0Destination: 4
   Axis1Destination: 6
   Axis2Destination: 6
+--- !u!114 &114792790499410082
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1850730992894404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 367d2a67e862c624885e9a2741919d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114812681035175298
 MonoBehaviour:
   m_ObjectHideFlags: 1
