@@ -537,6 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dimension: 2
+  baseLengthOfLine: 0.16
 --- !u!114 &114944391148216512
 MonoBehaviour:
   m_ObjectHideFlags: 1

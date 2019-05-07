@@ -212,7 +212,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
 
     // --- 線分の長さ ---
     // Todo: この長さを調節してN極から出た磁力線とS極から出た磁力線が一致するようにする
-    float baseLengthOfLine = 0.1f;
+    [SerializeField] float baseLengthOfLine = 0.16f;
 
     // Todo: Listがわからない
     //private List<GameObject> northPolesList;
@@ -245,7 +245,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
         // === LineRendererを設定する ===
         // --- LineRendererを初期化する ---
         magnetForceLine.useWorldSpace = true;
-        magnetForceLine.positionCount = 100;  // 描く線分の数
+        magnetForceLine.positionCount = 50;  // 描く線分の数
 
         // --- LineRendererの始点を初期位置にセットする ---
         magnetForceLine.SetPosition(0, startPosition);  // 引数の(x, y, z)を始点として磁力線を描く
