@@ -430,6 +430,10 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             audioSource.loop = false;
             audioSource.Play();
 
+            //手のモデルを表示する
+            if (BarMagnetModel.Instance.handReference != null)
+                BarMagnetModel.Instance.handReference.SetActive(true);
+
             MyHelper.MyDelayMethod(this, 1f, () =>
             {
                 audioSource.clip = ACDragging;
@@ -461,6 +465,10 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             audioSource.clip = ACFinish;
             audioSource.loop = false;
             audioSource.Play();
+
+            //手のモデルを非表示にする
+            if (BarMagnetModel.Instance.handReference != null)
+                BarMagnetModel.Instance.handReference.SetActive(false);
 
             MyHelper.MyDelayMethod(this, 1f, () =>
             {

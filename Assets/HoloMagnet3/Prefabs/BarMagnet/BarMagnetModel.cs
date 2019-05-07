@@ -6,6 +6,7 @@ public class BarMagnetModel : Singleton<BarMagnetModel>
 {
     [HideInInspector] public GameObject NorthPoleReference;
     [HideInInspector] public GameObject SouthPoleReference;
+    public GameObject handReference;
     public GameObject MagneticForceLinePrefab;
     //public bool IsDrawing;
 
@@ -17,6 +18,7 @@ public class BarMagnetModel : Singleton<BarMagnetModel>
         gameObject.GetComponent<BarMagnetModel>().SouthPoleReference =
             transform.Find("South Body/South Pole").gameObject;
 
+        handReference.SetActive(false);
 
         //準備出来たらGlobalListenerに追加
         if (gameObject.GetComponent<SetGlobalListener>() == null)
