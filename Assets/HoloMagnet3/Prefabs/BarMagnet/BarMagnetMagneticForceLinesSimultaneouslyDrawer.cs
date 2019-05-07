@@ -1,165 +1,208 @@
-﻿#undef elapsed_time  // 磁力線を引く処理時間を計測するため
+﻿#define elapsed_time  // 磁力線を引く処理時間を計測するため
 using HoloToolkit.Unity;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// UpdateでApplicationParamsのstateを監視
+/// 磁力線の描画を行う
 /// </summary>
 public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagnetMagneticForceLinesSimultaneouslyDrawer>
 {
-
-    public int Mode = 0;  // 0: 2D, 1: 3D  Todo: Listを使う
+    //public int Mode = 0;  // 0: 2D, 1: 3D  Todo: Listを使う
+    //磁力線描画のPrefab
     private GameObject magneticForceLinePrefab;
-
+    //ログ出力用
     private bool hasLogged;
 
     static Material lineMaterial;
 
-    int dimension = 2;
+    /// <summary>
+    /// 磁力線を描画するサイズを定義するクラス
+    /// </summary>
+    public class DimensionScale
+    {
+        /// <summary>
+        /// 磁力線描画開始地点
+        /// </summary>
+        public int start { private set; get; }
+
+        /// <summary>
+        /// 磁力線描画終了地点
+        /// </summary>
+        public int end { private set; get; }
+
+        /// <summary>
+        /// 磁力線描画開始地点間の長さ
+        /// </summary>
+        public int shift { private set; get; }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="_start"> 磁力線描画開始地点</param>
+        /// <param name="_end">磁力線描画終了地点</param>
+        /// <param name="_shift">磁力線描画開始地点間の長さ</param>
+        public DimensionScale(int _start, int _end, int _shift)
+        {
+            start = _start;
+            end = _end;
+            shift = _shift;
+        }
+    }
+
+    public int dimension = 2;
+    private DimensionScale scaleY;
+    private DimensionScale scaleZ;
+
+
+
+    /// <summary>
+    /// 磁力線を描画中か管理するフラグの実態(private)
+    /// </summary>
     private bool _IsDrawing = false;
+    /// <summary>
+    /// 磁力線を描画中か管理するフラグ(public)
+    /// </summary>
     public bool IsDrawing
     {
         set
         {
             _IsDrawing = value;
+
+            //描画中止への変更を検知して、DeleteLines()を呼び出す
             if (!value)
                 DeleteLines();
-
         }
         get
         {
             return _IsDrawing;
         }
     }
+
+    List<LineRenderer> magneticForceLines = null;
+
     private void Start()
     {
         magneticForceLinePrefab = BarMagnetModel.Instance.MagneticForceLinePrefab;
+
+        magneticForceLines = new List<LineRenderer>();
 
         MySceneManager.MySceneEnum scene = MySceneManager.Instance.MyScene;
         if (scene == MySceneManager.MySceneEnum.Compasses_3D)
         {
             dimension = 3;
+            scaleY = new DimensionScale(-2, 2, 2);
+            scaleZ = new DimensionScale(-2, 2, 1);
+        }
+        else
+        {
+            dimension = 2;
+            scaleY = new DimensionScale(-2, 2, 1);
+            scaleZ = new DimensionScale(0, 0, 1);
         }
     }
 
     public void Update()
     {
         if (IsDrawing)
-            DrawLoop(dimension);
+        {
+#if elapsed_time
+            // 処理時間の計測
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
+#endif
+            //必要なら磁力線の初期化
+            if (magneticForceLines.Count == 0)
+                GenerateLines(scaleY, scaleZ);
+
+            //N極磁力線の描画
+            DrawLoop(dimension, true, BarMagnetModel.Instance.NorthPoleReference.transform.position);
+            //S極磁力線の描画
+            DrawLoop(dimension, false, BarMagnetModel.Instance.SouthPoleReference.transform.position);
+
+#if elapsed_time
+            // 処理時間の計測
+            sw.Stop();
+
+            Debug.Log("DrawMagnetForceLines3D takes " + sw.ElapsedMilliseconds + "ms");
+#endif
+
+        }
+    }
+
+
+    public void GenerateLines(DimensionScale y, DimensionScale z)
+    {
+        if (magneticForceLines.Count > 0)
+        {
+            DeleteLines();
+        }
+
+        for (int indexY = y.start; indexY <= y.end; indexY += y.shift) // z
+        {
+            for (int indexZ = z.start; indexZ <= z.end; indexZ += z.shift) // y
+            {
+                //Debug.Log(string.Format("Y:{0} Z:{1}", indexY, indexZ));
+
+                //N用とS用とLoop毎に２つ生成する
+
+                var g = Instantiate(magneticForceLinePrefab, transform.position, Quaternion.identity);
+                // 作成したオブジェクトを子として登録
+                g.tag = "CloneLine";
+                g.transform.parent = transform;
+                var line = g.GetComponent<LineRenderer>();
+                magneticForceLines.Add(line);
+
+                g = Instantiate(magneticForceLinePrefab, transform.position, Quaternion.identity);
+                // 作成したオブジェクトを子として登録
+                g.tag = "CloneLine";
+                g.transform.parent = transform;
+                line = g.GetComponent<LineRenderer>();
+                magneticForceLines.Add(line);
+
+            }
+        }
+        Debug.Log("GenerateLines:" + magneticForceLines.Count);
     }
 
     public void DeleteLines()
     {
-        GameObject[] lines = GameObject.FindGameObjectsWithTag("CloneLine");
-
-        foreach (GameObject line in lines)
+        foreach (var line in magneticForceLines)
         {
-            Destroy(line);
+            Destroy(line.gameObject);
         }
+        magneticForceLines.Clear();
     }
 
-    public void DrawLoop(int dimension)
+    public void DrawLoop(int dimension, bool lineIsFromNorthPole, Vector3 polePosInWorld)
     {
-        GameObject myMagnet = gameObject;
-
-        this.DeleteLines();
-
-        Vector3 myBarMagnetNorthPoleWorldPosition = BarMagnetModel.Instance.NorthPoleReference.transform.position;
-        Vector3 myBarMagnetSouthPoleWorldPosition = BarMagnetModel.Instance.SouthPoleReference.transform.position;
-
         // デバッグ用ログ出力
         MyHelper.DebugLogEvery10Seconds(
             "DrawMagnetForceLines3D.Update() is fired.\n" +
             "BarMagnet: " + gameObject.transform.position.ToString() + "\n" +
-            "NorthPole: " + myBarMagnetNorthPoleWorldPosition.ToString() + "\n" +
-            "SouthPole: " + myBarMagnetSouthPoleWorldPosition.ToString(), ref hasLogged);
+            "Pole: " + lineIsFromNorthPole.ToString() + "\n", ref hasLogged);
 
         Vector3 barMagnetDirection = transform.rotation.eulerAngles;
 
-        for (int i = -1; i <= 1; i += 2)  // j=1のときN極側、j=-1のときS極側の磁力線を描く
+        int cnt = (lineIsFromNorthPole ? 0 : (int)magneticForceLines.Count / 2);
+
+        for (int indexY = scaleY.start; indexY <= scaleY.end; indexY += scaleY.shift) // z
         {
-            int numStartY;
-            int numEndY;
-            int numShiftY;
-            int numStartZ;
-            int numEndZ;
-            int numShiftZ;
-
-            if (dimension == 3)
+            for (int indexZ = scaleZ.start; indexZ <= scaleZ.end; indexZ += scaleZ.shift) // y
             {
-                numStartY = -2;  // 磁力線描画開始地点、y方向
-                numEndY = -numStartY;  // 磁石の中心に対して対称に描画開始地点を配置する
-                numShiftY = 2;   // 磁力線描画開始地点間の長さ、y方向
+                Vector3 shiftPositionFromMyPole = new Vector3(
+                    0.001f * indexY,  // y
+                    0.001f * (lineIsFromNorthPole ? 1 : -1),  // x
+                    0.001f * indexZ  // z
+                    );
 
-                numStartZ = -2;  // 磁力線描画開始地点、z方向
-                numEndZ = -numStartZ;
-                numShiftZ = 1;   // 磁力線描画開始地点間の長さ、z方向
-            }
-            else if (dimension == 2)
-            {
-                numStartY = -2;
-                numEndY = -numStartY;
-                numShiftY = 1;
+                shiftPositionFromMyPole =
+                    gameObject.transform.rotation * shiftPositionFromMyPole;
+                Vector3 startPosition = polePosInWorld + shiftPositionFromMyPole;
 
-                numStartZ = 0;
-                numEndZ = -numStartZ;
-                numShiftZ = 1;
-            }
-            else
-            {
-                throw new System.Exception("Invalid Mode");
-            }
+                DrawOne(magneticForceLines[cnt], lineIsFromNorthPole, startPosition, 0.003f);
 
-            for (int indexY = numStartY; indexY <= numEndY; indexY += numShiftY) // z
-            {
-                for (int indexZ = numStartZ; indexZ <= numEndZ; indexZ += numShiftZ) // y
-                {
-                    GameObject magneticForceLine =
-                        Instantiate(magneticForceLinePrefab, transform.position, Quaternion.identity);
-
-                    // 作成したオブジェクトを子として登録
-                    magneticForceLine.tag = "CloneLine";
-                    magneticForceLine.transform.parent = transform;
-
-                    bool lineIsFromNorthPole = true;
-                    Vector3 myBarMagnetPoleWorldPosition;
-
-                    // N極
-                    if (i == 1)
-                    {
-                        lineIsFromNorthPole = true;
-                        myBarMagnetPoleWorldPosition = myBarMagnetNorthPoleWorldPosition;
-                    }
-                    // S極
-                    else
-                    {
-                        lineIsFromNorthPole = false;
-                        myBarMagnetPoleWorldPosition = myBarMagnetSouthPoleWorldPosition;
-                    }
-
-                    Vector3 shiftPositionFromMyPole = new Vector3(
-                        0.001f * indexY,  // y
-                        0.001f * i,  // x
-                        0.001f * indexZ  // z
-                        );
-
-                    shiftPositionFromMyPole =
-                        myMagnet.transform.rotation * shiftPositionFromMyPole;
-                    Vector3 startPosition = myBarMagnetPoleWorldPosition + shiftPositionFromMyPole;
-
-#if elapsed_time
-                    // 処理時間の計測
-                    System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-                    sw.Start();
-#endif
-                    DrawOne(magneticForceLine, lineIsFromNorthPole, startPosition, 0.003f);
-#if elapsed_time
-                    // 処理時間の計測
-                    sw.Stop();
-
-                    Debug.Log("DrawMagnetForceLines3D takes " + sw.ElapsedMilliseconds + "ms");
-#endif
-                }
+                cnt++;
             }
         }
 
@@ -178,7 +221,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
     /// <summary>
     /// 引数の(x, y, z)を始点として磁力線を描く
     /// </summary>
-    public void DrawOne(GameObject magnetForceLine, bool lineIsFromNorthPole, Vector3 startPosition, float width)
+    public void DrawOne(LineRenderer magnetForceLine, bool lineIsFromNorthPole, Vector3 startPosition, float width)
     {
         // すべてのN極、S極を取得する
         GameObject[] northPoles = GameObject.FindGameObjectsWithTag("North Pole");
@@ -197,30 +240,29 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
         southPolesList.Add(BarMagnetModel.Instance.SouthPoleReference);
         */
 
-        // LineRendererを準備する
-        LineRenderer line = magnetForceLine.GetComponent<LineRenderer>();
+
 
         // === LineRendererを設定する ===
         // --- LineRendererを初期化する ---
-        line.useWorldSpace = true;
-        line.positionCount = 100;  // 描く線分の数
+        magnetForceLine.useWorldSpace = true;
+        magnetForceLine.positionCount = 100;  // 描く線分の数
 
         // --- LineRendererの始点を初期位置にセットする ---
-        line.SetPosition(0, startPosition);  // 引数の(x, y, z)を始点として磁力線を描く
+        magnetForceLine.SetPosition(0, startPosition);  // 引数の(x, y, z)を始点として磁力線を描く
 
         // --- lineの長さ ---
         float lengthOfLine = baseLengthOfLine * scaleToFitLocalPosition;
 
         // --- lineの太さ ---
-        line.startWidth = width;
-        line.endWidth = width;
+        magnetForceLine.startWidth = width;
+        magnetForceLine.endWidth = width;
 
         // === 変数の準備 ===
 
         Vector3 positionCurrentPoint = startPosition;
 
         // 線分を描画し続ける
-        for (int i = 1; i < line.positionCount; i++)
+        for (int i = 1; i < magnetForceLine.positionCount; i++)
         {
             //Vector3 forceResultant = ForceResultant(northPoles, southPoles, positionCurrentPoint);
             Vector3 forceResultant = MagneticForceCaliculator.Instance.ForceResultant(
@@ -236,7 +278,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
                 positionCurrentPoint += -forceResultant.normalized * lengthOfLine;
             }
 
-            line.SetPosition(i, positionCurrentPoint);
+            magnetForceLine.SetPosition(i, positionCurrentPoint);
 
             /*
             // --- OpenGL ---
