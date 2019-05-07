@@ -161,7 +161,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             }
 
 #if feel_physics
-            audioSource = GetComponents<AudioSource>()[0];  // Todo: �X�N���v�g�Œǉ����ēƗ������グ����
+            audioSource = GetComponents<AudioSource>()[0];  // Todo: スクリプトで追加して独立性を上げたい
 #endif
 
         }
@@ -430,6 +430,10 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             audioSource.loop = false;
             audioSource.Play();
 
+            //手のモデルを表示する
+            if (BarMagnetModel.Instance.handReference != null)
+                BarMagnetModel.Instance.handReference.SetActive(true);
+
             MyHelper.MyDelayMethod(this, 1f, () =>
             {
                 audioSource.clip = ACDragging;
@@ -437,7 +441,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
                 audioSource.Play();
             });
 
-            // 3�����̃V�[���ł���Ύ����ړ����~�߂�
+            // 3次元のシーンであれば自動移動を止める
             if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D &&
                 BarMagnetAutoMover.Instance.IsMoving)
             {
@@ -461,6 +465,10 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             audioSource.clip = ACFinish;
             audioSource.loop = false;
             audioSource.Play();
+
+            //手のモデルを非表示にする
+            if (BarMagnetModel.Instance.handReference != null)
+                BarMagnetModel.Instance.handReference.SetActive(false);
 
             MyHelper.MyDelayMethod(this, 1f, () =>
             {
