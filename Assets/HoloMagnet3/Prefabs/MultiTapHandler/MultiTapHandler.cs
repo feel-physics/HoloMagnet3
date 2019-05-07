@@ -54,7 +54,7 @@ IInputClickHandler // タップ操作検出
             {
                 // --- シングルタップ処理 ---
                 // 磁力線描画処理のオンオフを切り替える
-                BarMagnetModel.Instance.IsDrawing = !BarMagnetModel.Instance.IsDrawing;
+                BarMagnetMagneticForceLinesSimultaneouslyDrawer.Instance.IsDrawing = !BarMagnetMagneticForceLinesSimultaneouslyDrawer.Instance.IsDrawing;
 
                 // --- シングルタップ終了処理 ---
                 p_MultTapCount = 0;

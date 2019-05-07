@@ -37,7 +37,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4628360241764182}
   - component: {fileID: 114640533564228700}
-  - component: {fileID: 114736145909361394}
   - component: {fileID: 82390110802297212}
   - component: {fileID: 114315409918369016}
   - component: {fileID: 114905948474313042}
@@ -539,17 +538,6 @@ MonoBehaviour:
   MagneticForceLinePrefab: {fileID: 1256482237385276, guid: 62bc29ccba336ac43931d2e055086335,
     type: 2}
   IsDrawing: 0
---- !u!114 &114736145909361394
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1132814198459000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 175ba10fc5bc92d4d95e9d53e7bf0716, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114905948474313042
 MonoBehaviour:
   m_ObjectHideFlags: 1
