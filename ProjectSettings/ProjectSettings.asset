@@ -665,7 +665,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 3
+  apiCompatibilityLevel: 2
   cloudProjectId: 802e478d-dcfa-450c-9f3e-d894dbf64ab8
   projectName: HoloMagnet3-190114
   organizationId: feel-physics

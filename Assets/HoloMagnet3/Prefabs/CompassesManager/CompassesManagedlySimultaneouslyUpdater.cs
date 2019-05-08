@@ -31,7 +31,7 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     void UpdateCompassParentPosition()
     {
         //コンパスの間隔何個分ずれたら、移動を発生させるかの閾値
-        int check = 4;
+        int check = 1;
 
         //磁石とコンパスの位置差分を取得
         var offset = magnet.transform.position - CompassesModel.Instance.ParentTransform.position;

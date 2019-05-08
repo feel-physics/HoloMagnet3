@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CompassManagedlyUpdater : MonoBehaviour
 {
@@ -7,7 +6,7 @@ public class CompassManagedlyUpdater : MonoBehaviour
     // 通常は方位磁針を明るめに
     public float BrightnessCoefficient = 0.001f;
     // 3次元の場合は方位磁針を暗めに
-    public float BrightnessCoefficient3D = 0.00015f;
+    public float BrightnessCoefficient3D = 0.0001f;
 
     GameObject[] southPoles;
     GameObject[] northPoles;
