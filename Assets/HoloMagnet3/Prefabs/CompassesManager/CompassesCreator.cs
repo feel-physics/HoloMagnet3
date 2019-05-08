@@ -2,8 +2,10 @@
 
 public class CompassesCreator : MonoBehaviour
 {
+    //初期配置位置のオフセット（カメラの2メートル先）
     Vector3 shiftVector = new Vector3(0, 0, 2);
 
+    //コンパスを配置する間隔
     float pitchCompass;
 
     private int numCompassX = 1;
@@ -16,6 +18,9 @@ public class CompassesCreator : MonoBehaviour
     void Start()
     {
         MySceneManager.MySceneEnum scene = MySceneManager.Instance.MyScene;
+
+        //シーンに合わせて、配置するコンパス数を設定する
+        //Introduction シーンの場合は、処理を停止する
         switch (scene)
         {
             case MySceneManager.MySceneEnum.Introduction:
@@ -44,6 +49,16 @@ public class CompassesCreator : MonoBehaviour
         }
 
         Debug.Log("Instantiate compasses");  // Todo: 10秒おきのログの文面を現在進行形にする
+
+        //Compassの親のTransformを生成して、CompassModelに登録する
+        var parent = new GameObject();
+        parent.transform.position = shiftVector;
+        parent.name = "CommpassParent";
+        CompassesModel.Instance.ParentTransform = parent.transform;
+        CompassesModel.Instance.pitch = pitchCompass;
+
+
+       //次元に合わせて、コンパスのPrefabを設定する
         GameObject compass;
         switch (dimensiton)
         {
@@ -56,22 +71,26 @@ public class CompassesCreator : MonoBehaviour
             default:
                 throw new System.Exception("Invalid dimension");
         }
+
+        //コンパスをループで生成する
         for (int d = 0; d < numCompassZ; d++)
         {
             for (int h = 0; h < numCompassY; h++)
             {
                 for (int w = 0; w < numCompassX; w++)
                 {
+                    // 初期位置の設定
                     var localPositionCompassCloned =
                     new Vector3(
                         pitchCompass * w - (numCompassX - 1.0f) / 2.0f * pitchCompass,  // x軸に対し対称に±方向に方位磁針を並べる
                         pitchCompass * h - (numCompassY - 1.0f) / 2.0f * pitchCompass,  // y軸に対し対称に±方向に方位磁針を並べる
                         pitchCompass * d - (numCompassZ - 1.0f) / 2.0f * pitchCompass)  // z軸に対し対称に±方向に方位磁針を並べる
                         + shiftVector;
-
-                    var compassCloned = Instantiate(compass,
-                        new Vector3(0, 0, 0), Quaternion.identity);
-                    compassCloned.transform.position = localPositionCompassCloned;  // 2019/04/26
+                    
+                    //Instantiate
+                    var compassCloned = Instantiate(compass, localPositionCompassCloned, Quaternion.identity, CompassesModel.Instance.ParentTransform);
+                    //名前を付ける
+                    compassCloned.name = string.Format("Compass_{0}-{1}-{2}",w,h,d);
                 }
             }
         }

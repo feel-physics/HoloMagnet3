@@ -16,10 +16,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000013931524940}
-  - 114: {fileID: 114000010146961468}
+  - component: {fileID: 4000013931524940}
+  - component: {fileID: 114000010146961468}
   m_Layer: 0
   m_Name: HeadsUpDirectionIndicator
   m_TagString: Untagged
@@ -36,10 +36,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010146961468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,9 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetObject: {fileID: 0}
-  Depth: 15
+  Depth: 26.4
   Pivot: {x: 0, y: 0.5, z: 0}
   PointerPrefab: {fileID: 1000013959014570, guid: 6145c0073e089ec44ade2d6ee028ae9b,
     type: 2}
-  IndicatorMarginPercent: 0.1
+  IndicatorMarginPercent: 0.873
   DebugDrawPointerOrientationPlanes: 0
+  VisibilitySafeFactor: -0.105

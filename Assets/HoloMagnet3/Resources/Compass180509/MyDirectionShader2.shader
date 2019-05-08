@@ -37,9 +37,11 @@ Shader "Custom/MyDirectionShader2" {
 
             half4 color = tex2D(_MainTex, IN.uv_MainTex + scroll) + _Emission;
 
-			//_Emission.が0.03を下回ったら、消す
-			//参考：step(y, x)	y<=xなら1,y>xなら0
-			o.Emission = color.rgb * step( 0.02, _Emission.r);
+			if (_Emission.r < 0.02) {
+				discard;
+			}
+
+			o.Emission = color.rgb;// *step(0.02, _Emission.r);
 		}
 
 		ENDCG
