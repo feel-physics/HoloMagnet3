@@ -4,9 +4,9 @@ using UnityEngine;
 public class CompassManagedlyUpdater : MonoBehaviour
 {
     // 明るさの係数
-    // 3次元の場合は方位磁針を暗めに
+    // 通常は方位磁針を明るめに
     public float BrightnessCoefficient = 0.001f;
-    // それ以外の場合は方位磁針を明るめに
+    // 3次元の場合は方位磁針を暗めに
     public float BrightnessCoefficient3D = 0.00015f;
 
     GameObject[] southPoles;
