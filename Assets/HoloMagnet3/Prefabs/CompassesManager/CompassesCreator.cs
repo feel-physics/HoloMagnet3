@@ -50,7 +50,15 @@ public class CompassesCreator : MonoBehaviour
 
         Debug.Log("Instantiate compasses");  // Todo: 10秒おきのログの文面を現在進行形にする
 
-        //次元に合わせて、コンパスのPrefabを設定する
+        //Compassの親のTransformを生成して、CompassModelに登録する
+        var parent = new GameObject();
+        parent.transform.position = shiftVector;
+        parent.name = "CommpassParent";
+        CompassesModel.Instance.ParentTransform = parent.transform;
+        CompassesModel.Instance.pitch = pitchCompass;
+
+
+       //次元に合わせて、コンパスのPrefabを設定する
         GameObject compass;
         switch (dimensiton)
         {
@@ -80,7 +88,7 @@ public class CompassesCreator : MonoBehaviour
                         + shiftVector;
                     
                     //Instantiate
-                    var compassCloned = Instantiate(compass, localPositionCompassCloned, Quaternion.identity);
+                    var compassCloned = Instantiate(compass, localPositionCompassCloned, Quaternion.identity, CompassesModel.Instance.ParentTransform);
                     //名前を付ける
                     compassCloned.name = string.Format("Compass_{0}-{1}-{2}",w,h,d);
                 }
