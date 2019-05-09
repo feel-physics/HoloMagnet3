@@ -31,8 +31,8 @@ public class CompassesCreator : MonoBehaviour
                 numCompassZ = 1;
                 break;
             case MySceneManager.MySceneEnum.Compasses_2D:
-                numCompassX = 8;
-                numCompassY = 8;
+                numCompassX = 12;
+                numCompassY = 12;
                 numCompassZ = 1;
                 dimensiton = Dimensiton.D2;
                 pitchCompass = 0.07f;

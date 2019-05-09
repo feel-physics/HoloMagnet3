@@ -1,15 +1,20 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CompassManagedlyUpdater : MonoBehaviour
 {
+    // 明るさの係数
+    // 通常は方位磁針を明るめに
+    public float BrightnessCoefficient = 0.001f;
+    // 3次元の場合は方位磁針を暗めに
+    public float BrightnessCoefficient3D = 0.0001f;
+
     GameObject[] southPoles;
     GameObject[] northPoles;
     MeshRenderer meshRenderer;
     Material materialNorth;
     Material materialSouth;
 
-    float brightness = 0.001f;  // 明るさの係数
+    float brightnessCoefficient;
 
     // カラーオブジェクトをプリロード（あらかじめ作っておく）して入れ替える
     static Color originalCompassNorthColor = new Color(1f, 0.384f, 0.196f);
@@ -17,6 +22,15 @@ public class CompassManagedlyUpdater : MonoBehaviour
 
     void Start()
     {
+        if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D)
+        {
+            brightnessCoefficient = BrightnessCoefficient3D;
+        }
+        else
+        {
+            brightnessCoefficient = BrightnessCoefficient;
+        }
+
         meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
         materialNorth = meshRenderer.materials[0];
         materialSouth = meshRenderer.materials[1];
@@ -43,7 +57,7 @@ public class CompassManagedlyUpdater : MonoBehaviour
 
         // 合力の大きさでコンパスの明るさを決める
         // Todo:  2次元の色の減衰が強すぎて、磁石に隣接する方位磁針にしか色がつかない。仕上げの段階で調整する。
-        float brightnessOfForce = forceResultant.sqrMagnitude * brightness;
+        float brightnessOfForce = forceResultant.sqrMagnitude * brightnessCoefficient;
 
         // Emissioonを変える
         /*
@@ -72,9 +86,9 @@ public class CompassManagedlyUpdater : MonoBehaviour
         }
 
         // 明るさの微調整
-        if (1.0f < brightness)  // 明るすぎるとき
+        if (1.5f < brightness)  // 明るすぎるとき
         {
-            brightness = 1.0f + (brightness - 1.0f) * 0.00050f;  // 最後の値のさじ加減が大切
+            brightness = 1.5f + (brightness - 1.5f) * 0.00050f;  // 最後の値のさじ加減が大切
         }
         else if (brightness <= 0.5f)  // 暗すぎるとき
         {
