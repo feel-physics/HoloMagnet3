@@ -49,11 +49,13 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         {
             p.x += (int)vecToMove.x;
         }
-        else if (Mathf.Abs(vecToMove.y) >= check)
+
+        if (Mathf.Abs(vecToMove.y) >= check)
         {
             p.y += (int)vecToMove.y;
         }
-        else if (Mathf.Abs(vecToMove.z) >= check)
+
+        if (Mathf.Abs(vecToMove.z) >= check)
         {
             p.z += (int)vecToMove.z;
         }
