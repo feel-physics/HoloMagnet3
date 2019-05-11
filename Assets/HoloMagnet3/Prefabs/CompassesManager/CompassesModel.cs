@@ -17,6 +17,17 @@ public class CompassesModel : Singleton<CompassesModel>
     /// </summary>
     public float pitch = 0.07f;
 
+    /// <summary>
+    ///コンパスN極のsharedmaterial。値はCompassCreatorから設定される
+    /// </summary>
+    public Material MatNorth;
+
+    /// <summary>
+    ///コンパスS極のsharedmaterial。値はCompassCreatorから設定される
+    /// </summary>
+    public Material MatSouth;
+
+
     public void ClearAllReference()
     {
         CompassesReference.Clear();
