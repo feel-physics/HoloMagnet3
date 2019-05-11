@@ -18,6 +18,11 @@ public class BarMagnetRestrictMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (!Is2D) return;  // 2次元のシーンでなければreturn  Todo: 必要か？
+        /*
+         * 参考にさせていただきました
+         * C#でpositionのxとかyに値を突っ込む - テラシュールブログ
+         * http://tsubakit1.hateblo.jp/entry/20131015/1381836858
+         */
         Vector3 pos = transform.position;
         pos.z = 2;
         transform.position = pos;
