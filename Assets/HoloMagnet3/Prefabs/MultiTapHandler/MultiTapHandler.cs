@@ -19,6 +19,10 @@ IInputClickHandler // タップ操作検出
     [SerializeField, Tooltip("連続タップ許容時間(秒)")]
     private float MultTapTime = 0.5f;
 
+    [SerializeField]
+    private AudioClip acLoadNextScene;
+    // Todo: シーン毎に音を変える
+
     /// <summary>
     /// 連続タップカウント
     /// </summary>
@@ -73,7 +77,13 @@ IInputClickHandler // タップ操作検出
                 // 連続タップ許容時間が経過していればカウントに応じて処理を実行
                 if (p_MultTapCount == 2)
                 {
-                    // ダブルタップ処理
+                    // --- ダブルタップ処理 ---
+
+                    // 音を鳴らす
+                    AudioSource a = gameObject.AddComponent<AudioSource>();
+
+
+                    // 次のシーンをロード
                     Debug.Log("DoubleTap");
                     MySceneManager.Instance.LoadNextScene();
                 }

@@ -78,12 +78,14 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         }
 
 #if feel_physics
-        public AudioClip ACFinish;
-        public AudioClip ACMoving;
-        public AudioClip ACTap;
-        public AudioClip ACDoubleTap;
-        public AudioClip ACDragging;
-        public AudioClip ACHold;
+        [SerializeField]
+        private AudioClip ACFinish;
+        [SerializeField]
+        private AudioClip ACTap;
+        [SerializeField]
+        private AudioClip ACDragging;
+        [SerializeField]
+        private AudioClip ACHold;
         private AudioSource audioSource;
 #endif
 

@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114905948474313042}
   - component: {fileID: 114944391148216512}
   - component: {fileID: 114946775741763146}
+  - component: {fileID: 114114724655308206}
   m_Layer: 0
   m_Name: BarMagnet180202
   m_TagString: BarMagnet01
@@ -666,6 +667,18 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114114724655308206
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1132814198459000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1099636282329847b99908fa1b8df89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Is2D: 0
 --- !u!114 &114315409918369016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -704,7 +717,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bc5026f761a24a458826eb7fd373986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dimension: 2
   _IsDrawing: 0
   baseLengthOfLine: 0.02
   numLines: 110
@@ -726,9 +738,7 @@ MonoBehaviour:
   rotationConstraint: 0
   enableOneHandMovement: 1
   ACFinish: {fileID: 8300000, guid: a95d405907cd9b54c8fec1f61bf945b8, type: 3}
-  ACMoving: {fileID: 8300000, guid: f7ae472712ee84e4bbf01ec756fdf312, type: 3}
   ACTap: {fileID: 8300000, guid: 8fca52959c4e1f14db0b01ccf25f1c59, type: 3}
-  ACDoubleTap: {fileID: 8300000, guid: d52d89240c7918e40941d33fcfe42971, type: 3}
   ACDragging: {fileID: 8300000, guid: 484574b0326bb484da20126f573e829c, type: 3}
   ACHold: {fileID: 8300000, guid: e51f1b04d73ef33448fb253f9bff0709, type: 3}
 --- !u!114 &114946775741763146
