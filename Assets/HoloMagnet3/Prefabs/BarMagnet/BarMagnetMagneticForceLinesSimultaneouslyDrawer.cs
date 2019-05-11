@@ -8,15 +8,12 @@ using UnityEngine;
 /// </summary>
 public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagnetMagneticForceLinesSimultaneouslyDrawer>
 {
-    //public int Mode = 0;  // 0: 2D, 1: 3D  Todo: Listを使う
     //磁力線描画のPrefab
     private GameObject magneticForceLinePrefab;
     //ログ出力用
     private bool hasLogged;
 
     static Material lineMaterial;
-
-    public int dimension = 2;
 
     /// <summary>
     /// 磁力線を描画中か管理するフラグの実態(private)
@@ -60,12 +57,10 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
         MySceneManager.MySceneEnum scene = MySceneManager.Instance.MyScene;
         if (scene == MySceneManager.MySceneEnum.Compasses_3D)
         {
-            dimension = 3;
             listStartZ = new List<float> { -0.002f, 0, 0.002f };
         }
         else
         {
-            dimension = 2;
             listStartZ = new List<float> { 0 };
         }
     }
@@ -84,10 +79,10 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
                 GenerateLines();
 
             //N極磁力線の描画
-            DrawLoop(dimension, true, BarMagnetModel.Instance.NorthPoleReference.transform.position);
+            DrawLoop(true, BarMagnetModel.Instance.NorthPoleReference.transform.position);
            
             //S極磁力線の描画
-            DrawLoop(dimension, false, BarMagnetModel.Instance.SouthPoleReference.transform.position);
+            DrawLoop(false, BarMagnetModel.Instance.SouthPoleReference.transform.position);
 
 #if elapsed_time
             // 処理時間の計測
@@ -139,7 +134,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
         magneticForceLines.Clear();
     }
 
-    public void DrawLoop(int dimension, bool lineIsFromNorthPole, Vector3 polePosInWorld)
+    public void DrawLoop(bool lineIsFromNorthPole, Vector3 polePosInWorld)
     {
         // デバッグ用ログ出力
         MyHelper.DebugLogEvery10Seconds(
