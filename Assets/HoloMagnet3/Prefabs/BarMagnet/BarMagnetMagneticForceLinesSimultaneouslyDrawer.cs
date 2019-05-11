@@ -82,6 +82,8 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
     }
 
     List<LineRenderer> magneticForceLines = null;
+    List<float> listStartY;
+    List<float> listStartZ;
 
     private void Start()
     {
@@ -89,18 +91,22 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
 
         magneticForceLines = new List<LineRenderer>();
 
+        listStartY = new List<float> { -0.02f, -0.002f, 0, 0.002f, 0.02f };
+
         MySceneManager.MySceneEnum scene = MySceneManager.Instance.MyScene;
         if (scene == MySceneManager.MySceneEnum.Compasses_3D)
         {
             dimension = 3;
             scaleY = new DimensionScale(-2, 2, 2);
             scaleZ = new DimensionScale(-2, 2, 1);
+            listStartZ = new List<float> { -0.002f, 0, 0.002f };
         }
         else
         {
             dimension = 2;
             scaleY = new DimensionScale(-2, 2, 1);
             scaleZ = new DimensionScale(0, 0, 1);
+            listStartZ = new List<float> { 0 };
         }
     }
 
@@ -189,21 +195,21 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
 
         int cnt = (lineIsFromNorthPole ? 0 : (int)magneticForceLines.Count / 2);
 
-        for (int indexY = scaleY.start; indexY <= scaleY.end; indexY += scaleY.shift) // z
+        foreach (float startY in listStartY)
         {
-            for (int indexZ = scaleZ.start; indexZ <= scaleZ.end; indexZ += scaleZ.shift) // y
+            foreach (float startZ in listStartZ)
             {
                 Vector3 shiftPositionFromMyPole = new Vector3(
-                    0.001f * indexY,  // y
+                    startY,
                     0.001f * (lineIsFromNorthPole ? 1 : -1),  // x
-                    0.001f * indexZ  // z
+                    startZ
                     );
 
                 shiftPositionFromMyPole =
                     gameObject.transform.rotation * shiftPositionFromMyPole;
                 Vector3 startPosition = polePosInWorld + shiftPositionFromMyPole;
 
-                DrawOne(magneticForceLines[cnt], lineIsFromNorthPole, startPosition, 0.003f);
+                DrawOne(magneticForceLines[cnt], lineIsFromNorthPole, startPosition);
 
                 cnt++;
             }
@@ -215,7 +221,18 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
 
     // --- 線分の長さ ---
     // Todo: この長さを調節してN極から出た磁力線とS極から出た磁力線が一致するようにする
-    [SerializeField] float baseLengthOfLine = 0.1f;
+    [SerializeField] float baseLengthOfLine = 0.02f;
+
+    /// <summary>
+    /// 描く線分の数
+    /// </summary>
+    [SerializeField] int numLines = 110;
+
+    /// <summary>
+    /// 描く線分の太さ
+    /// </summary>
+    [SerializeField] float widthLines = 0.005f;
+
 
     // Todo: Listがわからない
     //private List<GameObject> northPolesList;
@@ -224,7 +241,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
     /// <summary>
     /// 引数の(x, y, z)を始点として磁力線を描く
     /// </summary>
-    public void DrawOne(LineRenderer magnetForceLine, bool lineIsFromNorthPole, Vector3 startPosition, float width)
+    public void DrawOne(LineRenderer magnetForceLine, bool lineIsFromNorthPole, Vector3 startPosition)
     {
         // すべてのN極、S極を取得する
         GameObject[] northPoles = GameObject.FindGameObjectsWithTag("North Pole");
@@ -248,7 +265,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
         // === LineRendererを設定する ===
         // --- LineRendererを初期化する ---
         magnetForceLine.useWorldSpace = true;
-        magnetForceLine.positionCount = 50;  // 描く線分の数
+        magnetForceLine.positionCount = numLines;
 
         // --- LineRendererの始点を初期位置にセットする ---
         magnetForceLine.SetPosition(0, startPosition);  // 引数の(x, y, z)を始点として磁力線を描く
@@ -257,8 +274,8 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
         float lengthOfLine = baseLengthOfLine * scaleToFitLocalPosition;
 
         // --- lineの太さ ---
-        magnetForceLine.startWidth = width;
-        magnetForceLine.endWidth = width;
+        magnetForceLine.startWidth = widthLines;
+        magnetForceLine.endWidth = widthLines;
 
         // === 変数の準備 ===
 

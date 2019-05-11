@@ -706,7 +706,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dimension: 2
   _IsDrawing: 0
-  baseLengthOfLine: 0.16
+  baseLengthOfLine: 0.02
+  numLines: 110
+  widthLines: 0.005
 --- !u!114 &114944391148216512
 MonoBehaviour:
   m_ObjectHideFlags: 1
