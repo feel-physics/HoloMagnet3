@@ -48,7 +48,7 @@ public class CompassesCreator : MonoBehaviour
                 throw new System.Exception("Invalid sceneId");
         }
 
-        Debug.Log("Instantiate compasses");  // Todo: 10秒おきのログの文面を現在進行形にする
+        Debug.Log("Instantiate compasses");
 
         //Compassの親のTransformを生成して、CompassModelに登録する
         var parent = new GameObject();
