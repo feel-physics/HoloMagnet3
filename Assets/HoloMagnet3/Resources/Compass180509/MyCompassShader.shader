@@ -57,15 +57,17 @@ Shader "Custom/MyCompassShader" {
 			float2 scroll = float2(_ScrollX, _ScrollY) * (-2) *_Time.y;
 			
 			//色の減衰量を計算
-			fixed t = (_HideDistance - dist) / (_HideDistance - _DarkDistance);
-			half4 color = tex2D(_MainTex, IN.uv_MainTex + scroll) + _Emission * t;
+			float t = saturate(( _HideDistance - dist) / _HideDistance);// (_HideDistance - dist) / (_HideDistance - _DarkDistance);
 
+
+			half4 color = tex2D(_MainTex, IN.uv_MainTex + scroll) + _Emission * t;
 			//if (_HideDistance < dist) {
-			if (color.r < 0.3) {
+			if (t < _DarkDistance) {
 				discard;
 			}
 
-			o.Emission = color.rgb;// *step(0.02, _Emission.r);
+			o.Emission = color;// *step(0.02, _Emission.r);
+			//o.Emission.a = t.x;
 		}
 
 		ENDCG
