@@ -81,7 +81,9 @@ IInputClickHandler // タップ操作検出
 
                     // 音を鳴らす
                     AudioSource a = gameObject.AddComponent<AudioSource>();
-
+                    a.clip = acLoadNextScene;
+                    a.loop = false;
+                    a.Play();
 
                     // 次のシーンをロード
                     Debug.Log("DoubleTap");

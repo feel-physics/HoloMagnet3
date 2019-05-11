@@ -26,7 +26,7 @@ public class MySceneManager : Singleton<MySceneManager> {
         MyScene = sceneDic[sceneName];
 
 #if false
-        // 初期化
+        // 初期化  Todo: 掃除する
         string sceneName = SceneManager.GetActiveScene().name;
         switch (sceneName)
         {
