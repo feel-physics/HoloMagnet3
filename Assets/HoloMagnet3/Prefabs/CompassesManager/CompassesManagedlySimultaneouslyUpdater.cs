@@ -64,6 +64,16 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
 
     void ManagedlyUpdate(List<CompassManagedlyUpdater> compasses)
     {
+        //コンパスが存在しているシーンでは、コンパスシェーダーにmaginetの位置を登録する
+        if (CompassesModel.Instance.MatNorth != null)
+        {
+            var p = magnet.transform.position;
+            var c = new Vector4(p.x, p.y, p.z, 0);//Vector4 に変換
+
+            CompassesModel.Instance.MatNorth.SetVector("_CenterPos", c);
+            CompassesModel.Instance.MatSouth.SetVector("_CenterPos", c);
+        }
+
         foreach (CompassManagedlyUpdater compass in compasses)
         {
             compass.ManagedlyUpdate();

@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Compass South
-  m_Shader: {fileID: 4800000, guid: 13ba2361df6e5a847957697198417804, type: 3}
+  m_Shader: {fileID: 4800000, guid: dccb0047d5f41e54abb94811e24841d1, type: 3}
   m_ShaderKeywords: _FORCEPERPIXEL_ON _SHADE4_ON _SPECULARHIGHLIGHTS_ON _USEAMBIENT_ON
     _USEDIFFUSE_ON _USEMAINCOLOR_ON
   m_LightmapFlags: 4
@@ -81,6 +81,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EndDistance: 0.1
     - _ForcePerPixel: 1
     - _Gloss: 1
     - _GlossMapScale: 1
@@ -99,6 +100,7 @@ Material:
     - _Specular: 10
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _StartDistance: 0.2
     - _UVSec: 0
     - _UseAmbient: 1
     - _UseBumpMap: 0
@@ -116,9 +118,11 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
+    - _CenterPos: {r: 1.4976723, g: -0.0002309382, b: 0.20166337, a: 0}
     - _Color: {r: 0.34117648, g: 0.5254902, b: 1, a: 1}
     - _Emission: {r: 0.34117648, g: 0.5254902, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _PlanePos: {r: 0.15, g: 0, b: 2, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _TextureScaleOffset: {r: 1, g: 1, b: 0, a: 0}

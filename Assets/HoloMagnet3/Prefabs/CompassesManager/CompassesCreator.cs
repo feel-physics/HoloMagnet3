@@ -58,7 +58,7 @@ public class CompassesCreator : MonoBehaviour
         CompassesModel.Instance.pitch = pitchCompass;
 
 
-       //次元に合わせて、コンパスのPrefabを設定する
+        //次元に合わせて、コンパスのPrefabを設定する
         GameObject compass;
         switch (dimensiton)
         {
@@ -71,6 +71,14 @@ public class CompassesCreator : MonoBehaviour
             default:
                 throw new System.Exception("Invalid dimension");
         }
+
+
+        //CompasのSharedMaterialを取得する
+        var mats = compass.GetComponentInChildren<MeshRenderer>().sharedMaterials;
+
+        CompassesModel.Instance.MatNorth = mats[0];
+        CompassesModel.Instance.MatSouth = mats[1];
+
 
         //コンパスをループで生成する
         for (int d = 0; d < numCompassZ; d++)
