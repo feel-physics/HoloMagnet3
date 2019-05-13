@@ -54,6 +54,19 @@ Shader "Custom/MyCompassShader2" {
 			vecS.y = _SouthPolePos.y;
 			vecS.z = _SouthPolePos.z;
 
+			// 自身（方位磁針）の位置ベクトルvecPを作成
+			float3 vecP;
+			vecP = IN.worldPos;
+
+			// 棒磁石に対する変位ベクトルvecDisN、vecDisSを作成
+			float3 vecDisN, vecDisS;
+			vecDisN = vecP - vecN;
+			vecDisS = vecP - vecS;
+
+			// N極からの磁力ベクトルvecF_Nを求める
+			float3 vecF_N;
+			vecF_N = vecDisN / pow(length(vecDisN), 3);
+
 			/*
 			//磁石の位置を取得
 			float3 center;
@@ -73,7 +86,8 @@ Shader "Custom/MyCompassShader2" {
 			float2 scroll = float2(_ScrollX, _ScrollY) * (-2) *_Time.y;
 
 			//色の減衰量を計算
-			float t = saturate((_HideDistance - dist) / _HideDistance);// (_HideDistance - dist) / (_HideDistance - _DarkDistance);
+			//float t = saturate((_HideDistance - dist) / _HideDistance);// (_HideDistance - dist) / (_HideDistance - _DarkDistance);
+			float t = saturate(length(vecF_N) / 100);// (_HideDistance - dist) / (_HideDistance - _DarkDistance);
 
 
 			half4 color = tex2D(_MainTex, IN.uv_MainTex + scroll) + _Emission * t;
