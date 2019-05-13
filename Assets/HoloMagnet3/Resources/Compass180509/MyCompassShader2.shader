@@ -64,6 +64,7 @@ Shader "Custom/MyCompassShader2" {
 			vecDisS = vecP - vecS;
 
 			// N極からの磁力ベクトルvecF_Nを求める
+			// 単位ベクトルを距離の2乗で割る
 			float3 vecF_N;
 			vecF_N = vecDisN / pow(length(vecDisN), 3);
 
@@ -87,7 +88,7 @@ Shader "Custom/MyCompassShader2" {
 
 			//色の減衰量を計算
 			//float t = saturate((_HideDistance - dist) / _HideDistance);// (_HideDistance - dist) / (_HideDistance - _DarkDistance);
-			float t = saturate(length(vecF_N) / 100);// (_HideDistance - dist) / (_HideDistance - _DarkDistance);
+			float t = saturate(length(vecF_N) / 1000);// (_HideDistance - dist) / (_HideDistance - _DarkDistance);
 
 
 			half4 color = tex2D(_MainTex, IN.uv_MainTex + scroll) + _Emission * t;
