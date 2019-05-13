@@ -5,9 +5,10 @@ Shader "Custom/MyCompassShader2" {
 		_MainTex("Base(RGB)", 2D) = "white" {}
 		_ScrollX("Scroll X", float) = 0
 		_ScrollY("Scroll Y", float) = 0
-			//磁石の位置　これを利用して明るさを調整する
+			// 磁石の位置
 			_NorthPolePos("North Pole", Vector) = (0,0,0,0)
 			_SouthPolePos("South Pole", Vector) = (0,0,0,0)
+			// 磁石を消し込むパラメータ
 			_DarkDistance("Distance to Dark", Float) = 0.2
 			_HideDistance("Distance to Hide", Float) = 0.1
 
@@ -81,6 +82,7 @@ Shader "Custom/MyCompassShader2" {
 			float t = saturate(length(vecF) / 1000);// (_HideDistance - dist) / (_HideDistance - _DarkDistance);
 
 			half4 color = tex2D(_MainTex, IN.uv_MainTex + scroll) + _Emission * t;
+			//half4 color = tex2D(_MainTex, IN.uv_MainTex + scroll) + _Emission * length(vecF) * pow(10, -100;
 			//if (_HideDistance < dist) {
 			if (t < _DarkDistance) {
 				discard;

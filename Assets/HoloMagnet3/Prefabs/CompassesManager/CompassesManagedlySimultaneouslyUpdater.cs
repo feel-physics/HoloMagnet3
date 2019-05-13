@@ -21,6 +21,8 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     // Todo: Storeに上げる
     // Todo: Storeの画像を変える
 
+    // Todo: 今後：磁力線をインスタンス化しない頂点シェーダで描く
+
     private void Start()
     {
         magnet = FindObjectOfType<BarMagnetModel>();
