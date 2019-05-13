@@ -63,33 +63,22 @@ Shader "Custom/MyCompassShader2" {
 			vecDisN = vecP - vecN;
 			vecDisS = vecP - vecS;
 
-			// N極からの磁力ベクトルvecF_Nを求める
+			// 極からの磁力ベクトルvecF_N, vecF_Sを求める
 			// 単位ベクトルを距離の2乗で割る
-			float3 vecF_N;
+			float3 vecF_N, vecF_S;
 			vecF_N = vecDisN / pow(length(vecDisN), 3);
+			vecF_S = vecDisS / pow(length(vecDisS), 3);
 
-			/*
-			//磁石の位置を取得
-			float3 center;
-			center.x = _NorthPolePos.x;
-			center.y = _NorthPolePos.y;
-			center.z = _NorthPolePos.z;
-			*/
-
-			//コンパスと磁石のベクトルを取得
-			//IN.worldPos　が、現在のコンパスの座標
-			float3 look = IN.worldPos - vecS;
-
-			//距離を計算
-			float dist = length(look);
+			// 磁力の合力ベクトルvecFを求める
+			float3 vecF;
+			vecF = vecF_N + vecF_S;
 
 			//ストライプ模様を時間でスクロールさせる
 			float2 scroll = float2(_ScrollX, _ScrollY) * (-2) *_Time.y;
 
 			//色の減衰量を計算
 			//float t = saturate((_HideDistance - dist) / _HideDistance);// (_HideDistance - dist) / (_HideDistance - _DarkDistance);
-			float t = saturate(length(vecF_N) / 1000);// (_HideDistance - dist) / (_HideDistance - _DarkDistance);
-
+			float t = saturate(length(vecF) / 1000);// (_HideDistance - dist) / (_HideDistance - _DarkDistance);
 
 			half4 color = tex2D(_MainTex, IN.uv_MainTex + scroll) + _Emission * t;
 			//if (_HideDistance < dist) {

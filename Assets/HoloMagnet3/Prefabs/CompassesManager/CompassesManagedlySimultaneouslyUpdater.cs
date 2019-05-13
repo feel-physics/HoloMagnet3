@@ -93,13 +93,12 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
             var nv4 = new Vector4(np.x, np.y, np.z, 0);  //Vector4 に変換
             var sv4 = new Vector4(sp.x, sp.y, sp.z, 0);  //Vector4 に変換
 
-#if true
+            // 方位磁針の N 極側のマテリアルのシェーダに座標をセット
             CompassesModel.Instance.MatNorth.SetVector("_NorthPolePos", nv4);
-            CompassesModel.Instance.MatSouth.SetVector("_NorthPolePos", nv4);
-#else
             CompassesModel.Instance.MatNorth.SetVector("_SouthPolePos", sv4);
+            // 方位磁針の S 極側のマテリアルのシェーダに座標をセット
+            CompassesModel.Instance.MatSouth.SetVector("_NorthPolePos", nv4);
             CompassesModel.Instance.MatSouth.SetVector("_SouthPolePos", sv4);
-#endif
         }
 
         foreach (CompassManagedlyUpdater compass in compasses)
