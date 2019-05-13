@@ -14,8 +14,8 @@ public class CompassManagedlyUpdater : MonoBehaviour
     //float brightnessCoefficient;
 
     // カラーオブジェクトをプリロード（あらかじめ作っておく）して入れ替える
-    static Color originalCompassNorthColor = new Color(1f, 0.384f, 0.196f);
-    static Color originalCompassSouthColor = new Color(0.341f, 0.525f, 1f);
+    //static Color originalCompassNorthColor = new Color(1f, 0.384f, 0.196f);
+    //static Color originalCompassSouthColor = new Color(0.341f, 0.525f, 1f);
 
     void Start()
     {
