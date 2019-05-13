@@ -6,8 +6,9 @@ Shader "Custom/MyCompassShader2" {
 		_ScrollX("Scroll X", float) = 0
 		_ScrollY("Scroll Y", float) = 0
 			//磁石の位置　これを利用して明るさを調整する
-			_CenterPos("Center", Vector) = (0,0,0,0)
-			_DarkDistance("DistanceToDark", Float) = 0.2
+			_NorthPolePos("North Pole", Vector) = (0,0,0,0)
+			_SouthPolePos("South Pole", Vector) = (0,0,0,0)
+			_DarkDistance("Distance to Dark", Float) = 0.2
 			_HideDistance("Distance to Hide", Float) = 0.1
 
 			_Emission("Emission", Color) = (1, 1, 1, 1)
@@ -41,12 +42,17 @@ Shader "Custom/MyCompassShader2" {
 
 		void surf(Input IN, inout SurfaceOutput o)
 		{
-			// N極の位置ベクトルNを作成
+			// N極の位置ベクトルvecNを作成
 			float3 vecN;
 			vecN.x = _NorthPolePos.x;
 			vecN.y = _NorthPolePos.y;
 			vecN.z = _NorthPolePos.z;
 
+			// S極の位置ベクトルvecNを作成
+			float3 vecS;
+			vecS.x = _SouthPolePos.x;
+			vecS.y = _SouthPolePos.y;
+			vecS.z = _SouthPolePos.z;
 
 			/*
 			//磁石の位置を取得
@@ -58,7 +64,7 @@ Shader "Custom/MyCompassShader2" {
 
 			//コンパスと磁石のベクトルを取得
 			//IN.worldPos　が、現在のコンパスの座標
-			float3 look = IN.worldPos - vecN;
+			float3 look = IN.worldPos - vecS;
 
 			//距離を計算
 			float dist = length(look);

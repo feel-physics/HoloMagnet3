@@ -3,17 +3,20 @@ using UnityEngine;
 
 public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
 {
-
-    BarMagnetModel magnet;  // Todo: barMagnet01Model に変える
+    private BarMagnetModel magnet;  // Todo: barMagnet01Model に変える
     // Todo: barMagnet01.northPoleになるようにする（松井さん？）
-    GameObject barMagnet01NorthPole;
-    GameObject BarMagnet01SouthPole;
+    private GameObject barMagnet01NorthPole;
+    private GameObject barMagnet01SouthPole;
     // Todo: Unity - Manual: Debugging DirectX 11/12 shaders with Visual Studio https://docs.unity3d.com/Manual/SL-DebuggingD3D11ShadersWithVS.html
+    // Todo: CompassesManagedlySimultaneouslyUpdaterをCompassesManagedlyUpdaterにRename
+    // Todo: BarMagnetMagneticForceLinesSimultaneouslyDrawerからSimultaneouslyを削除
     // Todo: 2次元のシーンで棒磁石と方位磁針のz座標がズレる問題を解消
     // Todo: つかんでいる手のシェーダーをMRTK/standard に変える
+    // Todo: Compass_Oneのシーンの方位磁針の位置に印を作る
     // Todo: シーン遷移の音を鳴らす
     // Todo: 読み上げるテキストを作る
     // Todo: テキストを読み上げてくれるサービスを探す
+    // Todo: コメントを英訳するかは相談する
     // Todo: Storeに上げる準備（アイコンなど）をする（うまくいかないときはHoloMagnet3.oldをそのまま持ってくる）
     // Todo: Storeに上げる
     // Todo: Storeの画像を変える
@@ -23,7 +26,7 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         magnet = FindObjectOfType<BarMagnetModel>();
         GameObject barMagnet01 = GameObject.Find("BarMagnet01");
         barMagnet01NorthPole = barMagnet01.transform.Find("North Body/North Pole").gameObject;
-
+        barMagnet01SouthPole = barMagnet01.transform.Find("South Body/South Pole").gameObject;
     }
     // Update is called once per frame
     void Update()
@@ -85,11 +88,14 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         if (CompassesModel.Instance.MatNorth != null)
         {
             //var p = magnet.transform.position;
-            var p = barMagnet01NorthPole.transform.position;
-            var n = new Vector4(p.x, p.y, p.z, 0);//Vector4 に変換
+            var np = barMagnet01NorthPole.transform.position;
+            var sp = barMagnet01SouthPole.transform.position;
+            var nv4 = new Vector4(np.x, np.y, np.z, 0);  //Vector4 に変換
+            var sv4 = new Vector4(sp.x, sp.y, sp.z, 0);  //Vector4 に変換
 
-            CompassesModel.Instance.MatNorth.SetVector("_NorthPolePos", n);
-            CompassesModel.Instance.MatSouth.SetVector("_NorthPolePos", n);
+            //CompassesModel.Instance.MatNorth.SetVector("_NorthPolePos", nv4);
+            CompassesModel.Instance.MatNorth.SetVector("_SouthPolePos", sv4);
+            CompassesModel.Instance.MatSouth.SetVector("_SouthPolePos", sv4);
         }
 
         foreach (CompassManagedlyUpdater compass in compasses)
