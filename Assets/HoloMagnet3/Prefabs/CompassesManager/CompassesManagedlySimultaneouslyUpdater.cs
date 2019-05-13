@@ -7,7 +7,8 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     BarMagnetModel magnet;
     private void Start()
     {
-        magnet = GameObject.FindObjectOfType<BarMagnetModel>();
+        magnet = FindObjectOfType<BarMagnetModel>();
+        GameObject barMagnet01 = GameObject.Find("BarMagnet01");
 
     }
     // Update is called once per frame
