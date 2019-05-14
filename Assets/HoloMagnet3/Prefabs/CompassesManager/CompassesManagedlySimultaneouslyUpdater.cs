@@ -20,6 +20,7 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     // Todo: Storeに上げる準備（アイコンなど）をする（うまくいかないときはHoloMagnet3.oldをそのまま持ってくる）
     // Todo: Storeに上げる
     // Todo: Storeの画像を変える
+    // Todo: 二次元シーン開始時にBarMagnetRistrictMovementをアタッチする
 
     // Todo: 今後：磁力線をインスタンス化しない頂点シェーダで描く
 
