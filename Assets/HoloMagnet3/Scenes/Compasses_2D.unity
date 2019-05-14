@@ -255,6 +255,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114845266300539728, guid: ba466508743e89f40badc4a077d50865,
+        type: 2}
+      propertyPath: brightnessCoefficient
+      value: 0.005
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba466508743e89f40badc4a077d50865, type: 2}
   m_IsPrefabParent: 0
@@ -410,6 +415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MultTapTime: 0.5
+  acLoadNextScene: {fileID: 0}
 --- !u!1001 &1794438706
 Prefab:
   m_ObjectHideFlags: 0

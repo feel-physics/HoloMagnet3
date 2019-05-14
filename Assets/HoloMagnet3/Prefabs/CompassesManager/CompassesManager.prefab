@@ -76,6 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac4660362d3c2a4fa07d2e895a90d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brightnessCoefficient: 0.005
+  brightnessLowerLimit: 10
 --- !u!114 &114942184202073350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,3 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CompassesReference: []
   CompassesReferenceForManagedlyUpdate: []
+  ParentTransform: {fileID: 0}
+  pitch: 0.07
+  MatNorth: {fileID: 0}
+  MatSouth: {fileID: 0}
