@@ -26,11 +26,11 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     // Todo: 今後：磁力線をインスタンス化しない頂点シェーダで描く
 
     // 明るさの係数
-    // Todo: 通常は方位磁針を明るめに
     [SerializeField]
     private float brightnessCoefficient = 0.005f;
-    // Todo: 3次元の場合は方位磁針を暗めに
-    //public float BrightnessCoefficient3D = 0.0001f;
+    // 3次元用の明るさの係数
+    [SerializeField]
+    private float brightnessCoefficient3D = 0.002f;
 
     // 明るさの下限
     [SerializeField]
@@ -43,20 +43,24 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         barMagnet01NorthPole = barMagnet01.transform.Find("North Body/North Pole").gameObject;
         barMagnet01SouthPole = barMagnet01.transform.Find("South Body/South Pole").gameObject;
 
-#if false
         // Todo: 以下のN極とS極で分かれている記述をまとめる
         // Todo: できればマテリアルをまとめてしまいたい
         // 方位磁針の明るさの係数
         CompassesModel.Instance.MatNorth.SetFloat(
             "_BrightnessCoefficient", brightnessCoefficient);
         CompassesModel.Instance.MatSouth.SetFloat(
-            "_BrightnessCoefficient", brightnessLowerLimit);
+            "_BrightnessCoefficient", brightnessCoefficient);
         // 方位磁針の明るさの下限
         CompassesModel.Instance.MatNorth.SetFloat(
-            "_BrightnessLowerLimit", brightnessCoefficient);
+            "_BrightnessLowerLimit", brightnessLowerLimit);
         CompassesModel.Instance.MatSouth.SetFloat(
             "_BrightnessLowerLimit", brightnessLowerLimit);
-#endif
+
+        // 3次元の場合は3次元用の明るさの係数を使う
+        if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D)
+        {
+            brightnessCoefficient = brightnessCoefficient3D;
+        }
     }
     // Update is called once per frame
     void Update()
@@ -131,21 +135,6 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
             // 方位磁針の S 極側のマテリアルのシェーダに座標をセット
             CompassesModel.Instance.MatSouth.SetVector("_NorthPolePos", nv4);
             CompassesModel.Instance.MatSouth.SetVector("_SouthPolePos", sv4);
-
-#if true
-        // Todo: 以下のN極とS極で分かれている記述をまとめる
-        // Todo: できればマテリアルをまとめてしまいたい
-        // 方位磁針の明るさの係数
-        CompassesModel.Instance.MatNorth.SetFloat(
-            "_BrightnessCoefficient", brightnessCoefficient);
-        CompassesModel.Instance.MatSouth.SetFloat(
-            "_BrightnessCoefficient", brightnessCoefficient);
-        // 方位磁針の明るさの下限
-        CompassesModel.Instance.MatNorth.SetFloat(
-            "_BrightnessLowerLimit", brightnessLowerLimit);
-        CompassesModel.Instance.MatSouth.SetFloat(
-            "_BrightnessLowerLimit", brightnessLowerLimit);
-#endif
         }
 
         foreach (CompassManagedlyUpdater compass in compasses)
