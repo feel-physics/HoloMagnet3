@@ -52,4 +52,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MultTapTime: 0.5
-  acLoadNextScene: {fileID: 8300000, guid: d52d89240c7918e40941d33fcfe42971, type: 3}

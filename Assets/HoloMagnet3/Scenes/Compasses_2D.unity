@@ -152,27 +152,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114064167778553102, guid: 1b583df5b13a0f349b3391657c139ce5, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b583df5b13a0f349b3391657c139ce5, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &154158834 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000224316833232, guid: 1b583df5b13a0f349b3391657c139ce5,
-    type: 2}
-  m_PrefabInternal: {fileID: 154158833}
---- !u!114 &154158835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 154158834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb883a2d70e9e5342aeede14bc1d9a98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MyScene: 0
 --- !u!1001 &335435855
 Prefab:
   m_ObjectHideFlags: 0
@@ -354,8 +336,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114447364137496900, guid: 1f66a8daac7dc334cbed551c2661f848, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f66a8daac7dc334cbed551c2661f848, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &919138772
@@ -535,24 +516,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6afb51c1fb1eca4c803312a06ae36b7, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1731260700 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1110684928767128, guid: 1f66a8daac7dc334cbed551c2661f848,
-    type: 2}
-  m_PrefabInternal: {fileID: 882048174}
---- !u!114 &1731260701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1731260700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31a69577f009e84fbecbbc13980c30e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MultTapTime: 0.5
-  acLoadNextScene: {fileID: 0}
 --- !u!1001 &1794438706
 Prefab:
   m_ObjectHideFlags: 0
