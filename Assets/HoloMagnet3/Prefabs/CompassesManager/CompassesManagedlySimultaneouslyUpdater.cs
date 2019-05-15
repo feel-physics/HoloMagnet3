@@ -44,15 +44,11 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     void Update()
     {
         // Observer
-        var compasses = CompassesModel.Instance.CompassesReferenceForManagedlyUpdate;
+        var compasses = 
+            CompassesModel.Instance.CompassesReferenceForManagedlyUpdate;
 
-        // Presenter
-        if (compasses.Count == 0)
-            return;
-
-        //コンパスが複数の場合は、磁石の移動に合わせて位置をupdateする
-        if (compasses.Count > 1)
-            UpdateCompassParentPosition();
+        //磁石の移動に合わせて位置をupdateする  Todo: 後で説明をメソッドのサマリーに移す
+        UpdateCompassParentPosition();
 
         //コンパスの向きのupdate
         ManagedlyUpdate(compasses);

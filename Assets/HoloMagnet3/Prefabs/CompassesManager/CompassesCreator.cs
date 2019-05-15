@@ -46,13 +46,13 @@ public class CompassesCreator : MonoBehaviour
 
         //シーンに合わせて、配置するコンパス数を設定する
         //Introduction シーンの場合は、処理を停止する
-        // Todo: Compass_Oneシーンの場合は、ObjectInitializationで位置を調節する
         switch (scene)
         {
             case MySceneManager.MySceneEnum.Compass_One:
-                numCompassX = 1;
-                numCompassY = 1;
-                numCompassZ = 1;
+                numCompassX = 3;
+                numCompassY = 3;
+                numCompassZ = 3;
+                pitchCompass = 0.4f;
                 break;
             case MySceneManager.MySceneEnum.Compasses_2D:
                 numCompassX = 12;
