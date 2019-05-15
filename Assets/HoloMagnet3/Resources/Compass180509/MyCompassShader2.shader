@@ -12,7 +12,7 @@ Shader "Custom/MyCompassShader2" {
 			_BrightnessCoefficient("Brightness Coefficient", Float) = 0.001
 			// 磁石を消し込むパラメータ
 			_BrightnessLowerLimit("Brightness Lower Limit", Float) = 0.1
-			_DarkDistance("Distance to Dark", Float) = 0.2
+			_DarkDistance("Distance to Dark", Float) = 0.0000000
 			_HideDistance("Distance to Hide", Float) = 0.1
 
 			_Emission("Emission", Color) = (1, 1, 1, 1)
@@ -71,31 +71,34 @@ Shader "Custom/MyCompassShader2" {
 
 			// 変位ベクトルの単位ベクトルを求める
 			float vecE_N, vecE_S;
+			/*
 			vecE_N = normalize(vecDisN);
 			vecE_S = normalize(vecDisS);
+			*/
 
 			// 極からの磁力ベクトルvecF_N, vecF_Sを求める
 			float3 vecF_N, vecF_S;
+			/*
 			vecF_N =        vecE_N / pow(length(vecDisN), 2);
 			vecF_S = -1.0 * vecE_S / pow(length(vecDisS), 2);
+			*/
+			vecF_N =        vecDisN / pow(length(vecDisN), 3);
+			vecF_S = -1.0 * vecDisS / pow(length(vecDisS), 3);
 			//vecF_N = vecDisN / pow(length(vecDisN), 3);
 			//vecF_S = vecDisS / pow(length(vecDisS), 3);
 
 			// 磁力の合力ベクトルvecFを求める
 			float3 vecF;
-			//vecF = vecF_N + vecF_S;
-			vecF = vecF_N;
+			vecF = vecF_N + vecF_S;
 
 			// 方位磁針の明るさを求める
 			float brightness;
 			brightness = _BrightnessCoefficient * length(vecF);
 
 			// 暗すぎる方位磁針は消す
-			/*
 			if (brightness < _BrightnessLowerLimit) {
 				discard;
 			}
-			*/
 
 			//ストライプ模様を時間でスクロールさせる
 			float2 scroll = float2(_ScrollX, _ScrollY) * (-2) *_Time.y;
@@ -107,10 +110,12 @@ Shader "Custom/MyCompassShader2" {
 			//half4 color = tex2D(_MainTex, IN.uv_MainTex + scroll) + _Emission * t;
 			half4 color = tex2D(_MainTex, IN.uv_MainTex + scroll) + _Emission * brightness;
 			//if (_HideDistance < dist) {
-			if (t < _DarkDistance) {
+			/*
+			if (t < 0.001) {
+			//if (t < _DarkDistance) {
 				discard;
 			}
-			
+			*/
 			o.Emission = color;// *step(0.02, _Emission.r);
 			//o.Emission.a = t.x;
 		}
