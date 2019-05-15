@@ -26,7 +26,14 @@ public class ObjectInitialization : MonoBehaviour {
         }
         else if(gameObject.name == "BarMagnet01")
         {
-            transform.localPosition = new Vector3(0, 0f, 2f);
+            if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D)
+            {
+                transform.localPosition = new Vector3(0, -0.7f, 2f);
+            }
+            else
+            {
+                transform.localPosition = new Vector3(0, 0f, 2f);
+            }
             Debug.Log(gameObject.name + logMessage);
         }
     }

@@ -43,6 +43,7 @@ public class CompassesCreator : MonoBehaviour
                 numCompassZ = 6;
                 dimensiton = Dimensiton.D3;
                 pitchCompass = 0.07f;
+                shiftVector = new Vector3(0, -0.7f, 2);
                 break;
             default:
                 throw new System.Exception("Invalid sceneId");
