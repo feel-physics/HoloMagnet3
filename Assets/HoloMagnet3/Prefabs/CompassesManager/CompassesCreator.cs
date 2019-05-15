@@ -17,6 +17,13 @@ public class CompassesCreator : MonoBehaviour
 
     void Start()
     {
+        // Introductionのシーンでは方位磁針を生成しない
+        if (MySceneManager.Instance.MyScene ==
+            MySceneManager.MySceneEnum.Introduction)
+        {
+            return;
+        }
+
         SetupCompassesPlacement();
 
         Debug.Log("Instantiate compasses");
@@ -42,8 +49,6 @@ public class CompassesCreator : MonoBehaviour
         // Todo: Compass_Oneシーンの場合は、ObjectInitializationで位置を調節する
         switch (scene)
         {
-            case MySceneManager.MySceneEnum.Introduction:
-                return;
             case MySceneManager.MySceneEnum.Compass_One:
                 numCompassX = 1;
                 numCompassY = 1;
