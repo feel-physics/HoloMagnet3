@@ -34,7 +34,7 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
 
     // 明るさの下限
     [SerializeField]
-    private float brightnessLowerLimit = 0.06f;
+    private float brightnessLowerLimit = 0.04f;
 
     private void Start()
     {

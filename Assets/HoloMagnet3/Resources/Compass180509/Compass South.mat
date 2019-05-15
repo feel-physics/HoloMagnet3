@@ -75,13 +75,13 @@ Material:
     - _AlphaTest: 0
     - _BlendOp: 0
     - _BrightnessCoefficient: 0.005
-    - _BrightnessLowerLimit: 0.005
+    - _BrightnessLowerLimit: 10
     - _BumpScale: 1
     - _CalibrationSpaceReflections: 0
     - _ColorWriteMask: 15
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DarkDistance: 0.1
+    - _DarkDistance: 0.02
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EndDistance: 0.4
