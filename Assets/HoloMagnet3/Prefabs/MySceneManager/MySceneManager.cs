@@ -25,6 +25,9 @@ public class MySceneManager : Singleton<MySceneManager> {
         string sceneName = SceneManager.GetActiveScene().name;
         MyScene = sceneDic[sceneName];
 
+        // オブジェクトを初期化する
+        ObjectsInitializer.Instance.Initialize();
+
 #if false
         // 初期化  Todo: 掃除する
         string sceneName = SceneManager.GetActiveScene().name;
