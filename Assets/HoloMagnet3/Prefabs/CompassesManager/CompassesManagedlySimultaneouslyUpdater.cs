@@ -11,8 +11,6 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     // Todo: 後で確認する Unity - Manual: Debugging DirectX 11/12 shaders with Visual Studio https://docs.unity3d.com/Manual/SL-DebuggingD3D11ShadersWithVS.html
     // Todo: 後でCompassesManagedlySimultaneouslyUpdaterをCompassesManagedlyUpdaterにRename
     // Todo: 後でBarMagnetMagneticForceLinesSimultaneouslyDrawerからSimultaneouslyを削除
-    // Todo: 2次元のシーンで棒磁石と方位磁針のz座標がズレる問題を解消
-    // Todo: Compass_Oneのシーンの方位磁針の位置に印を作る
     // Todo: シーン遷移の音を鳴らす
     // Todo: 読み上げるテキストを作る
     // Todo: テキストを読み上げてくれるサービスを探す
