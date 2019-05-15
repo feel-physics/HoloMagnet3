@@ -11,7 +11,6 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     // Todo: 後で確認する Unity - Manual: Debugging DirectX 11/12 shaders with Visual Studio https://docs.unity3d.com/Manual/SL-DebuggingD3D11ShadersWithVS.html
     // Todo: 後でCompassesManagedlySimultaneouslyUpdaterをCompassesManagedlyUpdaterにRename
     // Todo: 後でBarMagnetMagneticForceLinesSimultaneouslyDrawerからSimultaneouslyを削除
-    // Todo: シーン遷移の音を鳴らす
     // Todo: 読み上げるテキストを作る
     // Todo: テキストを読み上げてくれるサービスを探す
     // Todo: コメントを英訳するかは相談する
@@ -45,7 +44,7 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         var compasses = 
             CompassesModel.Instance.CompassesReferenceForManagedlyUpdate;
 
-        if (compasses.Count > 0)
+        if (compasses.Count > 0)  // Todo: IntroductionではCompassesManagerを消す
         {
             //磁石の移動に合わせて位置をupdateする  Todo: 後で説明をメソッドのサマリーに移す
             UpdateCompassParentPosition();
