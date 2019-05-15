@@ -596,7 +596,8 @@ Prefab:
       propertyPath: m_Name
       value: BarMagnet01
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114114724655308206, guid: d36ed935ad424bc429ae4d865030a856, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d36ed935ad424bc429ae4d865030a856, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1794438707 stripped
