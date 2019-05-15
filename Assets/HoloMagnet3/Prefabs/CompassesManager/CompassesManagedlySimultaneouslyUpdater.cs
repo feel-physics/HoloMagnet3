@@ -65,7 +65,8 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         int check = 1;
 
         //磁石とコンパスの位置差分を取得
-        var offset = magnet.transform.position - CompassesModel.Instance.ParentTransform.position;
+        var offset = magnet.transform.position - 
+            CompassesModel.Instance.ParentTransform.position;
         //コンパスの間隔を取得
         var pitch = CompassesModel.Instance.pitch;
 

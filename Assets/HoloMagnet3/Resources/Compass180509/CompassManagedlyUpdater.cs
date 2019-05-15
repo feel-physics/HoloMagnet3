@@ -45,6 +45,7 @@ public class CompassManagedlyUpdater : MonoBehaviour
         
     }
 
+    // Todo: 掃除
     //Color ColorWithBrightness(bool isNorth, Color color, float brightness)
     //{
     //    Color originalColor;

@@ -73,7 +73,7 @@ public class CompassesCreator : MonoBehaviour
     {
         //Compassの親のTransformを生成して、CompassModelに登録する
         var parent = new GameObject();
-        // CompassParentの位置はCompassManagerと同じ
+        // CompassParentの初期位置はCompassManagerと同じ
         parent.transform.position = transform.position;
         parent.name = "CommpassesParent";
         CompassesModel.Instance.ParentTransform = parent.transform;
@@ -126,7 +126,12 @@ public class CompassesCreator : MonoBehaviour
 
                     //Instantiate
                     // 親に子として付ける
-                    var compassCloned = Instantiate(compass, localPositionCompassCloned, Quaternion.identity, CompassesModel.Instance.ParentTransform);
+                    //var compassCloned = Instantiate(compass, localPositionCompassCloned, Quaternion.identity, CompassesModel.Instance.ParentTransform);
+                    var compassCloned = Instantiate(
+                        compass, 
+                        localPositionCompassCloned, 
+                        Quaternion.identity,
+                        CompassesModel.Instance.ParentTransform);
                     //名前を付ける
                     compassCloned.name = string.Format("Compass_{0}-{1}-{2}", w, h, d);
                 }
