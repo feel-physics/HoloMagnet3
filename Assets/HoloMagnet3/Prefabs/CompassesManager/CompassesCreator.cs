@@ -17,10 +17,29 @@ public class CompassesCreator : MonoBehaviour
 
     void Start()
     {
+        SetupCompassesPlacement();
+
+        Debug.Log("Instantiate compasses");
+
+        SetupCompassesParent();
+
+        //次元に合わせて、コンパスのPrefabを設定する
+        GameObject compass = LoadCompassPrefab();
+
+        //CompasのSharedMaterialを取得する
+        RegisterSharedmaterialToCompassesModel(compass);
+
+        //コンパスをループで生成する
+        CreateCompasses(compass);
+    }
+
+    void SetupCompassesPlacement()
+    {
         MySceneManager.MySceneEnum scene = MySceneManager.Instance.MyScene;
 
         //シーンに合わせて、配置するコンパス数を設定する
         //Introduction シーンの場合は、処理を停止する
+        // Todo: Compass_Oneシーンの場合は、ObjectInitializationで位置を調節する
         switch (scene)
         {
             case MySceneManager.MySceneEnum.Introduction:
@@ -48,19 +67,23 @@ public class CompassesCreator : MonoBehaviour
             default:
                 throw new System.Exception("Invalid sceneId");
         }
+    }
 
-        Debug.Log("Instantiate compasses");
-
+    void SetupCompassesParent()
+    {
         //Compassの親のTransformを生成して、CompassModelに登録する
         var parent = new GameObject();
-        parent.transform.position = shiftVector;
-        parent.name = "CommpassParent";
+        // CompassParentの位置はCompassManagerと同じ
+        parent.transform.position = transform.position;
+        parent.name = "CommpassesParent";
         CompassesModel.Instance.ParentTransform = parent.transform;
         CompassesModel.Instance.pitch = pitchCompass;
+    }
 
-
-        //次元に合わせて、コンパスのPrefabを設定する
+    GameObject LoadCompassPrefab()
+    {
         GameObject compass;
+
         switch (dimensiton)
         {
             case Dimensiton.D2:
@@ -73,15 +96,19 @@ public class CompassesCreator : MonoBehaviour
                 throw new System.Exception("Invalid dimension");
         }
 
+        return compass;
+    }
 
-        //CompasのSharedMaterialを取得する
+    void RegisterSharedmaterialToCompassesModel(GameObject compass)
+    {
         var mats = compass.GetComponentInChildren<MeshRenderer>().sharedMaterials;
 
         CompassesModel.Instance.MatNorth = mats[0];
         CompassesModel.Instance.MatSouth = mats[1];
+    }
 
-
-        //コンパスをループで生成する
+    void CreateCompasses(GameObject compass)
+    {
         for (int d = 0; d < numCompassZ; d++)
         {
             for (int h = 0; h < numCompassY; h++)
@@ -89,17 +116,19 @@ public class CompassesCreator : MonoBehaviour
                 for (int w = 0; w < numCompassX; w++)
                 {
                     // 初期位置の設定
+                    // CompassesManagerを中心に配置する
                     var localPositionCompassCloned =
                     new Vector3(
                         pitchCompass * w - (numCompassX - 1.0f) / 2.0f * pitchCompass,  // x軸に対し対称に±方向に方位磁針を並べる
                         pitchCompass * h - (numCompassY - 1.0f) / 2.0f * pitchCompass,  // y軸に対し対称に±方向に方位磁針を並べる
                         pitchCompass * d - (numCompassZ - 1.0f) / 2.0f * pitchCompass)  // z軸に対し対称に±方向に方位磁針を並べる
-                        + shiftVector;
-                    
+                        + transform.position;
+
                     //Instantiate
+                    // 親に子として付ける
                     var compassCloned = Instantiate(compass, localPositionCompassCloned, Quaternion.identity, CompassesModel.Instance.ParentTransform);
                     //名前を付ける
-                    compassCloned.name = string.Format("Compass_{0}-{1}-{2}",w,h,d);
+                    compassCloned.name = string.Format("Compass_{0}-{1}-{2}", w, h, d);
                 }
             }
         }
