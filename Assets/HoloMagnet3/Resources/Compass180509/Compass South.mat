@@ -75,7 +75,7 @@ Material:
     - _AlphaTest: 0
     - _BlendOp: 0
     - _BrightnessCoefficient: 0.005
-    - _BrightnessLowerLimit: 10
+    - _BrightnessLowerLimit: 0.04
     - _BumpScale: 1
     - _CalibrationSpaceReflections: 0
     - _ColorWriteMask: 15

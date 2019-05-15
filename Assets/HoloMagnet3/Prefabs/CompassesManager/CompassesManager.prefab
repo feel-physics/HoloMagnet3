@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brightnessCoefficient: 0.005
-  brightnessLowerLimit: 10
+  brightnessLowerLimit: 0.04
 --- !u!114 &114942184202073350
 MonoBehaviour:
   m_ObjectHideFlags: 1

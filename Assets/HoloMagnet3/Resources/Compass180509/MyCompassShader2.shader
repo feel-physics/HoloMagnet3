@@ -80,7 +80,6 @@ Shader "Custom/MyCompassShader2" {
 			float brightness;
 			brightness = _BrightnessCoefficient * length(vecF);
 
-			// 暗すぎる方位磁針は消す
 			if (brightness < _BrightnessLowerLimit) {
 				discard;
 			}
