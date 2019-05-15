@@ -163,7 +163,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             }
 
 #if feel_physics
-            audioSource = GetComponents<AudioSource>()[0];  // Todo: スクリプトで追加して独立性を上げたい
+            audioSource = GetComponents<AudioSource>()[0];  // Todo: 後でスクリプトで追加して独立性を上げたい
 #endif
 
         }

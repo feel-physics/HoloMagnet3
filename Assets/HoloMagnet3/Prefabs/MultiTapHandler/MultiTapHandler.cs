@@ -21,7 +21,7 @@ IInputClickHandler // タップ操作検出
 
     [SerializeField]
     private AudioClip acLoadNextScene;
-    // Todo: シーン毎に音を変える
+    // Todo: 後でシーン毎に音を変える
 
     /// <summary>
     /// 連続タップカウント

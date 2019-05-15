@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-// Todo: クラス名をRenameする
+// Todo: 後でクラス名をRenameする
 public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
 {
-    private BarMagnetModel magnet;  // Todo: barMagnet01Model に変える
-    // Todo: barMagnet01.northPoleになるようにする（松井さん？）
+    private BarMagnetModel magnet;  // Todo: 後でbarMagnet01Model に変える
+    // Todo: 後でbarMagnet01.northPoleになるようにする（松井さん？）
     private GameObject barMagnet01NorthPole;
     private GameObject barMagnet01SouthPole;
-    // Todo: Unity - Manual: Debugging DirectX 11/12 shaders with Visual Studio https://docs.unity3d.com/Manual/SL-DebuggingD3D11ShadersWithVS.html
-    // Todo: CompassesManagedlySimultaneouslyUpdaterをCompassesManagedlyUpdaterにRename
-    // Todo: BarMagnetMagneticForceLinesSimultaneouslyDrawerからSimultaneouslyを削除
+    // Todo: 後で確認する Unity - Manual: Debugging DirectX 11/12 shaders with Visual Studio https://docs.unity3d.com/Manual/SL-DebuggingD3D11ShadersWithVS.html
+    // Todo: 後でCompassesManagedlySimultaneouslyUpdaterをCompassesManagedlyUpdaterにRename
+    // Todo: 後でBarMagnetMagneticForceLinesSimultaneouslyDrawerからSimultaneouslyを削除
     // Todo: 2次元のシーンで棒磁石と方位磁針のz座標がズレる問題を解消
-    // Todo: つかんでいる手のシェーダーをMRTK/standard に変える
     // Todo: Compass_Oneのシーンの方位磁針の位置に印を作る
     // Todo: シーン遷移の音を鳴らす
     // Todo: 読み上げるテキストを作る
@@ -21,7 +20,7 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     // Todo: Storeに上げる準備（アイコンなど）をする（うまくいかないときはHoloMagnet3.oldをそのまま持ってくる）
     // Todo: Storeに上げる
     // Todo: Storeの画像を変える
-    // Todo: 二次元シーン開始時にBarMagnetRistrictMovementをアタッチする
+    // Todo: 後で動的に二次元シーン開始時にBarMagnetRistrictMovementをアタッチする
 
     // Todo: 今後：磁力線をインスタンス化しない頂点シェーダで描く
 
@@ -123,7 +122,7 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
             brightnessCoefficient = brightnessCoefficient3D;
         }
 
-        // Todo: 以下のN極とS極で分かれている記述をまとめる
+        // Todo: 今後以下のN極とS極で分かれている記述をまとめる
         // Todo: できればマテリアルをまとめてしまいたい
         // 方位磁針の明るさの係数
         CompassesModel.Instance.MatNorth.SetFloat(
