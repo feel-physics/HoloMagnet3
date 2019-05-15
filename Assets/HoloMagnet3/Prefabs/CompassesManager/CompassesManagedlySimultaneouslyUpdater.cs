@@ -100,7 +100,7 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         //コンパスが存在しているシーンでは、コンパスシェーダーにmaginetの位置を登録する
         if (CompassesModel.Instance.MatNorth != null)
         {
-            AssignMagnetPositionToCompass();
+            AssignMagnetPosition();
         }
 
         foreach (CompassManagedlyUpdater compass in compasses)
@@ -116,6 +116,12 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         barMagnet01NorthPole = barMagnet01.transform.Find("North Body/North Pole").gameObject;
         barMagnet01SouthPole = barMagnet01.transform.Find("South Body/South Pole").gameObject;
 
+        // 3次元の場合は3次元用の明るさの係数を使う
+        if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D)
+        {
+            brightnessCoefficient = brightnessCoefficient3D;
+        }
+
         // Todo: 以下のN極とS極で分かれている記述をまとめる
         // Todo: できればマテリアルをまとめてしまいたい
         // 方位磁針の明るさの係数
@@ -128,15 +134,9 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
             "_BrightnessLowerLimit", brightnessLowerLimit);
         CompassesModel.Instance.MatSouth.SetFloat(
             "_BrightnessLowerLimit", brightnessLowerLimit);
-
-        // 3次元の場合は3次元用の明るさの係数を使う
-        if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D)
-        {
-            brightnessCoefficient = brightnessCoefficient3D;
-        }
     }
 
-    void AssignMagnetPositionToCompass()
+    void AssignMagnetPosition()
     {
         // Todo: 以下のN極とS極で分かれている記述をまとめる
 
