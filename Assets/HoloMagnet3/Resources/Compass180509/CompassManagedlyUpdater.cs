@@ -33,7 +33,7 @@ public class CompassManagedlyUpdater : MonoBehaviour
         CompassRotateAndChangeEmission();
     }
     
-    void CompassRotateAndChangeEmission()
+    void CompassRotateAndChangeEmission()  // Todo: Renameする
     {
         // 合力ベクトル
         Vector3 forceResultant = 

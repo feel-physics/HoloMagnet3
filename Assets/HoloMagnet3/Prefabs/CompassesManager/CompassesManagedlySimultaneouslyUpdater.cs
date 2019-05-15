@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+// Todo: クラス名をRenameする
 public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
 {
     private BarMagnetModel magnet;  // Todo: barMagnet01Model に変える

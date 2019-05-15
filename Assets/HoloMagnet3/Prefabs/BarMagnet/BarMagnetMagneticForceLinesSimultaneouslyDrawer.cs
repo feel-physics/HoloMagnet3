@@ -3,6 +3,7 @@ using HoloToolkit.Unity;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Todo: クラス名をRenameする
 /// <summary>
 /// 磁力線の描画を行う
 /// </summary>
