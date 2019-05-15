@@ -38,30 +38,9 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
 
     private void Start()
     {
-        magnet = FindObjectOfType<BarMagnetModel>();
-        GameObject barMagnet01 = GameObject.Find("BarMagnet01");
-        barMagnet01NorthPole = barMagnet01.transform.Find("North Body/North Pole").gameObject;
-        barMagnet01SouthPole = barMagnet01.transform.Find("South Body/South Pole").gameObject;
-
-        // Todo: 以下のN極とS極で分かれている記述をまとめる
-        // Todo: できればマテリアルをまとめてしまいたい
-        // 方位磁針の明るさの係数
-        CompassesModel.Instance.MatNorth.SetFloat(
-            "_BrightnessCoefficient", brightnessCoefficient);
-        CompassesModel.Instance.MatSouth.SetFloat(
-            "_BrightnessCoefficient", brightnessCoefficient);
-        // 方位磁針の明るさの下限
-        CompassesModel.Instance.MatNorth.SetFloat(
-            "_BrightnessLowerLimit", brightnessLowerLimit);
-        CompassesModel.Instance.MatSouth.SetFloat(
-            "_BrightnessLowerLimit", brightnessLowerLimit);
-
-        // 3次元の場合は3次元用の明るさの係数を使う
-        if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D)
-        {
-            brightnessCoefficient = brightnessCoefficient3D;
-        }
+        SetupForChangingBrightness();
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -121,25 +100,57 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         //コンパスが存在しているシーンでは、コンパスシェーダーにmaginetの位置を登録する
         if (CompassesModel.Instance.MatNorth != null)
         {
-            // Todo: 以下のN極とS極で分かれている記述をまとめる
-
-            //var p = magnet.transform.position;
-            var np = barMagnet01NorthPole.transform.position;
-            var sp = barMagnet01SouthPole.transform.position;
-            var nv4 = new Vector4(np.x, np.y, np.z, 0);  //Vector4 に変換
-            var sv4 = new Vector4(sp.x, sp.y, sp.z, 0);  //Vector4 に変換
-
-            // 方位磁針の N 極側のマテリアルのシェーダに座標をセット
-            CompassesModel.Instance.MatNorth.SetVector("_NorthPolePos", nv4);
-            CompassesModel.Instance.MatNorth.SetVector("_SouthPolePos", sv4);
-            // 方位磁針の S 極側のマテリアルのシェーダに座標をセット
-            CompassesModel.Instance.MatSouth.SetVector("_NorthPolePos", nv4);
-            CompassesModel.Instance.MatSouth.SetVector("_SouthPolePos", sv4);
+            AssignMagnetPositionToCompass();
         }
 
         foreach (CompassManagedlyUpdater compass in compasses)
         {
             compass.ManagedlyUpdate();
         }
+    }
+
+    void SetupForChangingBrightness()
+    {
+        magnet = FindObjectOfType<BarMagnetModel>();
+        GameObject barMagnet01 = GameObject.Find("BarMagnet01");
+        barMagnet01NorthPole = barMagnet01.transform.Find("North Body/North Pole").gameObject;
+        barMagnet01SouthPole = barMagnet01.transform.Find("South Body/South Pole").gameObject;
+
+        // Todo: 以下のN極とS極で分かれている記述をまとめる
+        // Todo: できればマテリアルをまとめてしまいたい
+        // 方位磁針の明るさの係数
+        CompassesModel.Instance.MatNorth.SetFloat(
+            "_BrightnessCoefficient", brightnessCoefficient);
+        CompassesModel.Instance.MatSouth.SetFloat(
+            "_BrightnessCoefficient", brightnessCoefficient);
+        // 方位磁針の明るさの下限
+        CompassesModel.Instance.MatNorth.SetFloat(
+            "_BrightnessLowerLimit", brightnessLowerLimit);
+        CompassesModel.Instance.MatSouth.SetFloat(
+            "_BrightnessLowerLimit", brightnessLowerLimit);
+
+        // 3次元の場合は3次元用の明るさの係数を使う
+        if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D)
+        {
+            brightnessCoefficient = brightnessCoefficient3D;
+        }
+    }
+
+    void AssignMagnetPositionToCompass()
+    {
+        // Todo: 以下のN極とS極で分かれている記述をまとめる
+
+        //var p = magnet.transform.position;
+        var np = barMagnet01NorthPole.transform.position;
+        var sp = barMagnet01SouthPole.transform.position;
+        var nv4 = new Vector4(np.x, np.y, np.z, 0);  //Vector4 に変換
+        var sv4 = new Vector4(sp.x, sp.y, sp.z, 0);  //Vector4 に変換
+
+        // 方位磁針の N 極側のマテリアルのシェーダに座標をセット
+        CompassesModel.Instance.MatNorth.SetVector("_NorthPolePos", nv4);
+        CompassesModel.Instance.MatNorth.SetVector("_SouthPolePos", sv4);
+        // 方位磁針の S 極側のマテリアルのシェーダに座標をセット
+        CompassesModel.Instance.MatSouth.SetVector("_NorthPolePos", nv4);
+        CompassesModel.Instance.MatSouth.SetVector("_SouthPolePos", sv4);
     }
 }
