@@ -78,13 +78,8 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         }
 
 #if feel_physics
-        public AudioClip ACFinish;
-        public AudioClip ACMoving;
-        public AudioClip ACTap;
-        public AudioClip ACDoubleTap;
-        public AudioClip ACDragging;
-        public AudioClip ACHold;
-        private AudioSource audioSource;
+        [SerializeField]
+        private bool Is2D = false;
 #endif
 
         // Private fields that store transform information.
@@ -161,7 +156,12 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             }
 
 #if feel_physics
-            audioSource = GetComponents<AudioSource>()[0];  // Todo: スクリプトで追加して独立性を上げたい
+            // 2次元のシーンではz=2で固定（初期化）
+            if (MySceneManager.Instance.MyScene ==
+                MySceneManager.MySceneEnum.Compasses_2D)
+            {
+                Is2D = true;
+            }
 #endif
 
         }
@@ -183,6 +183,21 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             {
                 UpdateStateMachine();
             }
+
+#if feel_physics
+            // 2次元のシーンではz=2で固定
+            if (Is2D)
+            {
+                /*
+                 * 参考にさせていただきました
+                 * C#でpositionのxとかyに値を突っ込む - テラシュールブログ
+                 * http://tsubakit1.hateblo.jp/entry/20131015/1381836858
+                 */
+                Vector3 pos = transform.position;
+                Vector3 newpos = new Vector3(pos.x, pos.y, 2);
+                transform.position = newpos;
+            }
+#endif
         }
 
         private Vector3 GetInputPosition(InputEventData eventData)
@@ -426,20 +441,11 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         private void OnManipulationStarted()
         {
 #if feel_physics
-            audioSource.clip = ACHold;
-            audioSource.loop = false;
-            audioSource.Play();
+            MultiTapHandler.Instance.OnManipulationStarted();
 
             //手のモデルを表示する
             if (BarMagnetModel.Instance.handReference != null)
                 BarMagnetModel.Instance.handReference.SetActive(true);
-
-            MyHelper.MyDelayMethod(this, 1f, () =>
-            {
-                audioSource.clip = ACDragging;
-                audioSource.loop = true;
-                audioSource.Play();
-            });
 
             // 3次元のシーンであれば自動移動を止める
             if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D &&
@@ -460,20 +466,11 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             InputManager.Instance.PopModalInputHandler();
 
 #if feel_physics
-            audioSource.Stop();
-
-            audioSource.clip = ACFinish;
-            audioSource.loop = false;
-            audioSource.Play();
+            MultiTapHandler.Instance.OnManipulationEnded();
 
             //手のモデルを非表示にする
             if (BarMagnetModel.Instance.handReference != null)
                 BarMagnetModel.Instance.handReference.SetActive(false);
-
-            MyHelper.MyDelayMethod(this, 1f, () =>
-            {
-                audioSource.Stop();
-            });
 #endif
 
             // Hide Bounding Box visual on release

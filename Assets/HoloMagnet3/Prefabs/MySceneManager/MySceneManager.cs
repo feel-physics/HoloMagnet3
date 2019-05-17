@@ -1,12 +1,19 @@
 ﻿using HoloToolkit.Unity;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MySceneManager : Singleton<MySceneManager> {
 
     public enum MySceneEnum { Introduction, Compass_One, Compasses_2D, Compasses_3D };
     public MySceneEnum MyScene;
+
+    // シーン遷移のときに効果音を鳴らす
+    [SerializeField]
+    private AudioClip acLoadNextScene;
+
+    private AudioSource audioSource;
 
     // シーン名とenumのシーンとを対応させる
     private Dictionary<string, MySceneEnum> sceneDic = new Dictionary<string, MySceneEnum>() {
@@ -25,27 +32,10 @@ public class MySceneManager : Singleton<MySceneManager> {
         string sceneName = SceneManager.GetActiveScene().name;
         MyScene = sceneDic[sceneName];
 
-#if false
-        // 初期化
-        string sceneName = SceneManager.GetActiveScene().name;
-        switch (sceneName)
-        {
-            case "Introduction":
-                SceneId = 0;
-                break;
-            case "Compass_One":
-                SceneId = 1;
-                break;
-            case "Compasses_2D":
-                SceneId = 2;
-                break;
-            case "Compasses_3D":
-                SceneId = 3;
-                break;
-            default:
-                break;
-        }
-#endif
+        // オブジェクトを初期化する
+        ObjectsInitializer.Instance.Initialize();
+
+        audioSource = GetComponents<AudioSource>()[0];
     }
 
     public void LoadNextScene()
@@ -56,55 +46,33 @@ public class MySceneManager : Singleton<MySceneManager> {
         {
             case MySceneEnum.Introduction:
                 nextScene = MySceneEnum.Compass_One;
+                // Todo: 後でシーン遷移の音をシーン毎に変える
+                //audioSource.pitch = 1.0f;
                 break;
             case MySceneEnum.Compass_One:
                 nextScene = MySceneEnum.Compasses_2D;
+                //audioSource.pitch = 1.5f;
                 break;
             case MySceneEnum.Compasses_2D:
                 nextScene = MySceneEnum.Compasses_3D;
+                //audioSource.pitch = 2.0f;
                 break;
             case MySceneEnum.Compasses_3D:
                 nextScene = MySceneEnum.Introduction;
+                //audioSource.pitch = 2.5f;
                 break;
             default:
                 throw new System.Exception("Invarid MyScene");
         }
 
-        MyLoadScene(nextScene);
-#if false
-        string sceneName;
-
-        if (SceneId == 3)
+        MyHelper.MyDelayMethod(this, 1f, () =>
         {
-            SceneId = 0;
-        }
-        else
-        {
-            SceneId++;
-        }
-
-        switch (MyScene)
-        {
-            case 0:
-                sceneName = "Introduction";
-                break;
-            case 1:
-                sceneName = "Compass_One";
-                break;
-            case 2:
-                sceneName = "Compasses_2D";
-                break;
-            case 3:
-                sceneName = "Compasses_3D";
-                break;
-            default:
-                throw new System.Exception("sceneId is invalid");
-        }
-        SceneManager.LoadScene(sceneName);
-#endif
+            MyLoadScene(nextScene);
+        });
     }
 
     // enumのシーンで指定したシーンをロードする
+    // 使い回すためメソッドとして切り出している
     public void MyLoadScene(MySceneEnum scene)
     {
         SceneManager.LoadScene(sceneDic.FirstOrDefault(x => x.Value == scene).Key);

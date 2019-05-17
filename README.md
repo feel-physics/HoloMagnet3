@@ -46,7 +46,6 @@
 
 - Unity 2017.4.26f1
 - Visual Studio 2017.15
-- .NET Framework 3.5
 
 ## Licence
 
@@ -105,7 +104,6 @@ Facebook: https://www.facebook.com/feelphysicsjp
 
 - Unity 2017.4.26f1
 - Visual Studio 2017.15
-- NET Framework 3.5
 
 ## ライセンス
 MIT

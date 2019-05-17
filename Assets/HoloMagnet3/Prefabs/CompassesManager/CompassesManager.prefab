@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114845266300539728}
   - component: {fileID: 114122603326899368}
   - component: {fileID: 114528457740456236}
+  - component: {fileID: 114508225442029152}
   m_Layer: 0
   m_Name: CompassesManager
   m_TagString: Untagged
@@ -54,6 +55,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e039d21bb37ad143bf3de1b1c0b3e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114508225442029152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1018650526414424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8249e09ac5638ca4f96686a1bcd2b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114528457740456236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -76,6 +88,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac4660362d3c2a4fa07d2e895a90d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brightnessCoefficient: 0.005
+  brightnessCoefficient3D: 0.002
+  brightnessLowerLimit: 0.04
 --- !u!114 &114942184202073350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,3 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CompassesReference: []
   CompassesReferenceForManagedlyUpdate: []
+  ParentTransform: {fileID: 0}
+  pitch: 0.07
+  MatNorth: {fileID: 0}
+  MatSouth: {fileID: 0}
