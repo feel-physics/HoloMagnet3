@@ -63,6 +63,9 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
     private AudioClip acDraw;
     private AudioSource audioSource;
 
+    private GameObject[] northPoles;
+    private GameObject[] southPoles;
+
     private void Start()
     {
         magneticForceLinePrefab = BarMagnetModel.Instance.MagneticForceLinePrefab;
@@ -141,6 +144,11 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
                 magneticForceLines.Add(line);
             }
         }
+
+        // すべてのN極、S極を取得する
+        northPoles = GameObject.FindGameObjectsWithTag("North Pole");
+        southPoles = GameObject.FindGameObjectsWithTag("South Pole");
+
         Debug.Log("GenerateLines:" + magneticForceLines.Count);
     }
 
@@ -211,9 +219,6 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
     /// </summary>
     public void DrawOne(LineRenderer magnetForceLine, bool lineIsFromNorthPole, Vector3 startPosition)
     {
-        // すべてのN極、S極を取得する
-        GameObject[] northPoles = GameObject.FindGameObjectsWithTag("North Pole");
-        GameObject[] southPoles = GameObject.FindGameObjectsWithTag("South Pole");
 
         // === LineRendererを設定する ===
         // --- LineRendererを初期化する ---

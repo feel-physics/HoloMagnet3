@@ -63,29 +63,55 @@ public class MagneticForceCaliculator : Singleton<MagneticForceCaliculator> {
 
     private Vector3 ForceResultantOfOnePoles(GameObject[] poles, Vector3 positionCurrentPoint)
     {
-        var sumOfForceFromOnePoleToCurrentPoint =
-            poles.Select(pole =>
-            {
-                Vector3 positionBarMagnetNorthPole = pole.transform.position;
 
-                // N極からの現在の頂点への変位ベクトル(ベクトルn)
-                var displacementFromOnePoleToCurrentPoint = positionCurrentPoint - positionBarMagnetNorthPole;
+        //var sumOfForceFromOnePoleToCurrentPoint =
+        //    poles.Select(pole =>
+        //    {
+        //        Vector3 positionBarMagnetNorthPole = pole.transform.position;
 
-                // ベクトルnの長さの2乗（これで単位ベクトルを割る）
-                var lengthSquareFromOnePoleToCurrentPoint =
-                displacementFromOnePoleToCurrentPoint.sqrMagnitude;
+        //        // N極からの現在の頂点への変位ベクトル(ベクトルn)
+        //        var displacementFromOnePoleToCurrentPoint = positionCurrentPoint - positionBarMagnetNorthPole;
 
-                // ベクトルnの単位ベクトル
-                var normalizedDisplacementFromOnePoleToCurrentPoint =
-                    displacementFromOnePoleToCurrentPoint.normalized;
+        //        // ベクトルnの長さの2乗（これで単位ベクトルを割る）
+        //        var lengthSquareFromOnePoleToCurrentPoint =
+        //        displacementFromOnePoleToCurrentPoint.sqrMagnitude;
 
-                // ベクトルn
-                var forceFromOnePoleToCurrentPoint =
-                    normalizedDisplacementFromOnePoleToCurrentPoint / (float)lengthSquareFromOnePoleToCurrentPoint;
+        //        // ベクトルnの単位ベクトル
+        //        var normalizedDisplacementFromOnePoleToCurrentPoint =
+        //            displacementFromOnePoleToCurrentPoint.normalized;
 
-                return forceFromOnePoleToCurrentPoint;
-            }).
-            Aggregate((n0, n1) => n0 + n1);
+        //        // ベクトルn
+        //        var forceFromOnePoleToCurrentPoint =
+        //            normalizedDisplacementFromOnePoleToCurrentPoint / (float)lengthSquareFromOnePoleToCurrentPoint;
+
+        //        return forceFromOnePoleToCurrentPoint;
+        //    }).
+        //    Aggregate((n0, n1) => n0 + n1);
+
+        //Linqは遅いから使わないように変更
+        //@see 
+        var sumOfForceFromOnePoleToCurrentPoint = Vector3.zero;
+        foreach(var pole in poles)
+        {
+            var positionBarMagnetNorthPole = pole.transform.position;
+
+            // N極からの現在の頂点への変位ベクトル(ベクトルn)
+            var displacementFromOnePoleToCurrentPoint = positionCurrentPoint - positionBarMagnetNorthPole;
+
+            // ベクトルnの長さの2乗（これで単位ベクトルを割る）
+            var lengthSquareFromOnePoleToCurrentPoint =
+            displacementFromOnePoleToCurrentPoint.sqrMagnitude;
+
+            // ベクトルnの単位ベクトル
+            var normalizedDisplacementFromOnePoleToCurrentPoint =
+                displacementFromOnePoleToCurrentPoint.normalized;
+
+            // ベクトルn
+            var forceFromOnePoleToCurrentPoint =
+                normalizedDisplacementFromOnePoleToCurrentPoint / (float)lengthSquareFromOnePoleToCurrentPoint;
+
+            sumOfForceFromOnePoleToCurrentPoint += forceFromOnePoleToCurrentPoint;
+        }
         return sumOfForceFromOnePoleToCurrentPoint;
     }
 #endif
