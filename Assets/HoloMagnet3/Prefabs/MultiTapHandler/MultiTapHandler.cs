@@ -44,6 +44,12 @@ IInputClickHandler // タップ操作検出
     private AudioClip ACDoubleTap;
 
     /// <summary>
+    /// Holding効果音
+    /// </summary>
+    [SerializeField, Tooltip("Holding効果音")]
+    private AudioClip ACHolding;
+
+    /// <summary>
     /// Hold開始時刻
     /// </summary>
     private float p_HoldStart;
@@ -133,6 +139,13 @@ IInputClickHandler // タップ操作検出
             audioSource.clip = ACHoldStart;
             audioSource.loop = false;
             audioSource.Play();
+
+            MyHelper.MyDelayMethod(this, 1f, () =>
+            {
+                audioSource.clip = ACHolding;
+                audioSource.loop = true;
+                audioSource.Play();
+            });
 
             // 終了処理
             p_MultTapCount = 0;
