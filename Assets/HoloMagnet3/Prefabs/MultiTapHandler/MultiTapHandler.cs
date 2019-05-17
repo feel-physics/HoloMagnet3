@@ -9,6 +9,7 @@
 using HoloToolkit.Unity.InputModule;
 using HoloToolkit.Unity;
 
+// Todo: 後でクラス名を改良する
 public class MultiTapHandler : Singleton<MultiTapHandler>,
 IInputClickHandler // タップ操作検出
 {
@@ -22,7 +23,7 @@ IInputClickHandler // タップ操作検出
     /// Hold判定時間(秒)
     /// </summary>
     [SerializeField, Tooltip("Hold判定時間(秒)")]
-    private float HoldTime = 1.0f;
+    private float HoldTime = 0.5f;
 
     /// <summary>
     /// Hold効果音
@@ -141,6 +142,7 @@ IInputClickHandler // タップ操作検出
         // Hold終了
         else if (holdEnded)
         {
+            // Draggingの音を止める
             audioSource.Stop();
 
             audioSource.clip = ACFinish;
