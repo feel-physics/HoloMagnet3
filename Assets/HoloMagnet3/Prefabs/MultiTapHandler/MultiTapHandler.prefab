@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MultTapTime: 0.5
   HoldTime: 1
-  ACHold: {fileID: 8300000, guid: e51f1b04d73ef33448fb253f9bff0709, type: 3}
+  ACHoldStart: {fileID: 8300000, guid: e51f1b04d73ef33448fb253f9bff0709, type: 3}
   ACFinish: {fileID: 8300000, guid: a95d405907cd9b54c8fec1f61bf945b8, type: 3}
   ACDoubleTap: {fileID: 8300000, guid: d52d89240c7918e40941d33fcfe42971, type: 3}
+  ACHolding: {fileID: 8300000, guid: 484574b0326bb484da20126f573e829c, type: 3}
