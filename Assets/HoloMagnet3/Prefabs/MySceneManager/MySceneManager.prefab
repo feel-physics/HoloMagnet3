@@ -132,5 +132,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb883a2d70e9e5342aeede14bc1d9a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyScene: 0
+  MyScene: 1
   acLoadNextScene: {fileID: 8300000, guid: d52d89240c7918e40941d33fcfe42971, type: 3}

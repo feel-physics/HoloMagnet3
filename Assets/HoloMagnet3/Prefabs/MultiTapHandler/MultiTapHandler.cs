@@ -28,13 +28,19 @@ IInputClickHandler // タップ操作検出
     /// Hold効果音
     /// </summary>
     [SerializeField, Tooltip("Hold効果音")]
-    private AudioClip ACHold;
+    private AudioClip ACHoldStart;
 
     /// <summary>
     /// Finish効果音
     /// </summary>
     [SerializeField, Tooltip("Finish効果音")]
     private AudioClip ACFinish;
+
+    /// <summary>
+    /// DoubleTap効果音
+    /// </summary>
+    [SerializeField, Tooltip("DoubleTap効果音")]
+    private AudioClip ACDoubleTap;
 
     /// <summary>
     /// Hold開始時刻
@@ -106,6 +112,11 @@ IInputClickHandler // タップ操作検出
                     // --- ダブルタップ処理 ---
                     // 次のシーンをロード
                     MySceneManager.Instance.LoadNextScene();
+
+                    // DoubleTap効果音を鳴らす
+                    audioSource.clip = ACDoubleTap;
+                    audioSource.loop = false;
+                    audioSource.Play();
                 }
                 // 終了処理
                 p_MultTapCount = 0;
@@ -118,7 +129,7 @@ IInputClickHandler // タップ操作検出
             (Time.time - p_HoldStart) > HoldTime)
         {
             // Hold開始音を鳴らす
-            audioSource.clip = ACHold;
+            audioSource.clip = ACHoldStart;
             audioSource.loop = false;
             audioSource.Play();
 

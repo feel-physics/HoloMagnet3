@@ -9,6 +9,7 @@ public class MySceneManager : Singleton<MySceneManager> {
     public enum MySceneEnum { Introduction, Compass_One, Compasses_2D, Compasses_3D };
     public MySceneEnum MyScene;
 
+    // シーン遷移のときに効果音を鳴らす
     [SerializeField]
     private AudioClip acLoadNextScene;
 
@@ -33,43 +34,41 @@ public class MySceneManager : Singleton<MySceneManager> {
 
         // オブジェクトを初期化する
         ObjectsInitializer.Instance.Initialize();
+
+        audioSource = GetComponents<AudioSource>()[0];
     }
 
     public void LoadNextScene()
     {
         MySceneEnum nextScene;
 
-        audioSource = GetComponents<AudioSource>()[0];
-        audioSource.clip = acLoadNextScene;
-        audioSource.loop = false;
-
         switch (MyScene)
         {
             case MySceneEnum.Introduction:
                 nextScene = MySceneEnum.Compass_One;
                 // Todo: 後でシーン遷移の音をシーン毎に変える
-                audioSource.pitch = 1.0f;
+                //audioSource.pitch = 1.0f;
                 break;
             case MySceneEnum.Compass_One:
                 nextScene = MySceneEnum.Compasses_2D;
-                audioSource.pitch = 1.5f;
+                //audioSource.pitch = 1.5f;
                 break;
             case MySceneEnum.Compasses_2D:
                 nextScene = MySceneEnum.Compasses_3D;
-                audioSource.pitch = 2.0f;
+                //audioSource.pitch = 2.0f;
                 break;
             case MySceneEnum.Compasses_3D:
                 nextScene = MySceneEnum.Introduction;
-                audioSource.pitch = 2.5f;
+                //audioSource.pitch = 2.5f;
                 break;
             default:
                 throw new System.Exception("Invarid MyScene");
         }
 
-        MyLoadScene(nextScene);
-
-        // 音を鳴らす
-        audioSource.Play();
+        MyHelper.MyDelayMethod(this, 1f, () =>
+        {
+            MyLoadScene(nextScene);
+        });
     }
 
     // enumのシーンで指定したシーンをロードする
