@@ -693,6 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsDrawing: 0
+  acDraw: {fileID: 8300000, guid: 8fca52959c4e1f14db0b01ccf25f1c59, type: 3}
   baseLengthOfLine: 0.02
   numLines: 110
   widthLines: 0.005

@@ -32,6 +32,11 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
             Debug.Log(value);
             _IsDrawing = value;
 
+            // 音を鳴らす  Todo: 棒磁石移動の音と一緒に再生されてしまう
+            audioSource.clip = acDraw;
+            audioSource.loop = false;
+            audioSource.Play();
+
             //描画中止への変更を検知して、DeleteLines()を呼び出す
             if (!value)
             {
@@ -47,6 +52,10 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
     List<LineRenderer> magneticForceLines = null;
     List<float> listStartY;
     List<float> listStartZ;
+
+    [SerializeField]
+    private AudioClip acDraw;
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -65,6 +74,8 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
         {
             listStartZ = new List<float> { 0 };
         }
+
+        audioSource = GetComponents<AudioSource>()[0];
     }
 
     public void Update()
