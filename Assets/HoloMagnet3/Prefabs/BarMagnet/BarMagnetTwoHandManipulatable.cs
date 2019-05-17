@@ -169,7 +169,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             // Todo: 後でスクリプトで追加して独立性を上げたい
             audioSource = GetComponents<AudioSource>()[0];
 
-            // 2次元のシーンではz=2で固定
+            // 2次元のシーンではz=2で固定（初期化）
             if (MySceneManager.Instance.MyScene ==
                 MySceneManager.MySceneEnum.Compasses_2D)
             {
