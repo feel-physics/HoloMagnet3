@@ -4,13 +4,12 @@
  * http://bluebirdofoz.hatenablog.com/entry/2019/02/06/060929
  */
 
- using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+ using UnityEngine;
 // IInputClickHandler を利用するため InputModule を追加
 using HoloToolkit.Unity.InputModule;
+using HoloToolkit.Unity;
 
-public class MultiTapHandler : MonoBehaviour,
+public class MultiTapHandler : Singleton<MultiTapHandler>,
 IInputClickHandler // タップ操作検出
 {
     /// <summary>
@@ -18,6 +17,34 @@ IInputClickHandler // タップ操作検出
     /// </summary>
     [SerializeField, Tooltip("連続タップ許容時間(秒)")]
     private float MultTapTime = 0.5f;
+
+    /// <summary>
+    /// Hold判定時間(秒)
+    /// </summary>
+    [SerializeField, Tooltip("Hold判定時間(秒)")]
+    private float HoldTime = 1.0f;
+
+    /// <summary>
+    /// Hold効果音
+    /// </summary>
+    [SerializeField, Tooltip("Hold効果音")]
+    private AudioClip ACHold;
+
+    /// <summary>
+    /// Finish効果音
+    /// </summary>
+    [SerializeField, Tooltip("Finish効果音")]
+    private AudioClip ACFinish;
+
+    /// <summary>
+    /// Hold開始時刻
+    /// </summary>
+    private float p_HoldStart;
+
+    /// <summary>
+    /// Holdが終了したか否か
+    /// </summary>
+    private bool holdEnded;
 
     /// <summary>
     /// 連続タップカウント
@@ -30,6 +57,8 @@ IInputClickHandler // タップ操作検出
     private float p_MultTapStart;
     private float tapTime;
 
+    AudioSource audioSource;
+
     /// <summary>
     /// 起動時処理
     /// </summary>
@@ -37,6 +66,8 @@ IInputClickHandler // タップ操作検出
     {
         // FallBackEventHandlerにする
         InputManager.Instance.PushFallbackInputHandler(gameObject);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -49,19 +80,18 @@ IInputClickHandler // タップ操作検出
         {
             // 経過時間確認
             float elapsedTime = Time.time - p_MultTapStart;
-            // 初回タップから規定時間経過しても次のタップが来ない場合、シングルタップと判定
+            // 初回タップから規定時間経過しても次のタップが来ない場合、
+            // シングルタップと判定
             if (p_MultTapCount == 1 && MultTapTime < elapsedTime)
             {
                 // --- シングルタップ処理 ---
                 // 磁力線描画処理のオンオフを切り替える
                 BarMagnetMagneticForceLinesSimultaneouslyDrawer.Instance.IsDrawing = !BarMagnetMagneticForceLinesSimultaneouslyDrawer.Instance.IsDrawing;
 
-                // --- シングルタップ終了処理 ---
+                // 終了処理
                 p_MultTapCount = 0;
-            }
-            else
-            {
-                // 初回タップから次のタップを待機中
+                p_HoldStart = 0;
+                holdEnded = false;
             }
         }
         // 連続タップ
@@ -79,7 +109,35 @@ IInputClickHandler // タップ操作検出
                 }
                 // 終了処理
                 p_MultTapCount = 0;
+                p_HoldStart = 0;
+                holdEnded = false;
             }
+        }
+        // Hold開始
+        else if (p_HoldStart != 0 &&
+            (Time.time - p_HoldStart) > HoldTime)
+        {
+            // Hold開始音を鳴らす
+            audioSource.clip = ACHold;
+            audioSource.loop = false;
+            audioSource.Play();
+
+            // 終了処理
+            p_MultTapCount = 0;
+            p_HoldStart = 0;
+            holdEnded = false;
+        }
+        // Hold終了
+        else if (holdEnded)
+        {
+            audioSource.Stop();
+
+            audioSource.clip = ACFinish;
+            audioSource.loop = false;
+            audioSource.Play();
+
+            // 終了処理
+            holdEnded = false;
         }
     }
 
@@ -89,8 +147,6 @@ IInputClickHandler // タップ操作検出
     /// <param name="eventData"></param>
     public void OnInputClicked(InputClickedEventData eventData)
     {
-        Debug.Log("clicked!");
-
         // 現在時刻の取得
         float nowTime = Time.time;
 
@@ -108,5 +164,16 @@ IInputClickHandler // タップ操作検出
         }
         // 連続タップ計測開始時刻を更新
         p_MultTapStart = nowTime;
+    }
+
+    public void OnManipulationStarted()
+    {
+        // 現在時刻の取得
+        p_HoldStart = Time.time;
+    }
+
+    public void OnManipulationEnded()
+    {
+        holdEnded = true;
     }
 }

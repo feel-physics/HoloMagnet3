@@ -80,16 +80,6 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
 #if feel_physics
         [SerializeField]
         private bool Is2D = false;
-
-        [SerializeField]
-        private AudioClip ACFinish;
-        [SerializeField]
-        private AudioClip ACTap;
-        [SerializeField]
-        private AudioClip ACDragging;
-        [SerializeField]
-        private AudioClip ACHold;
-        private AudioSource audioSource;
 #endif
 
         // Private fields that store transform information.
@@ -166,9 +156,6 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             }
 
 #if feel_physics
-            // Todo: 後でスクリプトで追加して独立性を上げたい
-            audioSource = GetComponents<AudioSource>()[0];
-
             // 2次元のシーンではz=2で固定（初期化）
             if (MySceneManager.Instance.MyScene ==
                 MySceneManager.MySceneEnum.Compasses_2D)
@@ -211,7 +198,6 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
                 transform.position = newpos;
             }
 #endif
-
         }
 
         private Vector3 GetInputPosition(InputEventData eventData)
@@ -455,20 +441,11 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         private void OnManipulationStarted()
         {
 #if feel_physics
-            audioSource.clip = ACHold;
-            audioSource.loop = false;
-            audioSource.Play();
+            MultiTapHandler.Instance.OnManipulationStarted();
 
             //手のモデルを表示する
             if (BarMagnetModel.Instance.handReference != null)
                 BarMagnetModel.Instance.handReference.SetActive(true);
-
-            MyHelper.MyDelayMethod(this, 1f, () =>
-            {
-                audioSource.clip = ACDragging;
-                audioSource.loop = true;
-                audioSource.Play();
-            });
 
             // 3次元のシーンであれば自動移動を止める
             if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D &&
@@ -489,20 +466,11 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             InputManager.Instance.PopModalInputHandler();
 
 #if feel_physics
-            audioSource.Stop();
-
-            audioSource.clip = ACFinish;
-            audioSource.loop = false;
-            audioSource.Play();
+            MultiTapHandler.Instance.OnManipulationEnded();
 
             //手のモデルを非表示にする
             if (BarMagnetModel.Instance.handReference != null)
                 BarMagnetModel.Instance.handReference.SetActive(false);
-
-            MyHelper.MyDelayMethod(this, 1f, () =>
-            {
-                audioSource.Stop();
-            });
 #endif
 
             // Hide Bounding Box visual on release

@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyScene: 0
+  acLoadNextScene: {fileID: 0}
 --- !u!1001 &544819761
 Prefab:
   m_ObjectHideFlags: 0

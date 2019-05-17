@@ -36,6 +36,12 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
             audioSource.clip = acDraw;
             audioSource.loop = false;
             audioSource.Play();
+#if false
+            MyHelper.MyDelayMethod(this, 1f, () =>
+            {
+                audioSource.clip = null;
+            });
+#endif
 
             //描画中止への変更を検知して、DeleteLines()を呼び出す
             if (!value)
