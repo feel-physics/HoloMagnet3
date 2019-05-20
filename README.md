@@ -100,6 +100,74 @@ Facebook: https://www.facebook.com/feelphysicsjp
 3. **平面グリッド**上にコンパスが並んでいるシーン
 4. **立体グリッド**上にコンパスが並んでいるシーン
 
+## ストアへの登録
+
+公式の説明はここに書かれています：
+
+[Windows アプリを公開する \- Windows UWP applications \| Microsoft Docs](https://docs.microsoft.com/ja-jp/windows/uwp/publish/)
+
+また、[ゆーじ様の書かれたHoloLens向けのアプリ公開の方法](http://2vr.jp/2017/01/30/submitting-an-app-to-the-windows-store/#i-3)で大変丁寧に解説されています。
+
+以下では少しわかりにくい箇所を説明します
+
+### アプリのアイコン画像を生成し、登録する
+
+以前はこの機能がなく、[高橋忍様が開発されたフリーソフト](https://blogs.msdn.microsoft.com/shintak/2015/08/22/uwp-logo-maker-ver-1-0/)に頼り切りでした。
+
+現在はVisual Studio上でアイコンを自動生成することができます。
+
+「Project」→「Store」→「Edit App Manifest」→「Visual Assets」を開きます。
+
+![Untitled - Paint 2019-05-20 12 13 36](https://user-images.githubusercontent.com/129954/57994582-cbbab600-7af8-11e9-9646-41fb1eed3410.png)
+
+「Source」でアイコン画像を選択します。このとき注意したいのが、200KB以下の画像を選択して下さい。さもないと、あとでビルドするときにエラーが出ます。
+
+![HoloMagnet3-190114 - Microsoft Visual Studio 2019-05-20 10 24 57](https://user-images.githubusercontent.com/129954/57993904-e17aac00-7af5-11e9-9288-fdd9546600cb.png)
+
+「Apply recommended padding」をオフにします。さもないと、アイコン画像をうまく枠にフィットしてくれません。
+
+![HoloMagnet3-190114 - Microsoft Visual Studio 2019-05-20 10 53 49](https://user-images.githubusercontent.com/129954/57994161-c9eff300-7af6-11e9-835a-37eefcdccb39.png)
+
+「Generate」をクリックするとアイコン画像が生成されます。
+
+![HoloMagnet3-190114 - Microsoft Visual Studio 2019-05-20 11 00 48](https://user-images.githubusercontent.com/129954/57994208-002d7280-7af7-11e9-819b-d0b3d5ae8ad8.png)
+
+### Splash Logoを変える
+
+Splash Logoというのは、これです。
+
+![8f40ad8804d452a96150f3eeaf4637e0](https://user-images.githubusercontent.com/129954/57995993-fceab480-7aff-11e9-9c04-fb86a386b56b.png)
+
+これだけだと寂しいので、自社のロゴを追加しましょう。
+
+まず、正方形のpngファイルをAssetsに入れます。
+
+![Unity 2017 4 25f1 Personal (64bit) - Introduction unity - HoloMagnet3 - Universal Windows Platform _DX11_ 2019-05-20 13 07 58](https://user-images.githubusercontent.com/129954/57996059-56eb7a00-7b00-11e9-8392-cb1cafaaaa1d.png)
+
+「Texture Type」を「Sprite(2D and UI)」にします。
+
+![Unity 2017 4 25f1 Personal (64bit) - Introduction unity - HoloMagnet3 - Universal Windows Platform _DX11_ 2019-05-20 13 08 44](https://user-images.githubusercontent.com/129954/57996094-88644580-7b00-11e9-98b5-b5db7e56cd3c.png)
+
+「Sprite Mode」→「Mesh Type」を「Full Rect」にします。
+
+![Unity 2017 4 25f1 Personal (64bit) - Introduction unity - HoloMagnet3 - Universal Windows Platform _DX11_ 2019-05-20 13 18 25](https://user-images.githubusercontent.com/129954/57996339-d0d03300-7b01-11e9-837b-c36971e144a0.png)
+
+「Edit」→「Project Settings」→「Player」
+
+![Untitled - Paint 2019-05-20 12 16 23](https://user-images.githubusercontent.com/129954/57994654-23592180-7af9-11e9-82dc-65e95aebd967.png)
+
+「Splash Image」→「Logos」→「+」
+
+![Unity 2017 4 25f1 Personal (64bit) - Introduction unity - HoloMagnet3 - Universal Windows Platform _DX11_ 2019-05-20 13 11 32](https://user-images.githubusercontent.com/129954/57996160-d7aa7600-7b00-11e9-97de-e41db1303ee7.png)
+
+ここで先ほど追加したロゴの画像ファイルを選択します。
+
+少し上の「Splash Screen」→「Preview」を見てみましょう。
+
+![2019年5月20日：スプラッシュロゴを追加する](https://user-images.githubusercontent.com/129954/57996825-a59b1300-7b04-11e9-8f32-e0699151612a.gif)
+
+Splash Logoが変わったことがわかります。
+
 ## 開発環境
 
 - Unity 2017.4.26f1
