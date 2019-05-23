@@ -1,38 +1,188 @@
 # HoloMagnet3
 
-![HoloMagnet with English Subtitles](https://user-images.githubusercontent.com/129954/56087679-a65bdc00-5eaa-11e9-8f3d-f08724833a32.gif)
-![2019年4月14日：HoloMagnet36説明動画](https://user-images.githubusercontent.com/129954/56087721-73feae80-5eab-11e9-9aca-0b4f8a344ed6.gif)
+![2019年5月22日：HoloMagnet37、3次元自動](https://user-images.githubusercontent.com/129954/58151375-74f1df80-7ca4-11e9-89c6-a6a0fb16346f.gif)
+![2018年6月21日：（学会発表用）三重高校愛知総合工科高校授業風景320x180](https://user-images.githubusercontent.com/129954/58155580-1bdb7900-7caf-11e9-896a-229f64b4f12a.gif)
 
-## これは何？
+本アプリは、**「de:code 2019」**（マイクロソフト社の開発者をはじめとするITに携わるすべてのエンジニアのための年に一度のテクニカルカンファレンス）において、
 
+**「Microsoft MVP アワード」**（マイクロソフトの製品やテクノロジーに関する豊富な知識や経験を他者と共有することで、すべてのユーザーが最大限に製品を活用できるよう多大なサポートをおこなったコミュニティのリーダーに、マイクロソフトが感謝の意を表して授与する賞）の受賞者として、
+
+セッション内容をより深く理解し実践するのに役に立つコード「[パターン](#構成図)を用い、シンプルな [UI](#UI・表現) を提供する、初心者でもできる HoloLens アプリ開発と [Microsoft ストアへの登録方法](#ストア登録)～実際の[ソースコード](#軽量化)と[構成図](#構成図)を見ながら～」という位置づけで公開したものです。
+
+- このアプリは [5カ国10の学校300人の体験者](#授業風景) のフィードバックにより作られました。
 - 最先端の複合現実ヘッドセット **「HoloLens」** 用の理科（物理）学習アプリです。
 - このアプリの目的は**教育**です。対象は中学生、高校生、専門学校生、大学生です。
 - このアプリを使って、現実世界では目で**見ることのできない**磁界について学習することができます。
 - **数少ない**教育用HoloLensアプリです。
-- **誰でも**Microsoft Storeで無料で入手して体験することが可能です。
+- **誰でも** [Microsoft ストアで無料で入手](https://www.microsoft.com/ja-jp/p/holomagnet3/9pff2nq2t708)して体験することができます。
+
+## 目次
+
+- [特徴](#特徴)
+  - [軽量化](#軽量化)
+  - [UI・表現](#UI・表現)
+  - [論文](#論文)
+- [構成図](#構成図)
+- [ビルド方法](#ビルド方法)
+- [ストア登録](#ストア登録)
+- [謝辞](#謝辞)
 
 ## 特徴
 
-- **初心者**HoloLens開発者にとって、開発方法を学びやすい手軽な規模の実装例
-- HoloLensを体験するのが**初めてのユーザ**でも簡単に操作できるシンプルなUI
-- HoloLensアプリケーションのデザインパターンとして**MVPパターン**を採用した例
-- Unityの処理が落ちる`GameObject.Find()`を極力**使用しない**例
+### 軽量化
 
+![2019年5月22日：HoloMagnet37、2次元](https://user-images.githubusercontent.com/129954/58151322-4411aa80-7ca4-11e9-9fca-fdcaf8baae17.gif)
+![2019年5月22日：HoloMagnet37、3次元手動](https://user-images.githubusercontent.com/129954/58151979-496ff480-7ca6-11e9-92f8-cfecf742ec68.gif)
 
-## 始め方
+**500個**の方位磁針の個々の物理計算を毎フレームおこないながら、FPS **58**を実現しています。
 
-### 開発環境
+具体的には、シェーダをインスタンス化**せず**に、シェーダ**内**で物理計算をおこなって負荷を大幅に減らしています。
+
+なお、軽量化が必要な理由については次項の「UI・表現」で説明します。
+
+### シェーダをインスタンス化しない
+
+以下のように、マテリアルをスクリプトから操作せずに、シェーダに外部変数を受け取る変数を設定し、スクリプトからマテリアルを介さずにシェーダに**直接**値を代入しています。
+
+[CompassesManagedlySimultaneouslyUpdater\.cs](https://github.com/feel-physics/HoloMagnet3/blob/master/Assets/HoloMagnet3/Prefabs/CompassesManager/CompassesManagedlySimultaneouslyUpdater.cs#L140-L150)
+
+```csharp
+void AssignMagnetPosition()
+    {
+        var np = barMagnet01NorthPole.transform.position;
+        var sp = barMagnet01SouthPole.transform.position;
+        var nv4 = new Vector4(np.x, np.y, np.z, 0);  //Vector4 に変換
+        var sv4 = new Vector4(sp.x, sp.y, sp.z, 0);  //Vector4 に変換
+
+        // 方位磁針の N 極側のマテリアルのシェーダに座標をセット
+        CompassesModel.Instance.MatNorth.SetVector("_NorthPolePos", nv4);
+        CompassesModel.Instance.MatNorth.SetVector("_SouthPolePos", sv4);
+        // 方位磁針の S 極側のマテリアルのシェーダに座標をセット
+        CompassesModel.Instance.MatSouth.SetVector("_NorthPolePos", nv4);
+        CompassesModel.Instance.MatSouth.SetVector("_SouthPolePos", sv4);
+    }
+```
+
+これによりシェーダがインスタンス化されず、**単一**のシェーダとして処理されるため、計算負荷を大幅に減らすことができます。
+
+#### シェーダ内で物理計算を行う
+
+以下のように、シェーダ内で物理計算を行っています。
+
+[MyCompassShader2\.shader](https://github.com/feel-physics/HoloMagnet3/blob/master/Assets/HoloMagnet3/Resources/Compass180509/MyCompassShader2.shader#L49-L77)
+
+```ShaderLab
+// 自身（方位磁針）の位置ベクトルvecPを作成
+float3 vecP;
+vecP = IN.worldPos;
+
+// N極の位置ベクトルvecNを作成
+float3 vecN;
+vecN.x = _NorthPolePos.x;
+vecN.y = _NorthPolePos.y;
+vecN.z = _NorthPolePos.z;
+
+// S極の位置ベクトルvecSを作成
+float3 vecS;
+vecS.x = _SouthPolePos.x;
+vecS.y = _SouthPolePos.y;
+vecS.z = _SouthPolePos.z;
+
+// 自身から棒磁石に対する変位ベクトルvecDisN、vecDisSを作成
+float3 vecDisN, vecDisS;
+vecDisN = vecP - vecN;
+vecDisS = vecP - vecS;
+
+// 極からの磁力ベクトルvecF_N, vecF_Sを求める
+float3 vecF_N, vecF_S;
+vecF_N =        vecDisN / pow(length(vecDisN), 3);
+vecF_S = -1.0 * vecDisS / pow(length(vecDisS), 3);
+
+// 磁力の合力ベクトルvecFを求める
+float3 vecF;
+vecF = vecF_N + vecF_S;
+```
+
+これにより、物理計算をGPU内で完結させることができ、CPUへの負荷を大幅に減らすことができます。
+
+### UI・表現
+
+![2019年5月22日：HoloMagnet37、3次元磁力線](https://user-images.githubusercontent.com/129954/58152110-9d7ad900-7ca6-11e9-9be9-31caa7a0c727.gif)
+
+本アプリを用いた授業は、5カ国の10の学校で300人が体験しました。全員のアンケート（定量および定性）を収集し、それらを元に、アプリ体験をより良くし学習効果と満足度を上げるために、以下の工夫をおこないました。
+
+#### UI
+
+- 操作が安定していない（例えばフォーカスが外れる、マーカートラッキングがしばしば途切れる）と、体験者は**不満**を感じます。初めて体験するユーザに対するHoloLensアプリは、**極めて簡易**な（フォーカスもマーカートラッキングも使用しない安定した）操作方法を提供することが望ましいです。
+- 動作が**遅い**と、体験者は**不満**を感じるため、動作を可能な限り速くすることが望ましいです。
+- **シェアリング**は高次元の体験を提供することができますが、途中で接続が切れた場合の復旧に時間がかかるため、時間にタイトな授業（40人の場合、3分のロスも許されません）には**適しません**。
+
+#### 表現
+
+- プロジェクターで多人数に見せるためには、表示するオブジェクトは**大きく**するべきです。
+- 理解を妨げるため、体験とプロジェクターに映された映像のあいだの**タイムラグ**は短くするべきです。
+- 従来の**抽象的な表現**（磁力線など）だけでは初学者にとって分かりにくいため、別の理解を助ける**表現の工夫**（例えば格子状に配置された方位磁針）が必要です。
+- **静**的な表現よりも**動**的な表現の方が理解しやすく、身体を動かしてコンテンツを**体験**することができるとユーザの理解度と満足度は高くなります。
+
+#### 授業風景
+
+HoloLensを使っておこなった授業の様子です。見た目が変わっていきますが、毎回アプリを改良しているためです。
+
+![2018年5月21日-大阪メイカーズバザール](https://user-images.githubusercontent.com/129954/58153296-a4efb180-7ca9-11e9-8455-55201ff63c64.jpg)
+![170829-MFT](https://user-images.githubusercontent.com/129954/58153048-1844f380-7ca9-11e9-8ab6-206a428bd166.jpg)
+![22908671_1328002897323117_732263550_o](https://user-images.githubusercontent.com/129954/58153422-eaac7a00-7ca9-11e9-87df-3fa1c4f5d337.jpg)
+![2018年6月21日：（学会発表用）三重高校愛知総合工科高校授業風景320x180](https://user-images.githubusercontent.com/129954/58155580-1bdb7900-7caf-11e9-896a-229f64b4f12a.gif)
+![2018年3月8日-京進スクールワン四日市ときわ教室320x180](https://user-images.githubusercontent.com/129954/58155734-770d6b80-7caf-11e9-8d47-9faaa2eac46d.gif)
+![★2018年4月13日：障碍者ITカレッジ（明るくした）320x180](https://user-images.githubusercontent.com/129954/58155754-842a5a80-7caf-11e9-9898-6898d22c2c02.gif)
+![2018年6月6日：津東高校v3-3-320x180](https://user-images.githubusercontent.com/129954/58161211-cd33dc00-7cba-11e9-8d16-91cc5fad74a9.gif)
+![イギリスでのHoloLens授業](https://user-images.githubusercontent.com/129954/58163040-3d902c80-7cbe-11e9-81e2-cab23644c8ea.jpg)
+![2018年10月22日：ガーナ教員研修（含生徒）短縮版360x180](https://user-images.githubusercontent.com/129954/58161677-a88c3400-7cbb-11e9-87d2-dce10115ecfb.gif)
+![2018年10月26日：ガーナ、ホ工科大学授業320x180](https://user-images.githubusercontent.com/129954/58161826-f3a64700-7cbb-11e9-9052-d7153e02de74.gif)
+![2018年11月10日：FabLab-Rwanda320x180](https://user-images.githubusercontent.com/129954/58161999-497aef00-7cbc-11e9-83a0-179c352b0c9d.gif)
+![2018年11月13日：ルワンダビジネスマッチング320x180](https://user-images.githubusercontent.com/129954/58162136-8a730380-7cbc-11e9-9996-21cbfab1cc93.gif)
+![2018年11月15日：tumba college of technology320x180](https://user-images.githubusercontent.com/129954/58162229-c4440a00-7cbc-11e9-9144-ffc5f7cd8f29.gif)
+![2018年11月15日：University of Rwanda320x180](https://user-images.githubusercontent.com/129954/58162388-0e2cf000-7cbd-11e9-935c-8778c2bc9672.gif)
+![2019年3月20日：グロサミ2019-320x180](https://user-images.githubusercontent.com/129954/58162591-6bc13c80-7cbd-11e9-9895-c03c71186d13.gif)
+
+#### 論文
+
+これらの知見の詳細は、日本物理教育学会誌に論文として掲載される予定です（公開されたらリンクに変えます）。
+
+## 構成図
+
+本アプリの構成図です。
+
+![StructureDiagram](https://user-images.githubusercontent.com/129954/58148478-dc566200-7c99-11e9-89ed-abb2a20f726b.png)
+
+大きな円がプレハブ、中くらいの円がクラス、小さい円がメソッドを表しています。
+
+プレハブに対するクラスの役割は以下の通りです。
+
+- プレハブの上部にあるクラスがプレハブのハンドラ
+- プレハブの右側にあるクラスがプレハブのモデル
+- プレハブの下側にあるクラスがプレハブのコントローラ
+
+HoloLensアプリを作成する際は、最初はどうしても無秩序にプレハブやクラスを作ってしまいがちです。
+
+しかし、プレハブごとにハンドラ、モデル、コントローラクラスを作成すると、見通しの良い設計を手軽におこなうことができます。
+
+## ビルド方法
+
+### 環境
 
 - Unity 2017.4.26f1
 - Visual Studio 2017.15
 
+### 手順
+
 1. このリポジトリを**クローン**します
 2. Unityで、プロジェクトを**開きます**
-3. **ビルド**します
-4. HoloLensに**配置**します
+3. ビルド先フォルダ（「UWP」とするのが一般的）を指定して**ビルド**します
+4. ビルドが終わるとプロジェクトフォルダがエクスプローラによって開かれるので、先ほど指定したフォルダを開き、「HoloMagnet3.sln」ファイルをダブルクリックします。
+4. Visual Studio を使って HoloLensに**配置**します
 4. 「HoloMagnet3」を**起動**します
 
-## 使い方
+### 操作
 
 - **棒磁石を動かす**
   ホールドしながら腕を動かすことで棒磁石を動かすことができます
@@ -48,15 +198,15 @@
 3. **平面グリッド**上にコンパスが並んでいるシーン
 4. **立体グリッド**上にコンパスが並んでいるシーン
 
-## ストアへの登録
+## ストア登録
 
-公式の説明はここに書かれています：
+公式の詳細な説明はここに書かれています：
 
 [Windows アプリを公開する \- Windows UWP applications \| Microsoft Docs](https://docs.microsoft.com/ja-jp/windows/uwp/publish/)
 
-また、[ゆーじ様の書かれたHoloLens向けのアプリ公開の方法](http://2vr.jp/2017/01/30/submitting-an-app-to-the-windows-store/#i-3)で大変丁寧に解説されています。
+（[ゆーじ様の書かれたHoloLens向けのアプリ公開の方法](http://2vr.jp/2017/01/30/submitting-an-app-to-the-windows-store/#i-3)でも丁寧に解説されています）
 
-以下では少しわかりにくい箇所を説明します
+以下では、公式の説明に補足した方が良いと思われる事項について説明します
 
 ### アプリのアイコン画像を生成し、登録する
 
@@ -68,7 +218,7 @@
 
 ![Untitled - Paint 2019-05-20 12 13 36](https://user-images.githubusercontent.com/129954/57994582-cbbab600-7af8-11e9-9646-41fb1eed3410.png)
 
-「Source」でアイコン画像を選択します。このとき注意したいのが、200KB以下の画像を選択して下さい。さもないと、あとでビルドするときにエラーが出ます。
+「Source」でアイコン画像を選択します。
 
 ![HoloMagnet3-190114 - Microsoft Visual Studio 2019-05-20 10 24 57](https://user-images.githubusercontent.com/129954/57993904-e17aac00-7af5-11e9-9288-fdd9546600cb.png)
 
@@ -107,7 +257,7 @@
 
 ### ストアに登録するためにビルドする
 
-HoloLens2でも動くように「ARM」にもチェックを入れます。2つとも「Master」でビルドします。
+HoloLens2はARMアーキテクチャかもしれないので、「ARM」にもチェックを入れます。2つとも「Master」でビルドします。
 
 ![NotificationsForm 2019-05-20 15 05 06](https://user-images.githubusercontent.com/129954/57999542-b8b3e000-7b10-11e9-8660-b0f13901d71e.png)
 
@@ -115,18 +265,109 @@ HoloLens2でも動くように「ARM」にもチェックを入れます。2つ�
 
 ![NotificationsForm 2019-05-20 14 55 40](https://user-images.githubusercontent.com/129954/57999205-88b80d00-7b0f-11e9-92f6-f4c73c5793e3.png)
 
-## ライセンス
-GPL-3.0
+### ストア上の情報を登録する
+
+ビルドしてアップロードするとストア登録がだいたい終わった気になりますが、その後の作業量が意外に多いです。記入事項を事前に準備しておくと良いです。
+
+---
+
+まず、以下の事項を記入します。
+
+- アプリ名
+- アプリの説明
+- （更新したときは）更新内容
+- 検索キーワード
+
+---
+
+![2019年5月22日：ストア上の情報を登録するページのスクリーンショット_1](https://user-images.githubusercontent.com/129954/58159028-9a87e480-7cb6-11e9-9aff-c00786d1e511.png)
+
+---
+
+次に、スクリーンショットを登録します。
+
+---
+
+![2019年5月22日：ストア上の情報を登録するページのスクリーンショット_2](https://user-images.githubusercontent.com/129954/58159248-0b2f0100-7cb7-11e9-81de-5dd635947bae.png)
+
+---
+
+アプリのアイコンを登録します。
+
+---
+
+![2019年5月22日：ストア上の情報を登録するページのスクリーンショット_3](https://user-images.githubusercontent.com/129954/58159303-2f8add80-7cb7-11e9-9750-085b83f53e32.png)
+
+---
+
+ここがわかりにくいのですが、以下のように進めます。
+
+1. トレーラー動画をアップロードする
+2. 「Windows10 & XBox Image」をアップロードする
+3. 少し上に戻って、ストアのトップに表示するトレーラーを選びます
+
+2番目の事項をしないと、3番目の事項ができません。気をつけて下さい。
+
+---
+
+![2019年5月22日：ストア上の情報を登録するページのスクリーンショット_4](https://user-images.githubusercontent.com/129954/58159471-8ee8ed80-7cb7-11e9-84a6-fa0a8d1e1fff.png)
+
+---
+
+以下の事項を記入します。
+
+- ユーザがストアでアプリを検索する際に、部分一致でもヒットするように文節で分けたアプリ名
+- 音声認識で認識されるように文節で分けたアプリ名
+
+---
+
+![2019年5月22日：ストア上の情報を登録するページのスクリーンショット_5](https://user-images.githubusercontent.com/129954/58159754-20585f80-7cb8-11e9-8ffd-57891875231c.png)
+
+---
+
+以下の事項を記入します。
+
+- サポートのメールアドレス
+- 検索用キーワード
+- 著作権と商標
+- 開発者名
+
+---
+
+![2019年5月22日：ストア上の情報を登録するページのスクリーンショット_6](https://user-images.githubusercontent.com/129954/58160010-90ff7c00-7cb8-11e9-88de-e9bf28a8b2ea.png)
+
+---
+
+これが終わったら、Submit しましょう。
+
+## 謝辞
+
+- 鈴鹿高校 田端先生
+- 三重高校 村田先生、川田先生
+- 愛知総合工科高校 川田先生
+- 学芸大附属高校 大西先生
+- 津東高校 佐野先生
+- St. Giles Cambridge 校 Philip 先生
+- JICA ボランティア 杉本博士
+- JICA ボランティア 酒井先生
+- 神戸市アフリカビジネスミッションコーディネーター Samuel 様
+- 神戸情報大学院大学 Business Development 学部長 Barua 博士
+- トゥンバ工科大学 Clémence 校長
+- ルワンダ大学理工学部情報工学科 Kumaran 助教授
+- 林知樹様
+- 松井幸治様
+- シェアオフィス「ビズスクエアよっかいち」のスタッフの皆様
+- 日本・イギリス・ガーナ・ルワンダ・US の 300 人以上のフィードバックを下さった生徒たち
 
 ## 連絡先
 
-Email: tatsuro.ueda@feel-physics.jp
+[Email](mailto:tatsuro.ueda@feel-physics.jp), 
+[Homepage](https://feel-physics.jp),
+[Facebook](https://www.facebook.com/feelphysicsjp),
+[Twitter](https://twitter.com/feelphysicsjp),
+[LinkedIn](https://www.linkedin.com/in/weed7777/)
 
-Twitter: [@feelphysicsjp](https://twitter.com/feelphysicsjp)
-
-Homepage: https://www.youtube.com/watch?v=1nC2X5o88xA&list=PLUUoZRXFtWCeUb-ZHFwxF1LjgrtBOYd3G
-
-Facebook: https://www.facebook.com/feelphysicsjp
+---
 
 ## What's this?
 
@@ -186,4 +427,6 @@ Homepage: https://www.youtube.com/watch?v=1nC2X5o88xA&list=PLUUoZRXFtWCeUb-ZHFwx
 
 Facebook: https://www.facebook.com/feelphysicsjp
 
-© 2019 Feel Physics All rights reserved.
+---
+
+© 2019 Feel Physics® All rights reserved.
