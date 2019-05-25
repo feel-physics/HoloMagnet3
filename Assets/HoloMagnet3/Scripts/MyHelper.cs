@@ -2,16 +2,8 @@
 using UnityEngine;
 using System;
 
-public class MyHelper : MonoBehaviour
+public static class MyHelper
 {
-    public class MyMonoBehaviour : MonoBehaviour
-    {
-        public void CallStartCoroutine(IEnumerator iEnumerator)
-        {
-            StartCoroutine(iEnumerator); //ここで実際にMonoBehaviour.StartCoroutine()を呼ぶ
-        }
-    }
-
     // Todo: AsyncAwaitでできる
     private static IEnumerator DelayMethod(float waitTime, Action action)
     {
@@ -40,5 +32,15 @@ public class MyHelper : MonoBehaviour
         {
             hasLogged = false;
         }
+    }
+
+    public static Pole[] ToPoleArray(Transform[] transforms)
+    {
+        var poles = new Pole[transforms.Length];
+        for (var index = 0; index < poles.Length; index++)
+        {
+            poles[index] = new Pole { position = transforms[index].position };
+        }
+        return poles;
     }
 }

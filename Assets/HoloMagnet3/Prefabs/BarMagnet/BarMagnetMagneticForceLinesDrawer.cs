@@ -1,6 +1,7 @@
 ﻿#undef elapsed_time  // 磁力線を引く処理時間を計測するため
 using HoloToolkit.Unity;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // Todo: 後でクラス名をRenameする
@@ -8,14 +9,12 @@ using UnityEngine;
 /// <summary>
 /// 磁力線の描画を行う
 /// </summary>
-public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagnetMagneticForceLinesSimultaneouslyDrawer>
+public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForceLinesDrawer>
 {
     //磁力線描画のPrefab
     private GameObject magneticForceLinePrefab;
     //ログ出力用
     private bool hasLogged;
-
-    static Material lineMaterial;
 
     /// <summary>
     /// 磁力線を描画中か管理するフラグの実態(private)
@@ -63,8 +62,8 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
     private AudioClip acDraw;
     private AudioSource audioSource;
 
-    private GameObject[] northPoles;
-    private GameObject[] southPoles;
+    Transform[] southPolesTransform;
+    Transform[] northPolesTransform;
 
     private void Start()
     {
@@ -146,9 +145,12 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
         }
 
         // すべてのN極、S極を取得する
-        northPoles = GameObject.FindGameObjectsWithTag("North Pole");
-        southPoles = GameObject.FindGameObjectsWithTag("South Pole");
-
+        northPolesTransform = GameObject.FindGameObjectsWithTag("North Pole").
+            Select(go => go.transform).
+            ToArray();
+        southPolesTransform = GameObject.FindGameObjectsWithTag("South Pole").
+            Select(go => go.transform).
+            ToArray();
         Debug.Log("GenerateLines:" + magneticForceLines.Count);
     }
 
@@ -241,8 +243,10 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
         // 線分を描画し続ける
         for (int i = 1; i < magnetForceLine.positionCount; i++)
         {
-            Vector3 forceResultant = MagneticForceCaliculator.Instance.ForceResultant(
-                northPoles, southPoles, positionCurrentPoint);
+            Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
+                MyHelper.ToPoleArray(northPolesTransform),
+                MyHelper.ToPoleArray(southPolesTransform),
+                positionCurrentPoint);
 
             // --- 描画 ---
             if (lineIsFromNorthPole)
