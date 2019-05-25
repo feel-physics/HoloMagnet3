@@ -8,7 +8,7 @@ using UnityEngine;
 /// <summary>
 /// 磁力線の描画を行う
 /// </summary>
-public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagnetMagneticForceLinesSimultaneouslyDrawer>
+public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForceLinesDrawer>
 {
     //磁力線描画のPrefab
     private GameObject magneticForceLinePrefab;
