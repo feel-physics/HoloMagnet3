@@ -1,6 +1,7 @@
 ﻿#undef elapsed_time  // 磁力線を引く処理時間を計測するため
 using HoloToolkit.Unity;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // Todo: 後でクラス名をRenameする
@@ -242,7 +243,9 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
         for (int i = 1; i < magnetForceLine.positionCount; i++)
         {
             Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
-                northPoles, southPoles, positionCurrentPoint);
+                northPoles.Select(pole => new Pole { position = pole.transform.position }).ToArray(),
+                southPoles.Select(pole => new Pole { position = pole.transform.position }).ToArray(),
+                positionCurrentPoint);
 
             // --- 描画 ---
             if (lineIsFromNorthPole)

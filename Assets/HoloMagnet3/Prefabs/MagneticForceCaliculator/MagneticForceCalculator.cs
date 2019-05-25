@@ -2,6 +2,11 @@
 using System.Linq;
 using UnityEngine;
 
+public struct Pole
+{
+    public Vector3 position;
+}
+
 // sealed：このクラスから継承できなくする
 public sealed class MagneticForceCalculator
 {
@@ -13,7 +18,7 @@ public sealed class MagneticForceCalculator
     {
     }
 
-    public Vector3 ForceResultant(GameObject[] northPoles, GameObject[] southPoles, Vector3 positionCurrentPoint)
+    public Vector3 ForceResultant(Pole[] northPoles, Pole[] southPoles, Vector3 positionCurrentPoint)
     {
         // --- N極 ---
         Vector3 sumOfForceFromNorthPoleToCurrentPoint =
@@ -27,12 +32,12 @@ public sealed class MagneticForceCalculator
         return forceResultant;
     }
 
-    private Vector3 ForceResultantOfOnePoles(GameObject[] poles, Vector3 positionCurrentPoint)
+    private Vector3 ForceResultantOfOnePoles(Pole[] poles, Vector3 positionCurrentPoint)
     {
         var sumOfForceFromOnePoleToCurrentPoint = Vector3.zero;
         foreach(var pole in poles)
         {
-            var positionBarMagnetNorthPole = pole.transform.position;
+            var positionBarMagnetNorthPole = pole.position;
 
             // N極からの現在の頂点への変位ベクトル(ベクトルn)
             var displacementFromOnePoleToCurrentPoint = positionCurrentPoint - positionBarMagnetNorthPole;

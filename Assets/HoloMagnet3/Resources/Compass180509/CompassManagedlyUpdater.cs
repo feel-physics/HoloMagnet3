@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class CompassManagedlyUpdater : MonoBehaviour
 {
@@ -21,7 +22,10 @@ public class CompassManagedlyUpdater : MonoBehaviour
     {
         // 合力ベクトル
         Vector3 forceResultant = 
-            MagneticForceCalculator.Instance.ForceResultant(northPoles, southPoles, transform.position);
+            MagneticForceCalculator.Instance.ForceResultant(
+                northPoles.Select(pole => new Pole { position = pole.transform.position }).ToArray(),
+                southPoles.Select(pole => new Pole { position = pole.transform.position }).ToArray(),
+                transform.position);
 
         // コンパスの向きを設定する
         transform.LookAt(transform.position + forceResultant);
