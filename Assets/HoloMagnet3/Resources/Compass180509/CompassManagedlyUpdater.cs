@@ -21,7 +21,7 @@ public class CompassManagedlyUpdater : MonoBehaviour
     {
         // 合力ベクトル
         Vector3 forceResultant = 
-            MagneticForceCaliculator.Instance.ForceResultant(northPoles, southPoles, transform.position);
+            MagneticForceCalculator.Instance.ForceResultant(northPoles, southPoles, transform.position);
 
         // コンパスの向きを設定する
         transform.LookAt(transform.position + forceResultant);

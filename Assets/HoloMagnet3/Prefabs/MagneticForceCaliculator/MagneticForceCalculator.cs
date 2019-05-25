@@ -3,13 +3,13 @@ using System.Linq;
 using UnityEngine;
 
 // sealed：このクラスから継承できなくする
-public sealed class MagneticForceCaliculator
+public sealed class MagneticForceCalculator
 {
     // 最初に new されたときにインスタンス化され、以後は使い回す
-    public static readonly MagneticForceCaliculator Instance = new MagneticForceCaliculator();
+    public static readonly MagneticForceCalculator Instance = new MagneticForceCalculator();
 
     // コンストラクタをprivateにすることで、外部からnewできなくする
-    private MagneticForceCaliculator()
+    private MagneticForceCalculator()
     {
     }
 

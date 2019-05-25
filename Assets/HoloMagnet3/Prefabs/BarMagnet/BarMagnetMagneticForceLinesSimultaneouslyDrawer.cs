@@ -241,7 +241,7 @@ public class BarMagnetMagneticForceLinesSimultaneouslyDrawer : Singleton<BarMagn
         // 線分を描画し続ける
         for (int i = 1; i < magnetForceLine.positionCount; i++)
         {
-            Vector3 forceResultant = MagneticForceCaliculator.Instance.ForceResultant(
+            Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
                 northPoles, southPoles, positionCurrentPoint);
 
             // --- 描画 ---
