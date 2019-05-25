@@ -1,4 +1,4 @@
-﻿#undef elapsed_time  // 磁力線を引く処理時間を計測するため
+﻿#define elapsed_time  // 磁力線を引く処理時間を計測するため
 using HoloToolkit.Unity;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +65,9 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
     Transform[] southPolesTransform;
     Transform[] northPolesTransform;
 
+    long phase1Total = 0;
+    long phase2Total = 0;
+
     private void Start()
     {
         magneticForceLinePrefab = BarMagnetModel.Instance.MagneticForceLinePrefab;
@@ -92,6 +95,8 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
         {
 #if elapsed_time
             // 処理時間の計測
+            phase1Total = 0;
+            phase2Total = 0;
             System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
             sw.Start();
 #endif
@@ -109,10 +114,27 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
             // 処理時間の計測
             sw.Stop();
 
-            Debug.Log("DrawMagnetForceLines3D takes " + sw.ElapsedMilliseconds + "ms");
+            //Debug.Log("DrawMagnetForceLines3D takes " + sw.ElapsedMilliseconds + "ms");
+            var phase2elapsed = phase2Total - phase1Total;
+            var phase1nano = ((double)phase1Total / System.Diagnostics.Stopwatch.Frequency) * 1000000000;
+            var phase2nano = ((double)phase2elapsed / System.Diagnostics.Stopwatch.Frequency) * 1000000000;
+            Debug.Log(string.Format("phase1: {0}nsec, phase2elapsed: {1}nsec", phase1nano, phase2nano));
+
 #endif
 
         }
+    }
+
+    private void InitializeLineRenderer(LineRenderer magnetForceLine)
+    {
+        // === LineRendererを設定する ===
+        // --- LineRendererを初期化する ---
+        magnetForceLine.useWorldSpace = true;
+        magnetForceLine.positionCount = numLines;
+
+        // --- lineの太さ ---
+        magnetForceLine.startWidth = widthLines;
+        magnetForceLine.endWidth = widthLines;
     }
 
     public void GenerateLines()
@@ -133,6 +155,7 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
                 g.tag = "CloneLine";
                 g.transform.parent = transform;
                 var line = g.GetComponent<LineRenderer>();
+                InitializeLineRenderer(line);
                 magneticForceLines.Add(line);
 
                 g = Instantiate(magneticForceLinePrefab, transform.position, Quaternion.identity);
@@ -140,6 +163,7 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
                 g.tag = "CloneLine";
                 g.transform.parent = transform;
                 line = g.GetComponent<LineRenderer>();
+                InitializeLineRenderer(line);
                 magneticForceLines.Add(line);
             }
         }
@@ -175,21 +199,24 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
 
         int cnt = (lineIsFromNorthPole ? 0 : (int)magneticForceLines.Count / 2);
 
+        var rotation = gameObject.transform.rotation;
         foreach (float startY in listStartY)
         {
             foreach (float startZ in listStartZ)
             {
+                //var  shiftPositionFromMyPole2 = gameObject.transform.rotation * shiftPositionFromMyPole;
+                //Vector3 startPosition = polePosInWorld + shiftPositionFromMyPole2;
+
                 Vector3 shiftPositionFromMyPole = new Vector3(
                     startY,
                     0.001f * (lineIsFromNorthPole ? 1 : -1),  // 極からx方向にどれくらい離すか
                     startZ
                     );
 
-                shiftPositionFromMyPole =
-                    gameObject.transform.rotation * shiftPositionFromMyPole;
-                Vector3 startPosition = polePosInWorld + shiftPositionFromMyPole;
-
-                DrawOne(magneticForceLines[cnt], lineIsFromNorthPole, startPosition);
+                DrawOne(
+                    magneticForceLines[cnt],
+                    lineIsFromNorthPole,
+                    polePosInWorld + rotation * shiftPositionFromMyPole);
 
                 cnt++;
             }
@@ -216,26 +243,18 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
     /// </summary>
     [SerializeField] float widthLines = 0.005f;
 
+    private readonly System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+
     /// <summary>
     /// 引数の(x, y, z)を始点として磁力線を描く
     /// </summary>
     public void DrawOne(LineRenderer magnetForceLine, bool lineIsFromNorthPole, Vector3 startPosition)
     {
-
-        // === LineRendererを設定する ===
-        // --- LineRendererを初期化する ---
-        magnetForceLine.useWorldSpace = true;
-        magnetForceLine.positionCount = numLines;
-
         // --- LineRendererの始点を初期位置にセットする ---
         magnetForceLine.SetPosition(0, startPosition);  // 引数の(x, y, z)を始点として磁力線を描く
 
         // --- lineの長さ ---
         float lengthOfLine = baseLengthOfLine * scaleToFitLocalPosition;
-
-        // --- lineの太さ ---
-        magnetForceLine.startWidth = widthLines;
-        magnetForceLine.endWidth = widthLines;
 
         // === 変数の初期化 ===
         Vector3 positionCurrentPoint = startPosition;
@@ -243,10 +262,16 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
         // 線分を描画し続ける
         for (int i = 1; i < magnetForceLine.positionCount; i++)
         {
+            sw.Reset();
+            sw.Start();
+
             Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
                 MyHelper.ToPoleArray(northPolesTransform),
                 MyHelper.ToPoleArray(southPolesTransform),
                 positionCurrentPoint);
+
+
+            phase1Total += sw.ElapsedTicks;
 
             // --- 描画 ---
             if (lineIsFromNorthPole)
@@ -258,7 +283,18 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
                 positionCurrentPoint += -forceResultant.normalized * lengthOfLine;
             }
 
+            phase2Total += sw.ElapsedTicks;
+
+            sw.Stop();
             magnetForceLine.SetPosition(i, positionCurrentPoint);
         }
+
+
+#if false
+        MyHelper.DebugLogEvery10Seconds(
+            "phase1: {phase1Total.ToString()}, " +
+            "phase2: {phase2Total.ToString()}", 
+            ref hasLogged);
+#endif
     }
 }

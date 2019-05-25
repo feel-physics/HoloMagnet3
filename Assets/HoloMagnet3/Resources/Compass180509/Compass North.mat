@@ -59,7 +59,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BrightnessCoefficient: 0.005
+    - _BrightnessCoefficient: 0.002
     - _BrightnessLowerLimit: 0.04
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -88,7 +88,7 @@ Material:
     - _Color: {r: 1, g: 0.38431373, b: 0.19607843, a: 1}
     - _Emission: {r: 0.9191176, g: 0.21520802, b: 0.15686275, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _NorthPolePos: {r: -0.05, g: 0.0124999955, b: 1.99375, a: 0}
+    - _NorthPolePos: {r: -0.31979233, g: -0.6875, b: 1.99375, a: 0}
     - _PlanePos: {r: 0.05, g: 0, b: 1.96, a: 0}
-    - _SouthPolePos: {r: 0.05000001, g: 0.01250001, b: 1.99375, a: 0}
+    - _SouthPolePos: {r: -0.2197923, g: -0.6875, b: 1.99375, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
