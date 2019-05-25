@@ -28,24 +28,14 @@ public class CompassManagedlyUpdater : MonoBehaviour
         // コンパスを回転させ、明るさを変える
         Rotate();
     }
-
-    private static Pole[] ToPoleArray(Transform[] transforms)
-    {
-        var poles = new Pole[transforms.Length];
-        for (var index = 0; index < poles.Length; index++)
-        {
-            poles[index] = new Pole { position = transforms[index].position };
-        }
-        return poles;
-    }
     
     void Rotate()
     {
         // 合力ベクトル
         Vector3 forceResultant = 
             MagneticForceCalculator.Instance.ForceResultant(
-                ToPoleArray(southPolesTransform),
-                ToPoleArray(northPolesTransform),
+                MyHelper.ToPoleArray(southPolesTransform),
+                MyHelper.ToPoleArray(northPolesTransform),
                 transform.position);
 
         // コンパスの向きを設定する

@@ -216,16 +216,6 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
     /// </summary>
     [SerializeField] float widthLines = 0.005f;
 
-    private static Pole[] ToPoleArray(Transform[] transforms)
-    {
-        var poles = new Pole[transforms.Length];
-        for (var index = 0; index < poles.Length; index++)
-        {
-            poles[index] = new Pole { position = transforms[index].position };
-        }
-        return poles;
-    }
-
     /// <summary>
     /// 引数の(x, y, z)を始点として磁力線を描く
     /// </summary>
@@ -254,8 +244,8 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
         for (int i = 1; i < magnetForceLine.positionCount; i++)
         {
             Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
-                ToPoleArray(northPolesTransform),
-                ToPoleArray(southPolesTransform),
+                MyHelper.ToPoleArray(northPolesTransform),
+                MyHelper.ToPoleArray(southPolesTransform),
                 positionCurrentPoint);
 
             // --- 描画 ---
