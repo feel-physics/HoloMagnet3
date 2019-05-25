@@ -16,8 +16,6 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
     //ログ出力用
     private bool hasLogged;
 
-    static Material lineMaterial;
-
     /// <summary>
     /// 磁力線を描画中か管理するフラグの実態(private)
     /// </summary>
@@ -64,8 +62,8 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
     private AudioClip acDraw;
     private AudioSource audioSource;
 
-    private GameObject[] northPoles;
-    private GameObject[] southPoles;
+    Transform[] southPolesTransform;
+    Transform[] northPolesTransform;
 
     private void Start()
     {
@@ -147,9 +145,12 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
         }
 
         // すべてのN極、S極を取得する
-        northPoles = GameObject.FindGameObjectsWithTag("North Pole");
-        southPoles = GameObject.FindGameObjectsWithTag("South Pole");
-
+        northPolesTransform = GameObject.FindGameObjectsWithTag("North Pole").
+            Select(go => go.transform).
+            ToArray();
+        southPolesTransform = GameObject.FindGameObjectsWithTag("South Pole").
+            Select(go => go.transform).
+            ToArray();
         Debug.Log("GenerateLines:" + magneticForceLines.Count);
     }
 
@@ -215,6 +216,16 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
     /// </summary>
     [SerializeField] float widthLines = 0.005f;
 
+    private static Pole[] ToPoleArray(Transform[] transforms)
+    {
+        var poles = new Pole[transforms.Length];
+        for (var index = 0; index < poles.Length; index++)
+        {
+            poles[index] = new Pole { position = transforms[index].position };
+        }
+        return poles;
+    }
+
     /// <summary>
     /// 引数の(x, y, z)を始点として磁力線を描く
     /// </summary>
@@ -243,8 +254,8 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
         for (int i = 1; i < magnetForceLine.positionCount; i++)
         {
             Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
-                northPoles.Select(pole => new Pole { position = pole.transform.position }).ToArray(),
-                southPoles.Select(pole => new Pole { position = pole.transform.position }).ToArray(),
+                ToPoleArray(northPolesTransform),
+                ToPoleArray(southPolesTransform),
                 positionCurrentPoint);
 
             // --- 描画 ---
