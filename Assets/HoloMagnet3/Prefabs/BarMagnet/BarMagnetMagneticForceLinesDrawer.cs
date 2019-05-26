@@ -1,4 +1,4 @@
-﻿#define elapsed_time  // 磁力線を引く処理時間を計測するため
+﻿#undef elapsed_time  // 磁力線を引く処理時間を計測するため
 using HoloToolkit.Unity;
 using System.Collections.Generic;
 using System.Linq;
