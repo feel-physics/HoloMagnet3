@@ -25,11 +25,11 @@ The reason why I published this open-source app is, because I was one of 17 pers
 ## TOC
 
 - [Characteristics](#Characteristics)
-  - [Light Load](#LightLoad)
-  - [UI / Expression](#UI/Expression)
+  - [Light Load](#Light-Load)
+  - [UI / Expression](#UI-/-Expression)
   - [Paper](#Paper)
 - [Structure](#Structure)
-- [How to Build](#HowtoBuild)
+- [How to Build](#How-to-Build)
 - [Acknowledgements](#Acknowledgements)
 
 ## Characteristics
@@ -117,7 +117,7 @@ CPU load.
 
 これにより、物理計算をGPU内で完結させることができ、CPUへの負荷を大幅に減らすことができます。HoloLensのCPUはとても非力なため、必要な処理をどれだけGPUに回せるかが重要です。
 
-### UI・表現
+### UI / Expression
 
 ![2019年5月22日：HoloMagnet37、3次元磁力線](https://user-images.githubusercontent.com/129954/58152110-9d7ad900-7ca6-11e9-9be9-31caa7a0c727.gif)
 
