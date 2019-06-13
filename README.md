@@ -5,6 +5,8 @@ Physics education app visualizes Magnetic Field for HoloLens
 ![2019年5月22日：HoloMagnet37、3次元自動](https://user-images.githubusercontent.com/129954/58151375-74f1df80-7ca4-11e9-89c6-a6a0fb16346f.gif)
 ![2018年6月21日：（学会発表用）三重高校愛知総合工科高校授業風景320x180](https://user-images.githubusercontent.com/129954/58155580-1bdb7900-7caf-11e9-896a-229f64b4f12a.gif)
 
+[日本語](#日本語)
+
 ## Overview
 
 This code is published to **help** understanding sessions of HoloLens app development in IT Tech conference which held once a year by Microsoft Japan. 
@@ -108,20 +110,19 @@ float3 vecF;
 vecF = vecF_N + vecF_S;
 ```
 
-As a result, Physics calculation is completed in GPU. It significantly reduces
-CPU load.
-
-
-
-
-
-これにより、物理計算をGPU内で完結させることができ、CPUへの負荷を大幅に減らすことができます。HoloLensのCPUはとても非力なため、必要な処理をどれだけGPUに回せるかが重要です。
+As a result, Physics calculation is completed in GPU. It significantly reduces CPU load. Since the CPU power of HoloLens is very weak, it's **important** to transfer necessary processes to GPU.
 
 ### UI / Expression
 
 ![2019年5月22日：HoloMagnet37、3次元磁力線](https://user-images.githubusercontent.com/129954/58152110-9d7ad900-7ca6-11e9-9be9-31caa7a0c727.gif)
 
-本アプリを用いた授業は、5カ国の10の学校で300人が体験しました。全員のアンケート（定量および定性）を収集し、それらを元に、アプリ体験をより良くし学習効果と満足度を上げるために、以下の工夫をおこないました。
+More than 300 people in 5 countries at places including 11 schools were **practically taken** experience lessons / sessions with this app. **Learning tests** were taken in 3 schools, and **all** of them gave **questionaires** (both quantitative and qualitative). These results made the app experience **better**, and made the learning efficience and satisfaction degree **increase**. The devices are as followings: 
+
+
+
+
+
+
 
 #### UI
 
@@ -480,6 +481,13 @@ vecF_S = -1.0 * vecDisS / pow(length(vecDisS), 3);
 float3 vecF;
 vecF = vecF_N + vecF_S;
 ```
+
+これにより、物理計算をGPU内で完結させることができ、CPUへの負荷を大幅に減らすことができます。HoloLensのCPUはとても非力なため、必要な処理をどれだけGPUに回せるかが重要です。
+
+### UI・外見
+
+本アプリを用いた授業は、5カ国の10の学校で300人が体験しました。全員のアンケート（定量および定性）を収集し、それらを元に、アプリ体験をより良くし学習効果と満足度を上げるために、以下の工夫をおこないました。
+
 
 
 
