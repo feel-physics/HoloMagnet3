@@ -14,8 +14,6 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     // Todo: 読み上げるテキストを作る
     // Todo: テキストを読み上げてくれるサービスを探す
     // Todo: コメントを英訳するかは相談する
-    // Todo: Storeに上げる準備（アイコンなど）をする（うまくいかないときはHoloMagnet3.oldをそのまま持ってくる）
-    // Todo: Storeに上げる
     // Todo: Storeの画像を変える
     // Todo: 後で動的に二次元シーン開始時にBarMagnetRistrictMovementをアタッチする
 
@@ -139,13 +137,13 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         //var p = magnet.transform.position;
         var np = barMagnet01NorthPole.transform.position;
         var sp = barMagnet01SouthPole.transform.position;
-        var nv4 = new Vector4(np.x, np.y, np.z, 0);  //Vector4 に変換
-        var sv4 = new Vector4(sp.x, sp.y, sp.z, 0);  //Vector4 に変換
+        var nv4 = new Vector4(np.x, np.y, np.z, 0);  // Convert to Vector4
+        var sv4 = new Vector4(sp.x, sp.y, sp.z, 0);  // Convert to Vector4
 
-        // 方位磁針の N 極側のマテリアルのシェーダに座標をセット
+        // Set coordinates to Shader of Material of NORTH side of compass
         CompassesModel.Instance.MatNorth.SetVector("_NorthPolePos", nv4);
         CompassesModel.Instance.MatNorth.SetVector("_SouthPolePos", sv4);
-        // 方位磁針の S 極側のマテリアルのシェーダに座標をセット
+        // Set coordinates to Shader of Material of SOUTH side of compass
         CompassesModel.Instance.MatSouth.SetVector("_NorthPolePos", nv4);
         CompassesModel.Instance.MatSouth.SetVector("_SouthPolePos", sv4);
     }

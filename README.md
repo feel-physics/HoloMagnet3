@@ -1,48 +1,53 @@
 # HoloMagnet3
 
+Physics education app visualizes Magnetic Field for HoloLens
+
 ![2019年5月22日：HoloMagnet37、3次元自動](https://user-images.githubusercontent.com/129954/58151375-74f1df80-7ca4-11e9-89c6-a6a0fb16346f.gif)
 ![2018年6月21日：（学会発表用）三重高校愛知総合工科高校授業風景320x180](https://user-images.githubusercontent.com/129954/58155580-1bdb7900-7caf-11e9-896a-229f64b4f12a.gif)
 
-本アプリは、**「de:code 2019」**（マイクロソフト社の開発者をはじめとするITに携わるすべてのエンジニアのための年に一度のテクニカルカンファレンス）において、
+## Overview
 
-**「Microsoft MVP アワード」**（マイクロソフトの製品やテクノロジーに関する豊富な知識や経験を他者と共有することで、すべてのユーザーが最大限に製品を活用できるよう多大なサポートをおこなったコミュニティのリーダーに、マイクロソフトが感謝の意を表して授与する賞）の受賞者として、
+This code is published to **help** understanding sessions of HoloLens app development in IT Tech conference which held once a year by Microsoft Japan. 
 
-セッション内容をより深く理解し実践するのに役に立つコード「[パターン](#構成図)を用い、シンプルな [UI](#UI・表現) を提供する、初心者でもできる HoloLens アプリ開発と [Microsoft ストアへの登録方法](#ストア登録)～実際の[ソースコード](#軽量化)と[構成図](#構成図)を見ながら～」という位置づけで公開したものです。
+The reason why I published this open-source app is, because I was one of 17 personal sponsors who have **Microsoft MVP Award** (The Microsoft **M**ost **V**aluable **P**rofessional award is given by Microsoft to "technology experts who passionately share their knowledge with the community.")
 
-- このアプリは [5カ国10の学校300人の体験者](#授業風景) のフィードバックにより作られました。
-- 最先端の複合現実ヘッドセット **「HoloLens」** 用の理科（物理）学習アプリです。
-- このアプリの目的は**教育**です。対象は中学生、高校生、専門学校生、大学生です。
-- このアプリを使って、現実世界では目で**見ることのできない**磁界について学習することができます。
-- **数少ない**教育用HoloLensアプリです。
-- **誰でも** [Microsoft ストアで無料で入手](https://www.microsoft.com/ja-jp/p/holomagnet3/9pff2nq2t708)して体験することができます。
+- Made by feedbacks of **300** experienced people in **5** countries at **11** schools
+- Physics education app for headset with mixed reality technology (**very new** technology).
+- Objective is experience education for:
+  - **student** in junior high school, high school, college, university, night school
+  - visitor in science **museum**, event
+- You can see invisible phenomena, magnetic field, which can **not** be seen in real world. 
+- **Rare** education app for mixed reality headset.
+- **Anyone** can get app via [Microsoft Store](https://www.microsoft.com/en-us/p/holomagnet3/9pff2nq2t708)
+- **Free**
+---
 
-## 目次
+## TOC
 
-- [特徴](#特徴)
-  - [軽量化](#軽量化)
-  - [UI・表現](#UI・表現)
-  - [論文](#論文)
-- [構成図](#構成図)
-- [ビルド方法](#ビルド方法)
-- [ストア登録](#ストア登録)
-- [謝辞](#謝辞)
+- [Characteristics](#Characteristics)
+  - [Light Load](#Light Load)
+  - [UI / Expression](#UI / Expression)
+  - [Paper](#Paper)
+- [Structure](#Structure)
+- [How to Build](#How to Build)
+- [Acknowledgements](#Acknowledgements)
 
-## 特徴
+## Characteristics
 
-### 軽量化
+### Light Load
 
 ![2019年5月22日：HoloMagnet37、2次元](https://user-images.githubusercontent.com/129954/58151322-4411aa80-7ca4-11e9-9fca-fdcaf8baae17.gif)
 ![2019年5月22日：HoloMagnet37、3次元手動](https://user-images.githubusercontent.com/129954/58151979-496ff480-7ca6-11e9-92f8-cfecf742ec68.gif)
 
-**500個**の方位磁針の個々の物理計算を毎フレームおこないながら、FPS **58**を実現しています。
+The app executes the Physics calculation of each of **500** compasses on every frame, and the FPS is **58**.
 
-具体的には、シェーダをインスタンス化**せず**に、シェーダ**内**で物理計算をおこなって負荷を大幅に減らしています。
+Specifically, it does **not** instantiate it's Shader. It executes Physics calculation in the single Shader. As a result, the load is very light.
 
-なお、軽量化が必要な理由については次項の「UI・表現」で説明します。
+Furthermore, the reason why the light weight is needed is explained in next subject "UI / Expression".
 
-### シェーダをインスタンス化しない
+### Does not instantiate shader
 
-以下のように、マテリアルをスクリプトから操作せずに、シェーダに外部変数を受け取る変数を設定し、スクリプトからマテリアルを介さずにシェーダに**直接**値を代入しています。
+As the following codes, the Material is not operated by a Script. Valuables are set in the Shader which accept external valuables. They are assigned **directly** to the Shader by a Script.
 
 [CompassesManagedlySimultaneouslyUpdater\.cs](https://github.com/feel-physics/HoloMagnet3/blob/master/Assets/HoloMagnet3/Prefabs/CompassesManager/CompassesManagedlySimultaneouslyUpdater.cs#L140-L150)
 
@@ -51,57 +56,64 @@ void AssignMagnetPosition()
     {
         var np = barMagnet01NorthPole.transform.position;
         var sp = barMagnet01SouthPole.transform.position;
-        var nv4 = new Vector4(np.x, np.y, np.z, 0);  //Vector4 に変換
-        var sv4 = new Vector4(sp.x, sp.y, sp.z, 0);  //Vector4 に変換
+        var nv4 = new Vector4(np.x, np.y, np.z, 0);  // Convert to Vector4
+        var sv4 = new Vector4(sp.x, sp.y, sp.z, 0);  // Convert to Vector4
 
-        // 方位磁針の N 極側のマテリアルのシェーダに座標をセット
+        // Set coordinates to Shader of Material of NORTH side of compass
         CompassesModel.Instance.MatNorth.SetVector("_NorthPolePos", nv4);
         CompassesModel.Instance.MatNorth.SetVector("_SouthPolePos", sv4);
-        // 方位磁針の S 極側のマテリアルのシェーダに座標をセット
+        // Set coordinates to Shader of Material of SOUTH side of compass
         CompassesModel.Instance.MatSouth.SetVector("_NorthPolePos", nv4);
         CompassesModel.Instance.MatSouth.SetVector("_SouthPolePos", sv4);
     }
 ```
 
-これによりシェーダがインスタンス化されず、**単一**のシェーダとして処理されるため、計算負荷を大幅に減らすことができます。
+As a result, the Shader is not instantiated and processed as a **single** Shader. That significantly reduces the calculation load.
 
-#### シェーダ内で物理計算を行う
+#### Execute Physics calculation in Shader
 
-以下のように、シェーダ内で物理計算を行っています。
+As the following codes, Physics calculation is executed in a Shader.
 
 [MyCompassShader2\.shader](https://github.com/feel-physics/HoloMagnet3/blob/master/Assets/HoloMagnet3/Resources/Compass180509/MyCompassShader2.shader#L49-L77)
 
 ```ShaderLab
-// 自身（方位磁針）の位置ベクトルvecPを作成
+// Define position vector of self (compass) as vecP
 float3 vecP;
 vecP = IN.worldPos;
 
-// N極の位置ベクトルvecNを作成
+// Define position vector of NORTH Pole as vecN
 float3 vecN;
 vecN.x = _NorthPolePos.x;
 vecN.y = _NorthPolePos.y;
 vecN.z = _NorthPolePos.z;
 
-// S極の位置ベクトルvecSを作成
+// Define position vector of SOUTH Pole as vecS
 float3 vecS;
 vecS.x = _SouthPolePos.x;
 vecS.y = _SouthPolePos.y;
 vecS.z = _SouthPolePos.z;
 
-// 自身から棒磁石に対する変位ベクトルvecDisN、vecDisSを作成
+// Define displacement vector from self to bar magnet as vecDisN, vecDisS
 float3 vecDisN, vecDisS;
 vecDisN = vecP - vecN;
 vecDisS = vecP - vecS;
 
-// 極からの磁力ベクトルvecF_N, vecF_Sを求める
+// Get magnetic force vectors from two poles as vecF_N, vecF_S
 float3 vecF_N, vecF_S;
 vecF_N =        vecDisN / pow(length(vecDisN), 3);
 vecF_S = -1.0 * vecDisS / pow(length(vecDisS), 3);
 
-// 磁力の合力ベクトルvecFを求める
+// Get resultant magnetic force vector as vecF
 float3 vecF;
 vecF = vecF_N + vecF_S;
 ```
+
+As a result, Physics calculation is completed in GPU. It significantly reduces
+CPU load.
+
+
+
+
 
 これにより、物理計算をGPU内で完結させることができ、CPUへの負荷を大幅に減らすことができます。HoloLensのCPUはとても非力なため、必要な処理をどれだけGPUに回せるかが重要です。
 
@@ -369,6 +381,109 @@ HoloLens2はARMアーキテクチャかもしれないので、「ARM」にも�
 [LinkedIn](https://www.linkedin.com/in/weed7777/)
 
 ---
+
+## 日本語
+
+本アプリは、**「de:code 2019」**（マイクロソフト社の開発者をはじめとするITに携わるすべてのエンジニアのための年に一度のテクニカルカンファレンス）において、
+
+**「Microsoft MVP アワード」**（マイクロソフトの製品やテクノロジーに関する豊富な知識や経験を他者と共有することで、すべてのユーザーが最大限に製品を活用できるよう多大なサポートをおこなったコミュニティのリーダーに、マイクロソフトが感謝の意を表して授与する賞）の受賞者として、
+
+セッション内容をより深く理解し実践するのに役に立つコード「[パターン](#構成図)を用い、シンプルな [UI](#UI・表現) を提供する、初心者でもできる HoloLens アプリ開発と [Microsoft ストアへの登録方法](#ストア登録)～実際の[ソースコード](#軽量化)と[構成図](#構成図)を見ながら～」という位置づけで公開したものです。
+
+- このアプリは [5カ国10の学校300人の体験者](#授業風景) のフィードバックにより作られました。
+- 最先端の複合現実ヘッドセット **「HoloLens」** 用の理科（物理）学習アプリです。
+- このアプリの目的は**教育**です。対象は中学生、高校生、専門学校生、大学生です。
+- このアプリを使って、現実世界では目で**見ることのできない**磁界について学習することができます。
+- **数少ない**教育用HoloLensアプリです。
+- **誰でも** [Microsoft ストアで無料で入手](https://www.microsoft.com/ja-jp/p/holomagnet3/9pff2nq2t708)して体験することができます。
+
+## 目次
+
+- [特徴](#特徴)
+  - [軽量化](#軽量化)
+  - [UI・表現](#UI・表現)
+  - [論文](#論文)
+- [構成図](#構成図)
+- [ビルド方法](#ビルド方法)
+- [ストア登録](#ストア登録)
+- [謝辞](#謝辞)
+
+## 特徴
+
+### 軽量化
+
+**500個**の方位磁針の個々の物理計算を毎フレームおこないながら、FPS **58**を実現しています。
+
+具体的には、シェーダをインスタンス化**せず**に、シェーダ**内**で物理計算をおこなって負荷を大幅に減らしています。
+
+なお、軽量化が必要な理由については次項の「UI・表現」で説明します。
+
+### シェーダをインスタンス化しない
+
+以下のように、マテリアルをスクリプトから操作せずに、シェーダに外部変数を受け取る変数を設定し、スクリプトからマテリアルを介さずにシェーダに**直接**値を代入しています。
+
+[CompassesManagedlySimultaneouslyUpdater\.cs](https://github.com/feel-physics/HoloMagnet3/blob/master/Assets/HoloMagnet3/Prefabs/CompassesManager/CompassesManagedlySimultaneouslyUpdater.cs#L140-L150)
+
+```csharp
+void AssignMagnetPosition()
+    {
+        var np = barMagnet01NorthPole.transform.position;
+        var sp = barMagnet01SouthPole.transform.position;
+        var nv4 = new Vector4(np.x, np.y, np.z, 0);  //Vector4 に変換
+        var sv4 = new Vector4(sp.x, sp.y, sp.z, 0);  //Vector4 に変換
+
+        // 方位磁針の N 極側のマテリアルのシェーダに座標をセット
+        CompassesModel.Instance.MatNorth.SetVector("_NorthPolePos", nv4);
+        CompassesModel.Instance.MatNorth.SetVector("_SouthPolePos", sv4);
+        // 方位磁針の S 極側のマテリアルのシェーダに座標をセット
+        CompassesModel.Instance.MatSouth.SetVector("_NorthPolePos", nv4);
+        CompassesModel.Instance.MatSouth.SetVector("_SouthPolePos", sv4);
+    }
+```
+
+これによりシェーダがインスタンス化されず、**単一**のシェーダとして処理されるため、計算負荷を大幅に減らすことができます。
+
+#### シェーダ内で物理計算を行う
+
+以下のように、シェーダ内で物理計算を行っています。
+
+[MyCompassShader2\.shader](https://github.com/feel-physics/HoloMagnet3/blob/master/Assets/HoloMagnet3/Resources/Compass180509/MyCompassShader2.shader#L49-L77)
+
+```ShaderLab
+// 自身（方位磁針）の位置ベクトルvecPを作成
+float3 vecP;
+vecP = IN.worldPos;
+
+// N極の位置ベクトルvecNを作成
+float3 vecN;
+vecN.x = _NorthPolePos.x;
+vecN.y = _NorthPolePos.y;
+vecN.z = _NorthPolePos.z;
+
+// S極の位置ベクトルvecSを作成
+float3 vecS;
+vecS.x = _SouthPolePos.x;
+vecS.y = _SouthPolePos.y;
+vecS.z = _SouthPolePos.z;
+
+// 自身から棒磁石に対する変位ベクトルvecDisN、vecDisSを作成
+float3 vecDisN, vecDisS;
+vecDisN = vecP - vecN;
+vecDisS = vecP - vecS;
+
+// 極からの磁力ベクトルvecF_N, vecF_Sを求める
+float3 vecF_N, vecF_S;
+vecF_N =        vecDisN / pow(length(vecDisN), 3);
+vecF_S = -1.0 * vecDisS / pow(length(vecDisS), 3);
+
+// 磁力の合力ベクトルvecFを求める
+float3 vecF;
+vecF = vecF_N + vecF_S;
+```
+
+
+
+
 
 ## What's this?
 

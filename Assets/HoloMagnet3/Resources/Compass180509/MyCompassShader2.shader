@@ -46,33 +46,33 @@ Shader "Custom/MyCompassShader2" {
 
 		void surf(Input IN, inout SurfaceOutput o)
 		{
-			// 自身（方位磁針）の位置ベクトルvecPを作成
+			// Define position vector of self (compass) as vecP
 			float3 vecP;
 			vecP = IN.worldPos;
 
-			// N極の位置ベクトルvecNを作成
+			// Define position vector of NORTH Pole as vecN
 			float3 vecN;
 			vecN.x = _NorthPolePos.x;
 			vecN.y = _NorthPolePos.y;
 			vecN.z = _NorthPolePos.z;
 
-			// S極の位置ベクトルvecNを作成
+			// Define position vector of SOUTH Pole as vecS
 			float3 vecS;
 			vecS.x = _SouthPolePos.x;
 			vecS.y = _SouthPolePos.y;
 			vecS.z = _SouthPolePos.z;
 
-			// 自身から棒磁石に対する変位ベクトルvecDisN、vecDisSを作成
+			// Define displacement vector from self to bar magnet as vecDisN, vecDisS
 			float3 vecDisN, vecDisS;
 			vecDisN = vecP - vecN;
 			vecDisS = vecP - vecS;
 
-			// 極からの磁力ベクトルvecF_N, vecF_Sを求める
+			// Get magnetic force vectors from two poles as vecF_N, vecF_S
 			float3 vecF_N, vecF_S;
 			vecF_N =        vecDisN / pow(length(vecDisN), 3);
 			vecF_S = -1.0 * vecDisS / pow(length(vecDisS), 3);
 
-			// 磁力の合力ベクトルvecFを求める
+			// Get resultant magnetic force vector as vecF
 			float3 vecF;
 			vecF = vecF_N + vecF_S;
 
