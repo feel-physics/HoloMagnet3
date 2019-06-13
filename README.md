@@ -25,11 +25,11 @@ The reason why I published this open-source app is, because I was one of 17 pers
 ## TOC
 
 - [Characteristics](#Characteristics)
-  - [Light Load](#Light Load)
-  - [UI / Expression](#UI / Expression)
+  - [Light Load](#LightLoad)
+  - [UI / Expression](#UI/Expression)
   - [Paper](#Paper)
 - [Structure](#Structure)
-- [How to Build](#How to Build)
+- [How to Build](#HowtoBuild)
 - [Acknowledgements](#Acknowledgements)
 
 ## Characteristics
