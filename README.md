@@ -2,6 +2,8 @@
 
 Physics education app visualizes Magnetic Field for HoloLens
 
+We are very welcome to your contribution **for education** including porting to other platforms (such as Magic Leap One, Oculus Quest, and many others).
+
 ![2019年5月22日：HoloMagnet37、3次元自動](https://user-images.githubusercontent.com/129954/58151375-74f1df80-7ca4-11e9-89c6-a6a0fb16346f.gif)
 ![2018年6月21日：（学会発表用）三重高校愛知総合工科高校授業風景320x180](https://user-images.githubusercontent.com/129954/58155580-1bdb7900-7caf-11e9-896a-229f64b4f12a.gif)
 
@@ -118,28 +120,21 @@ As a result, Physics calculation is completed in GPU. It significantly reduces C
 
 More than 300 people in 5 countries at places including 11 schools were **practically taken** experience lessons / sessions with this app. **Learning tests** were taken in 3 schools, and **all** of them gave **questionaires** (both quantitative and qualitative). These results made the app experience **better**, and made the learning efficience and satisfaction degree **increase**. The devices are as followings: 
 
-
-
-
-
-
-
 #### UI
 
-- 操作が安定していない（例えばフォーカスが外れる、マーカートラッキングがしばしば途切れる）と、体験者は**不満**を感じます。初めて体験するユーザに対するHoloLensアプリは、**極めて簡易**な（フォーカスもマーカートラッキングも使用しない安定した）操作方法を提供することが望ましいです。
-- 動作が**遅い**と、体験者は**不満**を感じるため、動作を可能な限り速くすることが望ましいです。
-- **シェアリング**は高次元の体験を提供することができますが、途中で接続が切れた場合の復旧に時間がかかるため、時間にタイトな授業（40人の場合、3分のロスも許されません）には**適しません**。
+- Unstable operation (for example, Focus or marker tracking runs off) makes user feel dissatisfaction. It's desirable to provide **very simple operation** for a user who experience for the first time.
+- Slowness makes user feel dissatisfaction. It's desirable to make it **as fast as possible**.
+- Although **Sharing** provides a experience of higher level, it takes a few minutes to recover. Thus, it's **not suitable** for a lesson which is severe on time such as 40 students classroom.
 
-#### 表現
+#### Expression
 
-- プロジェクターで多人数に見せるためには、表示するオブジェクトは**大きく**するべきです。
-- 理解を妨げるため、体験とプロジェクターに映された映像のあいだの**タイムラグ**は短くするべきです。
-- 従来の**抽象的な表現**（磁力線など）だけでは初学者にとって分かりにくいため、別の理解を助ける**表現の工夫**（例えば格子状に配置された方位磁針）が必要です。
-- **静**的な表現よりも**動**的な表現の方が理解しやすく、身体を動かしてコンテンツを**体験**することができるとユーザの理解度と満足度は高くなります。
+- Objects to display **should be big** in order to show for many people with a projector or a big TV
+- It's difficult to understand old abstract expression (such as Lines of Magnetic Force) for beginner. Thus, devices of expression to **help understanding** (such as compasses arranged in grid) are important.
+- Static expression is more understandable than dynamic expression. Satisfaction and comprehension degrees are higher if an user can **move his/her body** to experience contents.
 
-#### 授業風景
+#### Lesson Scenes
 
-HoloLensを使っておこなった授業の様子です。見た目が変わっていきますが、毎回アプリを改良しているためです。
+The followings are lesson / session scenes. Appearance of the app was changing, because we improved step by step.
 
 ![2018年5月21日-大阪メイカーズバザール](https://user-images.githubusercontent.com/129954/58153296-a4efb180-7ca9-11e9-8455-55201ff63c64.jpg)
 ![170829-MFT](https://user-images.githubusercontent.com/129954/58153048-1844f380-7ca9-11e9-8ab6-206a428bd166.jpg)
@@ -157,34 +152,48 @@ HoloLensを使っておこなった授業の様子です。見た目が変わっ
 ![2018年11月15日：University of Rwanda320x180](https://user-images.githubusercontent.com/129954/58162388-0e2cf000-7cbd-11e9-935c-8778c2bc9672.gif)
 ![2019年3月20日：グロサミ2019-320x180](https://user-images.githubusercontent.com/129954/58162591-6bc13c80-7cbd-11e9-9895-c03c71186d13.gif)
 
-#### 論文
+#### Paper
 
-これらの知見については日本物理教育学会から研究報告の執筆を依頼されており、学会誌に詳細が掲載される予定です。
-（公開され次第リンクに変えます）。
+We were asked by The Physics Education Society of Japan to write a paper about these knowledge. We already posted. The detail is going to be put on the journal. We are going to add the link to the paper on publication.
 
-## 構成図
+## Structure Figure
 
-本アプリの構成図です。
+This is the structure figure of the app.
 
 ![StructureDiagram](https://user-images.githubusercontent.com/129954/58148478-dc566200-7c99-11e9-89ed-abb2a20f726b.png)
 
-大きな円がプレハブ、中くらいの円がクラス、小さい円がメソッドを表しています。
+We drew simple original structure figure in order to express both class relations and activity flows.
 
-プレハブに対するクラスの役割は以下の通りです。
+1. Large circle means Prefab, Middle size circle means class, Small circle means method.
+2. Arrows means paths of process from user
 
-- プレハブの上部にあるクラスがプレハブのハンドラ
-- プレハブの右側にあるクラスがプレハブのモデル
-- プレハブの下側にあるクラスがプレハブのコントローラ
+Rolls of classes against a Prefab is followings:
 
-HoloLensアプリを作成する際は、最初はどうしても無秩序にプレハブやクラスを作ってしまいがちです。
+- Handler class is over the Prefab
+- Model class is on the right of the Prefab
+- Controller class is under the Prefab
 
-しかし、プレハブごとにハンドラ、モデル、コントローラクラスを作成すると、見通しの良い設計を手軽におこなうことができます。
+A beginner developer of HoloLens tends to create classes disorderly.
+
+However, when you distinguish handler, model and controller classes against each Prefab, you can design with good prospect easily.
+
+## How to Build
+
+### Environment
+
+- Unity 2017.4.26f1 (2017.4.x seems to work)
+- Visual Studio 2017.15 (Check Windows 10 SDKs)
+![Visual Studio Installer 2019-06-19 16 59 55](https://user-images.githubusercontent.com/129954/59748279-c0080e00-92b5-11e9-9854-9ecda68a4f90.png)
+
+
+
+
 
 ## ビルド方法
 
 ### 環境
 
-- Unity 2017.4.26f1
+- Unity 2017.4.26f1（2017.4系列なら動くでしょう）
 - Visual Studio 2017.15
 
 ### 手順
@@ -487,6 +496,44 @@ vecF = vecF_N + vecF_S;
 ### UI・外見
 
 本アプリを用いた授業は、5カ国の10の学校で300人が体験しました。全員のアンケート（定量および定性）を収集し、それらを元に、アプリ体験をより良くし学習効果と満足度を上げるために、以下の工夫をおこないました。
+
+- 操作が安定していない（例えばフォーカスが外れる、マーカートラッキングがしばしば途切れる）と、体験者は**不満**を感じます。初めて体験するユーザに対するHoloLensアプリは、**極めて簡易**な操作方法を提供することが望ましいです。
+
+- 動作が**遅い**と、体験者は**不満**を感じるため、動作を可能な限り速くすることが望ましいです。
+- **シェアリング**は高次元の体験を提供することができますが、途中で接続が切れた場合の復旧に時間がかかるため、時間にタイトな授業（40人の場合、3分のロスも許されません）には**適しません**。
+
+#### 表現
+
+- プロジェクターで多人数に見せるためには、表示するオブジェクトは**大きく**するべきです。
+- 理解を妨げるため、体験とプロジェクターに映された映像のあいだの**タイムラグ**は短くするべきです。
+- 従来の**抽象的な表現**（磁力線など）だけでは初学者にとって分かりにくいため、別の理解を助ける**表現の工夫**（例えば格子状に配置された方位磁針）が必要です。
+- **静**的な表現よりも**動**的な表現の方が理解しやすく、身体を動かしてコンテンツを**体験**することができるとユーザの理解度と満足度は高くなります。
+
+#### 論文
+
+これらの知見については日本物理教育学会から研究報告の執筆を依頼され、すでに投稿しました。学会誌に詳細が掲載される予定です。公開され次第リンクに変えます。
+
+## 構成図
+
+本アプリの構成図です。
+
+![StructureDiagram](https://user-images.githubusercontent.com/129954/58148478-dc566200-7c99-11e9-89ed-abb2a20f726b.png)
+
+クラス関係とアクティビティフローを両方表現するために、シンプルな独自の構成図を描きました。
+
+1. 大きな円がプレハブ、中くらいの円がクラス、小さい円がメソッドを表しています。
+2. 矢印が、ユーザからのアクションがどのような経路をたどって処理されるかを表しています。
+
+プレハブに対するクラスの役割は以下の通りです。
+
+- プレハブの上部にあるクラスがプレハブのハンドラ
+- プレハブの右側にあるクラスがプレハブのモデル
+- プレハブの下側にあるクラスがプレハブのコントローラ
+
+HoloLensアプリを作成する際は、最初はどうしても無秩序にプレハブやクラスを作ってしまいがちです。
+
+しかし、プレハブごとにハンドラ、モデル、コントローラクラスを作成すると、見通しの良い設計を手軽におこなうことができます。
+
 
 
 
