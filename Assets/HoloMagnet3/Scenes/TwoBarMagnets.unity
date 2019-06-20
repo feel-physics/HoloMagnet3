@@ -656,7 +656,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1132814198459000, guid: d36ed935ad424bc429ae4d865030a856, type: 2}
       propertyPath: m_Name
-      value: BarMagnetStatic
+      value: BarMagnet02
       objectReference: {fileID: 0}
     - target: {fileID: 114905948474313042, guid: d36ed935ad424bc429ae4d865030a856,
         type: 2}
