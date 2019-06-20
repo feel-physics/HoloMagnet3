@@ -2,7 +2,7 @@
 
 Physics education app visualizes Magnetic Field for HoloLens
 
-We are very welcome to your contribution **for education** including porting to other platforms (such as Magic Leap One, Oculus Quest, and many others).
+We are very welcome to your contribution **for education** including porting to other platforms (such as Magic Leap One, Oculus Quest, iPad, Pixel, and many others).
 
 ![2019年5月22日：HoloMagnet37、3次元自動](https://user-images.githubusercontent.com/129954/58151375-74f1df80-7ca4-11e9-89c6-a6a0fb16346f.gif)
 ![2018年6月21日：（学会発表用）三重高校愛知総合工科高校授業風景320x180](https://user-images.githubusercontent.com/129954/58155580-1bdb7900-7caf-11e9-896a-229f64b4f12a.gif)
