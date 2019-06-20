@@ -141,10 +141,10 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         var sv4 = new Vector4(sp.x, sp.y, sp.z, 0);  // Convert to Vector4
 
         // Set coordinates to Shader of Material of NORTH side of compass
-        CompassesModel.Instance.MatNorth.SetVector("_NorthPolePos", nv4);
-        CompassesModel.Instance.MatNorth.SetVector("_SouthPolePos", sv4);
+        CompassesModel.Instance.MatNorth.SetVector("_NorthPole1Pos", nv4);
+        CompassesModel.Instance.MatNorth.SetVector("_SouthPole1Pos", sv4);
         // Set coordinates to Shader of Material of SOUTH side of compass
-        CompassesModel.Instance.MatSouth.SetVector("_NorthPolePos", nv4);
-        CompassesModel.Instance.MatSouth.SetVector("_SouthPolePos", sv4);
+        CompassesModel.Instance.MatSouth.SetVector("_NorthPole1Pos", nv4);
+        CompassesModel.Instance.MatSouth.SetVector("_SouthPole1Pos", sv4);
     }
 }

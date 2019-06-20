@@ -6,8 +6,8 @@ Shader "Custom/MyCompassShader2" {
 		_ScrollX("Scroll X", float) = 0
 		_ScrollY("Scroll Y", float) = 0
 			// 磁石の位置
-			_NorthPolePos("North Pole", Vector) = (0,0,0,0)
-			_SouthPolePos("South Pole", Vector) = (0,0,0,0)
+			_NorthPole1Pos("North Pole", Vector) = (0,0,0,0)
+			_SouthPole1Pos("South Pole", Vector) = (0,0,0,0)
 			// 方位磁針の明るさの係数
 			_BrightnessCoefficient("Brightness Coefficient", Float) = 0.005
 			// 磁石を消し込むパラメータ
@@ -37,8 +37,8 @@ Shader "Custom/MyCompassShader2" {
 		};
 		float _ScrollX, _ScrollY;
 		float4 _Emission;
-		float4 _NorthPolePos;
-		float4 _SouthPolePos;
+		float4 _NorthPole1Pos;
+		float4 _SouthPole1Pos;
 		float _BrightnessCoefficient;
 		float _BrightnessLowerLimit;
 		float _DarkDistance;
@@ -52,15 +52,15 @@ Shader "Custom/MyCompassShader2" {
 
 			// Define position vector of NORTH Pole as vecN
 			float3 vecN;
-			vecN.x = _NorthPolePos.x;
-			vecN.y = _NorthPolePos.y;
-			vecN.z = _NorthPolePos.z;
+			vecN.x = _NorthPole1Pos.x;
+			vecN.y = _NorthPole1Pos.y;
+			vecN.z = _NorthPole1Pos.z;
 
 			// Define position vector of SOUTH Pole as vecS
 			float3 vecS;
-			vecS.x = _SouthPolePos.x;
-			vecS.y = _SouthPolePos.y;
-			vecS.z = _SouthPolePos.z;
+			vecS.x = _SouthPole1Pos.x;
+			vecS.y = _SouthPole1Pos.y;
+			vecS.z = _SouthPole1Pos.z;
 
 			// Define displacement vector from self to bar magnet as vecDisN, vecDisS
 			float3 vecDisN, vecDisS;
