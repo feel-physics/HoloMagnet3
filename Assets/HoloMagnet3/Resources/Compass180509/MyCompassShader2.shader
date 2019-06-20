@@ -55,13 +55,14 @@ Shader "Custom/MyCompassShader2" {
 			float3 vecP;
 			vecP = IN.worldPos;
 
+			/* BarMagnet01 */
 			// Define position vector of NORTH Pole 1 as vecN1
 			float3 vecN1;
 			vecN1.x = _NorthPole1Pos.x;
 			vecN1.y = _NorthPole1Pos.y;
 			vecN1.z = _NorthPole1Pos.z;
 
-			// Define position vector of SOUTH Pole as vecS1
+			// Define position vector of SOUTH Pole 1 as vecS1
 			float3 vecS1;
 			vecS1.x = _SouthPole1Pos.x;
 			vecS1.y = _SouthPole1Pos.y;
@@ -77,9 +78,33 @@ Shader "Custom/MyCompassShader2" {
 			vecF_N1 =        vecDisN1 / pow(length(vecDisN1), 3);
 			vecF_S1 = -1.0 * vecDisS1 / pow(length(vecDisS1), 3);
 
+			/* BarMagnet02 */
+			// Define position vector of NORTH Pole 2 as vecN2
+			float3 vecN2;
+			vecN2.x = _NorthPole2Pos.x;
+			vecN2.y = _NorthPole2Pos.y;
+			vecN2.z = _NorthPole2Pos.z;
+
+			// Define position vector of SOUTH Pole 2 as vecS2
+			float3 vecS2;
+			vecS2.x = _SouthPole2Pos.x;
+			vecS2.y = _SouthPole2Pos.y;
+			vecS2.z = _SouthPole2Pos.z;
+
+			// Define displacement vector from self to bar magnet 02 as vecDisN2, vecDisS2
+			float3 vecDisN2, vecDisS2;
+			vecDisN2 = vecP - vecN2;
+			vecDisS2 = vecP - vecS2;
+
+			// Get magnetic force vectors from two poles of bar magnet 02 as vecF_N2, vecF_S2
+			float3 vecF_N2, vecF_S2;
+			vecF_N2 = vecDisN2 / pow(length(vecDisN2), 3);
+			vecF_S2 = -1.0 * vecDisS2 / pow(length(vecDisS2), 3);
+
+			/* Resultant Force */
 			// Get resultant magnetic force vector as vecF
 			float3 vecF;
-			vecF = vecF_N1 + vecF_S1;
+			vecF = vecF_N1 + vecF_S1 + vecF_N2 + vecF_S2;
 
 			// 方位磁針の明るさを求める
 			float brightness;
