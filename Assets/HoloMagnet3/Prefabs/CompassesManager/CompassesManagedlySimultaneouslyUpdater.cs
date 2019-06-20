@@ -144,14 +144,22 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         //var p = magnet.transform.position;
         var np1 = barMagnet01NorthPole.transform.position;
         var sp1 = barMagnet01SouthPole.transform.position;
+        var np2 = barMagnet02NorthPole.transform.position;
+        var sp2 = barMagnet02SouthPole.transform.position;
         var n1v4 = new Vector4(np1.x, np1.y, np1.z, 0);  // Convert to Vector4
         var s1v4 = new Vector4(sp1.x, sp1.y, sp1.z, 0);  // Convert to Vector4
+        var n2v4 = new Vector4(np2.x, np2.y, np2.z, 0);  // Convert to Vector4
+        var s2v4 = new Vector4(sp2.x, sp2.y, sp2.z, 0);  // Convert to Vector4
 
         // Set coordinates to Shader of Material of NORTH side of compass
         CompassesModel.Instance.MatNorth.SetVector("_NorthPole1Pos", n1v4);
         CompassesModel.Instance.MatNorth.SetVector("_SouthPole1Pos", s1v4);
+        CompassesModel.Instance.MatNorth.SetVector("_NorthPole2Pos", n2v4);
+        CompassesModel.Instance.MatNorth.SetVector("_SouthPole2Pos", s2v4);
         // Set coordinates to Shader of Material of SOUTH side of compass
         CompassesModel.Instance.MatSouth.SetVector("_NorthPole1Pos", n1v4);
         CompassesModel.Instance.MatSouth.SetVector("_SouthPole1Pos", s1v4);
+        CompassesModel.Instance.MatSouth.SetVector("_NorthPole2Pos", n2v4);
+        CompassesModel.Instance.MatSouth.SetVector("_SouthPole2Pos", s2v4);
     }
 }
