@@ -2,7 +2,7 @@
 
 Physics education app visualizes Magnetic Field for HoloLens
 
-We are very welcome to your contribution **for education** including porting to other platforms (such as Magic Leap One, Oculus Quest, iPad, Pixel, and many others).
+We are very welcome to your contribution **for education** including porting to other platforms (such as Magic Leap One, Oculus Quest, iPad, Pixel3, and many others).
 
 ![2019年5月22日：HoloMagnet37、3次元自動](https://user-images.githubusercontent.com/129954/58151375-74f1df80-7ca4-11e9-89c6-a6a0fb16346f.gif)
 ![2018年6月21日：（学会発表用）三重高校愛知総合工科高校授業風景320x180](https://user-images.githubusercontent.com/129954/58155580-1bdb7900-7caf-11e9-896a-229f64b4f12a.gif)
@@ -11,7 +11,7 @@ We are very welcome to your contribution **for education** including porting to 
 
 ## Overview
 
-This code is published to **help** understanding sessions of HoloLens app development in IT Tech conference which held once a year by Microsoft Japan. 
+This code is published to **help** understanding sessions of HoloLens app development in IT Tech conference which is held once a year by Microsoft Japan. 
 
 The reason why I published this open-source app is, because I was one of 17 personal sponsors who have **Microsoft MVP Award** (The Microsoft **M**ost **V**aluable **P**rofessional award is given by Microsoft to "technology experts who passionately share their knowledge with the community.")
 
@@ -215,11 +215,11 @@ However, when you distinguish handler, model and controller classes against each
 
 ## Acknowledgements
 
-- Susuka High School, Teacher Tabata
-- Mie High School, Teacher Murata and Teacher Kawada
-- Prefectural Aichi High School of Technology and Engineering, Teacher Kawada
-- Tokyo Gakugei University Senior High School, Teacher Ohnishi
-- Tsu Higashi High School, Teacher Sano
+- Susuka High School, Teacher Masaki Tabata
+- Mie High School, Teacher Ryosuke Murata and Teacher Hiroki Kawada
+- Prefectural Aichi High School of Technology and Engineering, Teacher Daisuke Kawada
+- Tokyo Gakugei University Senior High School, Teacher Takuya Ohnishi
+- Tsu Higashi High School, Teacher Tetsuya Sano
 - St. Giles Cambridge School, Teacher Philip
 - Japan International Cooperation Agency (JICA) volunteer, Dr. Sugimoto
 - Japan International Cooperation Agency (JICA) volunteer, Mr. Sakai
@@ -560,11 +560,11 @@ HoloLens2はARMアーキテクチャかもしれないので、「ARM」にも�
 
 ## 謝辞
 
-- 鈴鹿高校 田端先生
-- 三重高校 村田先生、川田先生
-- 愛知総合工科高校 川田先生
-- 学芸大附属高校 大西先生
-- 津東高校 佐野先生
+- 鈴鹿高校 田畑雅基先生
+- 三重高校 村田了祐先生、川田博基先生
+- 愛知総合工科高校 川田大介先生
+- 学芸大附属高校 大西啄也先生
+- 津東高校 佐野哲也先生
 - St. Giles Cambridge 校 Philip 先生
 - JICA ボランティア 杉本博士
 - JICA ボランティア 酒井先生
