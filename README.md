@@ -221,12 +221,12 @@ However, when you distinguish handler, model and controller classes against each
 - Tokyo Gakugei University Senior High School, Teacher Takuya Ohnishi
 - Tsu Higashi High School, Teacher Tetsuya Sano
 - St. Giles Cambridge School, Teacher Philip
-- Japan International Cooperation Agency (JICA) volunteer, Dr. Sugimoto
-- Japan International Cooperation Agency (JICA) volunteer, Mr. Sakai
+- Japan International Cooperation Agency (JICA) volunteer, Dr. Norihiro Sugimoto
+- Japan International Cooperation Agency (JICA) volunteer, Mr. Akihiro Sakai
 - Kobe City Africa Business Mission Coordinator, Samuel IMANISHIMWE
 - Kobe Institute of Computing Business Development Director, Dr. Nick Barua
 - Integrated Polytechnic Regional College (IPRC) Tumba, Principal MUTABAZI Rita Clémence
-- University of Rwanda Dept of Computer Engineering Associate Professor, Dr.Santhi Kumaran
+- University of Rwanda Dept of Computer Engineering Associate Professor, Dr. Santhi Kumaran
 - Tomoki Hayashi
 - Koji Matsui
 - All staffs in share office BizSquare Yokkaichi
@@ -566,12 +566,12 @@ HoloLens2はARMアーキテクチャかもしれないので、「ARM」にも�
 - 学芸大附属高校 大西啄也先生
 - 津東高校 佐野哲也先生
 - St. Giles Cambridge 校 Philip 先生
-- JICA ボランティア 杉本博士
-- JICA ボランティア 酒井先生
-- 神戸市アフリカビジネスミッションコーディネーター Samuel 様
-- 神戸情報大学院大学 Business Development 学部長 Barua 博士
-- トゥンバ工科大学 Clémence 校長
-- ルワンダ大学理工学部情報工学科 Kumaran 助教授
+- JICA ボランティア 杉本憲広博士
+- JICA ボランティア 酒井章宏先生
+- 神戸市アフリカビジネスミッションコーディネーター Samuel IMANISHIMWE 様
+- 神戸情報大学院大学 Business Development 学部長 Nick Barua 博士
+- トゥンバ工科大学 MUTABAZI Rita Clémence 校長
+- ルワンダ大学理工学部情報工学科 Santhi Kumaran 助教
 - 林知樹様
 - 松井幸治様
 - シェアオフィス「ビズスクエアよっかいち」のスタッフの皆様
