@@ -162,6 +162,8 @@ This is the structure figure of the app.
 
 ![StructureDiagram](https://user-images.githubusercontent.com/129954/58148478-dc566200-7c99-11e9-89ed-abb2a20f726b.png)
 
+(Drawn with [Qt Visual Graph Editor](https://github.com/ArsMasiuk/qvge))
+
 We drew simple original structure figure in order to express both class relations and activity flows.
 
 1. Large circle means Prefab, Middle size circle means class, Small circle means method.
