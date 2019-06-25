@@ -156,7 +156,7 @@ The followings are lesson / session scenes. Appearance of the app was changing, 
 
 We were asked by The Physics Education Society of Japan to write a paper about these knowledge. We already posted. The detail is going to be put on the journal. We are going to add the link to the paper on publication.
 
-## Structure Figure
+## Structure
 
 This is the structure figure of the app.
 
