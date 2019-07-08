@@ -12,7 +12,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Feel Physics
-  productName: HoloMagnet3-190114
+  productName: HoloMagnet3
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -255,7 +255,14 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   resolutionDialogBanner: {fileID: 0}
-  m_BuildTargetIcons: []
+  m_BuildTargetIcons:
+  - m_BuildTarget: 
+    m_Icons:
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 5cb92e39bd3480e469992917c4847e99, type: 3}
+      m_Width: 128
+      m_Height: 128
+      m_Kind: 0
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
   m_BuildTargetVRSettings:
@@ -571,8 +578,15 @@ PlayerSettings:
   metroCertificateIssuer: DefaultCompany
   metroCertificateNotAfter: 00501b859411d601
   metroApplicationDescription: HoloMagnet3-190114
-  wsaImages: {}
-  metroTileShortName: 
+  wsaImages:
+    786532: Assets/HoloMagnet3/Icons/Wide310x150Logo.scale-100.png
+    851984: Assets/HoloMagnet3/Icons/Square44x44Logo.altform-unplated_targetsize-16.png
+    852000: Assets/HoloMagnet3/Icons/Square44x44Logo.altform-unplated_targetsize-32.png
+    852016: Assets/HoloMagnet3/Icons/Square44x44Logo.altform-unplated_targetsize-48.png
+    852048: Assets/HoloMagnet3/Icons/Square44x44Logo.targetsize-24.png
+    852224: Assets/HoloMagnet3/Icons/Square44x44Logo.altform-unplated_targetsize-256.png
+    2228424: Assets/HoloMagnet3/AppIcon310x310_200.png
+  metroTileShortName: HoloMagnet3
   metroCommandLineArgsFile: 
   metroTileShowName: 0
   metroMediumTileShowName: 0
