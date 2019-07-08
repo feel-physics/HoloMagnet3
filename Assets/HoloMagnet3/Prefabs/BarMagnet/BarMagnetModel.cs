@@ -2,7 +2,7 @@
 using HoloToolkit.Unity.InputModule;
 using UnityEngine;
 
-public class BarMagnetModel : Singleton<BarMagnetModel>
+public class BarMagnetModel : MonoBehaviour
 {
     [HideInInspector] public GameObject NorthPoleReference;
     [HideInInspector] public GameObject SouthPoleReference;

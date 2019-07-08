@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CompassesModel : Singleton<CompassesModel>
+public class CompassesModel : MonoBehaviour
 {
     public List<GameObject> CompassesReference;
     public List<CompassManagedlyUpdater> CompassesReferenceForManagedlyUpdate;

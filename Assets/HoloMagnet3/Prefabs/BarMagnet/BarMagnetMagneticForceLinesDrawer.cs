@@ -9,7 +9,7 @@ using UnityEngine;
 /// <summary>
 /// 磁力線の描画を行う
 /// </summary>
-public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForceLinesDrawer>
+public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 {
     //磁力線描画のPrefab
     private GameObject magneticForceLinePrefab;
@@ -68,15 +68,18 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
     long phase1Total = 0;
     long phase2Total = 0;
 
+    BarMagnetModel barMagnetModel;
     private void Start()
     {
-        magneticForceLinePrefab = BarMagnetModel.Instance.MagneticForceLinePrefab;
+        barMagnetModel = GetComponent<BarMagnetModel>();
+        magneticForceLinePrefab = barMagnetModel.MagneticForceLinePrefab;
 
         magneticForceLines = new List<LineRenderer>();
 
         listStartY = new List<float> { -0.02f, -0.002f, 0, 0.002f, 0.02f };
 
-        MySceneManager.MySceneEnum scene = MySceneManager.Instance.MyScene;
+        var scene = MySceneManager.Instance.MyScene;
+
         if (scene == MySceneManager.MySceneEnum.Compasses_3D)
         {
             listStartZ = new List<float> { -0.002f, 0, 0.002f };
@@ -105,10 +108,10 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
                 GenerateLines();
 
             //N極磁力線の描画
-            DrawLoop(true, BarMagnetModel.Instance.NorthPoleReference.transform.position);
-           
+            DrawLoop(true, barMagnetModel.NorthPoleReference.transform.position);
+
             //S極磁力線の描画
-            DrawLoop(false, BarMagnetModel.Instance.SouthPoleReference.transform.position);
+            DrawLoop(false, barMagnetModel.SouthPoleReference.transform.position);
 
 #if elapsed_time
             // 処理時間の計測

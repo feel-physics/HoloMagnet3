@@ -15,6 +15,8 @@ public class CompassesCreator : MonoBehaviour
     private enum Dimensiton { D2, D3 };
     private Dimensiton dimensiton;
 
+    CompassesModel compassesModel;
+
     void Start()
     {
         // Introductionのシーンでは方位磁針を生成しない
@@ -24,11 +26,15 @@ public class CompassesCreator : MonoBehaviour
             return;
         }
 
+
+        compassesModel = GetComponent<CompassesModel>();
+
         SetupCompassesPlacement();
 
         Debug.Log("Instantiate compasses");
 
         SetupCompassesParent();
+
 
         //次元に合わせて、コンパスのPrefabを設定する
         GameObject compass = LoadCompassPrefab();
@@ -88,9 +94,9 @@ public class CompassesCreator : MonoBehaviour
         var parent = new GameObject();
         // CompassParentの初期位置はCompassManagerと同じ
         parent.transform.position = transform.position;
-        parent.name = "CommpassesParent";
-        CompassesModel.Instance.ParentTransform = parent.transform;
-        CompassesModel.Instance.pitch = pitchCompass;
+        parent.name = "CommpassesParent-" + transform.parent.name;
+        compassesModel.ParentTransform = parent.transform;
+        compassesModel.pitch = pitchCompass;
     }
 
     GameObject LoadCompassPrefab()
@@ -116,8 +122,8 @@ public class CompassesCreator : MonoBehaviour
     {
         var mats = compass.GetComponentInChildren<MeshRenderer>().sharedMaterials;
 
-        CompassesModel.Instance.MatNorth = mats[0];
-        CompassesModel.Instance.MatSouth = mats[1];
+        compassesModel.MatNorth = mats[0];
+        compassesModel.MatSouth = mats[1];
     }
 
     void CreateCompasses(GameObject compass)
@@ -144,7 +150,10 @@ public class CompassesCreator : MonoBehaviour
                         compass, 
                         localPositionCompassCloned, 
                         Quaternion.identity,
-                        CompassesModel.Instance.ParentTransform);
+                        compassesModel.ParentTransform);
+
+                    compassCloned.GetComponent<CompassRegisterer>().Register(compassesModel);
+
                     //名前を付ける
                     compassCloned.name = string.Format("Compass_{0}-{1}-{2}", w, h, d);
                 }

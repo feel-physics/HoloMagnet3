@@ -42,9 +42,13 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     [SerializeField]
     private float brightnessLowerLimit = 0.04f;
 
+    CompassesModel compassesModel;
     private void Start()
     {
+        compassesModel = GetComponent<CompassesModel>();
         SetupForChangingBrightness();
+
+        //Invoke("SetupForChangingBrightness", 1f);
     }
 
     // Update is called once per frame
@@ -52,7 +56,7 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     {
         // Observer
         var compasses =
-            CompassesModel.Instance.CompassesReferenceForManagedlyUpdate;
+            compassesModel.CompassesReferenceForManagedlyUpdate;
 
         if (compasses.Count > 0)  // Todo: IntroductionではCompassesManagerを消す
         {
@@ -71,9 +75,9 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
 
         //磁石とコンパスの位置差分を取得
         var offset = magnet.transform.position -
-            CompassesModel.Instance.ParentTransform.position;
+            compassesModel.ParentTransform.position;
         //コンパスの間隔を取得
-        var pitch = CompassesModel.Instance.pitch;
+        var pitch = compassesModel.pitch;
 
         //間隔何個分ずれているかを取得
         var vecToMove = offset / pitch;
@@ -98,13 +102,13 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         }
 
         if (p != Vector3.zero)
-            CompassesModel.Instance.ParentTransform.position += p * pitch;
+            compassesModel.ParentTransform.position += p * pitch;
     }
 
     void ManagedlyUpdate(List<CompassManagedlyUpdater> compasses)
     {
         //コンパスが存在しているシーンでは、コンパスシェーダーにmaginetの位置を登録する
-        if (CompassesModel.Instance.MatNorth != null)
+        if (compassesModel.MatNorth != null)
         {
             AssignMagnetPosition();
         }
@@ -151,14 +155,14 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         // Todo: 今後以下のN極とS極で分かれている記述をまとめる
         // Todo: できればマテリアルをまとめてしまいたい
         // 方位磁針の明るさの係数
-        CompassesModel.Instance.MatNorth.SetFloat(
+        compassesModel.MatNorth.SetFloat(
             "_BrightnessCoefficient", brightnessCoefficient);
-        CompassesModel.Instance.MatSouth.SetFloat(
+        compassesModel.MatSouth.SetFloat(
             "_BrightnessCoefficient", brightnessCoefficient);
         // 方位磁針の明るさの下限
-        CompassesModel.Instance.MatNorth.SetFloat(
+        compassesModel.MatNorth.SetFloat(
             "_BrightnessLowerLimit", brightnessLowerLimit);
-        CompassesModel.Instance.MatSouth.SetFloat(
+        compassesModel.MatSouth.SetFloat(
             "_BrightnessLowerLimit", brightnessLowerLimit);
     }
 
@@ -174,12 +178,12 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
 
         // Set coordinates to Shader of Material of NORTH side of compass
 
-        CompassesModel.Instance.MatNorth.SetVector("_NorthPole1Pos", n1v4);
-        CompassesModel.Instance.MatNorth.SetVector("_SouthPole1Pos", s1v4);
+        compassesModel.MatNorth.SetVector("_NorthPole1Pos", n1v4);
+        compassesModel.MatNorth.SetVector("_SouthPole1Pos", s1v4);
 
         // Set coordinates to Shader of Material of SOUTH side of compass
-        CompassesModel.Instance.MatSouth.SetVector("_NorthPole1Pos", n1v4);
-        CompassesModel.Instance.MatSouth.SetVector("_SouthPole1Pos", s1v4);
+        compassesModel.MatSouth.SetVector("_NorthPole1Pos", n1v4);
+        compassesModel.MatSouth.SetVector("_SouthPole1Pos", s1v4);
 
 
         if (barMagnet02NorthPole != null)
@@ -192,10 +196,10 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
             var s2v4 = new Vector4(sp2.x, sp2.y, sp2.z, 0);  // Convert to Vector4
 
             // Set coordinates to Shader of Material of NORTH side of compass
-            CompassesModel.Instance.MatNorth.SetVector("_NorthPole2Pos", n2v4);
-            CompassesModel.Instance.MatNorth.SetVector("_SouthPole2Pos", s2v4);
-            CompassesModel.Instance.MatSouth.SetVector("_NorthPole2Pos", n2v4);
-            CompassesModel.Instance.MatSouth.SetVector("_SouthPole2Pos", s2v4);
+            compassesModel.MatNorth.SetVector("_NorthPole2Pos", n2v4);
+            compassesModel.MatNorth.SetVector("_SouthPole2Pos", s2v4);
+            compassesModel.MatSouth.SetVector("_NorthPole2Pos", n2v4);
+            compassesModel.MatSouth.SetVector("_SouthPole2Pos", s2v4);
         }
     }
 }
