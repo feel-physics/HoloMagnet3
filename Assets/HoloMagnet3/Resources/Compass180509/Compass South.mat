@@ -126,13 +126,13 @@ Material:
     - _Color: {r: 0.34117648, g: 0.5254902, b: 1, a: 1}
     - _Emission: {r: 0.34117648, g: 0.5254902, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _NorthPole1Pos: {r: 0.14283034, g: -0.029253624, b: 1.9850065, a: 0}
-    - _NorthPole2Pos: {r: -0.25, g: 0.0124999955, b: 1.99375, a: 0}
+    - _NorthPole1Pos: {r: 0.06348144, g: 0.13278398, b: 1.9878496, a: 0}
+    - _NorthPole2Pos: {r: -0.14839286, g: -0.05599182, b: 2.0088751, a: 0}
     - _NorthPolePos: {r: -0.03198438, g: 0.014791243, b: 1.9934689, a: 0}
     - _PlanePos: {r: 0.15, g: 0, b: 2, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SouthPole1Pos: {r: 0.24283037, g: -0.02925361, b: 1.9850065, a: 0}
-    - _SouthPole2Pos: {r: -0.15, g: 0.01250001, b: 1.99375, a: 0}
+    - _SouthPole1Pos: {r: 0.16348144, g: 0.13278398, b: 1.9878496, a: 0}
+    - _SouthPole2Pos: {r: -0.048392855, g: -0.055991806, b: 2.0088751, a: 0}
     - _SouthPolePos: {r: 0.06801563, g: 0.014791258, b: 1.9934689, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _TextureScaleOffset: {r: 1, g: 1, b: 0, a: 0}
