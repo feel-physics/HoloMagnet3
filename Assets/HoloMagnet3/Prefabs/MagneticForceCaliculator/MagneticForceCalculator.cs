@@ -1,6 +1,4 @@
-﻿using HoloToolkit.Unity;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public struct Pole
 {
@@ -18,6 +16,7 @@ public sealed class MagneticForceCalculator
     {
     }
 
+    // 合力を返す
     public Vector3 ForceResultant(Pole[] northPoles, Pole[] southPoles, Vector3 positionCurrentPoint)
     {
         // --- N極 ---
@@ -39,6 +38,7 @@ public sealed class MagneticForceCalculator
         {
             var positionBarMagnetNorthPole = pole.position;
 
+#if false
             // N極からの現在の頂点への変位ベクトル(ベクトルn)
             var displacementFromOnePoleToCurrentPoint = positionCurrentPoint - positionBarMagnetNorthPole;
 
@@ -53,6 +53,20 @@ public sealed class MagneticForceCalculator
             // ベクトルn
             var forceFromOnePoleToCurrentPoint =
                 normalizedDisplacementFromOnePoleToCurrentPoint / (float)lengthSquareFromOnePoleToCurrentPoint;
+#else
+            // N極からの現在の頂点への変位ベクトル(ベクトルn)
+            var vec_d = positionCurrentPoint - positionBarMagnetNorthPole;
+
+            // ベクトルnの長さの2乗（これで単位ベクトルを割る）
+            var len_d = 
+                Mathf.Sqrt(vec_d.x * vec_d.x + vec_d.y * vec_d.y + vec_d.z * vec_d.z);
+
+            // vec_f = (vec_d / |vec_d|) / (|vec_d|^2)
+            //       =  vec_d / |vec_d|^3
+            //       =  vec_d / len_d^3
+            var forceFromOnePoleToCurrentPoint =
+                vec_d / (len_d * len_d * len_d);
+#endif
 
             sumOfForceFromOnePoleToCurrentPoint += forceFromOnePoleToCurrentPoint;
         }
