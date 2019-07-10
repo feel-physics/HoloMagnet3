@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿#define nekomimi
+// @nekomimi suggested a way to tune up
+
+using UnityEngine;
 
 public struct Pole
 {
@@ -38,7 +41,20 @@ public sealed class MagneticForceCalculator
         {
             var positionBarMagnetNorthPole = pole.position;
 
-#if false
+#if nekomimi
+            // N極からの現在の頂点への変位ベクトル(ベクトルn)
+            var vec_d = positionCurrentPoint - positionBarMagnetNorthPole;
+
+            // ベクトルnの長さの2乗（これで単位ベクトルを割る）
+            var len_d = 
+                Mathf.Sqrt(vec_d.x * vec_d.x + vec_d.y * vec_d.y + vec_d.z * vec_d.z);
+
+            // vec_f = (vec_d / |vec_d|) / (|vec_d|^2)
+            //       =  vec_d / |vec_d|^3
+            //       =  vec_d / len_d^3
+            var forceFromOnePoleToCurrentPoint =
+                vec_d / (len_d * len_d * len_d);
+#else
             // N極からの現在の頂点への変位ベクトル(ベクトルn)
             var displacementFromOnePoleToCurrentPoint = positionCurrentPoint - positionBarMagnetNorthPole;
 
@@ -53,19 +69,6 @@ public sealed class MagneticForceCalculator
             // ベクトルn
             var forceFromOnePoleToCurrentPoint =
                 normalizedDisplacementFromOnePoleToCurrentPoint / (float)lengthSquareFromOnePoleToCurrentPoint;
-#else
-            // N極からの現在の頂点への変位ベクトル(ベクトルn)
-            var vec_d = positionCurrentPoint - positionBarMagnetNorthPole;
-
-            // ベクトルnの長さの2乗（これで単位ベクトルを割る）
-            var len_d = 
-                Mathf.Sqrt(vec_d.x * vec_d.x + vec_d.y * vec_d.y + vec_d.z * vec_d.z);
-
-            // vec_f = (vec_d / |vec_d|) / (|vec_d|^2)
-            //       =  vec_d / |vec_d|^3
-            //       =  vec_d / len_d^3
-            var forceFromOnePoleToCurrentPoint =
-                vec_d / (len_d * len_d * len_d);
 #endif
 
             sumOfForceFromOnePoleToCurrentPoint += forceFromOnePoleToCurrentPoint;
