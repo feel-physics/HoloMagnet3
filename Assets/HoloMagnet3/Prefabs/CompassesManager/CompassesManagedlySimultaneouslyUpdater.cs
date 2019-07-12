@@ -121,7 +121,8 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
 
     void SetupForChangingBrightness()
     {
-        magnet = FindObjectOfType<BarMagnetModel>();
+
+        magnet = transform.parent.GetComponent<BarMagnetModel>();
 
         try
         {
