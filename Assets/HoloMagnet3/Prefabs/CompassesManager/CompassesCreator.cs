@@ -12,7 +12,7 @@ public class CompassesCreator : MonoBehaviour
     private int numCompassY = 1;
     private int numCompassZ = 1;
 
-    private enum Dimensiton { D2, D3 };
+    private enum Dimensiton { D2, D3, Real };
     private Dimensiton dimensiton;
 
     CompassesModel compassesModel;
@@ -78,10 +78,10 @@ public class CompassesCreator : MonoBehaviour
             case MySceneManager.MySceneEnum.TwoBarMagnets:
                 numCompassX = 8;
                 numCompassY = 8;
-                numCompassZ = 6;
-                dimensiton = Dimensiton.D3;
-                pitchCompass = 0.07f;
-                shiftVector = new Vector3(0, -0.7f, 2);
+                numCompassZ = 8;
+                dimensiton = Dimensiton.Real;
+                pitchCompass = 0.03f;
+                //shiftVector = new Vector3(0, -0.25f, 2);
                 break;
             default:
                 throw new System.Exception("Invalid sceneId");
@@ -110,6 +110,9 @@ public class CompassesCreator : MonoBehaviour
                 break;
             case Dimensiton.D3:
                 compass = (GameObject)Resources.Load("Compass180509/Compass3D180509");
+                break;
+            case Dimensiton.Real:
+                compass = (GameObject)Resources.Load("Compass180509/Compass3D190713");
                 break;
             default:
                 throw new System.Exception("Invalid dimension");
