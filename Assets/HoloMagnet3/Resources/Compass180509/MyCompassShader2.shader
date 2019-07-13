@@ -6,11 +6,11 @@ Shader "Custom/MyCompassShader2" {
 		_ScrollX("Scroll X", float) = 0
 		_ScrollY("Scroll Y", float) = 0
 			// 棒磁石1の位置
-			_NorthPole1Pos("North Pole", Vector) = (0,0,0,0)
-			_SouthPole1Pos("South Pole", Vector) = (0,0,0,0)
+			_NorthPole1Pos("North Pole1", Vector) = (0,0,0,0)
+			_SouthPole1Pos("South Pole1", Vector) = (0,0,0,0)
 			// 棒磁石2の位置
-			_NorthPole2Pos("North Pole", Vector) = (0,0,0,0)
-			_SouthPole2Pos("South Pole", Vector) = (0,0,0,0)
+			_NorthPole2Pos("North Pole2", Vector) = (0,0,0,0)
+			_SouthPole2Pos("South Pole2", Vector) = (0,0,0,0)
 			// 方位磁針の明るさの係数
 			_BrightnessCoefficient("Brightness Coefficient", Float) = 0.005
 			// 磁石を消し込むパラメータ
