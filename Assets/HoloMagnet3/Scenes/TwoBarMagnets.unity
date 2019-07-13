@@ -259,6 +259,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4356352093508692, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
   m_IsPrefabParent: 0
@@ -309,6 +313,16 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23960872563585096, guid: d36ed935ad424bc429ae4d865030a856,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d7d5c5bcf4ffa24c89c7e68452021ab, type: 2}
+    - target: {fileID: 23440002744775438, guid: d36ed935ad424bc429ae4d865030a856,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d7d5c5bcf4ffa24c89c7e68452021ab, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d36ed935ad424bc429ae4d865030a856, type: 2}
   m_IsPrefabParent: 0
@@ -603,7 +617,7 @@ Prefab:
     - target: {fileID: 114759905311542390, guid: 4f67146b0c6aa3a4ea100790c2659000,
         type: 2}
       propertyPath: webcamDeviceNumber
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114806519925787914, guid: 4f67146b0c6aa3a4ea100790c2659000,
         type: 2}
@@ -662,6 +676,16 @@ Prefab:
       propertyPath: m_Name
       value: BarMagnet01
       objectReference: {fileID: 0}
+    - target: {fileID: 23960872563585096, guid: d36ed935ad424bc429ae4d865030a856,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d7d5c5bcf4ffa24c89c7e68452021ab, type: 2}
+    - target: {fileID: 23440002744775438, guid: d36ed935ad424bc429ae4d865030a856,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d7d5c5bcf4ffa24c89c7e68452021ab, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d36ed935ad424bc429ae4d865030a856, type: 2}
   m_IsPrefabParent: 0
@@ -840,6 +864,10 @@ Prefab:
     - target: {fileID: 1100163639617722, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4356352093508692, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
