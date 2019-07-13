@@ -202,5 +202,13 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
             compassesModel.MatSouth.SetVector("_NorthPole2Pos", n2v4);
             compassesModel.MatSouth.SetVector("_SouthPole2Pos", s2v4);
         }
+        //磁石2が無い場合は、磁石2用のパラメタに磁石１の値を設定する
+        else
+        {
+            compassesModel.MatNorth.SetVector("_NorthPole2Pos", n1v4);
+            compassesModel.MatNorth.SetVector("_SouthPole2Pos", s1v4);
+            compassesModel.MatSouth.SetVector("_NorthPole2Pos", n1v4);
+            compassesModel.MatSouth.SetVector("_SouthPole2Pos", s1v4);
+        }
     }
 }
