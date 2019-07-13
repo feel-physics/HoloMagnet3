@@ -736,7 +736,7 @@ Prefab:
     - target: {fileID: 114806519925787914, guid: 4f67146b0c6aa3a4ea100790c2659000,
         type: 2}
       propertyPath: positionLowPass
-      value: 0.2
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f67146b0c6aa3a4ea100790c2659000, type: 2}
