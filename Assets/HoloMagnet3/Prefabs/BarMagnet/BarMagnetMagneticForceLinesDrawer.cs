@@ -81,7 +81,8 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 
         var scene = MySceneManager.Instance.MyScene;
 
-        if (scene == MySceneManager.MySceneEnum.Compasses_3D)
+        if (scene == MySceneManager.MySceneEnum.Compasses_3D ||
+            scene == MySceneManager.MySceneEnum.TwoBarMagnets)
         {
             listStartZ = new List<float> { -0.002f, 0, 0.002f };
         }
