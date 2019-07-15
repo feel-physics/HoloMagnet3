@@ -609,7 +609,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4356352093508692, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
@@ -1409,7 +1409,7 @@ Prefab:
     - target: {fileID: 114806519925787914, guid: 4f67146b0c6aa3a4ea100790c2659000,
         type: 2}
       propertyPath: rotationLowPass
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114974017187885982, guid: 4f67146b0c6aa3a4ea100790c2659000,
         type: 2}
@@ -1897,7 +1897,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4356352093508692, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
