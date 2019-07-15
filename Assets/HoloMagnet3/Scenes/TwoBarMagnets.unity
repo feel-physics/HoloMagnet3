@@ -611,6 +611,11 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 114957463027817998, guid: f9f7405f429c2594fb373f184c2d4cf7,
+        type: 2}
+      propertyPath: lowPassFactor
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
   m_IsPrefabParent: 0
@@ -1898,6 +1903,11 @@ Prefab:
     - target: {fileID: 4356352093508692, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114957463027817998, guid: f9f7405f429c2594fb373f184c2d4cf7,
+        type: 2}
+      propertyPath: lowPassFactor
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
