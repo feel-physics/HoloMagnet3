@@ -18,11 +18,12 @@ public class BarMagnetModel : MonoBehaviour
         gameObject.GetComponent<BarMagnetModel>().SouthPoleReference =
             transform.Find("South Body/South Pole").gameObject;
 
-        handReference.SetActive(false);
-
         //準備出来たらGlobalListenerに追加
         if (gameObject.GetComponent<SetGlobalListener>() == null)
             gameObject.AddComponent<SetGlobalListener>();
+
+        handReference.SetActive(false);
+
 
     }
 
