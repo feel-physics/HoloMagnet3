@@ -102,7 +102,17 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
         }
 
         if (p != Vector3.zero)
-            compassesModel.ParentTransform.position += p * pitch;
+        {
+            //compassesModel.ParentTransform.position += p * pitch;
+            var lastpos = compassesModel.ParentTransform.position;
+            lastpos = new Vector3(
+                pitch * (int)(lastpos.x / pitch),
+                pitch * (int)(lastpos.y / pitch),
+                pitch * (int)(lastpos.z / pitch)
+            );
+
+            compassesModel.ParentTransform.position = lastpos + (p * pitch);
+        }
     }
 
     void ManagedlyUpdate(List<CompassManagedlyUpdater> compasses)
