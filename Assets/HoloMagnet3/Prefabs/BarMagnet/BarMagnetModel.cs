@@ -22,8 +22,8 @@ public class BarMagnetModel : MonoBehaviour
         if (gameObject.GetComponent<SetGlobalListener>() == null)
             gameObject.AddComponent<SetGlobalListener>();
 
-        handReference.SetActive(false);
-
+        if (handReference != null)
+            handReference.SetActive(false);
 
     }
 
