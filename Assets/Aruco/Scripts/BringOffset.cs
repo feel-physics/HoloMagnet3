@@ -19,6 +19,17 @@ public class BringOffset : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        //
+        // Micast配信用に、次回のオフセットを調整する。
+        // XYZ軸の調整は、マーカーを板に張り付けた状態で以下の座標系となる
+        //
+        //  x(+) は下方向　x(-)　は上方向に移動
+        //  y(+) は左方向　y(-)　は右方向に移動
+        //  z(+) は手前　  z(-)　は奥側に移動
+        //
+        //HoloLensで見たときに、位置が合うようにするには、以下の行をコメントアウトする
+        transform.localPosition = new Vector3(0.6f, -0.4f, -0.2f);
+
 
         lowPassFilter(transform.position, ref intermediateValueBuf, lowPassFactor, true);
         lowPassFilter(transform.rotation, ref intermediateValueBufVec4, lowPassFactorQ, true);
