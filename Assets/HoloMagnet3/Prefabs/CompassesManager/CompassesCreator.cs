@@ -76,11 +76,11 @@ public class CompassesCreator : MonoBehaviour
                 shiftVector = new Vector3(0, -0.7f, 2);
                 break;
             case MySceneManager.MySceneEnum.TwoBarMagnets:
-                numCompassX = 8;
-                numCompassY = 8;
-                numCompassZ = 8;
+                numCompassX = 12;
+                numCompassY = 12;
+                numCompassZ = 12;
                 dimensiton = Dimensiton.Real;
-                pitchCompass = 0.03f;
+                pitchCompass = 0.02f;
                 //shiftVector = new Vector3(0, -0.25f, 2);
                 break;
             default:

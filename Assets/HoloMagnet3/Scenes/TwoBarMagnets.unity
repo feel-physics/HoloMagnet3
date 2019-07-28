@@ -1334,6 +1334,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1174059221279068, guid: f3af4dbd1c905cd44909b42c0e7903a5, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3af4dbd1c905cd44909b42c0e7903a5, type: 2}
   m_IsPrefabParent: 0
@@ -1520,7 +1524,7 @@ MonoBehaviour:
   barMagnet01SouthPole: {fileID: 0}
   barMagnet02NorthPole: {fileID: 0}
   barMagnet02SouthPole: {fileID: 0}
-  brightnessCoefficient: 0.0001
+  brightnessCoefficient: 0.0002
   brightnessCoefficient3D: 0.002
   brightnessLowerLimit: 0.04
 --- !u!114 &1698898604
@@ -2266,7 +2270,7 @@ MonoBehaviour:
   barMagnet01SouthPole: {fileID: 0}
   barMagnet02NorthPole: {fileID: 0}
   barMagnet02SouthPole: {fileID: 0}
-  brightnessCoefficient: 0.0001
+  brightnessCoefficient: 0.0002
   brightnessCoefficient3D: 0.002
   brightnessLowerLimit: 0.04
 --- !u!114 &2080722798
