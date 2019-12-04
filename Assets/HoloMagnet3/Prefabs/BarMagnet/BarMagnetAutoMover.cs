@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarMagnetAutoMover : Singleton<BarMagnetAutoMover> {
+public class BarMagnetAutoMover :MonoBehaviour {
 
     public AudioClip ACMoving;
     AudioSource audioSource;

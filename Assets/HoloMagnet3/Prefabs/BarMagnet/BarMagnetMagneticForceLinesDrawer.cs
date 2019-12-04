@@ -9,7 +9,7 @@ using UnityEngine;
 /// <summary>
 /// 磁力線の描画を行う
 /// </summary>
-public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForceLinesDrawer>
+public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 {
     //磁力線描画のPrefab
     private GameObject magneticForceLinePrefab;
@@ -67,17 +67,22 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
 
     long phase1Total = 0;
     long phase2Total = 0;
+    int numOfCalclation = 0;
 
+    BarMagnetModel barMagnetModel;
     private void Start()
     {
-        magneticForceLinePrefab = BarMagnetModel.Instance.MagneticForceLinePrefab;
+        barMagnetModel = GetComponent<BarMagnetModel>();
+        magneticForceLinePrefab = barMagnetModel.MagneticForceLinePrefab;
 
         magneticForceLines = new List<LineRenderer>();
 
         listStartY = new List<float> { -0.02f, -0.002f, 0, 0.002f, 0.02f };
 
-        MySceneManager.MySceneEnum scene = MySceneManager.Instance.MyScene;
-        if (scene == MySceneManager.MySceneEnum.Compasses_3D)
+        var scene = MySceneManager.Instance.MyScene;
+
+        if (scene == MySceneManager.MySceneEnum.Compasses_3D ||
+            scene == MySceneManager.MySceneEnum.TwoBarMagnets)
         {
             listStartZ = new List<float> { -0.002f, 0, 0.002f };
         }
@@ -97,6 +102,7 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
             // 処理時間の計測
             phase1Total = 0;
             phase2Total = 0;
+            numOfCalclation = 0;
             System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
             sw.Start();
 #endif
@@ -105,10 +111,10 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
                 GenerateLines();
 
             //N極磁力線の描画
-            DrawLoop(true, BarMagnetModel.Instance.NorthPoleReference.transform.position);
-           
+            DrawLoop(true, barMagnetModel.NorthPoleReference.transform.position);
+
             //S極磁力線の描画
-            DrawLoop(false, BarMagnetModel.Instance.SouthPoleReference.transform.position);
+            DrawLoop(false, barMagnetModel.SouthPoleReference.transform.position);
 
 #if elapsed_time
             // 処理時間の計測
@@ -116,9 +122,10 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
 
             //Debug.Log("DrawMagnetForceLines3D takes " + sw.ElapsedMilliseconds + "ms");
             var phase2elapsed = phase2Total - phase1Total;
-            var phase1nano = ((double)phase1Total / System.Diagnostics.Stopwatch.Frequency) * 1000000000;
-            var phase2nano = ((double)phase2elapsed / System.Diagnostics.Stopwatch.Frequency) * 1000000000;
+            var phase1nano = ((double)phase1Total / System.Diagnostics.Stopwatch.Frequency) * 1000000000 / numOfCalclation;
+            var phase2nano = ((double)phase2elapsed / System.Diagnostics.Stopwatch.Frequency) * 1000000000 / numOfCalclation;
             Debug.Log(string.Format("phase1: {0}nsec, phase2elapsed: {1}nsec", phase1nano, phase2nano));
+            Debug.Log(string.Format("MagneticForceCalculator.Instance.ForceResultant: {0}nsec, phase2elapsed: {1}nsec", phase1nano, phase2nano));
 
 #endif
 
@@ -284,6 +291,7 @@ public class BarMagnetMagneticForceLinesDrawer : Singleton<BarMagnetMagneticForc
             }
 
             phase2Total += sw.ElapsedTicks;
+            numOfCalclation++;
 
             sw.Stop();
             magnetForceLine.SetPosition(i, positionCurrentPoint);

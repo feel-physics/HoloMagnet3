@@ -59,6 +59,10 @@ public class MySceneManager : Singleton<MySceneManager> {
                 //audioSource.pitch = 2.0f;
                 break;
             case MySceneEnum.Compasses_3D:
+                nextScene = MySceneEnum.TwoBarMagnets;
+                //audioSource.pitch = 2.5f;
+                break;
+            case MySceneEnum.TwoBarMagnets:
                 nextScene = MySceneEnum.Introduction;
                 //audioSource.pitch = 2.5f;
                 break;

@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/HoloMagnet3/Scenes/Compasses_3D.unity
     guid: 9cfd1362e2e84a745af70db5a0a400f0
+  - enabled: 1
+    path: Assets/HoloMagnet3/Scenes/TwoBarMagnets.unity
+    guid: aa837d6d8993c784591a3fc278ac35d3

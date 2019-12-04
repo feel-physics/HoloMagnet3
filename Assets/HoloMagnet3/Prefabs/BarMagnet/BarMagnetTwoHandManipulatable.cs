@@ -132,6 +132,9 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             }
         }
 
+
+        BarMagnetModel barMagnetModel;
+
         /// <summary>
         /// Change the manipulation mode.
         /// </summary>
@@ -150,6 +153,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
 
         private void Start()
         {
+            barMagnetModel = GetComponent<BarMagnetModel>();
             if (hostTransform == null)
             {
                 hostTransform = transform;
@@ -444,14 +448,16 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             MultiTapHandler.Instance.OnManipulationStarted();
 
             //手のモデルを表示する
-            if (BarMagnetModel.Instance.handReference != null)
-                BarMagnetModel.Instance.handReference.SetActive(true);
+            if (barMagnetModel.handReference != null)
+                barMagnetModel.handReference.SetActive(true);
+
+            var barMagnetAutoMover = GetComponent<BarMagnetAutoMover>();
 
             // 3次元のシーンであれば自動移動を止める
             if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D &&
-                BarMagnetAutoMover.Instance.IsMoving)
+                barMagnetAutoMover.IsMoving)
             {
-                BarMagnetAutoMover.Instance.IsMoving = false;
+                barMagnetAutoMover.IsMoving = false;
             }
 #else
             InputManager.Instance.PushModalInputHandler(gameObject);
@@ -469,8 +475,8 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             MultiTapHandler.Instance.OnManipulationEnded();
 
             //手のモデルを非表示にする
-            if (BarMagnetModel.Instance.handReference != null)
-                BarMagnetModel.Instance.handReference.SetActive(false);
+            if (barMagnetModel.handReference != null)
+                barMagnetModel.handReference.SetActive(false);
 #endif
 
             // Hide Bounding Box visual on release

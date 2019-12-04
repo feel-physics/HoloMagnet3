@@ -12,8 +12,10 @@ public class CompassesCreator : MonoBehaviour
     private int numCompassY = 1;
     private int numCompassZ = 1;
 
-    private enum Dimensiton { D2, D3 };
+    private enum Dimensiton { D2, D3, Real };
     private Dimensiton dimensiton;
+
+    CompassesModel compassesModel;
 
     void Start()
     {
@@ -24,11 +26,15 @@ public class CompassesCreator : MonoBehaviour
             return;
         }
 
+
+        compassesModel = GetComponent<CompassesModel>();
+
         SetupCompassesPlacement();
 
         Debug.Log("Instantiate compasses");
 
         SetupCompassesParent();
+
 
         //次元に合わせて、コンパスのPrefabを設定する
         GameObject compass = LoadCompassPrefab();
@@ -70,12 +76,12 @@ public class CompassesCreator : MonoBehaviour
                 shiftVector = new Vector3(0, -0.7f, 2);
                 break;
             case MySceneManager.MySceneEnum.TwoBarMagnets:
-                numCompassX = 8;
-                numCompassY = 8;
-                numCompassZ = 6;
-                dimensiton = Dimensiton.D3;
-                pitchCompass = 0.07f;
-                shiftVector = new Vector3(0, -0.7f, 2);
+                numCompassX = 12;
+                numCompassY = 12;
+                numCompassZ = 12;
+                dimensiton = Dimensiton.Real;
+                pitchCompass = 0.02f;
+                //shiftVector = new Vector3(0, -0.25f, 2);
                 break;
             default:
                 throw new System.Exception("Invalid sceneId");
@@ -88,9 +94,9 @@ public class CompassesCreator : MonoBehaviour
         var parent = new GameObject();
         // CompassParentの初期位置はCompassManagerと同じ
         parent.transform.position = transform.position;
-        parent.name = "CommpassesParent";
-        CompassesModel.Instance.ParentTransform = parent.transform;
-        CompassesModel.Instance.pitch = pitchCompass;
+        parent.name = "CommpassesParent-" + transform.parent.name;
+        compassesModel.ParentTransform = parent.transform;
+        compassesModel.pitch = pitchCompass;
     }
 
     GameObject LoadCompassPrefab()
@@ -105,6 +111,9 @@ public class CompassesCreator : MonoBehaviour
             case Dimensiton.D3:
                 compass = (GameObject)Resources.Load("Compass180509/Compass3D180509");
                 break;
+            case Dimensiton.Real:
+                compass = (GameObject)Resources.Load("Compass180509/Compass3D190713");
+                break;
             default:
                 throw new System.Exception("Invalid dimension");
         }
@@ -116,8 +125,8 @@ public class CompassesCreator : MonoBehaviour
     {
         var mats = compass.GetComponentInChildren<MeshRenderer>().sharedMaterials;
 
-        CompassesModel.Instance.MatNorth = mats[0];
-        CompassesModel.Instance.MatSouth = mats[1];
+        compassesModel.MatNorth = mats[0];
+        compassesModel.MatSouth = mats[1];
     }
 
     void CreateCompasses(GameObject compass)
@@ -144,7 +153,10 @@ public class CompassesCreator : MonoBehaviour
                         compass, 
                         localPositionCompassCloned, 
                         Quaternion.identity,
-                        CompassesModel.Instance.ParentTransform);
+                        compassesModel.ParentTransform);
+
+                    compassCloned.GetComponent<CompassRegisterer>().Register(compassesModel);
+
                     //名前を付ける
                     compassCloned.name = string.Format("Compass_{0}-{1}-{2}", w, h, d);
                 }
