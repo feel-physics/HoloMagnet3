@@ -6,18 +6,18 @@ public class CompassManagedlyUpdater : MonoBehaviour
     //GameObject[] southPoles;
     //GameObject[] northPoles;
 
-    Transform[] southPolesTransform;
-    Transform[] northPolesTransform;
+    Transform[] southPolesTransforms;
+    Transform[] northPolesTransforms;
 
     void Start()
     {
         //northPoles = GameObject.FindGameObjectsWithTag("North Pole");
         //southPoles = GameObject.FindGameObjectsWithTag("South Pole");
 
-        southPolesTransform = GameObject.FindGameObjectsWithTag("North Pole").
+        southPolesTransforms = GameObject.FindGameObjectsWithTag("North Pole").
             Select(go => go.transform).
             ToArray();
-        northPolesTransform = GameObject.FindGameObjectsWithTag("South Pole").
+        northPolesTransforms = GameObject.FindGameObjectsWithTag("South Pole").
             Select(go => go.transform).
             ToArray();
 
@@ -34,8 +34,8 @@ public class CompassManagedlyUpdater : MonoBehaviour
         // 合力ベクトル
         Vector3 forceResultant = 
             MagneticForceCalculator.Instance.ForceResultant(
-                MyHelper.ToPoleArray(southPolesTransform),
-                MyHelper.ToPoleArray(northPolesTransform),
+                MyHelper.ToPoleArray(southPolesTransforms),
+                MyHelper.ToPoleArray(northPolesTransforms),
                 transform.position);
 
         // コンパスの向きを設定する

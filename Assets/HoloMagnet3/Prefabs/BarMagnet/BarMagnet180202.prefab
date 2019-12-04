@@ -128,6 +128,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1424533740334666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4912903182653252}
+  - component: {fileID: 114808995508610568}
+  - component: {fileID: 114252725734559000}
+  - component: {fileID: 114191677612768480}
+  - component: {fileID: 114284810318046744}
+  m_Layer: 0
+  m_Name: Compass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1528386880758648
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,6 +291,7 @@ Transform:
   - {fileID: 4984482104461526}
   - {fileID: 4275080024640404}
   - {fileID: 4353346421116124}
+  - {fileID: 4912903182653252}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -300,6 +320,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4275080024640404}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4912903182653252
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424533740334666}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4628360241764182}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4984482104461526
 Transform:
@@ -665,6 +698,47 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114191677612768480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424533740334666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e039d21bb37ad143bf3de1b1c0b3e55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114252725734559000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424533740334666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac4660362d3c2a4fa07d2e895a90d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnet: {fileID: 0}
+  barMagnet01NorthPole: {fileID: 0}
+  barMagnet01SouthPole: {fileID: 0}
+  barMagnet02NorthPole: {fileID: 0}
+  barMagnet02SouthPole: {fileID: 0}
+  brightnessCoefficient: 0.005
+  brightnessCoefficient3D: 0.002
+  brightnessLowerLimit: 0.04
+--- !u!114 &114284810318046744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424533740334666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c500762fcfee82f4b83489327074dd05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114640533564228700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -681,6 +755,23 @@ MonoBehaviour:
   handReference: {fileID: 1057886674737756}
   MagneticForceLinePrefab: {fileID: 1256482237385276, guid: 62bc29ccba336ac43931d2e055086335,
     type: 2}
+--- !u!114 &114808995508610568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424533740334666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100dc46445e13dd428c97a92dac8d4fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CompassesReference: []
+  CompassesReferenceForManagedlyUpdate: []
+  ParentTransform: {fileID: 0}
+  pitch: 0.07
+  MatNorth: {fileID: 0}
+  MatSouth: {fileID: 0}
 --- !u!114 &114905948474313042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -714,10 +805,6 @@ MonoBehaviour:
   rotationConstraint: 0
   enableOneHandMovement: 1
   Is2D: 0
-  ACFinish: {fileID: 8300000, guid: a95d405907cd9b54c8fec1f61bf945b8, type: 3}
-  ACTap: {fileID: 8300000, guid: 8fca52959c4e1f14db0b01ccf25f1c59, type: 3}
-  ACDragging: {fileID: 8300000, guid: 484574b0326bb484da20126f573e829c, type: 3}
-  ACHold: {fileID: 8300000, guid: e51f1b04d73ef33448fb253f9bff0709, type: 3}
 --- !u!114 &114946775741763146
 MonoBehaviour:
   m_ObjectHideFlags: 1

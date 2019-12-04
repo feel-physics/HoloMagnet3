@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CompassesRemover : Singleton<CompassesRemover> {
+[RequireComponent(typeof(CompassesModel))]
+public class CompassesRemover : MonoBehaviour
+{
 
     /// <summary>
     /// 方位磁針をすべて削除する
     /// </summary>
     public void Remove()
     {
-        List<GameObject> compasses = CompassesModel.Instance.CompassesReference;
+        var compassesModel = GetComponent<CompassesModel>();
+        List<GameObject> compasses = compassesModel.CompassesReference;
         foreach (GameObject compass in compasses)
         {
             Destroy(compass);
         }
 
-        CompassesModel.Instance.ClearAllReference();
+        compassesModel.ClearAllReference();
     }
 }

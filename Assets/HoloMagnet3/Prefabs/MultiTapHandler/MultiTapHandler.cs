@@ -4,7 +4,7 @@
  * http://bluebirdofoz.hatenablog.com/entry/2019/02/06/060929
  */
 
- using UnityEngine;
+using UnityEngine;
 // IInputClickHandler を利用するため InputModule を追加
 using HoloToolkit.Unity.InputModule;
 using HoloToolkit.Unity;
@@ -99,7 +99,12 @@ IInputClickHandler // タップ操作検出
             {
                 // --- シングルタップ処理 ---
                 // 磁力線描画処理のオンオフを切り替える
-                BarMagnetMagneticForceLinesDrawer.Instance.IsDrawing = !BarMagnetMagneticForceLinesDrawer.Instance.IsDrawing;
+
+                foreach (var b in GameObject.FindObjectsOfType<BarMagnetMagneticForceLinesDrawer>())
+                {
+                    b.IsDrawing = !b.IsDrawing;
+                }
+
 
                 // 終了処理
                 p_MultTapCount = 0;
@@ -108,7 +113,7 @@ IInputClickHandler // タップ操作検出
             }
         }
         // 連続タップ
-        else if(p_MultTapCount > 1)
+        else if (p_MultTapCount > 1)
         {
             // タップカウントが 2 以上の時、連続タップの発生チェック
             if ((Time.time - p_MultTapStart) > MultTapTime)

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MySceneManager : Singleton<MySceneManager> {
 
-    public enum MySceneEnum { Introduction, Compass_One, Compasses_2D, Compasses_3D };
+    public enum MySceneEnum { Introduction, Compass_One, Compasses_2D, Compasses_3D, TwoBarMagnets };
     public MySceneEnum MyScene;
 
     // シーン遷移のときに効果音を鳴らす
@@ -20,7 +20,8 @@ public class MySceneManager : Singleton<MySceneManager> {
         {"Introduction",    MySceneEnum.Introduction },
         {"Compass_One",     MySceneEnum.Compass_One },
         {"Compasses_2D",    MySceneEnum.Compasses_2D },
-        {"Compasses_3D",    MySceneEnum.Compasses_3D }
+        {"Compasses_3D",    MySceneEnum.Compasses_3D },
+        {"TwoBarMagnets",   MySceneEnum.TwoBarMagnets }
     };
 
     protected override void Awake()
@@ -58,6 +59,10 @@ public class MySceneManager : Singleton<MySceneManager> {
                 //audioSource.pitch = 2.0f;
                 break;
             case MySceneEnum.Compasses_3D:
+                nextScene = MySceneEnum.TwoBarMagnets;
+                //audioSource.pitch = 2.5f;
+                break;
+            case MySceneEnum.TwoBarMagnets:
                 nextScene = MySceneEnum.Introduction;
                 //audioSource.pitch = 2.5f;
                 break;

@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
 
 public class CompassRegisterer : MonoBehaviour {
-    private void Start()
-    {
-        Register();
-    }
 
-    private void Register()
+
+    public void Register(CompassesModel compassesModel)
     {
+        //Debug.Log("RegisterRegisterRegisterRegisterRegisterRegisterRegisterRegisterRegisterRegisterRegisterRegisterRegisterRegister");
         // Compasses Modelに自分を登録する
-        CompassesModel.Instance.CompassesReference.Add(gameObject);
-        CompassesModel.Instance.CompassesReferenceForManagedlyUpdate.
+        compassesModel.CompassesReference.Add(gameObject);
+        compassesModel.CompassesReferenceForManagedlyUpdate.
             Add(gameObject.GetComponent<CompassManagedlyUpdater>());
     }
 }
