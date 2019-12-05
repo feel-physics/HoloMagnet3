@@ -54,6 +54,7 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
         }
     }
 
+	[SerializeField]
     List<LineRenderer> magneticForceLines = null;
     List<float> listStartY;
     List<float> listStartZ;
@@ -305,4 +306,22 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
             ref hasLogged);
 #endif
     }
+
+
+	public Vector3[] FetchMagnetForceLinePositionList(int magnetForceLineIndex)
+	{
+		Vector3[] positions;
+
+		positions = new Vector3[magneticForceLines[magnetForceLineIndex].positionCount];
+		magneticForceLines[magnetForceLineIndex].GetPositions(positions);
+
+		return positions;
+	}
+
+	public int FetchMagnetForceLineNum()
+	{
+		return magneticForceLines.Count;
+	}
+
+
 }
