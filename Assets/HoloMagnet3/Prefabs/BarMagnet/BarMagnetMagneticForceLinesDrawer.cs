@@ -1,4 +1,7 @@
 ﻿#undef elapsed_time  // 磁力線を引く処理時間を計測するため
+//LineRendererではなくGLによって線を描画するかどうか.
+//#define ENABLE_GL_LINE_RENDERING
+
 using HoloToolkit.Unity;
 using System.Collections.Generic;
 using System.Linq;
@@ -165,6 +168,9 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
                 var line = g.GetComponent<LineRenderer>();
                 InitializeLineRenderer(line);
                 magneticForceLines.Add(line);
+#if ENABLE_GL_LINE_RENDERING
+				line.enabled = false;
+#endif
 
                 g = Instantiate(magneticForceLinePrefab, transform.position, Quaternion.identity);
                 // 作成したオブジェクトを子として登録
@@ -173,6 +179,9 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
                 line = g.GetComponent<LineRenderer>();
                 InitializeLineRenderer(line);
                 magneticForceLines.Add(line);
+#if ENABLE_GL_LINE_RENDERING
+				line.enabled = false;
+#endif
             }
         }
 
@@ -307,7 +316,7 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 #endif
     }
 
-
+	//矢印描画用に磁力線描画に使っている座標配列を取得する.
 	public Vector3[] FetchMagnetForceLinePositionList(int magnetForceLineIndex)
 	{
 		Vector3[] positions;
@@ -318,10 +327,44 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 		return positions;
 	}
 
+	//磁力線の数を取得する.
 	public int FetchMagnetForceLineNum()
 	{
 		return magneticForceLines.Count;
 	}
 
+
+#if ENABLE_GL_LINE_RENDERING
+	private void OnRenderObject( )
+	{
+		CreateLineMaterial( );
+
+		lineMaterial.SetPass(0);
+		GL.PushMatrix( );
+		for( int i = 0; i < FetchMagnetForceLineNum( ); i ++ ){
+			GL.Begin(GL.LINE_STRIP);
+			foreach( Vector3 pos in FetchMagnetForceLinePositionList(i) ){
+				GL.Color(Color.yellow);
+				GL.Vertex(pos);
+			}
+			GL.End();
+		}
+		GL.PopMatrix( );
+	}
+
+	static Material lineMaterial;
+	static void CreateLineMaterial( )
+	{
+		if( !lineMaterial ) {
+			Shader shader = Shader.Find("Hidden/Internal-Colored");
+			lineMaterial = new Material(shader);
+			lineMaterial.hideFlags = HideFlags.HideAndDontSave;
+			lineMaterial.enableInstancing = true;
+			lineMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+			lineMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+			lineMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
+		}
+	}
+#endif
 
 }
