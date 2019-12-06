@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587271, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1559,6 +1559,7 @@ GameObject:
   - component: {fileID: 1748340089}
   - component: {fileID: 1748340088}
   - component: {fileID: 1748340087}
+  - component: {fileID: 1748340093}
   m_Layer: 0
   m_Name: BarMagnet01
   m_TagString: BarMagnet01
@@ -1611,6 +1612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsDrawing: 0
+  magneticForceLines: []
   acDraw: {fileID: 8300000, guid: 8fca52959c4e1f14db0b01ccf25f1c59, type: 3}
   baseLengthOfLine: 0.02
   numLines: 110
@@ -1730,6 +1732,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &1748340093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1748340086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198124153566333468050a1984549e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magneticForceLinesDrawer: {fileID: 1748340089}
+  arrowSrcObject: {fileID: 1456240667581974, guid: 92ac83e9df3a01e4881568f84d9c72d3,
+    type: 2}
+  arrowDrawInterval: 20
+  isValidDraw: 1
 --- !u!1001 &1750111700
 Prefab:
   m_ObjectHideFlags: 0
@@ -1972,6 +1990,7 @@ GameObject:
   - component: {fileID: 1958524578}
   - component: {fileID: 1958524577}
   - component: {fileID: 1958524576}
+  - component: {fileID: 1958524581}
   m_Layer: 0
   m_Name: BarMagnet02
   m_TagString: BarMagnet01
@@ -2024,6 +2043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsDrawing: 0
+  magneticForceLines: []
   acDraw: {fileID: 8300000, guid: 8fca52959c4e1f14db0b01ccf25f1c59, type: 3}
   baseLengthOfLine: 0.02
   numLines: 110
@@ -2126,6 +2146,22 @@ MonoBehaviour:
   handReference: {fileID: 0}
   MagneticForceLinePrefab: {fileID: 1256482237385276, guid: 62bc29ccba336ac43931d2e055086335,
     type: 2}
+--- !u!114 &1958524581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1958524575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198124153566333468050a1984549e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magneticForceLinesDrawer: {fileID: 1958524578}
+  arrowSrcObject: {fileID: 1456240667581974, guid: 92ac83e9df3a01e4881568f84d9c72d3,
+    type: 2}
+  arrowDrawInterval: 20
+  isValidDraw: 1
 --- !u!1001 &1974456638
 Prefab:
   m_ObjectHideFlags: 0
@@ -2169,6 +2205,11 @@ Prefab:
         type: 2}
       propertyPath: MyScene
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 82917241561787942, guid: 1b583df5b13a0f349b3391657c139ce5,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b583df5b13a0f349b3391657c139ce5, type: 2}
