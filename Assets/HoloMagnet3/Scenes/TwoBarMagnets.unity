@@ -723,7 +723,7 @@ Transform:
   - {fileID: 1177806415}
   - {fileID: 2080722794}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &733848477
 GameObject:
@@ -1730,7 +1730,7 @@ Transform:
   - {fileID: 157837503}
   - {fileID: 1698898600}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &1748340093
 MonoBehaviour:
@@ -1745,6 +1745,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magneticForceLinesDrawer: {fileID: 1748340089}
   arrowSrcObject: {fileID: 1456240667581974, guid: 92ac83e9df3a01e4881568f84d9c72d3,
+    type: 2}
+  barMagnetArrowSrcObject: {fileID: 1998470274706256, guid: 6f11e4e11167c6b4ebae350f21c74fe7,
     type: 2}
   arrowDrawInterval: 20
   isValidDraw: 1
@@ -1889,7 +1891,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4724919047673038, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 114957463027817998, guid: f9f7405f429c2594fb373f184c2d4cf7,
         type: 2}
@@ -2160,6 +2162,8 @@ MonoBehaviour:
   magneticForceLinesDrawer: {fileID: 1958524578}
   arrowSrcObject: {fileID: 1456240667581974, guid: 92ac83e9df3a01e4881568f84d9c72d3,
     type: 2}
+  barMagnetArrowSrcObject: {fileID: 1998470274706256, guid: 6f11e4e11167c6b4ebae350f21c74fe7,
+    type: 2}
   arrowDrawInterval: 20
   isValidDraw: 1
 --- !u!1001 &1974456638
@@ -2199,7 +2203,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4091811833580872, guid: 1b583df5b13a0f349b3391657c139ce5, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114096501414401868, guid: 1b583df5b13a0f349b3391657c139ce5,
         type: 2}
