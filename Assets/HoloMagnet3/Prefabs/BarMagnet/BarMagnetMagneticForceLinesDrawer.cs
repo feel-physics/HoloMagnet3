@@ -5,6 +5,7 @@
 using HoloToolkit.Unity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 // Todo: 後でクラス名をRenameする
@@ -68,6 +69,8 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 
     Transform[] southPolesTransform;
     Transform[] northPolesTransform;
+    Pole[] southPoles;
+    Pole[] northPoles;
 
     long phase1Total = 0;
     long phase2Total = 0;
@@ -189,9 +192,11 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
         northPolesTransform = GameObject.FindGameObjectsWithTag("North Pole").
             Select(go => go.transform).
             ToArray();
+        northPoles = new Pole[northPolesTransform.Length];
         southPolesTransform = GameObject.FindGameObjectsWithTag("South Pole").
             Select(go => go.transform).
             ToArray();
+        southPoles = new Pole[southPolesTransform.Length];
         Debug.Log("GenerateLines:" + magneticForceLines.Count);
     }
 
@@ -206,17 +211,21 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 
     public void DrawLoop(bool lineIsFromNorthPole, Vector3 polePosInWorld)
     {
+        StringBuilder stringBuilder = new StringBuilder("DrawLoop() of BarMagnetForceLinesDrawer is firing.\n");
         // デバッグ用ログ出力
         MyHelper.DebugLogEvery10Seconds(
-            "DrawLoop() of BarMagnetForceLinesDrawer is firing.\n" +
-            "BarMagnet: " + gameObject.transform.position.ToString() + "\n" +
-            "Pole: " + lineIsFromNorthPole.ToString() + "\n", ref hasLogged);
+            stringBuilder.Append(
+            "BarMagnet: ").Append(gameObject.transform.position.ToString()).Append("\n").Append(
+            "Pole: ").Append(lineIsFromNorthPole.ToString()).Append("\n").ToString(), ref hasLogged);
 
         Vector3 barMagnetDirection = transform.rotation.eulerAngles;
 
         int cnt = (lineIsFromNorthPole ? 0 : (int)magneticForceLines.Count / 2);
 
         var rotation = gameObject.transform.rotation;
+        Vector3 shiftPositionFromMyPole = Vector3.zero;
+
+        shiftPositionFromMyPole.y = 0.001f * (lineIsFromNorthPole ? 1 : -1);  // 極からx方向にどれくらい離すか
         foreach (float startY in listStartY)
         {
             foreach (float startZ in listStartZ)
@@ -224,11 +233,8 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
                 //var  shiftPositionFromMyPole2 = gameObject.transform.rotation * shiftPositionFromMyPole;
                 //Vector3 startPosition = polePosInWorld + shiftPositionFromMyPole2;
 
-                Vector3 shiftPositionFromMyPole = new Vector3(
-                    startY,
-                    0.001f * (lineIsFromNorthPole ? 1 : -1),  // 極からx方向にどれくらい離すか
-                    startZ
-                    );
+                shiftPositionFromMyPole.x = startY;
+                shiftPositionFromMyPole.z = startZ;
 
                 DrawOne(
                     magneticForceLines[cnt],
@@ -282,12 +288,15 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
             sw.Reset();
             sw.Start();
 
-            Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
+/*            Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
                 MyHelper.ToPoleArray(northPolesTransform),
                 MyHelper.ToPoleArray(southPolesTransform),
-                positionCurrentPoint);
+                positionCurrentPoint);*/
 
-
+            MyHelper.CopyPoleArray(northPoles, northPolesTransform);
+            MyHelper.CopyPoleArray(southPoles, southPolesTransform);
+            Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
+                northPoles, southPoles, positionCurrentPoint);
             phase1Total += sw.ElapsedTicks;
 
             // --- 描画 ---
