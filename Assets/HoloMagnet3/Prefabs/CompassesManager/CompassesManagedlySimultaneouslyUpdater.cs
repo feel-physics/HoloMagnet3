@@ -123,9 +123,13 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
             AssignMagnetPosition();
         }
 
-        foreach (CompassManagedlyUpdater compass in compasses)
+/*        foreach (CompassManagedlyUpdater compass in compasses)
         {
             compass.ManagedlyUpdate();
+        }*/
+        for (int i = 0; i < compasses.Count; i ++)
+        {
+            compasses[i].ManagedlyUpdate();
         }
     }
 
