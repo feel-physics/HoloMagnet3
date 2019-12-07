@@ -33,20 +33,12 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 			for( int i = 0; i < magneticForceLinesDrawer.FetchMagnetForceLineNum(); i ++ ){
 				List<GameObject> arrowObjectList = new List<GameObject>();
 				Vector3[] posArray = magneticForceLinesDrawer.FetchMagnetForceLinePositionList(i);
-				for( int j = 0; j < posArray.Length; j ++ ){
-					if( (j % arrowDrawInterval) == 0 ){
-						Quaternion arrowDirection = Quaternion.identity;
-
-						arrowDirection = Quaternion.FromToRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[j], Vector3.up);
-//						arrowDirection = Quaternion.FromToRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)], Vector3.up);
-						arrowObjectList.Add(Instantiate(arrowSrcObject, posArray[j], arrowDirection, transform));
-					}
-				}
+				AddArrowObject(posArray, arrowObjectList, i < (magneticForceLinesDrawer.FetchMagnetForceLineNum() / 2));
 				allArrowObjectList.Add(arrowObjectList);
 			}
 		}
 
-		//某磁石内の矢印.
+		//棒磁石内の矢印.
 		if( barMagnetArrowSrcObject != null ){
 			barMagnetArrowObject = Instantiate(barMagnetArrowSrcObject, transform);
 			barMagnetArrowObject.transform.localPosition = new Vector3(0.0115f, 0.0f, 0.0f);
@@ -59,8 +51,8 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+	{
 		UpdateArrowTransform( );
 		DrawArrow( );
 
@@ -73,7 +65,8 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 		if( magneticForceLinesDrawer == null ){
 			return;
 		}
-		for( int i = 0; i < magneticForceLinesDrawer.FetchMagnetForceLineNum(); i ++ ){
+		//N極用とS極用で向きを反転する(ループ回数が多いので、処理負荷的にifで内部で分岐させるのではなく、それぞれの処理を書く).
+		for( int i = 0; i < magneticForceLinesDrawer.FetchMagnetForceLineNum() / 2; i ++ ){
 			if( i >= allArrowObjectList.Count ){
 				break;
 			}
@@ -82,8 +75,22 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 				if( (j % arrowDrawInterval) == 0 && (j / arrowDrawInterval) < allArrowObjectList[i].Count ){
 					Quaternion arrowDirection = Quaternion.identity;
 
-					arrowDirection = Quaternion.FromToRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[j], Vector3.up);
-//					arrowDirection = Quaternion.FromToRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)], Vector3.up);
+					arrowDirection = Quaternion.FromToRotation(posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], Vector3.up);
+//					arrowDirection = Quaternion.FromToRotation(posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], Vector3.Cross(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], posArray[Math.Max(j - (arrowDrawInterval / 2), 0)]));
+					allArrowObjectList[i][(j / arrowDrawInterval)].transform.SetPositionAndRotation(posArray[j], arrowDirection);
+				}
+			}
+		}
+		for( int i = magneticForceLinesDrawer.FetchMagnetForceLineNum() / 2; i < magneticForceLinesDrawer.FetchMagnetForceLineNum(); i ++ ){
+			if( i >= allArrowObjectList.Count ){
+				break;
+			}
+			Vector3[] posArray = magneticForceLinesDrawer.FetchMagnetForceLinePositionList(i);
+			for( int j = 0; j < posArray.Length; j ++ ){
+				if( (j % arrowDrawInterval) == 0 && (j / arrowDrawInterval) < allArrowObjectList[i].Count ){
+					Quaternion arrowDirection = Quaternion.identity;
+
+					arrowDirection = Quaternion.FromToRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)], Vector3.up);
 					allArrowObjectList[i][(j / arrowDrawInterval)].transform.SetPositionAndRotation(posArray[j], arrowDirection);
 				}
 			}
@@ -95,7 +102,7 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 	//描画する矢印のオブジェクトを管理する(GameObjectの生成と削除を管理).
 	public void DrawArrow()
 	{
-		if( magneticForceLinesDrawer == null ){
+		if( magneticForceLinesDrawer == null || isValidDraw == false ){
 			return;
 		}
 		for( int i = 0; i < magneticForceLinesDrawer.FetchMagnetForceLineNum(); i ++ ){
@@ -103,6 +110,7 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 			if( i < allArrowObjectList.Count ){
 				arrowObjectList = allArrowObjectList[i];
 			}
+			//磁力線の数に対して、矢印の方が少ない場合はリストを新たに生成する.
 			else{
 				arrowObjectList = new List<GameObject>( );
 			}
@@ -111,23 +119,19 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 			if( (posArray.Length / arrowDrawInterval) == arrowObjectList.Count ){
 				continue;
 			}
-			for( int j = 0; j < posArray.Length; j ++ ){
-				if( (j % arrowDrawInterval) == 0 && (j / arrowDrawInterval) >= arrowObjectList.Count ){
-					Quaternion arrowDirection = Quaternion.identity;
-
-					arrowDirection = Quaternion.FromToRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[j], Vector3.up);
-					arrowObjectList.Add(Instantiate(arrowSrcObject, posArray[j], arrowDirection, transform));
-				}
-			}
-			//要素が多い場合は削除する.
+			//磁力線1本内の要素が少ない場合は生成する.
+			AddArrowObject(posArray, arrowObjectList, i < (magneticForceLinesDrawer.FetchMagnetForceLineNum() / 2));
+			//磁力線1本内の要素が多い場合は削除する.
 			if( (posArray.Length / arrowDrawInterval) < arrowObjectList.Count ){
 				arrowObjectList.GetRange((posArray.Length / arrowDrawInterval), arrowObjectList.Count - (posArray.Length / arrowDrawInterval)).ForEach((GameObject obj) => {Destroy(obj);});
 				arrowObjectList.RemoveRange((posArray.Length / arrowDrawInterval), arrowObjectList.Count - (posArray.Length / arrowDrawInterval));
 			}
+			//磁力線の数に対して、矢印の方が少ない場合は生成したものを追加する.
 			if( i >= allArrowObjectList.Count ){
 				allArrowObjectList.Add(arrowObjectList);
 			}
 		}
+		//磁力線の数に対して、矢印の方が多い場合は削除する.
 		if( magneticForceLinesDrawer.FetchMagnetForceLineNum() < allArrowObjectList.Count ){
 			foreach( List<GameObject> objList in allArrowObjectList.GetRange(magneticForceLinesDrawer.FetchMagnetForceLineNum(), allArrowObjectList.Count - magneticForceLinesDrawer.FetchMagnetForceLineNum()) ){
 				objList.ForEach((GameObject obj) => {Destroy(obj);});
@@ -138,6 +142,7 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 		return;
 	}
 
+	//描画の有効/無効を切り替え(オブジェクトのactiveの切り替え).
 	public void SwitchValidDraw(bool isDraw)
 	{
 		isValidDraw = isDraw;
@@ -148,6 +153,27 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 
 		return;
 	}
+
+	//矢印用オブジェクトの生成(初期の位置と向きも計算しておく).
+	private void AddArrowObject(Vector3[] posArray, List<GameObject> arrowObjectList, bool isNorth)
+	{
+		for( int j = 0; j < posArray.Length; j ++ ){
+			if( (j % arrowDrawInterval) == 0 ){
+				Quaternion arrowDirection = Quaternion.identity;
+
+				//N極用、S極用で向きを反転させる.
+				if( isNorth == true ){
+					arrowDirection = Quaternion.FromToRotation(posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], Vector3.up);
+				}
+				else{
+					arrowDirection = Quaternion.FromToRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)], Vector3.up);
+				}
+				arrowObjectList.Add(Instantiate(arrowSrcObject, posArray[j], arrowDirection, transform));
+			}
+		}
+		return;
+	}
+
 
 #if UNITY_EDITOR
 	//インスペクター上で値を変えても確認できるように対応.
