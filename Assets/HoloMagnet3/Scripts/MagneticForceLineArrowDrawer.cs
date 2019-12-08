@@ -65,6 +65,7 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 		if( magneticForceLinesDrawer == null ){
 			return;
 		}
+		Vector3 upVector = Vector3.up;
 		//N極用とS極用で向きを反転する(ループ回数が多いので、処理負荷的にifで内部で分岐させるのではなく、それぞれの処理を書く).
 		for( int i = 0; i < magneticForceLinesDrawer.FetchMagnetForceLineNum() / 2; i ++ ){
 			if( i >= allArrowObjectList.Count ){
@@ -75,8 +76,7 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 				if( (j % arrowDrawInterval) == 0 && (j / arrowDrawInterval) < allArrowObjectList[i].Count ){
 					Quaternion arrowDirection = Quaternion.identity;
 
-					arrowDirection = Quaternion.FromToRotation(posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], Vector3.up);
-//					arrowDirection = Quaternion.FromToRotation(posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], Vector3.Cross(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], posArray[Math.Max(j - (arrowDrawInterval / 2), 0)]));
+					arrowDirection = Quaternion.LookRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)], upVector);
 					allArrowObjectList[i][(j / arrowDrawInterval)].transform.SetPositionAndRotation(posArray[j], arrowDirection);
 				}
 			}
@@ -90,7 +90,7 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 				if( (j % arrowDrawInterval) == 0 && (j / arrowDrawInterval) < allArrowObjectList[i].Count ){
 					Quaternion arrowDirection = Quaternion.identity;
 
-					arrowDirection = Quaternion.FromToRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)], Vector3.up);
+					arrowDirection = Quaternion.LookRotation(posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], upVector);
 					allArrowObjectList[i][(j / arrowDrawInterval)].transform.SetPositionAndRotation(posArray[j], arrowDirection);
 				}
 			}
@@ -163,10 +163,10 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 
 				//N極用、S極用で向きを反転させる.
 				if( isNorth == true ){
-					arrowDirection = Quaternion.FromToRotation(posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], Vector3.up);
+					arrowDirection = Quaternion.LookRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)], Vector3.up);
 				}
 				else{
-					arrowDirection = Quaternion.FromToRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)], Vector3.up);
+					arrowDirection = Quaternion.LookRotation(posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], Vector3.up);
 				}
 				arrowObjectList.Add(Instantiate(arrowSrcObject, posArray[j], arrowDirection, transform));
 			}
