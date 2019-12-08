@@ -9,10 +9,13 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 
 	//磁力線の矢印用の元になるprefab.
 	[SerializeField]private GameObject arrowSrcObject = null;
-	//某磁石に表示する矢印の元になるprefab.
+	//棒磁石に表示する矢印の元になるprefab.
 	[SerializeField]private GameObject barMagnetArrowSrcObject = null;
 
+	//磁力線内の要素何点につき、矢印を描画するかの間隔.
 	[SerializeField]private int arrowDrawInterval = 20;
+	//矢印を描画開始する磁力線内の要素番号のオフセット(磁力線の根本等に矢印が集中することの軽減を意識して設定できるように).
+	[SerializeField]private int arrowDrawIntervalOffset = 0;
 
 	private List<List<GameObject>> allArrowObjectList = new List<List<GameObject>>();
 	private GameObject barMagnetArrowObject = null;
@@ -41,6 +44,7 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 		//棒磁石内の矢印.
 		if( barMagnetArrowSrcObject != null ){
 			barMagnetArrowObject = Instantiate(barMagnetArrowSrcObject, transform);
+			//棒磁石の中心部に表示するためのオフセット座標.
 			barMagnetArrowObject.transform.localPosition = new Vector3(0.0115f, 0.0f, 0.0f);
 //			if( allArrowObjectList.Count == 0 ){
 //				barMagnetArrowObject.SetActive(false);
@@ -73,7 +77,7 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 			}
 			Vector3[] posArray = magneticForceLinesDrawer.FetchMagnetForceLinePositionList(i);
 			for( int j = 0; j < posArray.Length; j ++ ){
-				if( (j % arrowDrawInterval) == 0 && (j / arrowDrawInterval) < allArrowObjectList[i].Count ){
+				if( ((j + arrowDrawIntervalOffset) % arrowDrawInterval) == 0 && (j / arrowDrawInterval) < allArrowObjectList[i].Count ){
 					Quaternion arrowDirection = Quaternion.identity;
 
 					arrowDirection = Quaternion.LookRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)], upVector);
@@ -87,7 +91,7 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 			}
 			Vector3[] posArray = magneticForceLinesDrawer.FetchMagnetForceLinePositionList(i);
 			for( int j = 0; j < posArray.Length; j ++ ){
-				if( (j % arrowDrawInterval) == 0 && (j / arrowDrawInterval) < allArrowObjectList[i].Count ){
+				if( ((j + arrowDrawIntervalOffset) % arrowDrawInterval) == 0 && (j / arrowDrawInterval) < allArrowObjectList[i].Count ){
 					Quaternion arrowDirection = Quaternion.identity;
 
 					arrowDirection = Quaternion.LookRotation(posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], upVector);
@@ -158,7 +162,7 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 	private void AddArrowObject(Vector3[] posArray, List<GameObject> arrowObjectList, bool isNorth)
 	{
 		for( int j = 0; j < posArray.Length; j ++ ){
-			if( (j % arrowDrawInterval) == 0 ){
+			if( ((j + arrowDrawIntervalOffset) % arrowDrawInterval) == 0 ){
 				Quaternion arrowDirection = Quaternion.identity;
 
 				//N極用、S極用で向きを反転させる.
