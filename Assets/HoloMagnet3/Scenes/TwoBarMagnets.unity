@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587271, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1336,7 +1336,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1174059221279068, guid: f3af4dbd1c905cd44909b42c0e7903a5, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3af4dbd1c905cd44909b42c0e7903a5, type: 2}
@@ -1749,6 +1749,7 @@ MonoBehaviour:
   barMagnetArrowSrcObject: {fileID: 1998470274706256, guid: 6f11e4e11167c6b4ebae350f21c74fe7,
     type: 2}
   arrowDrawInterval: 20
+  arrowDrawIntervalOffset: 0
   isValidDraw: 1
 --- !u!1001 &1750111700
 Prefab:
@@ -2165,6 +2166,7 @@ MonoBehaviour:
   barMagnetArrowSrcObject: {fileID: 1998470274706256, guid: 6f11e4e11167c6b4ebae350f21c74fe7,
     type: 2}
   arrowDrawInterval: 20
+  arrowDrawIntervalOffset: 0
   isValidDraw: 1
 --- !u!1001 &1974456638
 Prefab:
