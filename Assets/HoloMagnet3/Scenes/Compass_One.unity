@@ -519,6 +519,11 @@ Prefab:
       propertyPath: m_Name
       value: BarMagnet01
       objectReference: {fileID: 0}
+    - target: {fileID: 114041314217508022, guid: d36ed935ad424bc429ae4d865030a856,
+        type: 2}
+      propertyPath: magneticForceLinesDrawer
+      value: 
+      objectReference: {fileID: 1699359517}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d36ed935ad424bc429ae4d865030a856, type: 2}
   m_IsPrefabParent: 0
@@ -527,6 +532,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1132814198459000, guid: d36ed935ad424bc429ae4d865030a856,
     type: 2}
   m_PrefabInternal: {fileID: 1699359515}
+--- !u!114 &1699359517 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114905948474313042, guid: d36ed935ad424bc429ae4d865030a856,
+    type: 2}
+  m_PrefabInternal: {fileID: 1699359515}
+  m_Script: {fileID: 11500000, guid: 0bc5026f761a24a458826eb7fd373986, type: 3}
 --- !u!1001 &1720491041
 Prefab:
   m_ObjectHideFlags: 0

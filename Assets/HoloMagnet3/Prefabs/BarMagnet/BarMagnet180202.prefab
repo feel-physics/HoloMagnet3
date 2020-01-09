@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 114905948474313042}
   - component: {fileID: 114944391148216512}
   - component: {fileID: 114946775741763146}
+  - component: {fileID: 114041314217508022}
   m_Layer: 0
   m_Name: BarMagnet180202
   m_TagString: BarMagnet01
@@ -698,6 +699,25 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114041314217508022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1132814198459000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198124153566333468050a1984549e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magneticForceLinesDrawer: {fileID: 0}
+  arrowSrcObject: {fileID: 1456240667581974, guid: 92ac83e9df3a01e4881568f84d9c72d3,
+    type: 2}
+  barMagnetArrowSrcObject: {fileID: 1998470274706256, guid: 6f11e4e11167c6b4ebae350f21c74fe7,
+    type: 2}
+  arrowDrawInterval: 20
+  arrowDrawIntervalOffset: 0
+  isValidDraw: 1
 --- !u!114 &114191677612768480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -784,10 +804,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsDrawing: 0
+  magneticForceLines: []
   acDraw: {fileID: 8300000, guid: 8fca52959c4e1f14db0b01ccf25f1c59, type: 3}
   baseLengthOfLine: 0.02
   numLines: 110
-  widthLines: 0.005
+  widthLines: 0.0005
 --- !u!114 &114944391148216512
 MonoBehaviour:
   m_ObjectHideFlags: 1
