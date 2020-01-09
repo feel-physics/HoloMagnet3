@@ -581,12 +581,12 @@ PlayerSettings:
   metroCertificateNotAfter: 00501b859411d601
   metroApplicationDescription: HoloMagnet3-190114
   wsaImages:
-    786532: Assets/HoloMagnet3/Icons/Wide310x150Logo.scale-100.png
-    851984: Assets/HoloMagnet3/Icons/Square44x44Logo.altform-unplated_targetsize-16.png
-    852000: Assets/HoloMagnet3/Icons/Square44x44Logo.altform-unplated_targetsize-32.png
-    852016: Assets/HoloMagnet3/Icons/Square44x44Logo.altform-unplated_targetsize-48.png
-    852048: Assets/HoloMagnet3/Icons/Square44x44Logo.targetsize-24.png
-    852224: Assets/HoloMagnet3/Icons/Square44x44Logo.altform-unplated_targetsize-256.png
+    786532: 
+    851984: 
+    852000: 
+    852016: 
+    852048: 
+    852224: 
     2228424: Assets/HoloMagnet3/AppIcon310x310_200.png
   metroTileShortName: HoloMagnet3
   metroCommandLineArgsFile: 
