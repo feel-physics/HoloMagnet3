@@ -99,6 +99,42 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
         {
             listStartZ = new List<float> { 0 };
         }
+
+        Vector3 pointA = new Vector3(1, Mathf.Sqrt(3), (-3 - Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointB = new Vector3(-2, 0, (-3 - Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointC = new Vector3(1, -Mathf.Sqrt(3), (-3 - Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointD = new Vector3(-(1 + Mathf.Sqrt(5)) / 2, -(1 + Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (1 - Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointE = new Vector3(1 + Mathf.Sqrt(5), 0, (1 - Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointF = new Vector3(-(1 + Mathf.Sqrt(5)) / 2, (1 + Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (1 - Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointG = new Vector3((1 + Mathf.Sqrt(5)) / 2, (1 + Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (Mathf.Sqrt(5) - 1) / 2) / 10000.0f;
+        Vector3 pointH = new Vector3(-1 - Mathf.Sqrt(5), 0, (Mathf.Sqrt(5) - 1) / 2) / 10000.0f;
+        Vector3 pointI = new Vector3((1 + Mathf.Sqrt(5)) / 2, -(1 + Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (Mathf.Sqrt(5) - 1) / 2) / 10000.0f;
+        Vector3 pointJ = new Vector3(-1, -Mathf.Sqrt(3), (3 + Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointK = new Vector3(2, 0, (3 + Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointL = new Vector3(-1, Mathf.Sqrt(3), (3 + Mathf.Sqrt(5)) / 2) / 10000.0f;
+
+        listStartPos.Add(pointA + pointB + pointC);  // 01
+        listStartPos.Add(pointA + pointB + pointF);  // 02
+        listStartPos.Add(pointA + pointC + pointE);  // 03
+        listStartPos.Add(pointB + pointC + pointD);  // 04
+        listStartPos.Add(pointA + pointF + pointG);  // 05
+        listStartPos.Add(pointA + pointE + pointG);  // 06
+        listStartPos.Add(pointC + pointE + pointI);  // 07
+        listStartPos.Add(pointC + pointD + pointI);  // 08
+        listStartPos.Add(pointB + pointD + pointH);  // 09
+        listStartPos.Add(pointB + pointF + pointH);  // 10
+        listStartPos.Add(pointF + pointG + pointL);  // 11
+        listStartPos.Add(pointE + pointG + pointK);  // 12
+        listStartPos.Add(pointE + pointI + pointK);  // 13
+        listStartPos.Add(pointD + pointI + pointJ);  // 14
+        listStartPos.Add(pointD + pointH + pointJ);  // 15
+        listStartPos.Add(pointF + pointH + pointL);  // 16
+        listStartPos.Add(pointG + pointL + pointK);  // 17
+        listStartPos.Add(pointI + pointJ + pointK);  // 18
+        listStartPos.Add(pointH + pointJ + pointL);  // 19
+        listStartPos.Add(pointJ + pointL + pointK);  // 20
+
+        /*
         listStartPos.Add(new Vector3(1, Mathf.Sqrt(3), (-3 -Mathf.Sqrt(5)) / 2) / 10000.0f);
         listStartPos.Add(new Vector3(-2, 0, (-3 -Mathf.Sqrt(5))/ 2) / 10000.0f);
         listStartPos.Add(new Vector3(1, -Mathf.Sqrt(3), (-3 -Mathf.Sqrt(5))/ 2) / 10000.0f);
@@ -111,6 +147,7 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
         listStartPos.Add(new Vector3(-1, -Mathf.Sqrt(3), (3 +Mathf.Sqrt(5))/ 2) / 10000.0f);
         listStartPos.Add(new Vector3(2, 0, (3 +Mathf.Sqrt(5))/ 2) / 10000.0f);
         listStartPos.Add(new Vector3(-1, Mathf.Sqrt(3), (3 +Mathf.Sqrt(5))/ 2) / 10000.0f);
+        */
 
         audioSource = GetComponents<AudioSource>()[0];
     }
