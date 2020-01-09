@@ -99,18 +99,18 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
         {
             listStartZ = new List<float> { 0 };
         }
-        listStartPos.Add(new Vector3(1, Mathf.Sqrt(3), (-3 -Mathf.Sqrt(5)) / 2) / 100.0f);
-        listStartPos.Add(new Vector3(-2, 0, (-3 -Mathf.Sqrt(5))/ 2) / 100.0f);
-        listStartPos.Add(new Vector3(1, -Mathf.Sqrt(3), (-3 -Mathf.Sqrt(5))/ 2) / 100.0f);
-        listStartPos.Add(new Vector3(-(1 +Mathf.Sqrt(5))/ 2, -(1 +Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (1 -Mathf.Sqrt(5))/ 2) / 100.0f);
-        listStartPos.Add(new Vector3(1 +Mathf.Sqrt(5), 0, (1 -Mathf.Sqrt(5))/ 2) / 100.0f);
-        listStartPos.Add(new Vector3(-(1 +Mathf.Sqrt(5))/ 2, (1 +Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (1 -Mathf.Sqrt(5))/ 2) / 100.0f);
-        listStartPos.Add(new Vector3((1 +Mathf.Sqrt(5))/ 2, (1 +Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (Mathf.Sqrt(5) - 1)/ 2) / 100.0f);
-        listStartPos.Add(new Vector3(-1 -Mathf.Sqrt(5), 0, (Mathf.Sqrt(5) - 1)/ 2) / 100.0f);
-        listStartPos.Add(new Vector3((1 +Mathf.Sqrt(5))/ 2, -(1 +Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (Mathf.Sqrt(5) - 1)/ 2) / 100.0f);
-        listStartPos.Add(new Vector3(-1, -Mathf.Sqrt(3), (3 +Mathf.Sqrt(5))/ 2) / 100.0f);
-        listStartPos.Add(new Vector3(2, 0, (3 +Mathf.Sqrt(5))/ 2) / 100.0f);
-        listStartPos.Add(new Vector3(-1, Mathf.Sqrt(3), (3 +Mathf.Sqrt(5))/ 2) / 100.0f);
+        listStartPos.Add(new Vector3(1, Mathf.Sqrt(3), (-3 -Mathf.Sqrt(5)) / 2) / 10000.0f);
+        listStartPos.Add(new Vector3(-2, 0, (-3 -Mathf.Sqrt(5))/ 2) / 10000.0f);
+        listStartPos.Add(new Vector3(1, -Mathf.Sqrt(3), (-3 -Mathf.Sqrt(5))/ 2) / 10000.0f);
+        listStartPos.Add(new Vector3(-(1 +Mathf.Sqrt(5))/ 2, -(1 +Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (1 -Mathf.Sqrt(5))/ 2) / 10000.0f);
+        listStartPos.Add(new Vector3(1 +Mathf.Sqrt(5), 0, (1 -Mathf.Sqrt(5))/ 2) / 10000.0f);
+        listStartPos.Add(new Vector3(-(1 +Mathf.Sqrt(5))/ 2, (1 +Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (1 -Mathf.Sqrt(5))/ 2) / 10000.0f);
+        listStartPos.Add(new Vector3((1 +Mathf.Sqrt(5))/ 2, (1 +Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (Mathf.Sqrt(5) - 1)/ 2) / 10000.0f);
+        listStartPos.Add(new Vector3(-1 -Mathf.Sqrt(5), 0, (Mathf.Sqrt(5) - 1)/ 2) / 10000.0f);
+        listStartPos.Add(new Vector3((1 +Mathf.Sqrt(5))/ 2, -(1 +Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (Mathf.Sqrt(5) - 1)/ 2) / 10000.0f);
+        listStartPos.Add(new Vector3(-1, -Mathf.Sqrt(3), (3 +Mathf.Sqrt(5))/ 2) / 10000.0f);
+        listStartPos.Add(new Vector3(2, 0, (3 +Mathf.Sqrt(5))/ 2) / 10000.0f);
+        listStartPos.Add(new Vector3(-1, Mathf.Sqrt(3), (3 +Mathf.Sqrt(5))/ 2) / 10000.0f);
 
         audioSource = GetComponents<AudioSource>()[0];
     }
