@@ -62,6 +62,7 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
     List<LineRenderer> magneticForceLines = null;
     List<float> listStartY;
     List<float> listStartZ;
+    List<Vector3> listStartPos = new List<Vector3>();
 
     [SerializeField]
     private AudioClip acDraw;
@@ -92,11 +93,24 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
             scene == MySceneManager.MySceneEnum.TwoBarMagnets)
         {
             listStartZ = new List<float> { -0.002f, 0, 0.002f };
+            listStartZ = new List<float> { 0 };
         }
         else
         {
             listStartZ = new List<float> { 0 };
         }
+        listStartPos.Add(new Vector3(1, Mathf.Sqrt(3), (-3 -Mathf.Sqrt(5)) / 2) / 100.0f);
+        listStartPos.Add(new Vector3(-2, 0, (-3 -Mathf.Sqrt(5))/ 2) / 100.0f);
+        listStartPos.Add(new Vector3(1, -Mathf.Sqrt(3), (-3 -Mathf.Sqrt(5))/ 2) / 100.0f);
+        listStartPos.Add(new Vector3(-(1 +Mathf.Sqrt(5))/ 2, -(1 +Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (1 -Mathf.Sqrt(5))/ 2) / 100.0f);
+        listStartPos.Add(new Vector3(1 +Mathf.Sqrt(5), 0, (1 -Mathf.Sqrt(5))/ 2) / 100.0f);
+        listStartPos.Add(new Vector3(-(1 +Mathf.Sqrt(5))/ 2, (1 +Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (1 -Mathf.Sqrt(5))/ 2) / 100.0f);
+        listStartPos.Add(new Vector3((1 +Mathf.Sqrt(5))/ 2, (1 +Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (Mathf.Sqrt(5) - 1)/ 2) / 100.0f);
+        listStartPos.Add(new Vector3(-1 -Mathf.Sqrt(5), 0, (Mathf.Sqrt(5) - 1)/ 2) / 100.0f);
+        listStartPos.Add(new Vector3((1 +Mathf.Sqrt(5))/ 2, -(1 +Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (Mathf.Sqrt(5) - 1)/ 2) / 100.0f);
+        listStartPos.Add(new Vector3(-1, -Mathf.Sqrt(3), (3 +Mathf.Sqrt(5))/ 2) / 100.0f);
+        listStartPos.Add(new Vector3(2, 0, (3 +Mathf.Sqrt(5))/ 2) / 100.0f);
+        listStartPos.Add(new Vector3(-1, Mathf.Sqrt(3), (3 +Mathf.Sqrt(5))/ 2) / 100.0f);
 
         audioSource = GetComponents<AudioSource>()[0];
     }
@@ -158,9 +172,10 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
             DeleteLines();
         }
 
-        foreach (float startY in listStartY)
+//        foreach (float startY in listStartY)
         {
-            foreach (float startZ in listStartZ)
+//            foreach (float startZ in listStartZ)
+            foreach( Vector3 startPos in listStartPos )
             {
                 //N用とS用とLoop毎に２つ生成する
 
@@ -226,15 +241,17 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
         Vector3 shiftPositionFromMyPole = Vector3.zero;
 
         shiftPositionFromMyPole.y = 0.001f * (lineIsFromNorthPole ? 1 : -1);  // 極からx方向にどれくらい離すか
-        foreach (float startY in listStartY)
+//        foreach (float startY in listStartY)
         {
-            foreach (float startZ in listStartZ)
+//            foreach (float startZ in listStartZ)
+            foreach( Vector3 startPos in listStartPos )
             {
                 //var  shiftPositionFromMyPole2 = gameObject.transform.rotation * shiftPositionFromMyPole;
                 //Vector3 startPosition = polePosInWorld + shiftPositionFromMyPole2;
 
-                shiftPositionFromMyPole.x = startY;
-                shiftPositionFromMyPole.z = startZ;
+//                shiftPositionFromMyPole.x = startY;
+//                shiftPositionFromMyPole.z = startZ;
+                shiftPositionFromMyPole = startPos;
 
                 DrawOne(
                     magneticForceLines[cnt],
