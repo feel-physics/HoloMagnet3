@@ -240,6 +240,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 82466490560700750, guid: 1f66a8daac7dc334cbed551c2661f848,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f66a8daac7dc334cbed551c2661f848, type: 2}
   m_IsPrefabParent: 0
@@ -390,6 +395,11 @@ Prefab:
       propertyPath: magneticForceLinesDrawer
       value: 
       objectReference: {fileID: 1717240007}
+    - target: {fileID: 114905948474313042, guid: d36ed935ad424bc429ae4d865030a856,
+        type: 2}
+      propertyPath: isLineStartPlane
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d36ed935ad424bc429ae4d865030a856, type: 2}
   m_IsPrefabParent: 0

@@ -66,6 +66,8 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
     List<Vector3> listStartPos = new List<Vector3>();
     [SerializeField]
     Vector3 lineStartEulerRotation = Vector3.zero;
+    [SerializeField]
+    bool isLineStartPlane = false;
 
     [SerializeField]
     private AudioClip acDraw;
@@ -137,6 +139,20 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
         listStartPos.Add(pointI + pointJ + pointK);  // 18
         listStartPos.Add(pointH + pointJ + pointL);  // 19
         listStartPos.Add(pointJ + pointL + pointK);  // 20
+
+        //磁力線の開始位置を平面にする設定の場合.
+        if( true == isLineStartPlane ){
+            //45度ずつの円を描く開始点にする.
+            listStartPos.Clear();
+            listStartPos.Add(new Vector3(Mathf.Cos(0.0f * Mathf.Deg2Rad), Mathf.Sin(0.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(45.0f * Mathf.Deg2Rad), Mathf.Sin(45.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(90.0f * Mathf.Deg2Rad), Mathf.Sin(90.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(135.0f * Mathf.Deg2Rad), Mathf.Sin(135.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(180.0f * Mathf.Deg2Rad), Mathf.Sin(180.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(225.0f * Mathf.Deg2Rad), Mathf.Sin(225.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(270.0f * Mathf.Deg2Rad), Mathf.Sin(270.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(315.0f * Mathf.Deg2Rad), Mathf.Sin(315.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+        }
 
        for( int i = 0; i < listStartPos.Count;i ++ ){
             listStartPos[i] = Quaternion.Euler(lineStartEulerRotation) * listStartPos[i];

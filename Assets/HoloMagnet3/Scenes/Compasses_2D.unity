@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587271, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -527,6 +527,11 @@ Prefab:
       propertyPath: magneticForceLinesDrawer
       value: 
       objectReference: {fileID: 1794438708}
+    - target: {fileID: 114905948474313042, guid: d36ed935ad424bc429ae4d865030a856,
+        type: 2}
+      propertyPath: isLineStartPlane
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114114724655308206, guid: d36ed935ad424bc429ae4d865030a856, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d36ed935ad424bc429ae4d865030a856, type: 2}

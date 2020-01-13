@@ -79,8 +79,11 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 			for( int j = 0; j < posArray.Length; j ++ ){
 				if( ((j + arrowDrawIntervalOffset) % arrowDrawInterval) == 0 && (j / arrowDrawInterval) < allArrowObjectList[i].Count ){
 					Quaternion arrowDirection = Quaternion.identity;
+					Vector3 lookVector = posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)];
 
-					arrowDirection = Quaternion.LookRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)], upVector);
+					if( Vector3.zero != lookVector ){
+						arrowDirection = Quaternion.LookRotation(lookVector, upVector);
+					}
 					allArrowObjectList[i][(j / arrowDrawInterval)].transform.SetPositionAndRotation(posArray[j], arrowDirection);
 				}
 			}
@@ -93,8 +96,11 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 			for( int j = 0; j < posArray.Length; j ++ ){
 				if( ((j + arrowDrawIntervalOffset) % arrowDrawInterval) == 0 && (j / arrowDrawInterval) < allArrowObjectList[i].Count ){
 					Quaternion arrowDirection = Quaternion.identity;
+					Vector3 lookVector = posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)];
 
-					arrowDirection = Quaternion.LookRotation(posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], upVector);
+					if( Vector3.zero != lookVector ){
+						arrowDirection = Quaternion.LookRotation(lookVector, upVector);
+					}
 					allArrowObjectList[i][(j / arrowDrawInterval)].transform.SetPositionAndRotation(posArray[j], arrowDirection);
 				}
 			}
@@ -164,13 +170,20 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 		for( int j = 0; j < posArray.Length; j ++ ){
 			if( ((j + arrowDrawIntervalOffset) % arrowDrawInterval) == 0 ){
 				Quaternion arrowDirection = Quaternion.identity;
+				Vector3 lookVector;
 
 				//N極用、S極用で向きを反転させる.
 				if( isNorth == true ){
-					arrowDirection = Quaternion.LookRotation(posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)], Vector3.up);
+					lookVector = posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)] - posArray[Math.Max(j - (arrowDrawInterval / 2), 0)];
+					if( Vector3.zero != lookVector ){
+						arrowDirection = Quaternion.LookRotation(lookVector, Vector3.up);
+					}
 				}
 				else{
-					arrowDirection = Quaternion.LookRotation(posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)], Vector3.up);
+					lookVector = posArray[Math.Max(j - (arrowDrawInterval / 2), 0)] - posArray[Math.Min(j + (arrowDrawInterval / 2), posArray.Length - 1)];
+					if( Vector3.zero != lookVector ){
+						arrowDirection = Quaternion.LookRotation(lookVector, Vector3.up);
+					}
 				}
 				arrowObjectList.Add(Instantiate(arrowSrcObject, posArray[j], arrowDirection, transform));
 			}
