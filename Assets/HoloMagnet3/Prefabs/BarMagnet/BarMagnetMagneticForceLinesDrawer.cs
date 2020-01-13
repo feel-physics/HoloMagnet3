@@ -64,6 +64,8 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
     List<float> listStartZ;
     //磁力線の開始位置リスト.
     List<Vector3> listStartPos = new List<Vector3>();
+    [SerializeField]
+    Vector3 lineStartEulerRotation = Vector3.zero;
 
     [SerializeField]
     private AudioClip acDraw;
@@ -135,6 +137,10 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
         listStartPos.Add(pointI + pointJ + pointK);  // 18
         listStartPos.Add(pointH + pointJ + pointL);  // 19
         listStartPos.Add(pointJ + pointL + pointK);  // 20
+
+       for( int i = 0; i < listStartPos.Count;i ++ ){
+            listStartPos[i] = Quaternion.Euler(lineStartEulerRotation) * listStartPos[i];
+        }
 
         audioSource = GetComponents<AudioSource>()[0];
     }

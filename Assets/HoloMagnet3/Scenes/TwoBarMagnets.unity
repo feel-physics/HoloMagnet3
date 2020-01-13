@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587271, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1613,6 +1613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _IsDrawing: 0
   magneticForceLines: []
+  lineStartEulerRotation: {x: 90, y: 0, z: 0}
   acDraw: {fileID: 8300000, guid: 8fca52959c4e1f14db0b01ccf25f1c59, type: 3}
   baseLengthOfLine: 0.02
   numLines: 110
@@ -2047,6 +2048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _IsDrawing: 0
   magneticForceLines: []
+  lineStartEulerRotation: {x: 90, y: 0, z: 0}
   acDraw: {fileID: 8300000, guid: 8fca52959c4e1f14db0b01ccf25f1c59, type: 3}
   baseLengthOfLine: 0.02
   numLines: 110
