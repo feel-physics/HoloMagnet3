@@ -44,7 +44,7 @@ public class CompassManagedlyUpdater : MonoBehaviour
         MyHelper.CopyPoleArray(northPoles, northPolesTransforms);
         MyHelper.CopyPoleArray(southPoles, southPolesTransforms);
         Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
-            northPoles, southPoles, transform.position);
+            southPoles, northPoles, transform.position);
 
         // コンパスの向きを設定する
         transform.LookAt(transform.position + forceResultant);
