@@ -243,7 +243,7 @@ However, when you distinguish handler, model and controller classes against each
 [Homepage](https://feel-physics.jp),
 [Facebook](https://www.facebook.com/feelphysicsjp),
 [Twitter](https://twitter.com/feelphysicsjp),
-[LinkedIn](https://www.linkedin.com/in/weed7777/)
+[LinkedIn](https://www.linkedin.com/in/tatsuro-ueda)
 
 ---
 
@@ -270,7 +270,6 @@ However, when you distinguish handler, model and controller classes against each
   - [論文](#論文)
 - [構成図](#構成図)
 - [ビルド方法](#ビルド方法)
-- [ストア登録](#ストア登録)
 - [謝辞](#謝辞)
 
 ## 特徴
@@ -421,148 +420,6 @@ HoloLensアプリを作成する際は、最初はどうしても無秩序にプ
 3. **平面グリッド**上にコンパスが並んでいるシーン
 4. **立体グリッド**上にコンパスが並んでいるシーン
 
-## ストア登録
-
-公式の詳細な説明はここに書かれています：
-
-[Windows アプリを公開する \- Windows UWP applications \| Microsoft Docs](https://docs.microsoft.com/ja-jp/windows/uwp/publish/)
-
-（[ゆーじ様の書かれたHoloLens向けのアプリ公開の方法](http://2vr.jp/2017/01/30/submitting-an-app-to-the-windows-store/#i-3)でも丁寧に解説されています）
-
-以下では、公式の説明に補足した方が良いと思われる事項について説明します
-
-### アプリのアイコン画像を生成し、登録する
-
-以前はこの機能がなく、[高橋忍様が開発されたフリーソフト](https://blogs.msdn.microsoft.com/shintak/2015/08/22/uwp-logo-maker-ver-1-0/)に頼り切りでした。
-
-現在はVisual Studio上でアイコンを自動生成することができます。
-
-「Project」→「Store」→「Edit App Manifest」→「Visual Assets」を開きます。
-
-![Untitled - Paint 2019-05-20 12 13 36](https://user-images.githubusercontent.com/129954/57994582-cbbab600-7af8-11e9-9646-41fb1eed3410.png)
-
-「Source」でアイコン画像を選択します。
-
-![HoloMagnet3-190114 - Microsoft Visual Studio 2019-05-20 10 24 57](https://user-images.githubusercontent.com/129954/57993904-e17aac00-7af5-11e9-9288-fdd9546600cb.png)
-
-「Apply recommended padding」をオフにします。さもないと、アイコン画像をうまく枠にフィットしてくれません。
-
-![HoloMagnet3-190114 - Microsoft Visual Studio 2019-05-20 10 53 49](https://user-images.githubusercontent.com/129954/57994161-c9eff300-7af6-11e9-835a-37eefcdccb39.png)
-
-「Generate」をクリックするとアイコン画像が生成されます。
-
-![HoloMagnet3-190114 - Microsoft Visual Studio 2019-05-20 11 00 48](https://user-images.githubusercontent.com/129954/57994208-002d7280-7af7-11e9-819b-d0b3d5ae8ad8.png)
-
-### スプラッシュ画像を変える
-
-「Splash Screen」の画像だけを変更します。
-
-![NotificationsForm 2019-05-20 14 50 43](https://user-images.githubusercontent.com/129954/57998986-b94b7700-7b0e-11e9-8f95-bb191d62c963.png)
-
-
-### アプリアイコンを変える
-
-スタートパネル上のアイコンをUnityのデフォルトのものから変えます。
-
-まずエクスプローラでUnityプロジェクトフォルダ→「UWP」→「（プロジェクト名）」→「Assets」に移動し、「Square310x310Logo.scale-200.png」というファイルをUnityのプロジェクトのAssetsフォルダに入れます。
-
-![Assets 2019-05-20 14 38 17](https://user-images.githubusercontent.com/129954/57998548-fe6ea980-7b0c-11e9-92d6-326c39747dab.png)
-
-「Edit」→「Project Settings」→「Player」を開きます
-
-![Untitled - Paint 2019-05-20 12 16 23](https://user-images.githubusercontent.com/129954/57994654-23592180-7af9-11e9-82dc-65e95aebd967.png)
-
-「Icon」→「Univarsal 10 Tiles and Logos」→「Scale 200% (620x620 pixels)」を開き、先ほどプロジェクトに追加した画像ファイルを選択します。
-
-![NotificationsForm 2019-05-20 14 47 06](https://user-images.githubusercontent.com/129954/57998870-362a2100-7b0e-11e9-8a9d-22b866eac054.png)
-
-これでHoloLensのスタートパネルのアイコンを変更することができます。
-
-### ストアに登録するためにビルドする
-
-HoloLens2はARMアーキテクチャかもしれないので、「ARM」にもチェックを入れます。2つとも「Master」でビルドします。
-
-![NotificationsForm 2019-05-20 15 05 06](https://user-images.githubusercontent.com/129954/57999542-b8b3e000-7b10-11e9-8660-b0f13901d71e.png)
-
-以下のようなエラーでビルドが止まる場合は、該当のファイルのサイズをPhotoshopの「Web用に保存」などで小さくします。
-
-![NotificationsForm 2019-05-20 14 55 40](https://user-images.githubusercontent.com/129954/57999205-88b80d00-7b0f-11e9-92f6-f4c73c5793e3.png)
-
-### ストア上の情報を登録する
-
-ビルドしてアップロードするとストア登録がだいたい終わった気になりますが、その後の作業量が意外に多いです。記入事項を事前に準備しておくと良いです。
-
----
-
-まず、以下の事項を記入します。
-
-- アプリ名
-- アプリの説明
-- （更新したときは）更新内容
-- 検索キーワード
-
----
-
-![2019年5月22日：ストア上の情報を登録するページのスクリーンショット_1](https://user-images.githubusercontent.com/129954/58159028-9a87e480-7cb6-11e9-9aff-c00786d1e511.png)
-
----
-
-次に、スクリーンショットを登録します。
-
----
-
-![2019年5月22日：ストア上の情報を登録するページのスクリーンショット_2](https://user-images.githubusercontent.com/129954/58159248-0b2f0100-7cb7-11e9-81de-5dd635947bae.png)
-
----
-
-アプリのアイコンを登録します。
-
----
-
-![2019年5月22日：ストア上の情報を登録するページのスクリーンショット_3](https://user-images.githubusercontent.com/129954/58159303-2f8add80-7cb7-11e9-9750-085b83f53e32.png)
-
----
-
-ここがわかりにくいのですが、以下のように進めます。
-
-1. トレーラー動画をアップロードする
-2. 「Windows10 & XBox Image」をアップロードする
-3. 少し上に戻って、ストアのトップに表示するトレーラーを選びます
-
-2番目の事項をしないと、3番目の事項ができません。気をつけて下さい。
-
----
-
-![2019年5月22日：ストア上の情報を登録するページのスクリーンショット_4](https://user-images.githubusercontent.com/129954/58159471-8ee8ed80-7cb7-11e9-84a6-fa0a8d1e1fff.png)
-
----
-
-以下の事項を記入します。
-
-- ユーザがストアでアプリを検索する際に、部分一致でもヒットするように文節で分けたアプリ名
-- 音声認識で認識されるように文節で分けたアプリ名
-
----
-
-![2019年5月22日：ストア上の情報を登録するページのスクリーンショット_5](https://user-images.githubusercontent.com/129954/58159754-20585f80-7cb8-11e9-8ffd-57891875231c.png)
-
----
-
-以下の事項を記入します。
-
-- サポートのメールアドレス
-- 検索用キーワード
-- 著作権と商標
-- 開発者名
-
----
-
-![2019年5月22日：ストア上の情報を登録するページのスクリーンショット_6](https://user-images.githubusercontent.com/129954/58160010-90ff7c00-7cb8-11e9-88de-e9bf28a8b2ea.png)
-
----
-
-これが終わったら、Submit しましょう。
-
 ## 謝辞
 
 - 鈴鹿高校 田畑雅基先生
@@ -588,7 +445,7 @@ HoloLens2はARMアーキテクチャかもしれないので、「ARM」にも�
 [Homepage](https://feel-physics.jp),
 [Facebook](https://www.facebook.com/feelphysicsjp),
 [Twitter](https://twitter.com/feelphysicsjp),
-[LinkedIn](https://www.linkedin.com/in/weed7777/)
+[LinkedIn](https://www.linkedin.com/in/tatsuro-ueda/)
 
 ---
 
