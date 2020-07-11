@@ -28,7 +28,7 @@ public class BringOffset : MonoBehaviour {
         //  z(+) は手前　  z(-)　は奥側に移動
         //
         //HoloLensで見たときに、位置が合うようにするには、以下の行をコメントアウトする
-        transform.localPosition = new Vector3(0.6f, -0.4f, -0.2f);
+        //transform.localPosition = new Vector3(0.6f, -0.4f, -0.2f);
 
 
         lowPassFilter(transform.position, ref intermediateValueBuf, lowPassFactor, true);

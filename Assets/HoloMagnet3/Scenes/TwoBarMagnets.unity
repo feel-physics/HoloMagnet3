@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587271, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -723,7 +723,7 @@ Transform:
   - {fileID: 1177806415}
   - {fileID: 2080722794}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &733848477
 GameObject:
@@ -1336,7 +1336,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1174059221279068, guid: f3af4dbd1c905cd44909b42c0e7903a5, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3af4dbd1c905cd44909b42c0e7903a5, type: 2}
@@ -1559,6 +1559,7 @@ GameObject:
   - component: {fileID: 1748340089}
   - component: {fileID: 1748340088}
   - component: {fileID: 1748340087}
+  - component: {fileID: 1748340093}
   m_Layer: 0
   m_Name: BarMagnet01
   m_TagString: BarMagnet01
@@ -1611,6 +1612,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsDrawing: 0
+  magneticForceLines: []
+  lineStartEulerRotation: {x: 90, y: 0, z: 0}
   acDraw: {fileID: 8300000, guid: 8fca52959c4e1f14db0b01ccf25f1c59, type: 3}
   baseLengthOfLine: 0.02
   numLines: 110
@@ -1728,8 +1731,27 @@ Transform:
   - {fileID: 157837503}
   - {fileID: 1698898600}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &1748340093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1748340086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198124153566333468050a1984549e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magneticForceLinesDrawer: {fileID: 1748340089}
+  arrowSrcObject: {fileID: 1456240667581974, guid: 92ac83e9df3a01e4881568f84d9c72d3,
+    type: 2}
+  barMagnetArrowSrcObject: {fileID: 1998470274706256, guid: 6f11e4e11167c6b4ebae350f21c74fe7,
+    type: 2}
+  arrowDrawInterval: 20
+  arrowDrawIntervalOffset: 0
+  isValidDraw: 1
 --- !u!1001 &1750111700
 Prefab:
   m_ObjectHideFlags: 0
@@ -1871,7 +1893,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4724919047673038, guid: f9f7405f429c2594fb373f184c2d4cf7, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 114957463027817998, guid: f9f7405f429c2594fb373f184c2d4cf7,
         type: 2}
@@ -1972,6 +1994,7 @@ GameObject:
   - component: {fileID: 1958524578}
   - component: {fileID: 1958524577}
   - component: {fileID: 1958524576}
+  - component: {fileID: 1958524581}
   m_Layer: 0
   m_Name: BarMagnet02
   m_TagString: BarMagnet01
@@ -2024,6 +2047,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsDrawing: 0
+  magneticForceLines: []
+  lineStartEulerRotation: {x: 90, y: 0, z: 0}
   acDraw: {fileID: 8300000, guid: 8fca52959c4e1f14db0b01ccf25f1c59, type: 3}
   baseLengthOfLine: 0.02
   numLines: 110
@@ -2126,6 +2151,25 @@ MonoBehaviour:
   handReference: {fileID: 0}
   MagneticForceLinePrefab: {fileID: 1256482237385276, guid: 62bc29ccba336ac43931d2e055086335,
     type: 2}
+--- !u!114 &1958524581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1958524575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198124153566333468050a1984549e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magneticForceLinesDrawer: {fileID: 1958524578}
+  arrowSrcObject: {fileID: 1456240667581974, guid: 92ac83e9df3a01e4881568f84d9c72d3,
+    type: 2}
+  barMagnetArrowSrcObject: {fileID: 1998470274706256, guid: 6f11e4e11167c6b4ebae350f21c74fe7,
+    type: 2}
+  arrowDrawInterval: 20
+  arrowDrawIntervalOffset: 0
+  isValidDraw: 1
 --- !u!1001 &1974456638
 Prefab:
   m_ObjectHideFlags: 0
@@ -2163,12 +2207,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4091811833580872, guid: 1b583df5b13a0f349b3391657c139ce5, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114096501414401868, guid: 1b583df5b13a0f349b3391657c139ce5,
         type: 2}
       propertyPath: MyScene
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 82917241561787942, guid: 1b583df5b13a0f349b3391657c139ce5,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b583df5b13a0f349b3391657c139ce5, type: 2}

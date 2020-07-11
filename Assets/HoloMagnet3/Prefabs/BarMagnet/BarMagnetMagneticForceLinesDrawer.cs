@@ -1,7 +1,11 @@
 ﻿#undef elapsed_time  // 磁力線を引く処理時間を計測するため
+//LineRendererではなくGLによって線を描画するかどうか.
+//#define ENABLE_GL_LINE_RENDERING
+
 using HoloToolkit.Unity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 // Todo: 後でクラス名をRenameする
@@ -54,9 +58,16 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
         }
     }
 
+	[SerializeField]
     List<LineRenderer> magneticForceLines = null;
     List<float> listStartY;
     List<float> listStartZ;
+    //磁力線の開始位置リスト.
+    List<Vector3> listStartPos = new List<Vector3>();
+    [SerializeField]
+    Vector3 lineStartEulerRotation = Vector3.zero;
+    [SerializeField]
+    bool isLineStartPlane = false;
 
     [SerializeField]
     private AudioClip acDraw;
@@ -64,6 +75,8 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 
     Transform[] southPolesTransform;
     Transform[] northPolesTransform;
+    Pole[] southPoles;
+    Pole[] northPoles;
 
     long phase1Total = 0;
     long phase2Total = 0;
@@ -85,10 +98,64 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
             scene == MySceneManager.MySceneEnum.TwoBarMagnets)
         {
             listStartZ = new List<float> { -0.002f, 0, 0.002f };
+            listStartZ = new List<float> { 0 };
         }
         else
         {
             listStartZ = new List<float> { 0 };
+        }
+
+        //磁力線の開始地点を正20面体ベースの値になるようにする.
+        Vector3 pointA = new Vector3(1, Mathf.Sqrt(3), (-3 - Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointB = new Vector3(-2, 0, (-3 - Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointC = new Vector3(1, -Mathf.Sqrt(3), (-3 - Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointD = new Vector3(-(1 + Mathf.Sqrt(5)) / 2, -(1 + Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (1 - Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointE = new Vector3(1 + Mathf.Sqrt(5), 0, (1 - Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointF = new Vector3(-(1 + Mathf.Sqrt(5)) / 2, (1 + Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (1 - Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointG = new Vector3((1 + Mathf.Sqrt(5)) / 2, (1 + Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (Mathf.Sqrt(5) - 1) / 2) / 10000.0f;
+        Vector3 pointH = new Vector3(-1 - Mathf.Sqrt(5), 0, (Mathf.Sqrt(5) - 1) / 2) / 10000.0f;
+        Vector3 pointI = new Vector3((1 + Mathf.Sqrt(5)) / 2, -(1 + Mathf.Sqrt(5)) * Mathf.Sqrt(3) / 2, (Mathf.Sqrt(5) - 1) / 2) / 10000.0f;
+        Vector3 pointJ = new Vector3(-1, -Mathf.Sqrt(3), (3 + Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointK = new Vector3(2, 0, (3 + Mathf.Sqrt(5)) / 2) / 10000.0f;
+        Vector3 pointL = new Vector3(-1, Mathf.Sqrt(3), (3 + Mathf.Sqrt(5)) / 2) / 10000.0f;
+
+        listStartPos.Add(pointA + pointB + pointC);  // 01
+        listStartPos.Add(pointA + pointB + pointF);  // 02
+        listStartPos.Add(pointA + pointC + pointE);  // 03
+        listStartPos.Add(pointB + pointC + pointD);  // 04
+        listStartPos.Add(pointA + pointF + pointG);  // 05
+        listStartPos.Add(pointA + pointE + pointG);  // 06
+        listStartPos.Add(pointC + pointE + pointI);  // 07
+        listStartPos.Add(pointC + pointD + pointI);  // 08
+        listStartPos.Add(pointB + pointD + pointH);  // 09
+        listStartPos.Add(pointB + pointF + pointH);  // 10
+        listStartPos.Add(pointF + pointG + pointL);  // 11
+        listStartPos.Add(pointE + pointG + pointK);  // 12
+        listStartPos.Add(pointE + pointI + pointK);  // 13
+        listStartPos.Add(pointD + pointI + pointJ);  // 14
+        listStartPos.Add(pointD + pointH + pointJ);  // 15
+        listStartPos.Add(pointF + pointH + pointL);  // 16
+        listStartPos.Add(pointG + pointL + pointK);  // 17
+        listStartPos.Add(pointI + pointJ + pointK);  // 18
+        listStartPos.Add(pointH + pointJ + pointL);  // 19
+        listStartPos.Add(pointJ + pointL + pointK);  // 20
+
+        //磁力線の開始位置を平面にする設定の場合.
+        if( true == isLineStartPlane ){
+            //45度ずつの円を描く開始点にする.
+            listStartPos.Clear();
+            listStartPos.Add(new Vector3(Mathf.Cos(0.0f * Mathf.Deg2Rad), Mathf.Sin(0.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(45.0f * Mathf.Deg2Rad), Mathf.Sin(45.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(90.0f * Mathf.Deg2Rad), Mathf.Sin(90.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(135.0f * Mathf.Deg2Rad), Mathf.Sin(135.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(180.0f * Mathf.Deg2Rad), Mathf.Sin(180.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(225.0f * Mathf.Deg2Rad), Mathf.Sin(225.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(270.0f * Mathf.Deg2Rad), Mathf.Sin(270.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+            listStartPos.Add(new Vector3(Mathf.Cos(315.0f * Mathf.Deg2Rad), Mathf.Sin(315.0f * Mathf.Deg2Rad), 0.0f) / 10000.0f);
+        }
+
+       for( int i = 0; i < listStartPos.Count;i ++ ){
+            listStartPos[i] = Quaternion.Euler(lineStartEulerRotation) * listStartPos[i];
         }
 
         audioSource = GetComponents<AudioSource>()[0];
@@ -151,37 +218,42 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
             DeleteLines();
         }
 
-        foreach (float startY in listStartY)
+        foreach( Vector3 startPos in listStartPos )
         {
-            foreach (float startZ in listStartZ)
-            {
-                //N用とS用とLoop毎に２つ生成する
+            //N用とS用とLoop毎に２つ生成する
 
-                var g = Instantiate(magneticForceLinePrefab, transform.position, Quaternion.identity);
-                // 作成したオブジェクトを子として登録
-                g.tag = "CloneLine";
-                g.transform.parent = transform;
-                var line = g.GetComponent<LineRenderer>();
-                InitializeLineRenderer(line);
-                magneticForceLines.Add(line);
+            var g = Instantiate(magneticForceLinePrefab, transform.position, Quaternion.identity);
+            // 作成したオブジェクトを子として登録
+            g.tag = "CloneLine";
+            g.transform.parent = transform;
+            var line = g.GetComponent<LineRenderer>();
+            InitializeLineRenderer(line);
+            magneticForceLines.Add(line);
+#if ENABLE_GL_LINE_RENDERING
+			line.enabled = false;
+#endif
 
-                g = Instantiate(magneticForceLinePrefab, transform.position, Quaternion.identity);
-                // 作成したオブジェクトを子として登録
-                g.tag = "CloneLine";
-                g.transform.parent = transform;
-                line = g.GetComponent<LineRenderer>();
-                InitializeLineRenderer(line);
-                magneticForceLines.Add(line);
-            }
+            g = Instantiate(magneticForceLinePrefab, transform.position, Quaternion.identity);
+            // 作成したオブジェクトを子として登録
+            g.tag = "CloneLine";
+            g.transform.parent = transform;
+            line = g.GetComponent<LineRenderer>();
+            InitializeLineRenderer(line);
+            magneticForceLines.Add(line);
+#if ENABLE_GL_LINE_RENDERING
+			line.enabled = false;
+#endif
         }
 
         // すべてのN極、S極を取得する
         northPolesTransform = GameObject.FindGameObjectsWithTag("North Pole").
             Select(go => go.transform).
             ToArray();
+        northPoles = new Pole[northPolesTransform.Length];
         southPolesTransform = GameObject.FindGameObjectsWithTag("South Pole").
             Select(go => go.transform).
             ToArray();
+        southPoles = new Pole[southPolesTransform.Length];
         Debug.Log("GenerateLines:" + magneticForceLines.Count);
     }
 
@@ -196,37 +268,32 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 
     public void DrawLoop(bool lineIsFromNorthPole, Vector3 polePosInWorld)
     {
+        StringBuilder stringBuilder = new StringBuilder("DrawLoop() of BarMagnetForceLinesDrawer is firing.\n");
         // デバッグ用ログ出力
         MyHelper.DebugLogEvery10Seconds(
-            "DrawLoop() of BarMagnetForceLinesDrawer is firing.\n" +
-            "BarMagnet: " + gameObject.transform.position.ToString() + "\n" +
-            "Pole: " + lineIsFromNorthPole.ToString() + "\n", ref hasLogged);
+            stringBuilder.Append(
+            "BarMagnet: ").Append(gameObject.transform.position.ToString()).Append("\n").Append(
+            "Pole: ").Append(lineIsFromNorthPole.ToString()).Append("\n").ToString(), ref hasLogged);
 
         Vector3 barMagnetDirection = transform.rotation.eulerAngles;
 
         int cnt = (lineIsFromNorthPole ? 0 : (int)magneticForceLines.Count / 2);
 
         var rotation = gameObject.transform.rotation;
-        foreach (float startY in listStartY)
+        Vector3 shiftPositionFromMyPole = Vector3.zero;
+
+        shiftPositionFromMyPole.y = 0.001f * (lineIsFromNorthPole ? 1 : -1);  // 極からx方向にどれくらい離すか
+        foreach( Vector3 startPos in listStartPos )
         {
-            foreach (float startZ in listStartZ)
-            {
-                //var  shiftPositionFromMyPole2 = gameObject.transform.rotation * shiftPositionFromMyPole;
-                //Vector3 startPosition = polePosInWorld + shiftPositionFromMyPole2;
 
-                Vector3 shiftPositionFromMyPole = new Vector3(
-                    startY,
-                    0.001f * (lineIsFromNorthPole ? 1 : -1),  // 極からx方向にどれくらい離すか
-                    startZ
-                    );
+            shiftPositionFromMyPole = startPos;
 
-                DrawOne(
-                    magneticForceLines[cnt],
-                    lineIsFromNorthPole,
-                    polePosInWorld + rotation * shiftPositionFromMyPole);
+            DrawOne(
+                magneticForceLines[cnt],
+                lineIsFromNorthPole,
+                polePosInWorld + rotation * shiftPositionFromMyPole);
 
-                cnt++;
-            }
+            cnt++;
         }
 
     }
@@ -272,12 +339,15 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
             sw.Reset();
             sw.Start();
 
-            Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
+/*            Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
                 MyHelper.ToPoleArray(northPolesTransform),
                 MyHelper.ToPoleArray(southPolesTransform),
-                positionCurrentPoint);
+                positionCurrentPoint);*/
 
-
+            MyHelper.CopyPoleArray(northPoles, northPolesTransform);
+            MyHelper.CopyPoleArray(southPoles, southPolesTransform);
+            Vector3 forceResultant = MagneticForceCalculator.Instance.ForceResultant(
+                northPoles, southPoles, positionCurrentPoint);
             phase1Total += sw.ElapsedTicks;
 
             // --- 描画 ---
@@ -305,4 +375,56 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
             ref hasLogged);
 #endif
     }
+
+	//矢印描画用に磁力線描画に使っている座標配列を取得する.
+	public Vector3[] FetchMagnetForceLinePositionList(int magnetForceLineIndex)
+	{
+		Vector3[] positions;
+
+		positions = new Vector3[magneticForceLines[magnetForceLineIndex].positionCount];
+		magneticForceLines[magnetForceLineIndex].GetPositions(positions);
+
+		return positions;
+	}
+
+	//磁力線の数を取得する.
+	public int FetchMagnetForceLineNum()
+	{
+		return magneticForceLines.Count;
+	}
+
+
+#if ENABLE_GL_LINE_RENDERING
+	private void OnRenderObject( )
+	{
+		CreateLineMaterial( );
+
+		lineMaterial.SetPass(0);
+		GL.PushMatrix( );
+		for( int i = 0; i < FetchMagnetForceLineNum( ); i ++ ){
+			GL.Begin(GL.LINE_STRIP);
+			foreach( Vector3 pos in FetchMagnetForceLinePositionList(i) ){
+				GL.Color(Color.yellow);
+				GL.Vertex(pos);
+			}
+			GL.End();
+		}
+		GL.PopMatrix( );
+	}
+
+	static Material lineMaterial;
+	static void CreateLineMaterial( )
+	{
+		if( !lineMaterial ) {
+			Shader shader = Shader.Find("Hidden/Internal-Colored");
+			lineMaterial = new Material(shader);
+			lineMaterial.hideFlags = HideFlags.HideAndDontSave;
+			lineMaterial.enableInstancing = true;
+			lineMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+			lineMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+			lineMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
+		}
+	}
+#endif
+
 }

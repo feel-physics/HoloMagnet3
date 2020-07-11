@@ -43,4 +43,17 @@ public static class MyHelper
         }
         return poles;
     }
+
+    public static bool CopyPoleArray(Pole[] outPoles, Transform[] transforms)
+    {
+        if( outPoles.Length != transforms.Length ){
+            return false;
+        }
+        for( int i = 0; i < outPoles.Length; i ++ ){
+            outPoles[i].position = transforms[i].position;
+        }
+
+        return true;
+    }
+
 }

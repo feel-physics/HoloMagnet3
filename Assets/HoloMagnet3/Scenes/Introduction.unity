@@ -240,6 +240,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 82466490560700750, guid: 1f66a8daac7dc334cbed551c2661f848,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f66a8daac7dc334cbed551c2661f848, type: 2}
   m_IsPrefabParent: 0
@@ -385,9 +390,25 @@ Prefab:
       propertyPath: m_Name
       value: BarMagnet01
       objectReference: {fileID: 0}
+    - target: {fileID: 114041314217508022, guid: d36ed935ad424bc429ae4d865030a856,
+        type: 2}
+      propertyPath: magneticForceLinesDrawer
+      value: 
+      objectReference: {fileID: 1717240007}
+    - target: {fileID: 114905948474313042, guid: d36ed935ad424bc429ae4d865030a856,
+        type: 2}
+      propertyPath: isLineStartPlane
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d36ed935ad424bc429ae4d865030a856, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1717240007 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114905948474313042, guid: d36ed935ad424bc429ae4d865030a856,
+    type: 2}
+  m_PrefabInternal: {fileID: 1717240006}
+  m_Script: {fileID: 11500000, guid: 0bc5026f761a24a458826eb7fd373986, type: 3}
 --- !u!1001 &1737148209
 Prefab:
   m_ObjectHideFlags: 0
