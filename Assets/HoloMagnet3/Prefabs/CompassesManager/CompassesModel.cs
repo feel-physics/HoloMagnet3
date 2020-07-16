@@ -1,5 +1,4 @@
-﻿using HoloToolkit.Unity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CompassesModel : MonoBehaviour

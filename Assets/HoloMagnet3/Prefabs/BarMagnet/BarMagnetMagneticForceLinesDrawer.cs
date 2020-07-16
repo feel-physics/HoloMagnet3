@@ -2,7 +2,6 @@
 //LineRendererではなくGLによって線を描画するかどうか.
 //#define ENABLE_GL_LINE_RENDERING
 
-using HoloToolkit.Unity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

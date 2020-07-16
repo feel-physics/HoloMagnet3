@@ -84,7 +84,7 @@ namespace HoloToolkit.UI.Keyboard
         /// <summary>
         /// Move the axis slider based on the camera forward and the keyboard plane projection.
         /// </summary>
-        public AxisSlider InputFieldSlide = null;
+//        public AxisSlider InputFieldSlide = null;
 
         /// <summary>
         /// Bool for toggling the slider being enabled.
@@ -292,7 +292,7 @@ namespace HoloToolkit.UI.Keyboard
             {
                 Vector3 nearPoint = Vector3.ProjectOnPlane(CameraCache.Main.transform.forward, transform.forward);
                 Vector3 relPos = transform.InverseTransformPoint(nearPoint);
-                InputFieldSlide.TargetPoint = relPos;
+//                InputFieldSlide.TargetPoint = relPos;
             }
             CheckForCloseOnInactivityTimeExpired();
         }
@@ -580,7 +580,7 @@ namespace HoloToolkit.UI.Keyboard
         /// Primary method for typing individual characters to a text field.
         /// </summary>
         /// <param name="valueKey">The valueKey of the pressed key.</param>
-        public void AppendValue(KeyboardValueKey valueKey)
+/*        public void AppendValue(KeyboardValueKey valueKey)
         {
             IndicateActivity();
             string value = "";
@@ -606,13 +606,13 @@ namespace HoloToolkit.UI.Keyboard
             m_CaretPosition += value.Length;
 
             UpdateCaretPosition(m_CaretPosition);
-        }
+        }*/
 
         /// <summary>
         /// Trigger specific keyboard functionality.
         /// </summary>
         /// <param name="functionKey">The functionKey of the pressed key.</param>
-        public void FunctionKey(KeyboardKeyFunc functionKey)
+/*        public void FunctionKey(KeyboardKeyFunc functionKey)
         {
             IndicateActivity();
             switch (functionKey.m_ButtonFunction)
@@ -705,7 +705,7 @@ namespace HoloToolkit.UI.Keyboard
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
+        }*/
 
         /// <summary>
         /// Delete the character before the caret.

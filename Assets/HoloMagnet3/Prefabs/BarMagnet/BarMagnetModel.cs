@@ -1,5 +1,4 @@
-﻿using HoloToolkit.Unity;
-using HoloToolkit.Unity.InputModule;
+﻿//using HoloToolkit.Unity.InputModule;
 using UnityEngine;
 
 public class BarMagnetModel : MonoBehaviour
@@ -18,9 +17,9 @@ public class BarMagnetModel : MonoBehaviour
         gameObject.GetComponent<BarMagnetModel>().SouthPoleReference =
             transform.Find("South Body/South Pole").gameObject;
 
-        //準備出来たらGlobalListenerに追加
+/*        //準備出来たらGlobalListenerに追加
         if (gameObject.GetComponent<SetGlobalListener>() == null)
-            gameObject.AddComponent<SetGlobalListener>();
+            gameObject.AddComponent<SetGlobalListener>();*/
 
         if (handReference != null)
             handReference.SetActive(false);

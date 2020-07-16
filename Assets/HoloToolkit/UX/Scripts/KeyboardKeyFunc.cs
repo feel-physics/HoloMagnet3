@@ -2,9 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace HoloToolkit.UI.Keyboard
+namespace Microsoft.MixedReality.Toolkit.Experimental.UI
 {
     /// <summary>
     /// Represents a key on the keyboard that has a function.
@@ -39,28 +40,19 @@ namespace HoloToolkit.UI.Keyboard
         /// <summary>
         /// Designer specified functionality of a keyboard button.
         /// </summary>
-        public Function m_ButtonFunction = Function.UNDEFINED;
+        [Experimental]
+        [SerializeField, FormerlySerializedAs("m_ButtonFunction")] private Function buttonFunction = Function.UNDEFINED;
 
-        /// <summary>
-        /// Reference to GameObject's Button component.
-        /// </summary>
-        private Button m_Button = null;
-
-        /// <summary>
-        /// Get the button component.
-        /// </summary>
-        private void Awake()
-        {
-            m_Button = GetComponent<Button>();
-        }
+        public Function ButtonFunction => buttonFunction;
 
         /// <summary>
         /// Subscribe to the onClick event.
         /// </summary>
         private void Start()
         {
+            Button m_Button = GetComponent<Button>();
             m_Button.onClick.RemoveAllListeners();
-            m_Button.onClick.AddListener(new UnityEngine.Events.UnityAction(FireFunctionKey));
+            m_Button.onClick.AddListener(FireFunctionKey);
         }
 
         /// <summary>
@@ -68,7 +60,7 @@ namespace HoloToolkit.UI.Keyboard
         /// </summary>
         private void FireFunctionKey()
         {
-            Keyboard.Instance.FunctionKey(this);
+//            NonNativeKeyboard.Instance.FunctionKey(this);
         }
     }
 }

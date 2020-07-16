@@ -117,11 +117,11 @@ namespace HoloToolkit.Unity
                 EditorUserBuildSettings.wsaUWPBuildType = buildInfo.WSAUWPBuildType.Value;
             }
 
-            var oldWSAGenerateReferenceProjects = EditorUserBuildSettings.wsaGenerateReferenceProjects;
+//            var oldWSAGenerateReferenceProjects = EditorUserBuildSettings.wsaGenerateReferenceProjects;
 
             if (buildInfo.WSAGenerateReferenceProjects.HasValue)
             {
-                EditorUserBuildSettings.wsaGenerateReferenceProjects = buildInfo.WSAGenerateReferenceProjects.Value;
+ //               EditorUserBuildSettings.wsaGenerateReferenceProjects = buildInfo.WSAGenerateReferenceProjects.Value;
             }
 
             var oldColorSpace = PlayerSettings.colorSpace;
@@ -177,7 +177,7 @@ namespace HoloToolkit.Unity
             {
                 OnPostProcessBuild(buildInfo, buildReport);
 
-                if (buildInfo.BuildTarget == BuildTarget.WSAPlayer && EditorUserBuildSettings.wsaGenerateReferenceProjects)
+/*                if (buildInfo.BuildTarget == BuildTarget.WSAPlayer && EditorUserBuildSettings.wsaGenerateReferenceProjects)
                 {
                     UwpProjectPostProcess.Execute(buildInfo.OutputDirectory);
                 }
@@ -189,7 +189,7 @@ namespace HoloToolkit.Unity
 
                 EditorUserBuildSettings.wsaGenerateReferenceProjects = oldWSAGenerateReferenceProjects;
                 EditorUserBuildSettings.SwitchActiveBuildTarget(oldBuildTargetGroup, oldBuildTarget);
-            }
+*/            }
         }
 
         public static void ParseBuildCommandLine(ref BuildInfo buildInfo)
