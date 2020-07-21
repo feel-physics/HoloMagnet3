@@ -3,7 +3,8 @@
 
 #define feel_physics
 
-using HoloToolkit.Unity.UX;
+//using HoloToolkit.Unity.UX;
+using Microsoft.MixedReality.Toolkit.UI;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
