@@ -569,9 +569,9 @@ PlayerSettings:
   metroPackageVersion: 3.6.0.0
   metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: DefaultCompany
-  metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 00501b859411d601
+  metroCertificateSubject: Feel Physics
+  metroCertificateIssuer: Feel Physics
+  metroCertificateNotAfter: 8053e4e8f481d701
   metroApplicationDescription: HoloMagnet3-190114
   wsaImages:
     786532: 

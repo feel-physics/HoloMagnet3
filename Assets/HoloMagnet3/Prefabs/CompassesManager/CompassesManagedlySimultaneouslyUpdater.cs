@@ -162,7 +162,7 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
 
 
         // 3次元の場合は3次元用の明るさの係数を使う
-        if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D)
+        if (MySceneManager.MyScene == MySceneManager.MySceneEnum.Compasses_3D)
         {
             brightnessCoefficient = brightnessCoefficient3D;
         }

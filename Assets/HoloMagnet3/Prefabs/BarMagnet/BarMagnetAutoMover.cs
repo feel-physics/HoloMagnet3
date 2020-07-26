@@ -14,7 +14,7 @@ public class BarMagnetAutoMover :MonoBehaviour {
     // Use this for initialization
     void Start () {
         // 3次元のシーンのみ作動する
-        if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D)
+        if (MySceneManager.MyScene == MySceneManager.MySceneEnum.Compasses_3D)
         {
             IsMoving = true;
 

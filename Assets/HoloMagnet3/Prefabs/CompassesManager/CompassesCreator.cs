@@ -15,12 +15,12 @@ public class CompassesCreator : MonoBehaviour
     private enum Dimensiton { D2, D3, Real };
     private Dimensiton dimensiton;
 
-    CompassesModel compassesModel;
+	CompassesModel compassesModel;
 
     void Start()
     {
         // Introductionのシーンでは方位磁針を生成しない
-        if (MySceneManager.Instance.MyScene ==
+        if ( MySceneManager.MyScene ==
             MySceneManager.MySceneEnum.Introduction)
         {
             return;
@@ -48,7 +48,7 @@ public class CompassesCreator : MonoBehaviour
 
     void SetupCompassesPlacement()
     {
-        MySceneManager.MySceneEnum scene = MySceneManager.Instance.MyScene;
+        MySceneManager.MySceneEnum scene = MySceneManager.MyScene;
 
         //シーンに合わせて、配置するコンパス数を設定する
         //Introduction シーンの場合は、処理を停止する

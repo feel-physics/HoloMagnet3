@@ -1,11 +1,10 @@
-﻿using HoloToolkit.Unity;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Unityでビルドしなくても、実機で確かめながら位置などを微調整できる
 /// MySceneManagerから呼ばれる
 /// </summary>
-public class ObjectsInitializer : Singleton<ObjectsInitializer>
+public class ObjectsInitializer
 {
 
     string logMessage = " was initialized";
@@ -22,7 +21,7 @@ public class ObjectsInitializer : Singleton<ObjectsInitializer>
 
         // 初期位置を設定
         Vector3 initialPosition = new Vector3(0, 0, 2);
-        if (MySceneManager.Instance.MyScene ==
+        if (MySceneManager.MyScene ==
             MySceneManager.MySceneEnum.Compasses_3D)
         {
             initialPosition = new Vector3(0, -0.7f, 2);

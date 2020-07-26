@@ -3,7 +3,6 @@
 
 #define feel_physics
 
-//using HoloToolkit.Unity.UX;
 using Microsoft.MixedReality.Toolkit.UI;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +18,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
     /// See Assets/HoloToolkit-Examples/Input/Readme/README_TwoHandManipulationTest.md
     /// for instructions on how to use the script.
     /// </summary>
-    public class BarMagnetTwoHandManipulatable : MonoBehaviour, IInputHandler, ISourceStateHandler
+    public class BarMagnetTwoHandManipulatable : MonoBehaviour/*, IInputHandler, ISourceStateHandler*/
     {
         [SerializeField]
         [Tooltip("Transform that will be dragged. Defaults to the object of the component.")]
@@ -136,10 +135,13 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
 
         BarMagnetModel barMagnetModel;
 
-        /// <summary>
-        /// Change the manipulation mode.
-        /// </summary>
-        [System.Obsolete("Use ManipulationMode.")]
+		[SerializeField]
+		private MultiTapHandler multiTapHandler = null;
+
+		/// <summary>
+		/// Change the manipulation mode.
+		/// </summary>
+		[System.Obsolete("Use ManipulationMode.")]
         public void SetManipulationMode(ManipulationMode mode)
         {
             manipulationMode = mode;
@@ -162,7 +164,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
 
 #if feel_physics
             // 2次元のシーンではz=2で固定（初期化）
-            if (MySceneManager.Instance.MyScene ==
+            if (MySceneManager.MyScene ==
                 MySceneManager.MySceneEnum.Compasses_2D)
             {
                 Is2D = true;
@@ -446,7 +448,10 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         private void OnManipulationStarted()
         {
 #if feel_physics
-            MultiTapHandler.Instance.OnManipulationStarted();
+			if (multiTapHandler != null)
+			{
+				multiTapHandler.OnManipulationStarted();
+			}
 
             //手のモデルを表示する
             if (barMagnetModel.handReference != null)
@@ -455,7 +460,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             var barMagnetAutoMover = GetComponent<BarMagnetAutoMover>();
 
             // 3次元のシーンであれば自動移動を止める
-            if (MySceneManager.Instance.MyScene == MySceneManager.MySceneEnum.Compasses_3D &&
+            if (MySceneManager.MyScene == MySceneManager.MySceneEnum.Compasses_3D &&
                 barMagnetAutoMover.IsMoving)
             {
                 barMagnetAutoMover.IsMoving = false;
@@ -473,7 +478,10 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             InputManager.Instance.PopModalInputHandler();
 
 #if feel_physics
-            MultiTapHandler.Instance.OnManipulationEnded();
+			if (multiTapHandler != null)
+			{
+				multiTapHandler.OnManipulationEnded();
+			}
 
             //手のモデルを非表示にする
             if (barMagnetModel.handReference != null)

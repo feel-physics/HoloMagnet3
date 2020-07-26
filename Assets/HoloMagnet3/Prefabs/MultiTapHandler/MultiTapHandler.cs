@@ -6,12 +6,11 @@
 
 using UnityEngine;
 // IInputClickHandler を利用するため InputModule を追加
-using HoloToolkit.Unity.InputModule;
-using HoloToolkit.Unity;
+//using HoloToolkit.Unity.InputModule;
 
 // Todo: 後でクラス名を改良する
-public class MultiTapHandler : Singleton<MultiTapHandler>,
-IInputClickHandler // タップ操作検出
+public class MultiTapHandler : MonoBehaviour/*,
+IInputClickHandler // タップ操作検出*/
 {
     /// <summary>
     /// 連続タップ許容時間(秒)
@@ -72,13 +71,16 @@ IInputClickHandler // タップ操作検出
 
     AudioSource audioSource;
 
-    /// <summary>
-    /// 起動時処理
-    /// </summary>
-    void Start()
+	[SerializeField]
+	private MySceneManager mySceneManager = null;
+
+	/// <summary>
+	/// 起動時処理
+	/// </summary>
+	void Start()
     {
-        // FallBackEventHandlerにする
-        InputManager.Instance.PushFallbackInputHandler(gameObject);
+//        // FallBackEventHandlerにする
+//        InputManager.Instance.PushFallbackInputHandler(gameObject);
 
         audioSource = GetComponent<AudioSource>();
     }
@@ -121,9 +123,12 @@ IInputClickHandler // タップ操作検出
                 // 連続タップ許容時間が経過していればカウントに応じて処理を実行
                 if (p_MultTapCount == 2)
                 {
-                    // --- ダブルタップ処理 ---
-                    // 次のシーンをロード
-                    MySceneManager.Instance.LoadNextScene();
+					// --- ダブルタップ処理 ---
+					// 次のシーンをロード
+					if (null != mySceneManager)
+					{
+						mySceneManager.LoadNextScene();
+					}
 
                     // DoubleTap効果音を鳴らす
                     audioSource.clip = ACDoubleTap;
@@ -172,7 +177,7 @@ IInputClickHandler // タップ操作検出
         }
     }
 
-    /// <summary>
+/*    /// <summary>
     /// タップ検出
     /// </summary>
     /// <param name="eventData"></param>
@@ -195,7 +200,7 @@ IInputClickHandler // タップ操作検出
         }
         // 連続タップ計測開始時刻を更新
         p_MultTapStart = nowTime;
-    }
+    }*/
 
     public void OnManipulationStarted()
     {
