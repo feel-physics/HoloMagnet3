@@ -170,6 +170,21 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
                 Is2D = true;
             }
 #endif
+			// ObjectManipulatorでつかんだ際に、3次元のシーンだった場合は自動移動を止める処理を実行する.
+			BarMagnetAutoMover barMagnetAutoMover = GetComponent<BarMagnetAutoMover>();
+			ObjectManipulator objectManipulator = GetComponent<ObjectManipulator>();
+			if (barMagnetAutoMover != null && objectManipulator != null)
+			{
+				objectManipulator.OnManipulationStarted.AddListener((Microsoft.MixedReality.Toolkit.UI.ManipulationEventData manipulationEventData) =>
+				{
+				// 3次元のシーンであれば自動移動を止める
+				if (MySceneManager.MyScene == MySceneManager.MySceneEnum.Compasses_3D &&
+	                barMagnetAutoMover.IsMoving)
+	            {
+	                barMagnetAutoMover.IsMoving = false;
+	            }
+				});
+			}
 
         }
 
