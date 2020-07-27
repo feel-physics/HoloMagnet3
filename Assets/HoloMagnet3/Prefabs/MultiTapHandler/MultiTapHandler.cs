@@ -4,13 +4,13 @@
  * http://bluebirdofoz.hatenablog.com/entry/2019/02/06/060929
  */
 
+using Microsoft.MixedReality.Toolkit;
+using Microsoft.MixedReality.Toolkit.Input;
 using UnityEngine;
-// IInputClickHandler を利用するため InputModule を追加
-//using HoloToolkit.Unity.InputModule;
 
 // Todo: 後でクラス名を改良する
-public class MultiTapHandler : MonoBehaviour/*,
-IInputClickHandler // タップ操作検出*/
+public class MultiTapHandler : MonoBehaviour,
+IMixedRealityPointerHandler // タップ操作検出
 {
     /// <summary>
     /// 連続タップ許容時間(秒)
@@ -79,8 +79,8 @@ IInputClickHandler // タップ操作検出*/
 	/// </summary>
 	void Start()
     {
-//        // FallBackEventHandlerにする
-//        InputManager.Instance.PushFallbackInputHandler(gameObject);
+        // FallBackEventHandlerにする
+		MixedRealityToolkit.Instance.GetService<IMixedRealityInputSystem>().PushFallbackInputHandler(gameObject);
 
         audioSource = GetComponent<AudioSource>();
     }
@@ -212,4 +212,40 @@ IInputClickHandler // タップ操作検出*/
     {
         holdEnded = true;
     }
+
+	public void OnPointerDown(MixedRealityPointerEventData eventData)
+	{
+        // 現在時刻の取得
+        p_HoldStart = Time.time;
+	}
+
+	public void OnPointerDragged(MixedRealityPointerEventData eventData)
+	{
+	}
+
+	public void OnPointerUp(MixedRealityPointerEventData eventData)
+	{
+        holdEnded = true;
+	}
+
+	public void OnPointerClicked(MixedRealityPointerEventData eventData)
+	{
+        // 現在時刻の取得
+        float nowTime = Time.time;
+
+        // 連続タップ確認
+        tapTime = nowTime - p_MultTapStart;
+        if (tapTime > MultTapTime)
+        {
+            // 前回タップから連続タップ許容時間を超えていれば初回タップと再判定
+            p_MultTapCount = 1;
+        }
+        else
+        {
+            // 前回タップから連続タップ許容時間内ならば連続タップと判定
+            p_MultTapCount++;
+        }
+        // 連続タップ計測開始時刻を更新
+        p_MultTapStart = nowTime;
+	}
 }

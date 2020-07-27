@@ -54,7 +54,8 @@ public class MySceneManager : MonoBehaviour
                 //audioSource.pitch = 2.0f;
                 break;
             case MySceneEnum.Compasses_3D:
-                nextScene = MySceneEnum.TwoBarMagnets;
+                nextScene = MySceneEnum.Introduction;
+//                nextScene = MySceneEnum.TwoBarMagnets;
                 //audioSource.pitch = 2.5f;
                 break;
             case MySceneEnum.TwoBarMagnets:
