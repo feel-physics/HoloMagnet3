@@ -216,7 +216,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
                  * http://tsubakit1.hateblo.jp/entry/20131015/1381836858
                  */
                 Vector3 pos = transform.position;
-                Vector3 newpos = new Vector3(pos.x, pos.y, 2);
+                Vector3 newpos = new Vector3(pos.x, pos.y, 0.5f);
                 transform.position = newpos;
             }
 #endif
