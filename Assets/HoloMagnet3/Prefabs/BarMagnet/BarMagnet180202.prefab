@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 7377216411965020324}
   - component: {fileID: 6492244689678922476}
   - component: {fileID: 8794058906809030244}
+  - component: {fileID: -4796947544544303347}
   m_Layer: 0
   m_Name: BarMagnet180202
   m_TagString: BarMagnet01
@@ -159,7 +160,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132814198459000}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.7}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.4}
   m_Children:
   - {fileID: 4984482104461526}
@@ -432,6 +433,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTetherWhenManipulating: 0
+--- !u!114 &-4796947544544303347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132814198459000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01154b683cef65c4591bfaccaa6d70ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1182504068648200
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,8 +810,6 @@ MonoBehaviour:
   barMagnet01SouthPole: {fileID: 0}
   barMagnet02NorthPole: {fileID: 0}
   barMagnet02SouthPole: {fileID: 0}
-  brightnessCoefficient: 0.005
-  brightnessCoefficient3D: 0.002
   brightnessLowerLimit: 0.04
 --- !u!114 &114191677612768480
 MonoBehaviour:
