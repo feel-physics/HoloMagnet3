@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BarMagnetTransformRestricter : MonoBehaviour
 {
+    // 棒磁石を以下のz座標に固定する
+    private float zRestricted = 0.7f;
     // Start時にシーンを取得し、Updateで使い回す
     private enum Scene { Introduction, OneCompass, Compass2D, Compass3D};
     private Scene scene;
@@ -47,11 +49,20 @@ public class BarMagnetTransformRestricter : MonoBehaviour
                 break;
             case Scene.Compass2D:
                 RotateOnlyAroundZAxis();
+                RestrictZ();
+
                 break;
             default:
                 throw new System.Exception("Invalid sceneId");
         }
 
+    }
+
+    private void RestrictZ()
+    {
+        Vector3 pos = transform.position;
+        Vector3 newpos = new Vector3(pos.x, pos.y, zRestricted);
+        transform.position = newpos;
     }
 
     private void RotateOnlyAroundZAxis()
