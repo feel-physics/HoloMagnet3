@@ -36,7 +36,7 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     private float brightnessCoefficient = 0.005f;
     // 3次元用の明るさの係数
     [SerializeField]
-    private float brightnessCoefficient3D = 0.002f;
+    private float brightnessCoefficient3D = 0.0002f;
 
     // 明るさの下限
     [SerializeField]
