@@ -32,8 +32,9 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
     // Todo: 今後：磁力線をインスタンス化しない頂点シェーダで描く
 
     // 明るさの係数
-    [SerializeField]
-    private float brightnessCoefficient = 0.005f;
+    //[SerializeField]
+    //private float brightnessCoefficient = 0.005f;
+    private float brightnessCoefficient = 0.0002f;
     // 3次元用の明るさの係数
     //[SerializeField]
     //private float brightnessCoefficient3D = 0.0002f;
