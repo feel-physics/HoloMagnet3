@@ -50,7 +50,8 @@ public class BarMagnetTransformRestricter : MonoBehaviour
             case Scene.Compass2D:
                 RotateOnlyAroundZAxis();
                 RestrictZ();
-
+                break;
+            case Scene.Compass3D:
                 break;
             default:
                 throw new System.Exception("Invalid sceneId");
