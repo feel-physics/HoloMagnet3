@@ -118,11 +118,6 @@ IMixedRealityPointerHandler // タップ操作検出
                 if (p_MultTapCount == 2)
                 {
 					// --- ダブルタップ処理 ---
-					// 次のシーンをロード
-					if (null != mySceneManager)
-					{
-						mySceneManager.LoadNextScene();
-					}
 
                     // DoubleTap効果音を鳴らす
                     audioSource.clip = ACDoubleTap;
