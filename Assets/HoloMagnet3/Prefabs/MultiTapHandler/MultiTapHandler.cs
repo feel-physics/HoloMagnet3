@@ -202,7 +202,16 @@ IMixedRealityPointerHandler // タップ操作検出
         p_MultTapStart = nowTime;
     }*/
 
-    public void OnManipulationStarted()
+	public void ToggleDrawMagneticForceLines()
+	{
+        // 磁力線描画処理のオンオフを切り替える
+        foreach (var b in GameObject.FindObjectsOfType<BarMagnetMagneticForceLinesDrawer>())
+        {
+            b.IsDrawing = !b.IsDrawing;
+        }
+	}
+
+	public void OnManipulationStarted()
     {
         // 現在時刻の取得
         p_HoldStart = Time.time;
