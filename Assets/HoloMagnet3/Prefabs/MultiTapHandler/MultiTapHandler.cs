@@ -102,12 +102,6 @@ IMixedRealityPointerHandler // タップ操作検出
                 // --- シングルタップ処理 ---
                 // 磁力線描画処理のオンオフを切り替える
 
-                foreach (var b in GameObject.FindObjectsOfType<BarMagnetMagneticForceLinesDrawer>())
-                {
-                    b.IsDrawing = !b.IsDrawing;
-                }
-
-
                 // 終了処理
                 p_MultTapCount = 0;
                 p_HoldStart = 0;
