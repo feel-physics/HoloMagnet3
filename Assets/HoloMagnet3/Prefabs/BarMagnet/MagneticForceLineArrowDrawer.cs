@@ -46,6 +46,8 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 			barMagnetArrowObject = Instantiate(barMagnetArrowSrcObject, transform);
 			//棒磁石の中心部に表示するためのオフセット座標.
 			barMagnetArrowObject.transform.localPosition = new Vector3(0.0115f, 0.0f, 0.0f);
+			//デフォルトは非表示.
+			barMagnetArrowObject.SetActive(false);
 //			if( allArrowObjectList.Count == 0 ){
 //				barMagnetArrowObject.SetActive(false);
 //			}
@@ -148,6 +150,8 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 			}
 			allArrowObjectList.RemoveRange(magneticForceLinesDrawer.FetchMagnetForceLineNum(), allArrowObjectList.Count - magneticForceLinesDrawer.FetchMagnetForceLineNum());
 		}
+		//磁力線に連動して矢印が表示されている場合は、磁石内のオブジェクトも表示させる.
+		barMagnetArrowObject.SetActive(allArrowObjectList.Count > 0);
 
 		return;
 	}
@@ -159,7 +163,7 @@ public class MagneticForceLineArrowDrawer : MonoBehaviour {
 		foreach( List<GameObject> objList in allArrowObjectList ){
 			objList.ForEach((GameObject obj) => {obj.SetActive(isValidDraw);});
 		}
-		barMagnetArrowSrcObject.SetActive(isValidDraw);
+		barMagnetArrowObject.SetActive(isValidDraw);
 
 		return;
 	}
