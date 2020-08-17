@@ -392,6 +392,26 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 		return magneticForceLines.Count;
 	}
 
+	/// <summary>
+	/// 磁力線を描画中状態を切り替える.
+	/// </summary>
+	public void SwitchDrawing(bool isDraw)
+	{
+		Debug.Log(isDraw);
+		_IsDrawing = isDraw;
+		prevIsDrawing = _IsDrawing;
+
+		// 音を鳴らす  Todo: 棒磁石移動の音と一緒に再生されてしまう
+		audioSource.clip = acDraw;
+		audioSource.loop = false;
+		audioSource.Play();
+
+		//描画中止への変更を検知して、DeleteLines()を呼び出す
+		if (!isDraw)
+		{
+			DeleteLines();
+		}
+	}
 
 #if ENABLE_GL_LINE_RENDERING
 	private void OnRenderObject( )
