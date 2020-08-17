@@ -31,26 +31,8 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
     {
         set
         {
-            Debug.Log(value);
-            _IsDrawing = value;
-
-            // 音を鳴らす  Todo: 棒磁石移動の音と一緒に再生されてしまう
-            audioSource.clip = acDraw;
-            audioSource.loop = false;
-            audioSource.Play();
-#if false
-            MyHelper.MyDelayMethod(this, 1f, () =>
-            {
-                audioSource.clip = null;
-            });
-#endif
-
-            //描画中止への変更を検知して、DeleteLines()を呼び出す
-            if (!value)
-            {
-                DeleteLines();
-            }
-        }
+			SwitchDrawing(value);
+		}
         get
         {
             return _IsDrawing;
