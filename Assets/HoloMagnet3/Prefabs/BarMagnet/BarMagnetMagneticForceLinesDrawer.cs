@@ -23,6 +23,8 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
     /// 磁力線を描画中か管理するフラグの実態(private)
     /// </summary>
     [SerializeField] private bool _IsDrawing = false;
+	//インスペクター上で_IsDrawingの値の変更を監視するための変数.
+	private bool prevIsDrawing = false;
 
     /// <summary>
     /// 磁力線を描画中か管理するフラグ(public)
