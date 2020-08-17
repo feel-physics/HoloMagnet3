@@ -23,6 +23,8 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
     /// 磁力線を描画中か管理するフラグの実態(private)
     /// </summary>
     [SerializeField] private bool _IsDrawing = false;
+	//インスペクター上で_IsDrawingの値の変更を監視するための変数.
+	private bool prevIsDrawing = false;
 
     /// <summary>
     /// 磁力線を描画中か管理するフラグ(public)
@@ -31,26 +33,8 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
     {
         set
         {
-            Debug.Log(value);
-            _IsDrawing = value;
-
-            // 音を鳴らす  Todo: 棒磁石移動の音と一緒に再生されてしまう
-            audioSource.clip = acDraw;
-            audioSource.loop = false;
-            audioSource.Play();
-#if false
-            MyHelper.MyDelayMethod(this, 1f, () =>
-            {
-                audioSource.clip = null;
-            });
-#endif
-
-            //描画中止への変更を検知して、DeleteLines()を呼び出す
-            if (!value)
-            {
-                DeleteLines();
-            }
-        }
+			SwitchDrawing(value);
+		}
         get
         {
             return _IsDrawing;
@@ -392,6 +376,35 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 		return magneticForceLines.Count;
 	}
 
+	/// <summary>
+	/// 磁力線を描画中状態を切り替える.
+	/// </summary>
+	public void SwitchDrawing(bool isDraw)
+	{
+		Debug.Log(isDraw);
+		_IsDrawing = isDraw;
+		prevIsDrawing = _IsDrawing;
+
+		// 音を鳴らす  Todo: 棒磁石移動の音と一緒に再生されてしまう
+		audioSource.clip = acDraw;
+		audioSource.loop = false;
+		audioSource.Play();
+
+		//描画中止への変更を検知して、DeleteLines()を呼び出す
+		if (!isDraw)
+		{
+			DeleteLines();
+		}
+	}
+
+	// インスペクター上で値を切り替えた際のチェック.
+	private void OnValidate()
+	{
+		if (prevIsDrawing != _IsDrawing)
+		{
+			SwitchDrawing(_IsDrawing);
+		}
+	}
 
 #if ENABLE_GL_LINE_RENDERING
 	private void OnRenderObject( )
