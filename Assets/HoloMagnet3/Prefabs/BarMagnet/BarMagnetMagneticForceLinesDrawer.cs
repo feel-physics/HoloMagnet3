@@ -397,6 +397,15 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 		}
 	}
 
+	// インスペクター上で値を切り替えた際のチェック.
+	private void OnValidate()
+	{
+		if (prevIsDrawing != _IsDrawing)
+		{
+			SwitchDrawing(_IsDrawing);
+		}
+	}
+
 #if ENABLE_GL_LINE_RENDERING
 	private void OnRenderObject( )
 	{
