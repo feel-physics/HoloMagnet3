@@ -37,4 +37,16 @@ public class LanguageSetting : MonoBehaviour
     }
 
 
+	//言語設定を日本語にする.
+	public void SwitchLanguageJapanese()
+	{
+		CurrentLanguageType = LanguageType.Japanese;
+	}
+
+	//言語設定を英語にする.
+	public void SwitchLanguageEnglish()
+	{
+		CurrentLanguageType = LanguageType.English;
+	}
+
 }
