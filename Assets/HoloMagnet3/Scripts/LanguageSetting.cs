@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using System.Collections.ObjectModel;
 
@@ -36,6 +37,9 @@ public class LanguageSetting : MonoBehaviour
 			{LanguageType.Japanese, "次のシーン" },{LanguageType.English, "Proceed to next scene"}
 		})},
 	});
+
+	//言語切り替え時に言語切り替え用処理を自動で実行させるターゲットとなるTextMeshProのリスト.
+	[SerializeField]List<TextMeshPro> textMeshObjList = new List<TextMeshPro>();
 
     // Start is called before the first frame update
     void Start()
