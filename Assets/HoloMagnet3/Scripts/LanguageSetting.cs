@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.ObjectModel;
 
 public class LanguageSetting : MonoBehaviour
 {
@@ -25,6 +26,17 @@ public class LanguageSetting : MonoBehaviour
 			currentLanguageType = value;
 		}
 	}
+
+	//既存のテキストに対して、言語設定ごとに差し替えるテキストを保持する定数(数が少ないので、定数としてコード内に埋め込む).
+	static readonly ReadOnlyDictionary<string, ReadOnlyDictionary<LanguageType, string>> localizeTextData = new ReadOnlyDictionary<string, ReadOnlyDictionary<LanguageType, string>>(new Dictionary<string, ReadOnlyDictionary<LanguageType, string>>(){
+		{"磁力線表示", new ReadOnlyDictionary<LanguageType, string>(new Dictionary<LanguageType, string>(){
+			{LanguageType.Japanese, "磁力線表示" },　{LanguageType.English, "Show Magnetic Force Lines"}
+		})},
+		{"次のシーン", new ReadOnlyDictionary<LanguageType, string>(new Dictionary<LanguageType, string>(){
+			{LanguageType.Japanese, "次のシーン" },{LanguageType.English, "Proceed to next scene"}
+		})},
+	});
+
     // Start is called before the first frame update
     void Start()
     {
