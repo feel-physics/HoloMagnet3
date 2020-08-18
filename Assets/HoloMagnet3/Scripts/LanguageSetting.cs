@@ -44,14 +44,23 @@ public class LanguageSetting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ApplyLanguageTextToAllTextMeshObj();
     }
 
-    // Update is called once per frame
+/*    // Update is called once per frame
     void Update()
     {
         
-    }
+    }*/
 
+	//既存のテキストを言語設定に対応したテキストに置き換える.
+	public void ApplyLanguageTextToAllTextMeshObj()
+	{
+		foreach(TextMeshPro textMeshObj in textMeshObjList)
+		{
+			textMeshObj.text = localizeTextData[textMeshObj.text][CurrentLanguageType];
+		}
+	}
 
 	//言語設定を日本語にする.
 	public void SwitchLanguageJapanese()
