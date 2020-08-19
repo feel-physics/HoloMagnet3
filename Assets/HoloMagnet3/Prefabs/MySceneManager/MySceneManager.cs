@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class MySceneManager : MonoBehaviour
 {
 
-    public enum MySceneEnum { Introduction, Compass_One, Compasses_2D, Compasses_3D, TwoBarMagnets };
+    public enum MySceneEnum { LanguageSelect, Introduction, Compass_One, Compasses_2D, Compasses_3D, TwoBarMagnets };
     public static MySceneEnum MyScene;
 
     // シーン遷移のときに効果音を鳴らす
@@ -18,7 +18,8 @@ public class MySceneManager : MonoBehaviour
 
     // シーン名とenumのシーンとを対応させる
     private static readonly Dictionary<string, MySceneEnum> sceneDic = new Dictionary<string, MySceneEnum>() {
-        {"Introduction",    MySceneEnum.Introduction },
+		{"LanguageSelect",    MySceneEnum.LanguageSelect },
+		{"Introduction",    MySceneEnum.Introduction },
         {"Compass_One",     MySceneEnum.Compass_One },
         {"Compasses_2D",    MySceneEnum.Compasses_2D },
         {"Compasses_3D",    MySceneEnum.Compasses_3D },
