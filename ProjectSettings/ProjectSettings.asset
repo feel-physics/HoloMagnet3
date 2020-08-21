@@ -574,13 +574,46 @@ PlayerSettings:
   metroCertificateNotAfter: 8053e4e8f481d701
   metroApplicationDescription: HoloMagnet3-190114
   wsaImages:
+    131172: Assets/VisualAssetsForUWP/SplashScreen.scale-100.png
+    131197: Assets/VisualAssetsForUWP/SplashScreen.scale-125.png
+    131222: Assets/VisualAssetsForUWP/SplashScreen.scale-150.png
+    131272: Assets/VisualAssetsForUWP/SplashScreen.scale-200.png
+    131472: Assets/VisualAssetsForUWP/SplashScreen.scale-400.png
     786532: 
     851984: 
     852000: 
     852016: 
     852048: 
     852224: 
-    2228424: Assets/HoloMagnet3/AppIcon310x310_200.png
+    2031632: Assets/VisualAssetsForUWP/Square44x44Logo.targetsize-16_altform-unplated.png
+    2031640: Assets/VisualAssetsForUWP/Square44x44Logo.targetsize-24_altform-unplated.png
+    2031664: Assets/VisualAssetsForUWP/Square44x44Logo.targetsize-48_altform-unplated.png
+    2031716: Assets/VisualAssetsForUWP/Square44x44Logo.scale-100.png
+    2031741: Assets/VisualAssetsForUWP/Square44x44Logo.scale-125.png
+    2031766: Assets/VisualAssetsForUWP/Square44x44Logo.scale-150.png
+    2031816: Assets/VisualAssetsForUWP/Square44x44Logo.scale-200.png
+    2031872: Assets/VisualAssetsForUWP/Square44x44Logo.targetsize-256_altform-unplated.png
+    2032016: Assets/VisualAssetsForUWP/Square44x44Logo.scale-400.png
+    2097252: Assets/VisualAssetsForUWP/Square71x71Logo.scale-100.png
+    2097277: Assets/VisualAssetsForUWP/Square71x71Logo.scale-125.png
+    2097302: Assets/VisualAssetsForUWP/Square71x71Logo.scale-150.png
+    2097352: Assets/VisualAssetsForUWP/Square71x71Logo.scale-200.png
+    2097552: Assets/VisualAssetsForUWP/Square71x71Logo.scale-400.png
+    2162788: Assets/VisualAssetsForUWP/Square150x150Logo.scale-100.png
+    2162813: Assets/VisualAssetsForUWP/Square150x150Logo.scale-125.png
+    2162838: Assets/VisualAssetsForUWP/Square150x150Logo.scale-150.png
+    2162888: Assets/VisualAssetsForUWP/Square150x150Logo.scale-200.png
+    2163088: Assets/VisualAssetsForUWP/Square150x150Logo.scale-400.png
+    2228324: Assets/VisualAssetsForUWP/Square310x310Logo.scale-100.png
+    2228349: Assets/VisualAssetsForUWP/Square310x310Logo.scale-125.png
+    2228374: Assets/VisualAssetsForUWP/Square310x310Logo.scale-150.png
+    2228424: Assets/VisualAssetsForUWP/Square310x310Logo.scale-200.png
+    2228624: Assets/VisualAssetsForUWP/Square310x310Logo.scale-400.png
+    2293860: Assets/VisualAssetsForUWP/Wide310x150Logo.scale-100.png
+    2293885: Assets/VisualAssetsForUWP/Wide310x150Logo.scale-125.png
+    2293910: Assets/VisualAssetsForUWP/Wide310x150Logo.scale-150.png
+    2293960: Assets/VisualAssetsForUWP/Wide310x150Logo.scale-200.png
+    2294160: Assets/VisualAssetsForUWP/Wide310x150Logo.scale-400.png
   metroTileShortName: HoloMagnet3
   metroTileShowName: 0
   metroMediumTileShowName: 0
