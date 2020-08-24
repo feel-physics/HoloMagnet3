@@ -1,4 +1,4 @@
-English / ![日本語](README-JP.md)
+English / [日本語](README-JP.md)
 
 # HoloMagnet3
 
