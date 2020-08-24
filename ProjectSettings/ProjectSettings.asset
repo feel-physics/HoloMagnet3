@@ -574,6 +574,11 @@ PlayerSettings:
   metroCertificateNotAfter: 8053e4e8f481d701
   metroApplicationDescription: HoloMagnet3-190114
   wsaImages:
+    65636: Assets/VisualAssetsForUWP/StoreLogo.scale-100.png
+    65661: Assets/VisualAssetsForUWP/StoreLogo.scale-125.png
+    65686: Assets/VisualAssetsForUWP/StoreLogo.scale-150.png
+    65736: Assets/VisualAssetsForUWP/StoreLogo.scale-200.png
+    65936: Assets/VisualAssetsForUWP/StoreLogo.scale-400.png
     131172: Assets/VisualAssetsForUWP/SplashScreen.scale-100.png
     131197: Assets/VisualAssetsForUWP/SplashScreen.scale-125.png
     131222: Assets/VisualAssetsForUWP/SplashScreen.scale-150.png
@@ -587,6 +592,7 @@ PlayerSettings:
     852224: 
     2031632: Assets/VisualAssetsForUWP/Square44x44Logo.targetsize-16_altform-unplated.png
     2031640: Assets/VisualAssetsForUWP/Square44x44Logo.targetsize-24_altform-unplated.png
+    2031648: Assets/VisualAssetsForUWP/Square44x44Logo.altform-unplated_targetsize-32.png
     2031664: Assets/VisualAssetsForUWP/Square44x44Logo.targetsize-48_altform-unplated.png
     2031716: Assets/VisualAssetsForUWP/Square44x44Logo.scale-100.png
     2031741: Assets/VisualAssetsForUWP/Square44x44Logo.scale-125.png
