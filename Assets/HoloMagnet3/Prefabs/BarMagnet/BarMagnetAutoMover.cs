@@ -45,4 +45,22 @@ public class BarMagnetAutoMover :MonoBehaviour {
         gameObject.transform.position =
             initialPosition + displacePosition;
     }
+
+	public void SwitchMoving(bool isMoving)
+	{
+		if (IsMoving == isMoving)
+		{
+			return;
+		}
+		IsMoving = isMoving;
+		if (IsMoving == false && audioSource != null)
+		{
+			audioSource.Stop();
+		}
+		else if (audioSource != null)
+		{
+			audioSource.Play();
+		}
+	}
+
 }
