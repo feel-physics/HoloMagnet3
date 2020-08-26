@@ -397,6 +397,14 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// 磁力線を描画中状態を切り替える.
+	/// </summary>
+	public void ToggleDrawing()
+	{
+		SwitchDrawing(!_IsDrawing);
+	}
+
 	// インスペクター上で値を切り替えた際のチェック.
 	private void OnValidate()
 	{
