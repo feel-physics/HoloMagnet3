@@ -135,8 +135,8 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
 
         BarMagnetModel barMagnetModel;
 
-		[SerializeField]
-		private MultiTapHandler multiTapHandler = null;
+//		[SerializeField]
+//		private MultiTapHandler multiTapHandler = null;
 
 		/// <summary>
 		/// Change the manipulation mode.
@@ -463,10 +463,10 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         private void OnManipulationStarted()
         {
 #if feel_physics
-			if (multiTapHandler != null)
+/*			if (multiTapHandler != null)
 			{
 				multiTapHandler.OnManipulationStarted();
-			}
+			}*/
 
             //手のモデルを表示する
             if (barMagnetModel.handReference != null)
@@ -493,10 +493,10 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             InputManager.Instance.PopModalInputHandler();
 
 #if feel_physics
-			if (multiTapHandler != null)
+/*			if (multiTapHandler != null)
 			{
 				multiTapHandler.OnManipulationEnded();
-			}
+			}*/
 
             //手のモデルを非表示にする
             if (barMagnetModel.handReference != null)
