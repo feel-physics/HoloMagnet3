@@ -137,7 +137,6 @@ GameObject:
   - component: {fileID: 114640533564228700}
   - component: {fileID: 82390110802297212}
   - component: {fileID: 114905948474313042}
-  - component: {fileID: 114944391148216512}
   - component: {fileID: 114946775741763146}
   - component: {fileID: 114041314217508022}
   - component: {fileID: 7702450870323437986}
@@ -303,25 +302,6 @@ MonoBehaviour:
   baseLengthOfLine: 0.02
   numLines: 110
   widthLines: 0.0005
---- !u!114 &114944391148216512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1132814198459000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6b98c39b438c9c4b88c3d0192dbaec3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hostTransform: {fileID: 0}
-  boundingBoxPrefab: {fileID: 0}
-  manipulationMode: 4
-  rotationConstraint: 0
-  enableOneHandMovement: 1
-  Is2D: 0
-  multiTapHandler: {fileID: 0}
 --- !u!114 &114946775741763146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -810,6 +790,8 @@ MonoBehaviour:
   barMagnet01SouthPole: {fileID: 0}
   barMagnet02NorthPole: {fileID: 0}
   barMagnet02SouthPole: {fileID: 0}
+  brightnessCoefficient: 0.0002
+  brightnessCoefficient3D: 0.0002
   brightnessLowerLimit: 0.04
 --- !u!114 &114191677612768480
 MonoBehaviour:
