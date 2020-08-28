@@ -21,11 +21,6 @@ public class BarMagnetManipulationSoundPlayer : MonoBehaviour
 		{
 			audioSource = GetComponent<AudioSource>();
 		}
-		if (audioSource != null && holdingSound != null)
-		{
-			audioSource.clip = holdingSound;
-			audioSource.loop = true;
-		}
 	}
 
 /*	// Update is called once per frame
