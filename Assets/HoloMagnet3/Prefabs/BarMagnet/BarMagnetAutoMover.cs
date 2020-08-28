@@ -55,7 +55,11 @@ public class BarMagnetAutoMover :MonoBehaviour {
 		IsMoving = isMoving;
 		if (IsMoving == false && audioSource != null)
 		{
-			audioSource.Stop();
+			//自動移動用の音を再生していた場合は停止する.
+			if (audioSource.clip == ACMoving)
+			{
+				audioSource.Stop();
+			}
 		}
 		else if (audioSource != null)
 		{
