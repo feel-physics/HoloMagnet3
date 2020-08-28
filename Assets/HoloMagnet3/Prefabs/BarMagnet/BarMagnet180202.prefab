@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 6492244689678922476}
   - component: {fileID: 8794058906809030244}
   - component: {fileID: -4796947544544303347}
+  - component: {fileID: 3888961836656108714}
   m_Layer: 0
   m_Name: BarMagnet180202
   m_TagString: BarMagnet01
@@ -390,10 +391,32 @@ MonoBehaviour:
   scaleLerpTime: 0.001
   onManipulationStarted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3888961836656108714}
+        m_MethodName: PlayHoldStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onManipulationEnded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3888961836656108714}
+        m_MethodName: PlayHoldEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -425,6 +448,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01154b683cef65c4591bfaccaa6d70ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3888961836656108714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132814198459000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd2f0c93f094fa41b0c605fc3c364e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdStartSound: {fileID: 8300000, guid: e51f1b04d73ef33448fb253f9bff0709, type: 3}
+  holdEndSound: {fileID: 8300000, guid: a95d405907cd9b54c8fec1f61bf945b8, type: 3}
+  holdingSound: {fileID: 8300000, guid: 484574b0326bb484da20126f573e829c, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &1182504068648200
 GameObject:
   m_ObjectHideFlags: 0
