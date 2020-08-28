@@ -34,4 +34,32 @@ public class BarMagnetManipulationSoundPlayer : MonoBehaviour
 
 	}*/
 
+	public void PlayHoldStart()
+	{
+		if (audioSource == null)
+		{
+			return;
+		}
+		
+		audioSource.PlayOneShot(holdStartSound);
+		if (audioSource != null && holdingSound != null)
+		{
+			audioSource.clip = holdingSound;
+			audioSource.loop = true;
+			audioSource.PlayDelayed(1.0f);
+		}
+
+	}
+	
+	public void PlayHoldEnd( )
+	{
+		if (audioSource == null)
+		{
+			return;
+		}
+
+		audioSource.Stop();
+		audioSource.PlayOneShot(holdEndSound);
+	}
+
 }
