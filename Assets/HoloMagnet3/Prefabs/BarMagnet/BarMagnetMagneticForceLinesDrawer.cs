@@ -386,9 +386,7 @@ public class BarMagnetMagneticForceLinesDrawer : MonoBehaviour
 		prevIsDrawing = _IsDrawing;
 
 		// 音を鳴らす  Todo: 棒磁石移動の音と一緒に再生されてしまう
-		audioSource.clip = acDraw;
-		audioSource.loop = false;
-		audioSource.Play();
+		audioSource.PlayOneShot(acDraw);
 
 		//描画中止への変更を検知して、DeleteLines()を呼び出す
 		if (!isDraw)
