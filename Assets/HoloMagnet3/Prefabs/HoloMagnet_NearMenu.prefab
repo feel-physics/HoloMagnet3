@@ -293,6 +293,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.051
       objectReference: {fileID: 0}
+    - target: {fileID: 2827255906976489158, guid: 40b588bd40632eb41a0af374d91c4fc9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3009022622657665697, guid: 40b588bd40632eb41a0af374d91c4fc9,
         type: 3}
       propertyPath: m_IsActive
@@ -532,12 +537,27 @@ PrefabInstance:
     - target: {fileID: 6376582067664713665, guid: 40b588bd40632eb41a0af374d91c4fc9,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6376582067664713665, guid: 40b588bd40632eb41a0af374d91c4fc9,
         type: 3}
       propertyPath: maxDistance
-      value: 0.7
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6376582067664713665, guid: 40b588bd40632eb41a0af374d91c4fc9,
+        type: 3}
+      propertyPath: minDistance
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6376582067664713665, guid: 40b588bd40632eb41a0af374d91c4fc9,
+        type: 3}
+      propertyPath: maxViewDegrees
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6376582067664713665, guid: 40b588bd40632eb41a0af374d91c4fc9,
+        type: 3}
+      propertyPath: fixedVerticalPosition
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7784587948190700201, guid: 40b588bd40632eb41a0af374d91c4fc9,
         type: 3}
