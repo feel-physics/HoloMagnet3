@@ -33,7 +33,10 @@ public class MySceneManager : MonoBehaviour
         MyScene = sceneDic[sceneName];
 
         audioSource = GetComponents<AudioSource>()[0];
-    }
+
+		//DebugConsoleを強制的に非表示化.
+		Debug.developerConsoleVisible = false;
+	}
 
     public void LoadNextScene()
     {
