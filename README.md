@@ -159,7 +159,7 @@ The followings are lesson / session scenes. Appearance of the app was changing, 
 
 #### Paper
 
-![Practices of Magnetic Field Experience Sessions with Augmented Reality technology in five countries (Reviewed, Japanese)](https://www.jstage.jst.go.jp/article/pesj/67/4/67_266/_article/-char/ja/)
+[Practices of Magnetic Field Experience Sessions with Augmented Reality technology in five countries (Reviewed, Japanese)](https://www.jstage.jst.go.jp/article/pesj/67/4/67_266/_article/-char/ja/)
 
 ## Structure
 
