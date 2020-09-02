@@ -118,7 +118,7 @@ vecF = vecF_N + vecF_S;
 
 #### 論文
 
-![5カ国での拡張現実技術を用いた磁界体験の実践（査読論文）](https://www.jstage.jst.go.jp/article/pesj/67/4/67_266/_article/-char/ja/)
+[5カ国での拡張現実技術を用いた磁界体験の実践（査読論文）](https://www.jstage.jst.go.jp/article/pesj/67/4/67_266/_article/-char/ja/)
 
 ## 構成図
 
