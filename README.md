@@ -189,8 +189,8 @@ However, when you distinguish handler, model and controller classes against each
 
 ### Environment
 
-- Unity 2017.4.26f1 (2017.4.x seems to work)
-- Visual Studio 2017.15 (Check all Windows 10 SDKs)
+- Unity 2019.4
+- Visual Studio 2019 (Check all Windows 10 SDKs)
 ![Visual Studio Installer 2019-06-19 16 59 55](https://user-images.githubusercontent.com/129954/59748279-c0080e00-92b5-11e9-9854-9ecda68a4f90.png)
 
 ### Procedure
