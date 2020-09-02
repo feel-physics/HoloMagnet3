@@ -23,6 +23,7 @@
   - [論文](#論文)
 - [構成図](#構成図)
 - [ビルド方法](#ビルド方法)
+- [操作](#操作)
 - [謝辞](#謝辞)
 
 ## 特徴
@@ -145,8 +146,8 @@ HoloLensアプリを作成する際は、最初はどうしても無秩序にプ
 
 ### 環境
 
-- Unity 2017.4.26f1（2017.4系列なら動くでしょう）
-- Visual Studio 2017.15 (すべての Windows 10 SDK にチェックして下さい)
+- Unity 2019.4
+- Visual Studio 2019 (すべての Windows 10 SDK にチェックして下さい)
 ![Visual Studio Installer 2019-06-19 16 59 55](https://user-images.githubusercontent.com/129954/59748279-c0080e00-92b5-11e9-9854-9ecda68a4f90.png)
 
 1. このリポジトリを**クローン**します
