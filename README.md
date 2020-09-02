@@ -39,6 +39,7 @@ The reason why I published this open-source app is, because I was one of 17 pers
   - [Paper](#Paper)
 - [Structure](#Structure)
 - [How to Build](#How-to-Build)
+- [Usage](#Usage)
 - [Acknowledgements](#Acknowledgements)
 
 ## Characteristics
