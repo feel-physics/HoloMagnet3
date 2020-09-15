@@ -129,7 +129,7 @@ This app was used in 10 schools in 5 countries, with 300 students experiencing t
 #### UI
 
 - If the operation is inconsistent (e.g., out of focus, marker tracking is often interrupted), the experience is **frustrating** for the user. HoloLens apps for first-time users should provide extremely **simple controls**.
-- It is advisable to make the operation **as fast as possible**, as slow **operation** will frustrate the experience.
+- It is advisable to make the process **as fast as possible**, as slow **process** will frustrate the experience.
 - **Sharing** can provide a high-dimensional experience, but it's **not suitable** for time-tight classes (no more than 3 minutes can be lost for 40 students) because of the time it takes to recover if the connection is lost in the middle of the class.
 
 #### Expression
