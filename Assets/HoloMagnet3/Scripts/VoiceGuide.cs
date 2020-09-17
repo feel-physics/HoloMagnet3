@@ -6,6 +6,11 @@ public class VoiceGuide : MonoBehaviour
 {
 	[SerializeField]private AudioClip guideVoiceClip = null;
 	[SerializeField]private AudioSource audioSource = null;
+
+	// ループ再生するかどうか.
+	[SerializeField]private bool isLoop = true;
+	// ループ再生時のループインターバル秒数.
+	[SerializeField]private float loopIntervalSec = 5.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,5 +40,22 @@ public class VoiceGuide : MonoBehaviour
 		// 音の再生.
 		audioSource.clip = guideVoiceClip;
 		audioSource.Play();
+		// ループ再生を行う場合は、再生時間とインターバル時間を待って次回の再生を行うようにする.
+		if (isLoop == true)
+		{
+			StartCoroutine(WaitPlayVoiceGuide(guideVoiceClip.length));
+		}
 	}
+
+	IEnumerator WaitPlayVoiceGuide(float guideVoiceSec)
+	{
+		// まずガイドボイスの再生時間を待つ.
+		yield return new WaitForSeconds(guideVoiceSec);
+
+		// 次のガイドボイス再生までのインターバル時間を待つ.
+		yield return new WaitForSeconds(loopIntervalSec);
+
+		Play();
+	}
+
 }
