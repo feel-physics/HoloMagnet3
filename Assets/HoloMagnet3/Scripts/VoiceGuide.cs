@@ -11,6 +11,9 @@ public class VoiceGuide : MonoBehaviour
 	[SerializeField]private bool isLoop = true;
 	// ループ再生時のループインターバル秒数.
 	[SerializeField]private float loopIntervalSec = 5.0f;
+	// 自動再生を行うかどうか.
+	[SerializeField]private bool isPlayOnAwake = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,10 @@ public class VoiceGuide : MonoBehaviour
 		if (audioSource == null)
 		{
 			audioSource = GetComponent<AudioSource>();
+		}
+		if (isPlayOnAwake == true && guideVoiceClip != null)
+		{
+			Play();
 		}
 	}
 
