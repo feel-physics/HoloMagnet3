@@ -23,4 +23,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/HoloMagnet3/Scenes/TwoBarMagnets.unity
     guid: aa837d6d8993c784591a3fc278ac35d3
-  m_configObjects: {}
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 95d412ef6ea73c04fa4f112bd07102c9,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 691beba96242ce84d847847da87c38d0,
+      type: 2}
