@@ -394,18 +394,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 114064167778553102, guid: 1b583df5b13a0f349b3391657c139ce5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1b583df5b13a0f349b3391657c139ce5, type: 3}
---- !u!114 &797110435 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114096501414401868, guid: 1b583df5b13a0f349b3391657c139ce5,
-    type: 3}
-  m_PrefabInstance: {fileID: 797110434}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb883a2d70e9e5342aeede14bc1d9a98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1699359515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -660,26 +648,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 891571429808102646, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 891571429808102646, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3204841062644646681, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 797110435}
-    - target: {fileID: 3204841062644646681, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadNextScene
-      objectReference: {fileID: 0}
     - target: {fileID: 4300612273730420714, guid: 32cca222c3ae59040bcbce7449a6d2be,
         type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -700,55 +668,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: HoloMagnet_NearMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 4651483795035123718, guid: 32cca222c3ae59040bcbce7449a6d2be,
+        type: 3}
+      propertyPath: profiles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4651483795035123718, guid: 32cca222c3ae59040bcbce7449a6d2be,
+        type: 3}
+      propertyPath: profiles.Array.data[0].Themes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5420901811932445748, guid: 32cca222c3ae59040bcbce7449a6d2be,
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5420901811932445770, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5420901811932445770, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5420901811932445770, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5420901811932445770, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6229167582181946309, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: updateLinkedTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6696237600919175353, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6696237600919175353, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6696237600919175353, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6696237600919175353, guid: 32cca222c3ae59040bcbce7449a6d2be,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6696237600919175367, guid: 32cca222c3ae59040bcbce7449a6d2be,
         type: 3}
