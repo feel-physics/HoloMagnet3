@@ -663,6 +663,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.052
       objectReference: {fileID: 0}
+    - target: {fileID: 8727868426842763079, guid: 40b588bd40632eb41a0af374d91c4fc9,
+        type: 3}
+      propertyPath: additionalOffset.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727868426842763079, guid: 40b588bd40632eb41a0af374d91c4fc9,
+        type: 3}
+      propertyPath: additionalRotation.x
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727868426842763079, guid: 40b588bd40632eb41a0af374d91c4fc9,
+        type: 3}
+      propertyPath: additionalRotation.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8730868853488533197, guid: 40b588bd40632eb41a0af374d91c4fc9,
         type: 3}
       propertyPath: m_Size.y
