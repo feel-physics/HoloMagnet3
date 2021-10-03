@@ -33,16 +33,17 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
 
     // 明るさの係数
     [SerializeField]
-    //private float brightnessCoefficient = 0.005f;
-    private float brightnessCoefficient = 0.0002f;
+    private float brightnessCoefficient = 0.005f;
+    //private float brightnessCoefficient = 0.0002f;
     // 3次元用の明るさの係数
     [SerializeField]
-    private float brightnessCoefficient3D = 0.0002f;
+    private float brightnessCoefficient3D = 0.0005f;
     //private float brightnessCoefficient3D = 0.0002f;
 
     // 明るさの下限
     [SerializeField]
-    private float brightnessLowerLimit = 0.04f;
+    private float brightnessLowerLimit = 0.05f;
+    //private float brightnessLowerLimit = 0.04f;
 
     CompassesModel compassesModel;
     private void Start()
@@ -119,7 +120,7 @@ public class CompassesManagedlySimultaneouslyUpdater : MonoBehaviour
 
     void ManagedlyUpdate(List<CompassManagedlyUpdater> compasses)
     {
-        //コンパスが存在しているシーンでは、コンパスシェーダーにmaginetの位置を登録する
+        //コンパスが存在しているシーンでは、コンパスシェーダーにmagnetの位置を登録する
         if (compassesModel.MatNorth != null)
         {
             AssignMagnetPosition();

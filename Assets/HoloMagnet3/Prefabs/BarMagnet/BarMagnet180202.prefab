@@ -299,7 +299,7 @@ MonoBehaviour:
   _IsDrawing: 0
   magneticForceLines: []
   lineStartEulerRotation: {x: 0, y: 0, z: 0}
-  isLineStartPlane: 0
+  isLineStartPlane: 1
   acDraw: {fileID: 8300000, guid: 8fca52959c4e1f14db0b01ccf25f1c59, type: 3}
   baseLengthOfLine: 0.02
   numLines: 110
@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198124153566333468050a1984549e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magneticForceLinesDrawer: {fileID: 0}
+  magneticForceLinesDrawer: {fileID: 114905948474313042}
   arrowSrcObject: {fileID: 1456240667581974, guid: 92ac83e9df3a01e4881568f84d9c72d3,
     type: 3}
   barMagnetArrowSrcObject: {fileID: 1998470274706256, guid: 6f11e4e11167c6b4ebae350f21c74fe7,
@@ -398,6 +398,17 @@ MonoBehaviour:
   onManipulationStarted:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 114946775741763146}
+        m_MethodName: SwitchMoving
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 3888961836656108714}
         m_MethodName: PlayHoldStart
         m_Mode: 1
@@ -830,9 +841,9 @@ MonoBehaviour:
   CompassesReference: []
   CompassesReferenceForManagedlyUpdate: []
   ParentTransform: {fileID: 0}
-  pitch: 0.07
-  MatNorth: {fileID: 0}
-  MatSouth: {fileID: 0}
+  pitch: 0.08
+  MatNorth: {fileID: 2100000, guid: 87c576ba39ad83b4f9368ef1bf5984e8, type: 2}
+  MatSouth: {fileID: 2100000, guid: d3cd45581ac4af04c9c25d5b4cbfaaaa, type: 2}
 --- !u!114 &114252725734559000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,9 +861,9 @@ MonoBehaviour:
   barMagnet01SouthPole: {fileID: 0}
   barMagnet02NorthPole: {fileID: 0}
   barMagnet02SouthPole: {fileID: 0}
-  brightnessCoefficient: 0.0002
-  brightnessCoefficient3D: 0.0002
-  brightnessLowerLimit: 0.04
+  brightnessCoefficient: 0.005
+  brightnessCoefficient3D: 0.04
+  brightnessLowerLimit: 0.05
 --- !u!114 &114191677612768480
 MonoBehaviour:
   m_ObjectHideFlags: 0
