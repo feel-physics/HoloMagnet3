@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Compass South
   m_Shader: {fileID: 4800000, guid: 11920a725ca76204aa0fca5e127c0da6, type: 3}
   m_ShaderKeywords: _FORCEPERPIXEL_ON _SHADE4_ON _SPECULARHIGHLIGHTS_ON _USEAMBIENT_ON
@@ -74,7 +75,7 @@ Material:
     m_Floats:
     - _AlphaTest: 0
     - _BlendOp: 0
-    - _BrightnessCoefficient: 0.005
+    - _BrightnessCoefficient: 0.0002
     - _BrightnessLowerLimit: 0.04
     - _BumpScale: 1
     - _CalibrationSpaceReflections: 0
@@ -127,12 +128,12 @@ Material:
     - _Emission: {r: 0.34117648, g: 0.5254902, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NorthPole1Pos: {r: -0.050000004, g: 0.0124999955, b: 1.99375, a: 0}
-    - _NorthPole2Pos: {r: -0.050000004, g: 0.0124999955, b: 1.99375, a: 0}
+    - _NorthPole2Pos: {r: -0.26, g: -0.17750001, b: 1.99375, a: 0}
     - _NorthPolePos: {r: -0.03198438, g: 0.014791243, b: 1.9934689, a: 0}
     - _PlanePos: {r: 0.15, g: 0, b: 2, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _SouthPole1Pos: {r: 0.050000004, g: 0.01250001, b: 1.99375, a: 0}
-    - _SouthPole2Pos: {r: 0.050000004, g: 0.01250001, b: 1.99375, a: 0}
+    - _SouthPole2Pos: {r: -0.16, g: -0.17749998, b: 1.99375, a: 0}
     - _SouthPolePos: {r: 0.06801563, g: 0.014791258, b: 1.9934689, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _TextureScaleOffset: {r: 1, g: 1, b: 0, a: 0}

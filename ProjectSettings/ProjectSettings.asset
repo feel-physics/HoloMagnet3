@@ -17,8 +17,8 @@ PlayerSettings:
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
-  m_ShowUnitySplashScreen: 0
-  m_ShowUnitySplashLogo: 0
+  m_ShowUnitySplashScreen: 1
+  m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
   m_SplashScreenAnimation: 1
   m_SplashScreenLogoStyle: 1
@@ -307,6 +307,11 @@ PlayerSettings:
     m_Enabled: 1
     m_Devices:
     - WindowsMR
+  - m_BuildTarget: Standalone
+    m_Enabled: 1
+    m_Devices:
+    - Oculus
+    - OpenVR
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
   openGLRequireES32: 0
@@ -567,11 +572,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: HoloMagnet36
   metroPackageVersion: 3.6.0.0
-  metroCertificatePath: Assets\WSATestCertificate.pfx
+  metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: Feel Physics
-  metroCertificateIssuer: Feel Physics
-  metroCertificateNotAfter: 8053e4e8f481d701
+  metroCertificateSubject: katsuwo
+  metroCertificateIssuer: katsuwo
+  metroCertificateNotAfter: 8037505a05ebd801
   metroApplicationDescription: HoloMagnet3-190114
   wsaImages:
     65636: Assets/VisualAssetsForUWP/StoreLogo.scale-100.png
@@ -651,7 +656,7 @@ PlayerSettings:
       InternetClientServer: False
       Location: False
       LowLevelDevices: False
-      Microphone: False
+      Microphone: True
       MusicLibrary: False
       Objects3D: False
       OfflineMapsManagement: False
@@ -728,10 +733,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 802e478d-dcfa-450c-9f3e-d894dbf64ab8
+  cloudProjectId: 4eda0337-4c30-422a-9d5d-6a0f2df6fa9e
   framebufferDepthMemorylessMode: 0
-  projectName: HoloMagnet3-190114
-  organizationId: feel-physics
+  projectName: HoloMagnet3 (1)
+  organizationId: katsuwo
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
