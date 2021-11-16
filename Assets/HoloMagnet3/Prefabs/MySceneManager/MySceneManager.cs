@@ -57,13 +57,17 @@ public class MySceneManager : MonoBehaviour
                 nextScene = MySceneEnum.Compasses_3D;
                 //audioSource.pitch = 2.0f;
                 break;
-			//言語選択画面からもIntroductionへ.
-			case MySceneEnum.LanguageSelect:
-			case MySceneEnum.Compasses_3D:
+
+            case MySceneEnum.LanguageSelect:
                 nextScene = MySceneEnum.Introduction;
-//                nextScene = MySceneEnum.TwoBarMagnets;
                 //audioSource.pitch = 2.5f;
                 break;
+
+            case MySceneEnum.Compasses_3D:
+                nextScene = MySceneEnum.TwoBarMagnets;
+                //audioSource.pitch = 2.5f;
+                break;
+
             case MySceneEnum.TwoBarMagnets:
                 nextScene = MySceneEnum.Introduction;
                 //audioSource.pitch = 2.5f;

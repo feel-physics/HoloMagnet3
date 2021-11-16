@@ -1,6 +1,6 @@
 ﻿#undef elapsed_time  // 磁力線を引く処理時間を計測するため
 //LineRendererではなくGLによって線を描画するかどうか.
-//#define ENABLE_GL_LINE_RENDERING
+#define ENABLE_GL_LINE_RENDERING
 
 using System.Collections.Generic;
 using System.Linq;

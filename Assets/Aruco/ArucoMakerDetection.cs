@@ -80,8 +80,6 @@ public class ArucoMakerDetection : MonoBehaviour {
 	}
 
 	public void MarkerDetectionWithAruco(FrameReadyParameterClass frameParam) {
-		Debug.Log("getMatImage invoked");
-
 		_cameraMatrix = CreateCameraMatrix(frameParam.cameraIntrinsics.FocalLengthX,
 			frameParam.cameraIntrinsics.FocalLengthY, frameParam.cameraIntrinsics.PrincipalPointX,
 			frameParam.cameraIntrinsics.PrincipalPointY);
@@ -95,7 +93,6 @@ public class ArucoMakerDetection : MonoBehaviour {
 			_distCoeffs);
 		
 		if (_ids.total() > 0) {
-			Debug.Log($"Something detect  total{_ids.total()}");
 			Aruco.estimatePoseSingleMarkers(_corners, markerLength, _cameraMatrix, _distCoeffs, _rvecs, _tvecs);
 			MarkerDetectedParameterClass mdp = new MarkerDetectedParameterClass();
 			mdp.corners = _corners;

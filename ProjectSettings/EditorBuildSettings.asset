@@ -5,19 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/HoloMagnet3/Scenes/LanguageSelect.unity
     guid: 13f35c828642faf4b973a3ea0a35d1ce
-  - enabled: 0
+  - enabled: 1
     path: Assets/HoloMagnet3/Scenes/Introduction.unity
     guid: 056360883ec884a4e9b1b5540b6f3528
-  - enabled: 0
+  - enabled: 1
     path: Assets/HoloMagnet3/Scenes/Compass_One.unity
     guid: 24a3c960fadfee748999ce798c6d35ab
-  - enabled: 0
+  - enabled: 1
     path: Assets/HoloMagnet3/Scenes/Compasses_2D.unity
     guid: 1b926ef93c6202f40b09c4e612858ce0
-  - enabled: 0
+  - enabled: 1
     path: Assets/HoloMagnet3/Scenes/Compasses_3D.unity
     guid: 9cfd1362e2e84a745af70db5a0a400f0
   - enabled: 1

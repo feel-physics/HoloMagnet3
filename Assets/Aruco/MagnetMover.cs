@@ -70,11 +70,9 @@ public class MagnetMover : MonoBehaviour {
 						ARM = mdp.arCameraWorldMatrix * invertZM * ARM;
 					}
 				}
-
 				break;
 			}
 		}
-
 		_idFound = idFound;
 	}
 }
