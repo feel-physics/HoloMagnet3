@@ -84,7 +84,12 @@ public class Hololens2CameraProvider : CameraProvider {
 	void Update() {
 		lock (ExecuteOnMainThread) {
 			while (ExecuteOnMainThread.Count > 0) {
-				ExecuteOnMainThread.Dequeue().Invoke();
+				if (ExecuteOnMainThread.Count == 1) {
+					ExecuteOnMainThread.Dequeue().Invoke();
+				}
+				else {
+					ExecuteOnMainThread.Dequeue();
+				}
 			}
 		}
 	}
