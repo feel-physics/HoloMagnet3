@@ -46,7 +46,6 @@ public class Hololens2CameraProvider : CameraProvider {
 	public void OnFrameMatAcquired(Mat grayMat, Matrix4x4 projectionMatrix, Matrix4x4 cameraToWorldMatrix,
 		CameraIntrinsics cameraIntrinsics) {
 		Debug.Log("OnFrameMatAcquired invoked");
-		HoloLensWithOpenCVForUnityExample.DebugUtils.TrackTick();
 		
 		var param = new FrameReadyParameterClass {
 			graymat = grayMat,
