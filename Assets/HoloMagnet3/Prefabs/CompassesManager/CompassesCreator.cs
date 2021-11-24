@@ -163,4 +163,14 @@ public class CompassesCreator : MonoBehaviour
             }
         }
     }
+
+    public void RebuildCompass() {
+        GameObject compass = LoadCompassPrefab();
+
+        //CompasのSharedMaterialを取得する
+        RegisterSharedmaterialToCompassesModel(compass);
+
+        //コンパスをループで生成する
+        CreateCompasses(compass);
+    }
 }
