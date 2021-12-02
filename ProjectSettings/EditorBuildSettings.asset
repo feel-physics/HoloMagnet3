@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/HoloMagnet3/Scenes/TwoBarMagnets.unity
+    guid: aa837d6d8993c784591a3fc278ac35d3
+  - enabled: 1
     path: Assets/HoloMagnet3/Scenes/LanguageSelect.unity
     guid: 13f35c828642faf4b973a3ea0a35d1ce
   - enabled: 1
@@ -20,7 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/HoloMagnet3/Scenes/Compasses_3D.unity
     guid: 9cfd1362e2e84a745af70db5a0a400f0
-  - enabled: 1
-    path: Assets/HoloMagnet3/Scenes/TwoBarMagnets.unity
-    guid: aa837d6d8993c784591a3fc278ac35d3
   m_configObjects: {}
