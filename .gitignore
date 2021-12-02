@@ -6,6 +6,7 @@
 Assets/AssetStoreTools*
 UWP/
 UWP-temp/
+Build-Ueda*/
 
 # Visual Studio cache directory
 .vs/
