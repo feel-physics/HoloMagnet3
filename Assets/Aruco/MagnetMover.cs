@@ -13,7 +13,7 @@ public class MagnetMover : MonoBehaviour {
 	[SerializeField] private GameObject target;
 	[SerializeField] private bool useLerpFilter = true;
 	[SerializeField] private bool showDebugInfo = false;
-
+	
 	private TextMeshProUGUI tmp = null;
 	private Matrix4x4 invertYMatrix;
 	private Matrix4x4 invertZMatrix;
